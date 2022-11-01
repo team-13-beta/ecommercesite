@@ -40,20 +40,27 @@ export default function App({ $app }) {
         e.preventDefault();
         const { target } = e;
         if (target.matches("[data-link]")) {
-          const BASE_URL = "http://127.0.0.1:5500";
+          const BASE_URL = `http://localhost:5000`;
           const targetURL = target.href.replace(BASE_URL, "");
-          navigate(targetURL, target.dataset.link);
+          navigate(targetURL, { title: target.dataset.link });
           this.render();
         }
       });
     });
     window.addEventListener("historychange", ({ detail }) => {
       const { to, isReplace, state } = detail;
+      console.log(detail);
       if (isReplace || to === location.pathname)
         history.replaceState(state, "", to);
       else history.pushState(state, "", to);
 
       this.render();
+    });
+
+    const initialUrl = `http://localhost:5000/admin/orders`;
+
+    navigate(initialUrl, {
+      title: "Orders",
     });
   };
 
