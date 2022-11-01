@@ -1,0 +1,55 @@
+/* 헤더 */
+#header {
+  border: 1px solid black;
+  width: 1024px;
+  height: auto;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+}
+.header_container {
+  border: 1px solid black;
+  margin-bottom: 20px;
+}
+.logo_header {
+  font-size: 50px;
+  text-align: center;
+}
+.category_container {
+  border: 1px solid black;
+  font-size: 50px;
+  text-align: center;
+}
+
+/* ---------------------------------------- */
+/* ---------------------------------------- */
+
+/* 메인 내용 */
+#contents {
+  width: 1024px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+}
+
+/* 제품 상단 컴포넌트 */
+.content_container {
+  margin-bottom: 20px;
+}
+
+/* 제품 이미지 컴포넌트 */
+
+/* ---------------------------------------- */
+/* ---------------------------------------- */
+
+/* 푸터 */
+#footer {
+  width: 1024px;
+  margin: 0 auto;
+  border: 1px solid black;
+  box-sizing: border-box;
+}
+.footer_item {
+  font-size: 30px;
+  border: 1px solid blueviolet;
+}
