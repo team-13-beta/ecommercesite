@@ -1,9 +1,11 @@
+/* 헤더 */
 #header {
   border: 1px solid black;
   width: 1024px;
   height: auto;
   margin: 0 auto;
   margin-bottom: 20px;
+  box-sizing: border-box;
 }
 .header_container {
   border: 1px solid black;
@@ -19,17 +21,25 @@
   text-align: center;
 }
 
+/* ---------------------------------------- */
+/* ---------------------------------------- */
+
+/* 메인 내용 */
 #contents {
   width: 1024px;
   margin: 0 auto;
   border: 1px solid black;
   margin-bottom: 20px;
+  box-sizing: border-box;
 }
 
+/* 제품 상단 컴포넌트 */
 .content_container {
   display: flex;
   margin-bottom: 20px;
 }
+
+/* 제품 이미지 컴포넌트 */
 .product_img_area {
   border: 1px solid red;
   font-size: 50px;
@@ -37,22 +47,50 @@
   height: 500px;
   margin-right: 100px;
 }
+.product_title {
+}
+.product_content {
+}
+.product_price {
+}
+.product_options {
+}
+.product_select_container {
+  display: flex;
+}
+.product_bucket_btn {
+  border: 1px solid orange;
+  box-sizing: border-box;
+  width: 80px;
+  height: 30px;
+}
+.product_buy_btn {
+  background-color: orange;
+  width: 80px;
+  height: 30px;
+}
+
+/* 제품 설명 및 구매 컴포넌트 */
 .product_info_area {
   border: 1px solid yellow;
   width: 400px;
   height: 500px;
 }
 
+/* 제품 상세 하단 컴포넌트 */
 .product_detail_container {
   display: block;
   margin-bottom: 20px;
 }
 .detail_tab {
+  display: flex;
   border: 1px solid blue;
-  width: 1024px;
   height: 30px;
   font-size: 30px;
   margin-bottom: 20px;
+}
+.detail_tab_item {
+  margin-right: 10px;
 }
 .product_detail_area {
   display: flex;
@@ -69,10 +107,16 @@
   width: 300px;
   border: 1px solid purple;
 }
+
+/* ---------------------------------------- */
+/* ---------------------------------------- */
+
+/* 푸터 */
 #footer {
   width: 1024px;
   margin: 0 auto;
   border: 1px solid black;
+  box-sizing: border-box;
 }
 .footer_item {
   font-size: 30px;
