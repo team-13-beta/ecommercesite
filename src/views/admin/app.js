@@ -4,12 +4,14 @@ import Products from "./products/index.js";
 
 import { navigate } from "../utility/navigate.js";
 import { pathToRegex } from "../useful-functions.js";
-
+import { clearContainer } from "../../utility/documentSelect.js";
 export default function App({ $app }) {
-  this.state = {};
+  this.state = {
+    orderLists: [],
+  };
 
-  const orders = new Orders({ $app, initialState: this.state.homeList });
-  const products = new Products({ $app, initialState: "Settings" });
+  const orders = new Orders({ $app, initialState: this.state.orderLists });
+  const products = new Products({ $app });
   const categories = new Categories({ $app });
 
   const routes = [
@@ -27,13 +29,13 @@ export default function App({ $app }) {
     });
     let match = results.find((route) => route.result != null);
 
-    if (match) match.route.view.init();
+    if (match) {
+      match.route.view.init();
+    }
   };
 
   this.init = () => {
-    window.addEventListener("popstate", () => {
-      this.render();
-    });
+    window.addEventListener("popstate", () => this.render());
 
     window.addEventListener("DOMContentLoaded", () => {
       document.body.addEventListener("click", (e) => {
@@ -42,14 +44,15 @@ export default function App({ $app }) {
         if (target.matches("[data-link]")) {
           const BASE_URL = `http://localhost:5000`;
           const targetURL = target.href.replace(BASE_URL, "");
-          navigate(targetURL, { title: target.dataset.link });
-          this.render();
+          if (targetURL !== location.pathname) {
+            navigate(targetURL, { title: target.dataset.link, state: "load" });
+          }
         }
       });
     });
+
     window.addEventListener("historychange", ({ detail }) => {
       const { to, isReplace, state } = detail;
-      console.log(detail);
       if (isReplace || to === location.pathname)
         history.replaceState(state, "", to);
       else history.pushState(state, "", to);
@@ -61,6 +64,7 @@ export default function App({ $app }) {
 
     navigate(initialUrl, {
       title: "Orders",
+      state: "initial",
     });
   };
 

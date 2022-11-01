@@ -1,4 +1,4 @@
 import App from "./app.js";
 
-const $root = document.getElementById("root");
-new App({ $root });
+const $app = document.getElementById("root");
+new App({ $app });
