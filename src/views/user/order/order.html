@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>쇼핑-n팀</title>
     <!-- 커스텀 css, js -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
     <link rel="stylesheet" href="order.css" />
   </head>
   <body>
@@ -15,21 +19,28 @@
       <div class="category_container"><div class="category">category</div></div>
     </header>
 
-    <section id="contents">
-      <div class="content_container">
-        <div class="order_info_area">
-          <div class="order_info">
-            주문정보
-            <div id="order_id">주문 번호</div>
-            <div id="order_people">주문자 정보</div>
-            <div id="order_address">주문자 주소지</div>
+    <section id="contents" class="box">
+      <div class="columns">
+        <div class="column is-three-fifths">
+          <div class="card block">
+            <div class="card-header-title">주문정보</div>
+            <div class="card-content">주문 번호</div>
+            <div class="card-content">주문자 정보</div>
+            <div class="card-content">주문자 주소지</div>
           </div>
-          <div class="order_items">주문한 제품 목록들</div>
+
+          <div class="card block">
+            <div class="card-header-title">제품 목록</div>
+            <div class="card-content">제품명</div>
+            <div class="card-content">수량</div>
+          </div>
         </div>
-        <div class="price_info_area">
-          <div>주문결제 금액</div>
-          <div class="price_info">결제 금액</div>
-          <div class="payment_btn">결제하기</div>
+        <div class="column">
+          <div class="card">
+            <div class="card-header-title">주문 결제 금액</div>
+            <div class="card-content">결제 금액</div>
+            <button class="card-content button">결제 하기</button>
+          </div>
         </div>
       </div>
     </section>
