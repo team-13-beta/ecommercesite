@@ -4,7 +4,93 @@ import Products from "./products/index.js";
 
 import { navigate } from "../utility/navigate.js";
 import { pathToRegex } from "../useful-functions.js";
-import { clearContainer } from "../../utility/documentSelect.js";
+
+const INITNAI_URL = `http://localhost:5000/admin`;
+const orderData = {
+  data: [
+    {
+      order_id: "1",
+      address: "경기도 수원시 장안구 엄복동",
+      consumerName: "정호진",
+      phoneNumber: "010-2333-9654",
+      status: "배송전",
+      totalPrice: 10000,
+    },
+    {
+      order_id: "2",
+      address: "경기도 수원시 장안구 엄복동",
+      consumerName: "정호진",
+      phoneNumber: "010-2333-9654",
+      status: "배송전",
+      totalPrice: 10000,
+    },
+    {
+      order_id: "3",
+      address: "경기도 수원시 장안구 엄복동",
+      consumerName: "정호진",
+      phoneNumber: "010-2333-9654",
+      status: "배송전",
+      totalPrice: 10000,
+    },
+    {
+      order_id: "4",
+      address: "경기도 수원시 장안구 엄복동",
+      consumerName: "정호진",
+      phoneNumber: "010-2333-9654",
+      status: "배송전",
+      totalPrice: 10000,
+    },
+    {
+      order_id: "5",
+      address: "경기도 수원시 장안구 엄복동",
+      consumerName: "정호진",
+      phoneNumber: "010-2333-9654",
+      status: "배송전",
+      totalPrice: 10000,
+    },
+    {
+      order_id: "6",
+      address: "경기도 수원시 장안구 엄복동",
+      consumerName: "정호진",
+      phoneNumber: "010-2333-9654",
+      status: "배송전",
+      totalPrice: 10000,
+    },
+    {
+      order_id: "7",
+      address: "경기도 수원시 장안구 엄복동",
+      consumerName: "정호진",
+      phoneNumber: "010-2333-9654",
+      status: "배송전",
+      totalPrice: 10000,
+    },
+    {
+      order_id: "8",
+      address: "경기도 수원시 장안구 엄복동",
+      consumerName: "정호진",
+      phoneNumber: "010-2333-9654",
+      status: "배송전",
+      totalPrice: 10000,
+    },
+    {
+      order_id: "9",
+      address: "경기도 수원시 장안구 엄복동",
+      consumerName: "정호진",
+      phoneNumber: "010-2333-9654",
+      status: "배송전",
+      totalPrice: 10000,
+    },
+    {
+      order_id: "10",
+      address: "경기도 수원시 장안구 엄복동",
+      consumerName: "정호진",
+      phoneNumber: "010-2333-9654",
+      status: "배송전",
+      totalPrice: 10000,
+    },
+  ],
+};
+
 export default function App({ $app }) {
   this.state = {
     orderLists: [],
@@ -34,6 +120,10 @@ export default function App({ $app }) {
     }
   };
 
+  this.setState = (state) => {
+    this.state = { ...state };
+  };
+
   this.init = () => {
     window.addEventListener("popstate", () => this.render());
 
@@ -60,9 +150,10 @@ export default function App({ $app }) {
       this.render();
     });
 
-    const initialUrl = `http://localhost:5000/admin/orders`;
+    console.log(orderData);
+    this.setState({ ...this.state, orderLists: orderData.data });
 
-    navigate(initialUrl, {
+    navigate(`${INITNAI_URL}/orders`, {
       title: "Orders",
       state: "initial",
     });

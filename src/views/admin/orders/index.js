@@ -1,4 +1,5 @@
 import { createElement, clearContainer } from "../../utility/documentSelect.js";
+import { tableTemplate } from "../components/tableTemplate.js";
 
 const ORDER_COLUMNS = [
   "상품 아이디",
@@ -13,28 +14,28 @@ export default function Orders({ $app, initialState }) {
 
   this.$element = createElement("div");
 
-  const $table = createElement("table");
+  this.init = () => {
+    clearContainer($app);
+    clearContainer(this.$element);
 
-  const tableSetting = () => {
-    const $thead = createElement("thead");
-    const $theadRow = createElement("tr");
+    this.$element.insertAdjacentHTML(
+      "afterbegin",
+      tableTemplate(ORDER_COLUMNS),
+    );
 
-    for (const column of ORDER_COLUMNS) {
-      const $td = createElement("td");
-      $td.innerHTML = column;
-      $theadRow.appendChild($td);
-    }
-    $thead.appendChild($theadRow);
-    $table.appendChild($thead);
+    const $optionHeader = createElement("div");
+    const $orderSearch = createElement("input"); // id 검색
+
+    $optionHeader.appendChild($orderSearch);
+    this.$element.insertAdjacentHTML("afterbegin", $optionHeader.innerHTML);
+
+    $app.appendChild(this.$element);
   };
 
-  this.init = () => {
-    if (history.state === null) return;
-    clearContainer($app);
-    if ($app.firstChild) return;
-    tableSetting();
+  this.render = () => {};
 
-    this.$element.appendChild($table);
-    $app.appendChild(this.$element);
+  this.setState = (state) => {
+    this.state = state;
+    this.render();
   };
 }
