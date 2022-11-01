@@ -128,11 +128,22 @@
           </div>
         </div>
 
-        <!-- 주소 찾기 -->
-        <div class="field is-horizontal">
-          <div class="field-label is-normal">
-            <label class="label" for="address2">주소</label>
+        <div class="field">
+          <label class="label" for="phoneNumberInput">휴대폰 번호</label>
+          <div class="control">
+            <input
+              class="input"
+              id="phoneNumberInput"
+              type="text"
+              placeholder="000-****-****"
+              autocomplete="on"
+            />
           </div>
+        </div>
+        <!-- 주소 찾기 -->
+        <label class="label" for="address2">주소</label>
+        <div class="field is-horizontal">
+          <div class="field-label is-normal"></div>
           <div class="field-body search">
             <div class="field">
               <p class="control">
@@ -174,7 +185,7 @@
           </div>
         </div>
 
-        <div class="field is-horizontal">
+        <div class="field is-horizontal mb-5">
           <div class="field-label is-normal no-label"></div>
           <div class="field-body">
             <div class="field">
@@ -196,5 +207,6 @@
         </button>
       </form>
     </div>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   </body>
 </html>
