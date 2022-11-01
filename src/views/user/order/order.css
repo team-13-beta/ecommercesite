@@ -1,0 +1,43 @@
+#header {
+  border: 1px solid black;
+  width: 1024px;
+  height: auto;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+.header_container {
+  border: 1px solid black;
+  margin-bottom: 20px;
+}
+.logo_header {
+  font-size: 50px;
+  text-align: center;
+}
+.category_container {
+  border: 1px solid black;
+  font-size: 50px;
+  text-align: center;
+}
+
+#contents {
+  width: 1024px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+#modal-payment {
+  display: none;
+}
+.is-open {
+  display: block;
+}
+
+#footer {
+  width: 1024px;
+  margin: 0 auto;
+  border: 1px solid black;
+}
+.footer_item {
+  font-size: 30px;
+  border: 1px solid blueviolet;
+}
