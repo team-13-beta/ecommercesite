@@ -40,7 +40,7 @@
   height: 400px;
   margin-bottom: 20px;
 }
-.address_info {
+.order_items {
   border: 1px solid yellowgreen;
   font-size: 30px;
   width: 600px;
@@ -49,11 +49,11 @@
 
 .price_info_area {
   margin: 20px;
-}
-.price_info {
   border: 1px solid palegreen;
   width: 300px;
   height: 900px;
+}
+.price_info {
 }
 #footer {
   width: 1024px;
