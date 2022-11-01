@@ -1,7 +1,7 @@
 import { createElement, clearContainer } from "../../utility/documentSelect.js";
 import { tableTemplate } from "../components/tableTemplate.js";
 
-const CATEGORIES_COLUMNS = ["카테고리 이름"];
+const CATEGORIES_COLUMNS = [["category_name", "카테고리 이름"]];
 
 export default function Categories({ $app, initialState }) {
   this.state = initialState;

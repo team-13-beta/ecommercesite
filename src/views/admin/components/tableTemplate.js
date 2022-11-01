@@ -1,15 +1,32 @@
 import { createElement } from "../../utility/documentSelect.js";
 
-export function tableTemplate(columns, datas) {
+export function tableTemplate(columns, datas = []) {
   const $thead = createElement("thead");
   const $theadRow = createElement("tr");
-  for (const column of columns) {
+
+  const $tbody = createElement("tbody");
+  for (const [key, value] of columns) {
     const $td = createElement("td");
-    $td.innerHTML = column;
+    $td.innerHTML = value;
     $theadRow.appendChild($td);
   }
   $thead.appendChild($theadRow);
-  const $tbody = createElement("tbody");
+
+  console.log(datas);
+  for (const data of datas) {
+    const $tr = createElement("tr");
+    for (const [key, _] of columns) {
+      const $td = createElement("td");
+      if (key === "detail_button") {
+        $td.innerHTML = `<button>상세 정보</button>`;
+      } else {
+        $td.innerHTML = data[key] ?? "";
+      }
+      $tr.appendChild($td);
+    }
+
+    $tbody.appendChild($tr);
+  }
 
   return `
     <table>

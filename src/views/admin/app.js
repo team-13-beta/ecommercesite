@@ -5,7 +5,7 @@ import Products from "./products/index.js";
 import { navigate } from "../utility/navigate.js";
 import { pathToRegex } from "../useful-functions.js";
 
-const INITNAI_URL = `http://localhost:5000/admin`;
+const BASE_URL = `http://localhost:5000/admin`;
 const orderData = {
   data: [
     {
@@ -19,7 +19,7 @@ const orderData = {
     {
       order_id: "2",
       address: "경기도 수원시 장안구 엄복동",
-      consumerName: "정호진",
+      consumerName: "김민수",
       phoneNumber: "010-2333-9654",
       status: "배송전",
       totalPrice: 10000,
@@ -27,7 +27,7 @@ const orderData = {
     {
       order_id: "3",
       address: "경기도 수원시 장안구 엄복동",
-      consumerName: "정호진",
+      consumerName: "김민수",
       phoneNumber: "010-2333-9654",
       status: "배송전",
       totalPrice: 10000,
@@ -35,7 +35,7 @@ const orderData = {
     {
       order_id: "4",
       address: "경기도 수원시 장안구 엄복동",
-      consumerName: "정호진",
+      consumerName: "김민수",
       phoneNumber: "010-2333-9654",
       status: "배송전",
       totalPrice: 10000,
@@ -43,7 +43,7 @@ const orderData = {
     {
       order_id: "5",
       address: "경기도 수원시 장안구 엄복동",
-      consumerName: "정호진",
+      consumerName: "김민수",
       phoneNumber: "010-2333-9654",
       status: "배송전",
       totalPrice: 10000,
@@ -51,7 +51,7 @@ const orderData = {
     {
       order_id: "6",
       address: "경기도 수원시 장안구 엄복동",
-      consumerName: "정호진",
+      consumerName: "김민수",
       phoneNumber: "010-2333-9654",
       status: "배송전",
       totalPrice: 10000,
@@ -59,7 +59,7 @@ const orderData = {
     {
       order_id: "7",
       address: "경기도 수원시 장안구 엄복동",
-      consumerName: "정호진",
+      consumerName: "김민수",
       phoneNumber: "010-2333-9654",
       status: "배송전",
       totalPrice: 10000,
@@ -67,7 +67,7 @@ const orderData = {
     {
       order_id: "8",
       address: "경기도 수원시 장안구 엄복동",
-      consumerName: "정호진",
+      consumerName: "김민수",
       phoneNumber: "010-2333-9654",
       status: "배송전",
       totalPrice: 10000,
@@ -75,7 +75,7 @@ const orderData = {
     {
       order_id: "9",
       address: "경기도 수원시 장안구 엄복동",
-      consumerName: "정호진",
+      consumerName: "asdf",
       phoneNumber: "010-2333-9654",
       status: "배송전",
       totalPrice: 10000,
@@ -83,7 +83,7 @@ const orderData = {
     {
       order_id: "10",
       address: "경기도 수원시 장안구 엄복동",
-      consumerName: "정호진",
+      consumerName: "한정환",
       phoneNumber: "010-2333-9654",
       status: "배송전",
       totalPrice: 10000,
@@ -96,7 +96,23 @@ export default function App({ $app }) {
     orderLists: [],
   };
 
-  const orders = new Orders({ $app, initialState: this.state.orderLists });
+  const orders = new Orders({
+    $app,
+    initialState: this.state.orderLists,
+    onClick: (searchData) => {
+      const orderLists =
+        searchData === ""
+          ? orderData.data
+          : this.state.orderLists.filter((data) =>
+              data.consumerName.includes(searchData),
+            );
+
+      this.setState({
+        ...this.state,
+        orderLists,
+      });
+    },
+  });
   const products = new Products({ $app });
   const categories = new Categories({ $app });
 
@@ -114,7 +130,6 @@ export default function App({ $app }) {
       };
     });
     let match = results.find((route) => route.result != null);
-
     if (match) {
       match.route.view.init();
     }
@@ -122,6 +137,7 @@ export default function App({ $app }) {
 
   this.setState = (state) => {
     this.state = { ...state };
+    orders.setState(this.state.orderLists);
   };
 
   this.init = () => {
@@ -132,10 +148,12 @@ export default function App({ $app }) {
         e.preventDefault();
         const { target } = e;
         if (target.matches("[data-link]")) {
-          const BASE_URL = `http://localhost:5000`;
           const targetURL = target.href.replace(BASE_URL, "");
           if (targetURL !== location.pathname) {
-            navigate(targetURL, { title: target.dataset.link, state: "load" });
+            navigate(`/admin${targetURL}`, {
+              title: target.dataset.link,
+              state: "load",
+            });
           }
         }
       });
@@ -150,10 +168,9 @@ export default function App({ $app }) {
       this.render();
     });
 
-    console.log(orderData);
     this.setState({ ...this.state, orderLists: orderData.data });
 
-    navigate(`${INITNAI_URL}/orders`, {
+    navigate(`${BASE_URL}/orders`, {
       title: "Orders",
       state: "initial",
     });
