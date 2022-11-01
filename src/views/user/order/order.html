@@ -10,6 +10,7 @@
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
     />
     <link rel="stylesheet" href="order.css" />
+    
   </head>
   <body>
     <header id="header">
@@ -39,8 +40,16 @@
           <div class="card">
             <div class="card-header-title">주문 결제 금액</div>
             <div class="card-content">결제 금액</div>
-            <button class="card-content button">결제 하기</button>
+            <button class="card-content button" id="paymentBtn">
+              결제 하기
+            </button>
           </div>
+        </div>
+      </div>
+
+      <div id="modal-payment">
+          <div>hihihihihihihi</div>
+          <button id="modal-close" class="button">close</button>
         </div>
       </div>
     </section>
@@ -49,4 +58,5 @@
       <div class="footer_item">footer</div>
     </footer>
   </body>
+  <script type="text/javascript" src="order.js"></script>
 </html>

@@ -25,35 +25,13 @@
   margin-bottom: 20px;
 }
 
-.content_container {
-  display: flex;
-  margin-bottom: 20px;
+#modal-payment {
+  display: none;
 }
-.order_info_area {
-  margin: 20px;
-}
-.order_info {
-  border: 1px solid blueviolet;
-  font-size: 30px;
-  width: 600px;
-  height: 400px;
-  margin-bottom: 20px;
-}
-.order_items {
-  border: 1px solid yellowgreen;
-  font-size: 30px;
-  width: 600px;
-  height: 500px;
+.is-open {
+  display: block;
 }
 
-.price_info_area {
-  margin: 20px;
-  border: 1px solid palegreen;
-  width: 300px;
-  height: 900px;
-}
-.price_info {
-}
 #footer {
   width: 1024px;
   margin: 0 auto;
