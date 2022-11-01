@@ -3,7 +3,7 @@ import { UserSchema } from "../schemas/user-schema";
 
 const User = model("users", UserSchema);
 
-export class UserModel {
+export class UserModel { // 이메일 중복 검사
   async findByEmail(email) {
     const user = await User.findOne({ email });
     return user;
@@ -14,7 +14,7 @@ export class UserModel {
     return user;
   }
 
-  async create(userInfo) {
+  async create(userInfo) { 
     const createdNewUser = await User.create(userInfo);
     return createdNewUser;
   }
@@ -27,7 +27,6 @@ export class UserModel {
   async update({ userId, update }) {
     const filter = { _id: userId };
     const option = { returnOriginal: false };
-
     const updatedUser = await User.findOneAndUpdate(filter, update, option);
     return updatedUser;
   }
