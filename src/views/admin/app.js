@@ -214,6 +214,8 @@ export default function App({ $app }) {
     orderLists: orderData.data,
     categoryLists: categoryData.data,
     productLists: productData.data,
+    orderDetail: {},
+    productDetail: {},
   };
 
   const orders = new Orders({
@@ -267,10 +269,14 @@ export default function App({ $app }) {
       });
     },
   });
-  const productDetail = new ProductDetail({ $app, $initialState: {} });
+  const productDetail = new ProductDetail({
+    $app,
+    $initialState: this.state.productDetail,
+  });
+
   const orderDetail = new OrderDetail({
     $app,
-    $initialState: {},
+    $initialState: this.state.orderDetail,
     deleteHandler: (e) => {},
     updateHandler: (updateVal) => {
       const { id } = updateVal;
@@ -278,8 +284,9 @@ export default function App({ $app }) {
       const orderLists = this.state.orderLists.map((order) =>
         order.id === id ? updateVal : order,
       );
-      orderDetail.setState(updateVal);
-      this.setState({ orderLists });
+
+      alert("수정 완료");
+      this.setState({ orderLists, orderDetail: updateVal });
     },
   });
 
@@ -302,22 +309,12 @@ export default function App({ $app }) {
         result: location.pathname.match(pathToRegex(route.path)),
       };
     });
-    console.log(results);
     let match = results.find((route) => route.result != null);
     // 화면이 변하지 않아서, 그만큼 화면이 쌓이게 되는 것인가?
     // 값이 변화가 된다면, render가 되어야 함.
     // setState -> render -> url match -> orderDetail init()
     //                                 -> orderDetail render();
-    console.log("setState 실행 횟수:", this.state.renderStack);
     if (match) {
-      if (
-        match.route.view === orderDetail ||
-        match.route.view === productDetail
-      ) {
-        if (match.route.view.state) {
-          match.route.view.render();
-        }
-      }
       match.route.view.init();
     }
   };
@@ -326,16 +323,20 @@ export default function App({ $app }) {
     this.state = {
       ...this.state,
       ...nextState,
-      renderStack: this.state.renderStack + 1,
     };
     orders.setState(this.state.orderLists);
     categories.setState(this.state.categoryLists);
     products.setState(this.state.productLists);
+    orderDetail.setState(this.state.orderDetail);
+    productDetail.setState(this.state.productDetail);
+
     this.render();
   };
 
   this.init = () => {
-    window.addEventListener("popstate", () => this.render());
+    window.addEventListener("popstate", () => {
+      this.render();
+    });
 
     window.addEventListener("DOMContentLoaded", () => {
       document.body.addEventListener("click", (e) => {

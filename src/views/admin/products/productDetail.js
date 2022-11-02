@@ -5,4 +5,8 @@ export default function ProductDetail({ initialState }) {
     this.render();
   };
   this.render = () => {};
+  this.setState = (nextState) => {
+    this.state = nextState;
+    this.render();
+  };
 }

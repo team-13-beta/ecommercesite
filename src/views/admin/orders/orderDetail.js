@@ -13,11 +13,11 @@ export default function OrderDetail({
 
   this.init = () => {
     clearContainer($app);
-    if (this.state === undefined || this.state.id !== history.state.state.id) {
+    if (!this.state || this.state.id !== history.state.state.id) {
       this.setState(history.state.state);
+    } else {
+      this.$element.innerHTML = orderDetailTemplate(this.state);
     }
-    const detailTemplate = orderDetailTemplate(this.state);
-    this.$element.innerHTML = detailTemplate;
 
     this.$element.addEventListener("click", (e) => {
       e.preventDefault();
@@ -31,7 +31,9 @@ export default function OrderDetail({
         deleteHandler(e);
       }
     });
+
     console.log("orderDetail render");
+
     $app.appendChild(this.$element);
   };
 
@@ -40,7 +42,7 @@ export default function OrderDetail({
   };
 
   this.setState = (nextState) => {
-    this.state = { ...this.state, ...nextState };
+    this.state = nextState;
     this.render();
   };
 }
