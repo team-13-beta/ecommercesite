@@ -28,5 +28,6 @@ export const wait = (ms) => {
   return new Promise((r) => setTimeout(r, ms));
 };
 
+// path가 올바른 형식인지 확인
 export const pathToRegex = (path) =>
   new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$");

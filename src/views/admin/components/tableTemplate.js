@@ -18,7 +18,7 @@ export function tableTemplate(columns, datas = []) {
     for (const [key, _] of columns) {
       const $td = createElement("td");
       if (key === "detail_button") {
-        $td.innerHTML = `<button>상세 정보</button>`;
+        $td.innerHTML = `<button data-detail-id=${data["id"]}>상세 정보</button>`;
       } else {
         $td.innerHTML = data[key] ?? "";
       }
@@ -30,12 +30,8 @@ export function tableTemplate(columns, datas = []) {
 
   return `
     <table>
-      <thead>
-        ${$thead.innerHTML}
-      </thead>
-      <tbody>
-        ${$tbody.innerHTML}
-      </tbody>
+      ${$thead.outerHTML}
+      ${$tbody.outerHTML}
     </table>
   `;
 }

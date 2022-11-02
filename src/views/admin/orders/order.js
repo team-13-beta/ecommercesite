@@ -1,8 +1,9 @@
 import { createElement, clearContainer } from "../../utility/documentSelect.js";
+import { appendDetailMoveHandler } from "../../utility/navigate.js";
 import { tableTemplate } from "../components/tableTemplate.js";
 
 const ORDER_COLUMNS = [
-  ["order_id", "주문 아이디"],
+  ["id", "주문 아이디"],
   ["consumerName", "주문자 이름"],
   ["phoneNumber", "전화 번호"],
   ["status", "배송 상태"],
@@ -34,6 +35,10 @@ export default function Orders({ $app, initialState, onChange, onClick }) {
       "beforeend",
       tableTemplate(ORDER_COLUMNS, this.state),
     );
+
+    const $table = this.$element.querySelector("table");
+
+    appendDetailMoveHandler($table);
 
     $app.appendChild(this.$element);
   };

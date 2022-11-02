@@ -9,3 +9,17 @@ export const navigate = (to, state = {}, isReplace = false) => {
 
   dispatchEvent(historyChangeEvent);
 };
+
+export const appendDetailMoveHandler = ($element) => {
+  $element.addEventListener("click", (e) => {
+    e.preventDefault();
+    const { target } = e;
+    if (target.matches("[data-detail-id]")) {
+      const { detailId } = target.dataset;
+      navigate(`${location.pathname}/${detailId}`, {
+        title: detailId,
+        state: "load",
+      });
+    }
+  });
+};

@@ -4,12 +4,14 @@ import Products from "./products/product.js";
 
 import { navigate } from "../utility/navigate.js";
 import { pathToRegex } from "../useful-functions.js";
+import ProductDetail from "./products/productDetail.js";
+import OrderDetail from "./orders/orderDetail.js";
 
 const BASE_URL = `http://localhost:5000/admin`;
 const orderData = {
   data: [
     {
-      order_id: "1",
+      id: "1",
       address: "경기도 수원시 장안구 엄복동",
       consumerName: "정호진",
       phoneNumber: "010-2333-9654",
@@ -17,7 +19,7 @@ const orderData = {
       totalPrice: 10000,
     },
     {
-      order_id: "2",
+      id: "2",
       address: "경기도 수원시 장안구 엄복동",
       consumerName: "김민수",
       phoneNumber: "010-2333-9654",
@@ -25,7 +27,7 @@ const orderData = {
       totalPrice: 10000,
     },
     {
-      order_id: "3",
+      id: "3",
       address: "경기도 수원시 장안구 엄복동",
       consumerName: "김민수",
       phoneNumber: "010-2333-9654",
@@ -33,7 +35,7 @@ const orderData = {
       totalPrice: 10000,
     },
     {
-      order_id: "4",
+      id: "4",
       address: "경기도 수원시 장안구 엄복동",
       consumerName: "김민수",
       phoneNumber: "010-2333-9654",
@@ -41,7 +43,7 @@ const orderData = {
       totalPrice: 10000,
     },
     {
-      order_id: "5",
+      id: "5",
       address: "경기도 수원시 장안구 엄복동",
       consumerName: "김민수",
       phoneNumber: "010-2333-9654",
@@ -49,7 +51,7 @@ const orderData = {
       totalPrice: 10000,
     },
     {
-      order_id: "6",
+      id: "6",
       address: "경기도 수원시 장안구 엄복동",
       consumerName: "김민수",
       phoneNumber: "010-2333-9654",
@@ -57,7 +59,7 @@ const orderData = {
       totalPrice: 10000,
     },
     {
-      order_id: "7",
+      id: "7",
       address: "경기도 수원시 장안구 엄복동",
       consumerName: "김민수",
       phoneNumber: "010-2333-9654",
@@ -65,7 +67,7 @@ const orderData = {
       totalPrice: 10000,
     },
     {
-      order_id: "8",
+      id: "8",
       address: "경기도 수원시 장안구 엄복동",
       consumerName: "김민수",
       phoneNumber: "010-2333-9654",
@@ -73,7 +75,7 @@ const orderData = {
       totalPrice: 10000,
     },
     {
-      order_id: "9",
+      id: "9",
       address: "경기도 수원시 장안구 엄복동",
       consumerName: "asdf",
       phoneNumber: "010-2333-9654",
@@ -81,7 +83,7 @@ const orderData = {
       totalPrice: 10000,
     },
     {
-      order_id: "10",
+      id: "10",
       address: "경기도 수원시 장안구 엄복동",
       consumerName: "한정환",
       phoneNumber: "010-2333-9654",
@@ -113,91 +115,91 @@ const categoryData = {
 const productData = {
   data: [
     {
-      product_id: "1",
+      id: "1",
       productName: "김계란 닭가슴살",
       category: "닭가슴살",
       price: "2400",
       stock: "100",
     },
     {
-      product_id: "2",
+      id: "2",
       productName: "하림 닭가슴살",
       category: "닭가슴살",
       price: "2700",
       stock: "100",
     },
     {
-      product_id: "3",
+      id: "3",
       productName: "허닭 닭가슴살",
       category: "닭가슴살",
       price: "2200",
       stock: "50",
     },
     {
-      product_id: "4",
+      id: "4",
       productName: "풀무원 닭가슴살",
       category: "닭가슴살",
       price: "1800",
       stock: "100",
     },
     {
-      product_id: "5",
+      id: "5",
       productName: "김계란 프로틴",
       category: "프로틴",
       price: "4000",
       stock: "100",
     },
     {
-      product_id: "6",
+      id: "6",
       productName: "몬스터 프로틴",
       category: "프로틴",
       price: "35000",
       stock: "100",
     },
     {
-      product_id: "7",
+      id: "7",
       productName: "김혜자 도시락",
       category: "도시락",
       price: "4500",
       stock: "100",
     },
     {
-      product_id: "8",
+      id: "8",
       productName: "GS 도시락",
       category: "도시락",
       price: "4700",
       stock: "100",
     },
     {
-      product_id: "9",
+      id: "9",
       productName: "닭가슴살",
       category: "닭가슴살",
       price: "2400",
       stock: "100",
     },
     {
-      product_id: "10",
+      id: "10",
       productName: "닥터유 24",
       category: "프로틴음료",
       price: "2400",
       stock: "100",
     },
     {
-      product_id: "11",
+      id: "11",
       productName: "셀트리온 27",
       category: "프로틴음료",
       price: "2700",
       stock: "100",
     },
     {
-      product_id: "12",
+      id: "12",
       productName: "김수미 도시락",
       category: "도시락",
       price: "4400",
       stock: "100",
     },
     {
-      product_id: "13",
+      id: "13",
       productName: "생닭가슴살",
       category: "닭가슴살",
       price: "900",
@@ -265,10 +267,15 @@ export default function App({ $app }) {
     },
   });
 
+  const productDetail = new ProductDetail({ $initialState: {} });
+  const orderDetail = new OrderDetail({ $initialState: {} });
+
   const routes = [
     { path: "/admin/orders", view: orders, title: "Orders" },
     { path: "/admin/products", view: products, title: "Products" },
     { path: "/admin/categories", view: categories, title: "Categories" },
+    { path: "/admin/products/:id", view: productDetail, title: "Categories" },
+    { path: "/admin/orders/:id", view: orderDetail, title: "Categories" },
   ];
 
   this.render = () => {

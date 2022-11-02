@@ -1,9 +1,10 @@
 import { clearContainer, createElement } from "../../utility/documentSelect.js";
+import { appendDetailMoveHandler } from "../../utility/navigate.js";
 import { categoryHeader } from "../components/productHeader.js";
 import { tableTemplate } from "../components/tableTemplate.js";
 
 const PRODUCT_COLUMNS = [
-  ["product_id", "상품 아이디"],
+  ["id", "상품 아이디"],
   ["productName", "상품명"],
   ["category", "카테고리"],
   ["price", "가격"],
@@ -28,18 +29,24 @@ export default function Products({ $app, initialState, onClick }) {
     );
 
     const $inputVal = this.$element.querySelector(".category-search");
-    console.log($inputVal);
+
     this.$element
       .querySelector(".search")
       .addEventListener("click", (e) => onClick($inputVal.value));
+
+    const $table = this.$element.querySelector("table");
+
+    appendDetailMoveHandler($table);
 
     $app.appendChild(this.$element);
   };
 
   this.render = () => {
-    const table = this.$element.querySelector("table");
+    const $table = this.$element.querySelector("table");
     console.log(this.state);
-    if (table) table.innerHTML = tableTemplate(PRODUCT_COLUMNS, this.state);
+    if ($table) {
+      $table.innerHTML = tableTemplate(PRODUCT_COLUMNS, this.state);
+    }
   };
 
   this.setState = (state) => {
