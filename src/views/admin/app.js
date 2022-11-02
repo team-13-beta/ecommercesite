@@ -145,6 +145,19 @@ export default function App({ $app }) {
   const categories = new Categories({
     $app,
     initialState: this.state.categoryLists,
+    onClick: (searchData) => {
+      const categoryLists =
+        searchData === ""
+          ? categoryData.data
+          : this.state.categoryLists.filter((data) =>
+              data.category_name.includes(searchData),
+            );
+
+      this.setState({
+        ...this.state,
+        categoryLists,
+      });
+    },
   });
 
   const routes = [
