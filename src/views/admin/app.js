@@ -111,7 +111,99 @@ const categoryData = {
   ],
 };
 const productData = {
-  data: [],
+  data: [
+    {
+      product_id: "1",
+      productName: "김계란 닭가슴살",
+      category: "닭가슴살",
+      price: "2400",
+      stock: "100",
+    },
+    {
+      product_id: "2",
+      productName: "하림 닭가슴살",
+      category: "닭가슴살",
+      price: "2700",
+      stock: "100",
+    },
+    {
+      product_id: "3",
+      productName: "허닭 닭가슴살",
+      category: "닭가슴살",
+      price: "2200",
+      stock: "50",
+    },
+    {
+      product_id: "4",
+      productName: "풀무원 닭가슴살",
+      category: "닭가슴살",
+      price: "1800",
+      stock: "100",
+    },
+    {
+      product_id: "5",
+      productName: "김계란 프로틴",
+      category: "프로틴",
+      price: "4000",
+      stock: "100",
+    },
+    {
+      product_id: "6",
+      productName: "몬스터 프로틴",
+      category: "프로틴",
+      price: "35000",
+      stock: "100",
+    },
+    {
+      product_id: "7",
+      productName: "김혜자 도시락",
+      category: "도시락",
+      price: "4500",
+      stock: "100",
+    },
+    {
+      product_id: "8",
+      productName: "GS 도시락",
+      category: "도시락",
+      price: "4700",
+      stock: "100",
+    },
+    {
+      product_id: "9",
+      productName: "닭가슴살",
+      category: "닭가슴살",
+      price: "2400",
+      stock: "100",
+    },
+    {
+      product_id: "10",
+      productName: "닥터유 24",
+      category: "프로틴음료",
+      price: "2400",
+      stock: "100",
+    },
+    {
+      product_id: "11",
+      productName: "셀트리온 27",
+      category: "프로틴음료",
+      price: "2700",
+      stock: "100",
+    },
+    {
+      product_id: "12",
+      productName: "김수미 도시락",
+      category: "도시락",
+      price: "4400",
+      stock: "100",
+    },
+    {
+      product_id: "13",
+      productName: "생닭가슴살",
+      category: "닭가슴살",
+      price: "900",
+      stock: "100",
+    },
+  ],
 };
 
 export default function App({ $app }) {
@@ -141,6 +233,19 @@ export default function App({ $app }) {
   const products = new Products({
     $app,
     initialState: this.state.productLists,
+    onClick: (searchData) => {
+      const productLists =
+        searchData === ""
+          ? productData.data
+          : this.state.productLists.filter((data) =>
+              data.productName.includes(searchData),
+            );
+
+      this.setState({
+        ...this.state,
+        productLists,
+      });
+    },
   });
   const categories = new Categories({
     $app,
@@ -183,7 +288,7 @@ export default function App({ $app }) {
     this.state = { ...state };
     orders.setState(this.state.orderLists);
     categories.setState(this.state.categoryLists);
-    // products.setState(this.state.productLists);
+    products.setState(this.state.productLists);
     this.render();
   };
 
