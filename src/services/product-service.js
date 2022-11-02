@@ -1,4 +1,4 @@
-import { productModel } from '../db/index.js';
+import { productModel,categoryModel } from '../db/index.js';
 
 
 class ProductService {
@@ -14,8 +14,9 @@ class ProductService {
 
     async addProduct(productInfo){
         // 객체 destructuring
-        const { name,stock, price, description,company } = productInfo;
+        const { name,stock, price, description,company,categoryName } = productInfo;
 
+        const category=await categoryModel.findByName(categoryName);
         // 상품 이름 중복 확인
         const product = await this.productModel.findByName(name);
         if (product) {
@@ -32,6 +33,7 @@ class ProductService {
             price,
             description,
             company,
+            categoryId:category._id
         });
 
         return createdNewProduct;
@@ -47,15 +49,13 @@ class ProductService {
             );
         }
 
-        const deleteProduct=await this.productModel.deleteOne(productName);
+        const deleteProduct=await this.productModel.deleteOne(product);
 
         return deleteProduct;
     }
 
-    async setProduct(productInfoRequired, toUpdate) {
-        // 객체 destructuring
-        const { productId } = productInfoRequired;
-    
+    async setProduct(productId, toUpdate) {
+   
         // 우선 해당 id의 유저가 db에 있는지 확인
         let product = await this.productModel.findById(productId);
     

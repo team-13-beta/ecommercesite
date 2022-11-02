@@ -8,12 +8,17 @@ export class ProductModel {
     const product = await Product.findOne({ name });
     return product;
   }
+  async findById(productId) {
+    const product = await Product.findOne({ _id: productId });
+    return product;
+  }
+
   async create(productInfo) {
     const createdNewProduct = await Product.create(productInfo);
     return createdNewProduct;
   }
   async findAll() {
-    const products = await Product.find({});
+    const products = await Product.find({}).populate("categoryId");
     return products;
   }
 
@@ -27,8 +32,8 @@ export class ProductModel {
     return updatedProduct;
   }
 
-  async deleteOne(productName){
-    const deleteproduct=await Product.deleteOne({productName});
+  async deleteOne(product){
+    const deleteproduct=await Product.deleteOne({name: product.name});
     return deleteproduct;
   }
 }

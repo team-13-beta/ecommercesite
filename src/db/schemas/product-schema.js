@@ -14,10 +14,6 @@ const ProductSchema = new Schema(
         type:Number,
         required:true,
     },
-    // userSchema 참고해보니 new Schema를 통해 객체로 구현하였는데 
-    // 어느것이 나을까ㅏㅏ
-    // 근데 new Schema를 해서 하는게 나을지도?
-    // 규격을 맞춰서 데이터를 삽입해야하니깐
     description:{
         type:Schema.Types.Mixed,
     },
@@ -25,6 +21,11 @@ const ProductSchema = new Schema(
         type:String,
         required:true,
     },
+    categoryId:{
+      type: Schema.Types.ObjectId,
+      requried: true,
+      ref: 'Category',
+    }
   },
   {
     collection: "products",

@@ -19,17 +19,12 @@ productRouter.get("/", async (req,res,next)=>{
     }
 })
 
-productRouter.get("/add",async(req,res,next)=>{
+productRouter.post("/",async(req,res,next)=>{
     try {
         // req (request)의 body 에서 데이터 가져오기
         // 추가해볼 데이터
-        const name = "닭가슴살 주먹밥";
-        const stock = 30;
-        const price = 3500;
-        const description = {imageUrl:["rkskekasdf","aakfkqkdfasdf"]};
-        const company = "베타밥";
+        const {name,stock,price,description,company,categoryName}=req.body;
 
-    
         // 위 데이터를 유저 db에 추가하기
         const newProduct = await productService.addProduct({
           name,
@@ -37,6 +32,7 @@ productRouter.get("/add",async(req,res,next)=>{
           price,
           description,
           company,
+          categoryName
         });
     
         // 추가된 유저의 db 데이터를 프론트에 다시 보내줌
@@ -47,15 +43,51 @@ productRouter.get("/add",async(req,res,next)=>{
       }
 })
 
-productRouter.get("/delete",async (req,res,next)=>{
+productRouter.delete("/:product_name",async (req,res,next)=>{
     // 삭제할 상품 이름
     try{
+        const {product_name}=req.params;
         const name="닭가슴살 소시지";
-        const deleteproduct=await productService.deleteProduct(name);
+        const deleteproduct=await productService.deleteProduct(product_name);
     
         res.status(201).json(deleteproduct);
     }catch(err){
         next(err);
     }
 });
+
+productRouter.patch(
+    "/:productId",
+    async function (req, res, next) {
+      try {
+        // params로부터 id를 가져옴
+        const productId = req.params.productId;
+  
+        // body data 로부터 업데이트할 사용자 정보를 추출함.
+        const {name,stock,price,description,company}=req.body;
+ 
+        // 위 데이터가 undefined가 아니라면, 즉, 프론트에서 업데이트를 위해
+        // 보내주었다면, 업데이트용 객체에 삽입함.
+        const toUpdate = {
+          ...(name && { name }),
+          ...(stock && { stock }),
+          ...(price && { price }),
+          ...(description && { description }),
+          ...(company && { company }),
+        };
+        console.log(toUpdate);
+        // 사용자 정보를 업데이트함.
+        const updatedProductInfo = await productService.setProduct(
+          productId,
+          toUpdate,
+        );
+  
+        // 업데이트 이후의 유저 데이터를 프론트에 보내 줌
+        res.status(200).json(updatedProductInfo);
+      } catch (error) {
+        next(error);
+      }
+    },
+  );
+
 export { productRouter };
