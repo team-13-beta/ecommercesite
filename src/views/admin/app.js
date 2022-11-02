@@ -210,14 +210,15 @@ const productData = {
 
 export default function App({ $app }) {
   this.state = {
-    orderLists: [],
-    categoryLists: [],
-    productLists: [],
+    renderStack: 0,
+    orderLists: orderData.data,
+    categoryLists: categoryData.data,
+    productLists: productData.data,
   };
 
   const orders = new Orders({
     $app,
-    initialState: this.state.orderLists,
+    initialState: orderData.data,
     onClick: (searchData) => {
       const orderLists =
         searchData === ""
@@ -234,7 +235,7 @@ export default function App({ $app }) {
   });
   const products = new Products({
     $app,
-    initialState: this.state.productLists,
+    initialState: productData.data,
     onClick: (searchData) => {
       const productLists =
         searchData === ""
@@ -251,7 +252,7 @@ export default function App({ $app }) {
   });
   const categories = new Categories({
     $app,
-    initialState: this.state.categoryLists,
+    initialState: categoryData.data,
     onClick: (searchData) => {
       const categoryLists =
         searchData === ""
@@ -266,16 +267,32 @@ export default function App({ $app }) {
       });
     },
   });
-
   const productDetail = new ProductDetail({ $app, $initialState: {} });
-  const orderDetail = new OrderDetail({ $app, $initialState: {} });
+  const orderDetail = new OrderDetail({
+    $app,
+    $initialState: {},
+    deleteHandler: (e) => {},
+    updateHandler: (updateVal) => {
+      const { id } = updateVal;
+      // 수정 완료가 되어야 함.
+      const orderLists = this.state.orderLists.map((order) =>
+        order.id === id ? updateVal : order,
+      );
+      orderDetail.setState(updateVal);
+      this.setState({ orderLists });
+    },
+  });
 
   const routes = [
     { path: "/admin/orders", view: orders, title: "Orders" },
     { path: "/admin/products", view: products, title: "Products" },
     { path: "/admin/categories", view: categories, title: "Categories" },
-    { path: "/admin/products/:id", view: productDetail, title: "Categories" },
-    { path: "/admin/orders/:id", view: orderDetail, title: "Categories" },
+    {
+      path: "/admin/products/:id",
+      view: productDetail,
+      title: "ProductDetails",
+    },
+    { path: "/admin/orders/:id", view: orderDetail, title: "OrderDetails" },
   ];
 
   this.render = () => {
@@ -285,14 +302,32 @@ export default function App({ $app }) {
         result: location.pathname.match(pathToRegex(route.path)),
       };
     });
+    console.log(results);
     let match = results.find((route) => route.result != null);
+    // 화면이 변하지 않아서, 그만큼 화면이 쌓이게 되는 것인가?
+    // 값이 변화가 된다면, render가 되어야 함.
+    // setState -> render -> url match -> orderDetail init()
+    //                                 -> orderDetail render();
+    console.log("setState 실행 횟수:", this.state.renderStack);
     if (match) {
+      if (
+        match.route.view === orderDetail ||
+        match.route.view === productDetail
+      ) {
+        if (match.route.view.state) {
+          match.route.view.render();
+        }
+      }
       match.route.view.init();
     }
   };
 
-  this.setState = (state) => {
-    this.state = { ...state };
+  this.setState = (nextState) => {
+    this.state = {
+      ...this.state,
+      ...nextState,
+      renderStack: this.state.renderStack + 1,
+    };
     orders.setState(this.state.orderLists);
     categories.setState(this.state.categoryLists);
     products.setState(this.state.productLists);
@@ -325,13 +360,6 @@ export default function App({ $app }) {
       else history.pushState(state, "", to);
 
       this.render();
-    });
-
-    this.setState({
-      ...this.state,
-      orderLists: orderData.data,
-      categoryLists: categoryData.data,
-      productLists: productData.data,
     });
 
     navigate(`${BASE_URL}/orders`, {

@@ -36,14 +36,14 @@ export default function Products({ $app, initialState, onClick }) {
 
     const $table = this.$element.querySelector("table");
 
-    appendDetailMoveHandler($table);
+    appendDetailMoveHandler($table, this.state, "ProductDetails");
 
     $app.appendChild(this.$element);
   };
 
   this.render = () => {
     const $table = this.$element.querySelector("table");
-    console.log(this.state);
+    console.log(this.state, "product render");
     if ($table) {
       $table.innerHTML = tableTemplate(PRODUCT_COLUMNS, this.state);
     }

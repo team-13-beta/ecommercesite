@@ -11,14 +11,17 @@ export default function Categories({ $app, initialState, onClick }) {
 
   this.init = () => {
     clearContainer($app);
-    clearContainer(this.$element); // table만 초기화 하면 됨. $table을 초기화 하고, search나 검색을 추가할 것.
+    clearContainer(this.$element);
+    // table만 초기화 하면 됨. $table을 초기화 하고, search나 검색을 추가할 것.
     this.$element.innerHTML = categoryHeader();
     this.$element.insertAdjacentHTML(
       "beforeend",
       tableTemplate(CATEGORIES_COLUMNS, this.state),
     );
+
     const $inputVal = this.$element.querySelector(".category-search");
     console.log($inputVal);
+
     this.$element
       .querySelector(".search")
       .addEventListener("click", (e) => onClick($inputVal.value));
@@ -31,6 +34,7 @@ export default function Categories({ $app, initialState, onClick }) {
 
   this.render = () => {
     const table = this.$element.querySelector("table");
+    console.log(this.state, "category render");
     if (table) table.innerHTML = tableTemplate(CATEGORIES_COLUMNS, this.state);
   };
 
