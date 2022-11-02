@@ -2,9 +2,16 @@ import cors from "cors";
 import express from "express";
 import { viewsRouter, userRouter, productRouter,categoryRouter } from "./routers/index.js";
 import { errorHandler } from "./middlewares/index.js";
+import {categoryModelTest} from "./db/models/category-testData.js";
+import {productModelTest} from "./db/models/product-testData.js";
+import {userModelTest} from "./db/models/user-testData.js";
+(categoryModelTest()).then(console.log("SUCCESS : [CategoryModelData] Created"));
+(productModelTest()).then(console.log("SUCCESS : [ProductModelData] Created"));
+(userModelTest()).then(console.log("SUCCESS : [UserModelData] Created"));
+
 
 const app = express();
-
+ 
 // CORS 에러 방지
 app.use(cors());
 

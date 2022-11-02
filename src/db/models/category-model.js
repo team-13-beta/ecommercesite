@@ -1,6 +1,7 @@
 import { model } from "mongoose";
 import { CategorySchema } from "../schemas/category-schema.js";
 
+
 const Category = model("categories", CategorySchema);
 
 export class CategoryModel {
