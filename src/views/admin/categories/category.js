@@ -2,6 +2,8 @@ import { createElement, clearContainer } from "../../utility/documentSelect.js";
 import { categoryHeader } from "../components/categoryHeader.js";
 import { tableTemplate } from "../components/tableTemplate.js";
 
+import { modal, closeModal } from "../components/modal.js";
+
 const CATEGORIES_COLUMNS = [["category_name", "카테고리 이름"]];
 
 export default function Categories({ $app, initialState, onClick }) {
@@ -25,9 +27,16 @@ export default function Categories({ $app, initialState, onClick }) {
     this.$element
       .querySelector(".search")
       .addEventListener("click", (e) => onClick($inputVal.value));
-    this.$element
-      .querySelector(".append")
-      .addEventListener("click", () => console.log("append"));
+    this.$element.querySelector(".append").addEventListener("click", () => {
+      const $modalLayout = createElement("div");
+      $modalLayout.setAttribute("class", "modal__layout");
+      $modalLayout.innerHTML = modal;
+      document.querySelector("body").prepend($modalLayout);
+
+      const $modalClose = document.querySelector(".modal__close > button");
+
+      $modalClose.addEventListener("click", closeModal);
+    });
 
     $app.appendChild(this.$element);
   };
