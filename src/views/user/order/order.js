@@ -1,14 +1,18 @@
-function openModal($el) {
-  $el.classList.add("is-open");
-}
-
-function closeModal($el) {
-  $el.classList.remove("is-open");
-}
-
+const modalEl = document.querySelector("#modal-payment");
 const paymentBtnEl = document.querySelector("#paymentBtn");
 const modalCloseBtnEl = document.querySelector("#modal-close");
-const modalEl = document.querySelector("#modal-payment");
+const backEl = document.querySelector(".modal-bg");
 
-paymentBtnEl.addEventListener("click", openModal(modalEl));
-modalCloseBtnEl.addEventListener("click", closeModal(modalEl));
+function openModal() {
+  modalEl.classList.remove("is-close");
+}
+
+function closeModal() {
+  modalEl.classList.add("is-close");
+}
+
+window.onload = function () {
+  paymentBtnEl.addEventListener("click", openModal);
+  modalCloseBtnEl.addEventListener("click", closeModal);
+  backEl.addEventListener("click", closeModal);
+};

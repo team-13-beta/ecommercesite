@@ -25,11 +25,31 @@
   margin-bottom: 20px;
 }
 
-#modal-payment {
-  display: none;
+.modal-container {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.is-open {
-  display: block;
+.modal-bg {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.modal-box {
+  position: absolute;
+  background-color: #fff;
+  width: 400px;
+  height: 400px;
+  padding: 20px;
+}
+
+.is-close {
+  display: none;
 }
 
 #footer {

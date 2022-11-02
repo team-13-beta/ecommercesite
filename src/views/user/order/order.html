@@ -10,7 +10,6 @@
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
     />
     <link rel="stylesheet" href="order.css" />
-    
   </head>
   <body>
     <header id="header">
@@ -46,17 +45,27 @@
           </div>
         </div>
       </div>
-
-      <div id="modal-payment">
-          <div>hihihihihihihi</div>
-          <button id="modal-close" class="button">close</button>
-        </div>
-      </div>
     </section>
+
+    <div id="modal-payment" class="modal-container is-close">
+      <div class="modal-bg"></div>
+      <div class="modal-box">
+        <div class="card">
+          <div class="card-header-title">결제 목록</div>
+          <div class="card-content">
+            <div class="content">결제 금액</div>
+          </div>
+        </div>
+
+        <button id="modal-close" class="button close-btn">닫기</button>
+        <button class="button">결제 하기</button>
+      </div>
+    </div>
 
     <footer id="footer">
       <div class="footer_item">footer</div>
     </footer>
+
+    <script type="text/javascript" src="order.js"></script>
   </body>
-  <script type="text/javascript" src="order.js"></script>
 </html>
