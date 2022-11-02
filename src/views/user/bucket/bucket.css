@@ -22,37 +22,13 @@
 #contents {
   width: 1024px;
   margin: 0 auto;
-  border: 1px solid black;
   margin-bottom: 20px;
 }
 
 .content_container {
   margin-bottom: 20px;
 }
-.bucket_header {
-  font-size: 30px;
-}
 
-.bucket_info_area {
-}
-.bucket_info {
-  display: flex;
-}
-.bucket_img {
-  width: 200px;
-  height: 200px;
-  border: 1px solid yellow;
-}
-.bucket_content {
-  width: 400px;
-  height: 200px;
-  border: 1px solid black;
-}
-.bucket_price {
-  width: 200px;
-  height: 200px;
-  border: 1px solid gray;
-}
 #footer {
   width: 1024px;
   margin: 0 auto;
