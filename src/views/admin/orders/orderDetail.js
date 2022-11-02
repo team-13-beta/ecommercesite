@@ -1,7 +1,11 @@
-export default function OrderDetail({ initialState }) {
+import { clearContainer, createElement } from "../../utility/documentSelect.js";
+
+export default function OrderDetail({ $app, initialState }) {
   this.state = initialState;
+
+  this.$element = createElement("div");
   this.init = () => {
-    console.log("orderDetail");
+    clearContainer($app);
     this.render();
   };
   this.render = () => {};

@@ -267,8 +267,8 @@ export default function App({ $app }) {
     },
   });
 
-  const productDetail = new ProductDetail({ $initialState: {} });
-  const orderDetail = new OrderDetail({ $initialState: {} });
+  const productDetail = new ProductDetail({ $app, $initialState: {} });
+  const orderDetail = new OrderDetail({ $app, $initialState: {} });
 
   const routes = [
     { path: "/admin/orders", view: orders, title: "Orders" },

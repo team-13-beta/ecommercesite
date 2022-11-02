@@ -17,6 +17,7 @@ export const appendDetailMoveHandler = ($element) => {
     if (target.matches("[data-detail-id]")) {
       const { detailId } = target.dataset;
       navigate(`${location.pathname}/${detailId}`, {
+        // 여기서 뒤로 계속 추가되는 값들 제거하기
         title: detailId,
         state: "load",
       });
