@@ -14,13 +14,16 @@ export default function Categories({ $app, initialState }) {
 
     this.$element.insertAdjacentHTML(
       "afterbegin",
-      tableTemplate(CATEGORIES_COLUMNS),
+      tableTemplate(CATEGORIES_COLUMNS, this.state),
     );
 
     $app.appendChild(this.$element);
   };
 
-  this.render = () => {};
+  this.render = () => {
+    const table = this.$element.querySelector("table");
+    if (table) table.innerHTML = tableTemplate(ORDER_COLUMNS, this.state);
+  };
 
   this.setState = (state) => {
     this.state = state;

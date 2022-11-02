@@ -40,6 +40,7 @@ export default function Orders({ $app, initialState, onChange, onClick }) {
 
   this.render = () => {
     const table = this.$element.querySelector("table");
+    console.log(this.state);
     if (table) table.innerHTML = tableTemplate(ORDER_COLUMNS, this.state);
     // this.$element.innerHTML = (
     //   "afterbegin",

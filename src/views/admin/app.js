@@ -90,10 +90,35 @@ const orderData = {
     },
   ],
 };
+const categoryData = {
+  data: [
+    {
+      category_id: "1",
+      category_name: "닭가슴살",
+    },
+    {
+      category_id: "2",
+      category_name: "프로틴음료",
+    },
+    {
+      category_id: "3",
+      category_name: "프로틴",
+    },
+    {
+      category_id: "4",
+      category_name: "도시락",
+    },
+  ],
+};
+const productData = {
+  data: [],
+};
 
 export default function App({ $app }) {
   this.state = {
     orderLists: [],
+    categoryLists: [],
+    productLists: [],
   };
 
   const orders = new Orders({
@@ -113,8 +138,14 @@ export default function App({ $app }) {
       });
     },
   });
-  const products = new Products({ $app });
-  const categories = new Categories({ $app });
+  const products = new Products({
+    $app,
+    initialState: this.state.productLists,
+  });
+  const categories = new Categories({
+    $app,
+    initialState: this.state.categoryLists,
+  });
 
   const routes = [
     { path: "/admin/orders", view: orders, title: "Orders" },
@@ -138,6 +169,9 @@ export default function App({ $app }) {
   this.setState = (state) => {
     this.state = { ...state };
     orders.setState(this.state.orderLists);
+    categories.setState(this.state.categoryLists);
+    // products.setState(this.state.productLists);
+    this.render();
   };
 
   this.init = () => {
@@ -168,7 +202,12 @@ export default function App({ $app }) {
       this.render();
     });
 
-    this.setState({ ...this.state, orderLists: orderData.data });
+    this.setState({
+      ...this.state,
+      orderLists: orderData.data,
+      categoryLists: categoryData.data,
+      productLists: productData.data,
+    });
 
     navigate(`${BASE_URL}/orders`, {
       title: "Orders",
