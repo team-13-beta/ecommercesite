@@ -1,6 +1,6 @@
-import Categories from "./categories/index.js";
-import Orders from "./orders/index.js";
-import Products from "./products/index.js";
+import Categories from "./categories/category.js";
+import Orders from "./orders/order.js";
+import Products from "./products/product.js";
 
 import { navigate } from "../utility/navigate.js";
 import { pathToRegex } from "../useful-functions.js";
