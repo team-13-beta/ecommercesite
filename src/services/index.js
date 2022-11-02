@@ -1,2 +1,3 @@
-export * from "./user-service";
-// Product 연결
+export * from "./user-service.js";
+export * from "./product-service.js";
+export * from "./category-service.js";
