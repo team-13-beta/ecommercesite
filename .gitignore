@@ -602,5 +602,12 @@ dist
 ### VisualStudio Patch ###
 # Additional files built by Visual Studio
 
+### Template .gitignore detail
+# Dependencies
+node_modules
+yarn.lock
+package-lock.json
+.env
+
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudio,windows,macos
