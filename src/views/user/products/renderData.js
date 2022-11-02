@@ -1,6 +1,6 @@
 export default function renderData(img, name, price, des) {
   return `
-    <div class="image is-128x128 column img-title">
+    <div class="image  column img-title">
         <img src=${img} />
     </div>
     <div class="column card">
