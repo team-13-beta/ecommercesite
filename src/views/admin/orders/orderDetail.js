@@ -10,7 +10,18 @@ export default function OrderDetail({
   this.state = initialState;
 
   this.$element = createElement("div");
-
+  this.$element.addEventListener("click", (e) => {
+    e.preventDefault();
+    const { type } = e.target.dataset;
+    if (type === "update") {
+      updateHandler({
+        ...this.state,
+        status: this.$element.querySelector("select").value,
+      });
+    } else if (type === "delete") {
+      deleteHandler(e);
+    }
+  });
   this.init = () => {
     clearContainer($app);
     if (!this.state || this.state.id !== history.state.state.id) {
@@ -18,21 +29,6 @@ export default function OrderDetail({
     } else {
       this.$element.innerHTML = orderDetailTemplate(this.state);
     }
-
-    this.$element.addEventListener("click", (e) => {
-      e.preventDefault();
-      const { type } = e.target.dataset;
-      if (type === "update") {
-        updateHandler({
-          ...this.state,
-          status: this.$element.querySelector("select").value,
-        });
-      } else if (type === "delete") {
-        deleteHandler(e);
-      }
-    });
-
-    console.log("orderDetail render");
 
     $app.appendChild(this.$element);
   };

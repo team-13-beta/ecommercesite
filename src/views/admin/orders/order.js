@@ -19,11 +19,13 @@ export default function Orders({ $app, initialState, onChange, onClick }) {
   this.init = () => {
     clearContainer($app);
     clearContainer(this.$element);
+
     this.$element.innerHTML = orderHeaderTemplate();
     this.$element.insertAdjacentHTML(
       "beforeend",
       tableTemplate(ORDER_COLUMNS, this.state),
     );
+
     const $inputVal = this.$element.querySelector(".order-search");
     this.$element
       .querySelector(".search")

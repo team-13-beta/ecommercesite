@@ -2,7 +2,7 @@ import { clearContainer, createElement } from "../../utility/documentSelect.js";
 import { appendDetailMoveHandler } from "../../utility/navigate.js";
 import { categoryHeader } from "../components/productHeader.js";
 import { tableTemplate } from "../components/tableTemplate.js";
-
+import { productModal, closeModal } from "../components/modal.js";
 const PRODUCT_COLUMNS = [
   ["id", "상품 아이디"],
   ["productName", "상품명"],
@@ -25,7 +25,7 @@ export default function Products({ $app, initialState, onClick }) {
 
     this.$element.insertAdjacentHTML(
       "beforeend",
-      tableTemplate(PRODUCT_COLUMNS, this.state),
+      tableTemplate(PRODUCT_COLUMNS, this.state.productLists),
     );
 
     const $inputVal = this.$element.querySelector(".category-search");
@@ -36,16 +36,46 @@ export default function Products({ $app, initialState, onClick }) {
 
     const $table = this.$element.querySelector("table");
 
-    appendDetailMoveHandler($table, this.state, "ProductDetails");
+    appendDetailMoveHandler($table, this.state.productLists, "ProductDetails");
 
+    this.$element.querySelector(".append").addEventListener("click", () => {
+      const $modalLayout = createElement("div");
+      $modalLayout.setAttribute("class", "modal__layout");
+      $modalLayout.innerHTML = productModal(this.state.categoryLists);
+      document.querySelector("body").prepend($modalLayout);
+
+      const $modalClose = $modalLayout.querySelector(".close-button");
+      const $categoryAppend = $modalLayout.querySelector(".product-append");
+
+      $categoryAppend.addEventListener("click", (e) => {
+        e.preventDefault();
+        this.setState([
+          ...this.state,
+          {
+            category_id: Date.now() + "",
+            category_name: $categoryInput.value,
+          },
+        ]);
+        closeModal();
+      });
+
+      $modalClose.addEventListener("click", closeModal);
+    });
     $app.appendChild(this.$element);
   };
 
   this.render = () => {
     const $table = this.$element.querySelector("table");
-    console.log(this.state, "product render");
+    const $modalLayout = this.$element.querySelector(".modal__layout");
     if ($table) {
-      $table.innerHTML = tableTemplate(PRODUCT_COLUMNS, this.state);
+      $table.innerHTML = tableTemplate(
+        PRODUCT_COLUMNS,
+        this.state.productLists,
+      );
+    }
+
+    if ($modalLayout) {
+      $modalLayout.innerHTML = productModal(this.state.categoryLists);
     }
   };
 

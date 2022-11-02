@@ -2,11 +2,16 @@ import { createElement, clearContainer } from "../../utility/documentSelect.js";
 import { categoryHeader } from "../components/categoryHeader.js";
 import { tableTemplate } from "../components/tableTemplate.js";
 
-import { modal, closeModal } from "../components/modal.js";
+import { categoryModal, closeModal } from "../components/modal.js";
 
 const CATEGORIES_COLUMNS = [["category_name", "카테고리 이름"]];
 
-export default function Categories({ $app, initialState, onClick }) {
+export default function Categories({
+  $app,
+  initialState,
+  searchHandler,
+  appendHandler,
+}) {
   this.state = initialState;
 
   this.$element = createElement("div"); // closuer가 발동되어서 사용됨.
@@ -22,19 +27,27 @@ export default function Categories({ $app, initialState, onClick }) {
     );
 
     const $inputVal = this.$element.querySelector(".category-search");
-    console.log($inputVal);
 
     this.$element
       .querySelector(".search")
-      .addEventListener("click", (e) => onClick($inputVal.value));
+      .addEventListener("click", (e) => searchHandler($inputVal.value));
+
     this.$element.querySelector(".append").addEventListener("click", () => {
       const $modalLayout = createElement("div");
       $modalLayout.setAttribute("class", "modal__layout");
-      $modalLayout.innerHTML = modal;
+      $modalLayout.innerHTML = categoryModal;
       document.querySelector("body").prepend($modalLayout);
 
-      const $modalClose = document.querySelector(".modal__close > button");
+      const $modalClose = $modalLayout.querySelector(".close-button");
+      const $categoryAppend = $modalLayout.querySelector(".category-append");
+      const $categoryInput = $modalLayout.querySelector(".category-input");
 
+      $categoryAppend.addEventListener("click", (e) =>
+        appendHandler({
+          category_id: Date.now() + "",
+          category_name: $categoryInput.value,
+        }),
+      );
       $modalClose.addEventListener("click", closeModal);
     });
 

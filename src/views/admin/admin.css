@@ -10,11 +10,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
-.modal__layout > .modal__card {
+.modal__layout > .modal__category__card {
   width: 650px;
-  height: 750px;
+  height: 320px;
   margin-right: 50px;
   display: flex;
   flex-direction: column;
@@ -23,7 +24,7 @@
   background-color: #fff;
 }
 
-.modal__layout > .modal__card > .modal__header {
+.modal__layout > .modal__category__card > .modal__header {
   width: 100%;
   height: 42px;
   box-sizing: border-box;
@@ -33,19 +34,19 @@
   border: 1px solid #8e8e8e;
 }
 
-.modal__layout > .modal__card > .modal__header > .modal__back {
+.modal__layout > .modal__category__card > .modal__header > .modal__back {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-basis: 60px;
 }
 
-.modal__layout > .modal__card > .modal__header > .modal__back > img {
+.modal__layout > .modal__category__card > .modal__header > .modal__back > img {
   visibility: hidden;
   cursor: pointer;
 }
 
-.modal__layout > .modal__card > .modal__header > p {
+.modal__layout > .modal__category__card > .modal__header > p {
   visibility: hidden;
   flex-basis: 60px;
   color: #0095f6;
@@ -66,7 +67,7 @@
   cursor: pointer;
 }
 
-.modal__layout > .modal__card > .modal__main {
+.modal__layout > .modal__category__card > .modal__main {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
@@ -76,16 +77,16 @@
   align-items: center;
 }
 
-.modal__layout > .modal__card > .modal__main > img {
+.modal__layout > .modal__category__card > .modal__main > img {
   margin-bottom: 15px;
 }
 
-.modal__layout > .modal__card > .modal__main > h3 {
+.modal__layout > .modal__category__card > .modal__main > h3 {
   margin-bottom: 15px;
   font-size: 22px;
 }
 
-.modal__layout > .modal__card > .modal__main > label > p {
+.modal__layout > .modal__category__card > .modal__main > label > p {
   width: 109px;
   height: 30px;
   display: flex;
@@ -99,6 +100,6 @@
   cursor: pointer;
 }
 
-.modal__layout > .modal__card > .modal__main > #file {
+.modal__layout > .modal__category__card > .modal__main > #file {
   display: none;
 }

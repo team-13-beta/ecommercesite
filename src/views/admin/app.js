@@ -6,6 +6,7 @@ import { navigate } from "../utility/navigate.js";
 import { pathToRegex } from "../useful-functions.js";
 import ProductDetail from "./products/productDetail.js";
 import OrderDetail from "./orders/orderDetail.js";
+import { closeModal } from "./components/modal.js";
 
 const BASE_URL = `http://localhost:5000/admin`;
 const orderData = {
@@ -210,7 +211,6 @@ const productData = {
 
 export default function App({ $app }) {
   this.state = {
-    renderStack: 0,
     orderLists: orderData.data,
     categoryLists: categoryData.data,
     productLists: productData.data,
@@ -237,7 +237,7 @@ export default function App({ $app }) {
   });
   const products = new Products({
     $app,
-    initialState: productData.data,
+    initialState: this.state,
     onClick: (searchData) => {
       const productLists =
         searchData === ""
@@ -255,7 +255,7 @@ export default function App({ $app }) {
   const categories = new Categories({
     $app,
     initialState: categoryData.data,
-    onClick: (searchData) => {
+    searchHandler: (searchData) => {
       const categoryLists =
         searchData === ""
           ? categoryData.data
@@ -267,6 +267,13 @@ export default function App({ $app }) {
         ...this.state,
         categoryLists,
       });
+    },
+    appendHandler: (appendItem) => {
+      this.setState({
+        ...this.state,
+        categoryLists: [...this.state.categoryLists, appendItem],
+      });
+      closeModal();
     },
   });
   const productDetail = new ProductDetail({
@@ -326,11 +333,11 @@ export default function App({ $app }) {
     };
     orders.setState(this.state.orderLists);
     categories.setState(this.state.categoryLists);
-    products.setState(this.state.productLists);
+    products.setState({ ...this.state });
     orderDetail.setState(this.state.orderDetail);
     productDetail.setState(this.state.productDetail);
 
-    this.render();
+    // this.render();
   };
 
   this.init = () => {
