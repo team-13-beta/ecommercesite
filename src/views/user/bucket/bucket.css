@@ -9,26 +9,28 @@
   text-align: center;
   border-radius: 10px;
 }
-  .category_container {
-    border: 1px solid black;
-    font-size: 50px;
-    text-align: center;
-  }
-  
-  #contents {
-    width: 1024px;
-    margin: 0 auto;
-    margin-bottom: 20px;
-  }
-  
-  .content_container {
-    margin-bottom: 20px;
-  }
-  .footer_container {
-    width: 1024px;
-    margin: 0 auto;
-    background-color: #ff922b;
-    color: #ffe8cc;
-  }
-  
-  
+.category_container {
+  border: 1px solid black;
+  font-size: 50px;
+  text-align: center;
+}
+
+#contents {
+  width: 1024px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+.content_container {
+  margin-bottom: 20px;
+}
+
+.stock-con {
+  display: flex;
+}
+.footer_container {
+  width: 1024px;
+  margin: 0 auto;
+  background-color: #ff922b;
+  color: #ffe8cc;
+}
