@@ -1,18 +1,14 @@
-#header {
-    border: 1px solid black;
-    width: 1024px;
-    height: auto;
-    margin: 0 auto;
-    margin-bottom: 20px;
-  }
-  .header_container {
-    border: 1px solid black;
-    margin-bottom: 20px;
-  }
-  .logo_header {
-    font-size: 50px;
-    text-align: center;
-  }
+.header-container {
+  display: flex;
+}
+
+.logo {
+  background-color: #ff922b;
+  width: 80px;
+  font-size: 20px;
+  text-align: center;
+  border-radius: 10px;
+}
   .category_container {
     border: 1px solid black;
     font-size: 50px;
@@ -52,13 +48,10 @@
     display: none;
   }
   
-  #footer {
+  .footer_container {
     width: 1024px;
     margin: 0 auto;
-    border: 1px solid black;
-  }
-  .footer_item {
-    font-size: 30px;
-    border: 1px solid blueviolet;
+    background-color: #ff922b;
+    color: #ffe8cc;
   }
   
