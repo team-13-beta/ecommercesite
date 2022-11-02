@@ -18,13 +18,18 @@ async function handleData() {
         const htmlStr = renderBucketData(img, name, price, stock);
         let el = document.createElement("div");
         el.classList.add("columns");
+        el.classList.add("item-box");
         el.innerHTML = htmlStr;
         dataEl.append(el);
       }
 
-      const srcEl = document.createElement("script");
-      srcEl.setAttribute("src", "counter.js");
-      document.querySelector("body").appendChild(srcEl);
+      const counterEl = document.createElement("script");
+      counterEl.setAttribute("src", "counter.js");
+      document.querySelector("body").appendChild(counterEl);
+
+      const deletteEl = document.createElement("script");
+      deletteEl.setAttribute("src", "deleteItem.js");
+      document.querySelector("body").appendChild(deletteEl);
     });
 }
 

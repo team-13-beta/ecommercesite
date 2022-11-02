@@ -10,7 +10,6 @@ export default function renderBucketData(img, name, price, stock) {
             <button class="button plus-btn">+</button>
           </div>
           <div class="column total-price">${price * stock}</div>
-          <button class="delete column del-btn"></button>
-          
+          <button class="delete column del-btn"></button>    
   `;
 }
