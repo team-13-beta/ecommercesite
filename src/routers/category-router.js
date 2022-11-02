@@ -33,4 +33,46 @@ categoryRouter.post("/",async(req,res,next)=>{
       }
 })
 
+categoryRouter.patch(
+  "/:categoryId",
+  async function (req, res, next) {
+    try {
+      // params로부터 id를 가져옴
+      const categoryId = req.params.categoryId;
+
+      // body data 로부터 업데이트할 사용자 정보를 추출함.
+      const {name}=req.body;
+
+      // 위 데이터가 undefined가 아니라면, 즉, 프론트에서 업데이트를 위해
+      // 보내주었다면, 업데이트용 객체에 삽입함.
+      const toUpdate = {
+        ...(name && { name }),
+      };
+      //console.log(toUpdate);
+      // 사용자 정보를 업데이트함.
+      const updatedCategoryInfo = await categoryService.setCategory(
+        categoryId,
+        toUpdate,
+      );
+
+      // 업데이트 이후의 유저 데이터를 프론트에 보내 줌
+      res.status(200).json(updatedCategoryInfo);
+    } catch (error) {
+      next(error);
+    }
+  },
+);
+
+categoryRouter.delete("/:categoryId",async (req,res,next)=>{
+  // 삭제할 상품 이름
+  try{
+      const categoryId=req.params.categoryId;
+      const deleteCategory=await categoryService.deleteCategory(categoryId);
+  
+      res.status(201).json(deleteCategory);
+  }catch(err){
+      next(err);
+  }
+});
+
 export { categoryRouter };
