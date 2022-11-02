@@ -1,0 +1,19 @@
+@font-face {
+  font-family: "S-CoreDream-3Light";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.header-container {
+  display: flex;
+}
+
+.logo {
+  background-color: #ff922b;
+  width: 80px;
+  font-size: 20px;
+  text-align: center;
+  border-radius: 10px;
+}
