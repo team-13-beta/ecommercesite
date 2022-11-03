@@ -3,6 +3,11 @@ import is from "@sindresorhus/is";
 // 폴더에서 import하면, 자동으로 폴더의 index.js에서 가져옴
 import { loginRequired } from "../middlewares/index.js";
 import { userService } from "../services/index.js";
+import oauth2 from "passport-google-oauth2";
+import passport from "passport";
+import session from "express-session";
+import MongoStore from "connect-mongo";
+import { config } from "dotenv";
 
 const userRouter = Router();
 
@@ -65,12 +70,44 @@ userRouter.post("/login", async function (req, res, next) {
   }
 });
 
+
+
+const GoogleStrategy = oauth2.Strategy;
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_ID;
+const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_SECRET;
+const option = {
+  secret: process.env.SESSION_SECRET,
+  resave: true,
+  saveUninitialized: true,
+  store:MongoStore.create({mongoUrl:process.env.MONGO_SESSION_URL}),
+  cookie:{maxAge:600000,httpOnly:true}// 1000ms = 1s
+}
+
+
+// 세션 
+userRouter.use("/login/auth", session(option), async function(req,res,next) {
+  req.session.email="test@example.com";
+  req.session.uid="OK";
+  req.session.isLogined = true;
+  req.session.save(function(){
+    // res.redirect("/login");
+  })
+  next();
+});
+
+userRouter.get("/login/auth" , async function(req,res){
+  return res.status(200).json({ key: req.session.id, expire : req.session.cookie.expires, example:"hoho"});
+})
+
 // 전체 유저 목록을 가져옴 (배열 형태임)
 // 미들웨어로 loginRequired 를 썼음 (이로써, jwt 토큰이 없으면 사용 불가한 라우팅이 됨)
 userRouter.get("/userlist", loginRequired, async function (req, res, next) {
   try {
-    // 전체 사용자 목록을 얻음
-    const users = await userService.getUsers();
+    // 사용자의 권한(Role)에 따라 사용자 목록을 얻음 || admin : 전체 데이터, user : 본인의 데이터
+    let option = '';
+    if(req.currentRole !== 'admin')
+    option = req.currentUserId;    
+    const users = await userService.getUsers(option);
 
     // 사용자 목록(배열)을 JSON 형태로 프론트에 보냄
     res.status(200).json(users);

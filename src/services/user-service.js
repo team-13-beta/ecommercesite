@@ -13,8 +13,6 @@ class UserService {
   async addUser(userInfo) {
     // 객체 destructuring
     const { email, fullName:name, password, phoneNumber, address } = userInfo;
-    console.log(phoneNumber," phoneNumber");
-    console.log(address,"Address");
     // 이메일 중복 확인
     const user = await this.userModel.findByEmail(email);
     if (user) {
@@ -75,9 +73,9 @@ class UserService {
     return { token };
   }
 
-  // 사용자 목록을 받음.
-  async getUsers() {
-    const users = await this.userModel.findAll();
+  // 사용자 목록을 받음. admin이면 다 받을 수 있고 user면 사용자 자신의 정보만 조회가능
+  async getUsers(option) {
+    const users = (option !== '')? await this.userModel.findById(option): await this.userModel.findAll();
     return users;
   }
 
