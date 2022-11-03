@@ -16,6 +16,14 @@ export default function Orders({ $app, initialState, onChange, onClick }) {
 
   this.$element = createElement("div");
 
+  this.$element.addEventListener("click", (e) => {
+    e.preventDefault();
+    const { type, detailId } = e.target.dataset;
+    console.log(type, detailId, e.target.dataset);
+    if (type === "detail") {
+      appendDetailMoveHandler(detailId, this.state, "OrderDetails");
+    }
+  });
   this.init = () => {
     clearContainer($app);
     clearContainer(this.$element);
@@ -31,18 +39,14 @@ export default function Orders({ $app, initialState, onChange, onClick }) {
       .querySelector(".search")
       .addEventListener("click", (e) => onClick($inputVal.value));
 
-    const $table = this.$element.querySelector("table");
-
-    appendDetailMoveHandler($table, this.state, "OrderDetails"); // 최초로 이어놓고, 이제 값을 어떻게 해야하나?
-
     $app.appendChild(this.$element);
+    this.render();
   };
 
   this.render = () => {
-    const table = this.$element.querySelector("table");
-    console.log(this.state, "order render");
-    if (table) {
-      table.innerHTML = tableTemplate(ORDER_COLUMNS, this.state);
+    const $table = this.$element.querySelector("table");
+    if ($table) {
+      $table.innerHTML = tableTemplate(ORDER_COLUMNS, this.state);
     }
   };
 

@@ -18,7 +18,7 @@ export function tableTemplate(columns, datas = []) {
     for (const [key, _] of columns) {
       const $td = createElement("td");
       if (key === "detail_button") {
-        $td.innerHTML = `<button data-detail-id=${data["id"]}>상세 정보</button>`;
+        $td.innerHTML = `<button data-type="detail" data-detail-id=${data["id"]}>상세 정보</button>`;
       } else {
         $td.innerHTML = data[key] ?? "";
       }

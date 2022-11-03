@@ -20,20 +20,20 @@ export function productModal(categories) {
       </div>
       <div class="modal__main">
         <label>상품명</label>
-        <input id="pruductName" placeholder="상품명을 입력해주세요"  required/>
+        <input id="productName" placeholder="상품명을 입력해주세요"  required/>
 
         <label>카테고리</label>
         <select id="category" required>
           ${categories
             .map(
               ({ category_id, category_name }) =>
-                `<option value=${category_id}>${category_name}</option>`,
+                `<option value=${category_name}>${category_name}</option>`,
             )
             .join("")}
         </select>
 
         <label>제조사</label>
-        <input id="company" placeholder="제조사를 입력해주세요" required />
+        <input id="companyName" placeholder="제조사를 입력해주세요" required />
 
         <label>제품 설명</label>
         <textarea id="description" placeholder="제품 설명을 입력해주세요" required></textarea>

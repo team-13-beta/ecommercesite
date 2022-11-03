@@ -32,12 +32,18 @@ export default function Products({
 
   this.$element.addEventListener("click", (e) => {
     e.preventDefault();
-    const { type } = e.target.dataset;
+    const { type, detailId } = e.target.dataset;
     if (type === "search") {
       const $inputVal = this.$element.querySelector(".category-search");
       searchHandler($inputVal.value);
     } else if (type === "append") {
       modalHandler(this.state.categoryLists);
+    } else if (type === "detail") {
+      appendDetailMoveHandler(
+        detailId,
+        this.state.productLists,
+        "ProductDetails",
+      );
     }
   });
 
@@ -69,24 +75,24 @@ export default function Products({
     });
 
     $appendButton.addEventListener("click", () => {
-      const pruductName = returnDocumentId("pruductName");
+      const productName = returnDocumentId("productName");
       const category = returnDocumentId("category");
-      const company = returnDocumentId("company");
+      const companyName = returnDocumentId("companyName");
       const description = returnDocumentId("description");
       const stock = returnDocumentId("stock");
       const price = returnDocumentId("price");
 
       const data = {
-        pruductName: pruductName.value,
+        id: String(Date.now()),
+        productName: productName.value,
         category: category.value,
-        company: company.value,
+        companyName: companyName.value,
         description: description.value,
         stock: stock.value,
         price: price.value,
         imageSrc: imageBase64,
       };
       appendHandler(data);
-      console.log(data);
       closeModal();
     });
 
@@ -104,11 +110,8 @@ export default function Products({
       tableTemplate(PRODUCT_COLUMNS, this.state.productLists),
     );
 
-    const $table = this.$element.querySelector("table");
-
-    appendDetailMoveHandler($table, this.state.productLists, "ProductDetails");
-
     $app.appendChild(this.$element);
+    this.render();
   };
 
   this.render = () => {
@@ -122,6 +125,7 @@ export default function Products({
   };
 
   this.setState = (state) => {
+    console.log(state, "!");
     this.state = state;
     this.render();
   };
