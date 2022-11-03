@@ -9,7 +9,8 @@ async function handleData() {
       const temp = data;
       console.log(temp);
       for (let i = 0; i < temp.length; i++) {
-        const [img, name, price] = [
+        const [id, img, name, price] = [
+          temp[i].product_id,
           temp[i].imgTitle,
           temp[i].name,
           temp[i].price,
