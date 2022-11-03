@@ -9,7 +9,7 @@ async function handleData() {
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
-
+      let TotalPrice = 0;
       for (let i = 0; i < data.length; i++) {
         const dataString = JSON.stringify(data[i]);
         // 로컬 스토리지에 저장
@@ -20,7 +20,7 @@ async function handleData() {
           data[i].price,
           data[i].stock,
         ];
-
+        TotalPrice += data[i].price * data[i].stock;
         // 페이지에 데이터를 뿌려준다.
         const htmlStr = renderBucketData(img, name, price, stock);
         let el = document.createElement("div");
@@ -29,6 +29,8 @@ async function handleData() {
         el.innerHTML = htmlStr;
         dataEl.append(el);
       }
+
+      window.localStorage.setItem("total-price", TotalPrice);
 
       // 렌더링이 되면 스크립트 파일을 추가한다.
       const counterEl = document.createElement("script");

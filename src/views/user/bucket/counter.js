@@ -7,7 +7,7 @@ const totalPriceEl = document.querySelector("#total-price");
 
 function handleCount(e, idx) {
   const oper = e.target.textContent;
-  const nowTotal = parseInt(totalPriceEl.textContent);
+  let nowTotal = parseInt(totalPriceEl.textContent);
 
   let val = parseInt(stockEl[idx].textContent); // 수량
   const priceVal = parseInt(priceEl[idx].textContent); // 현재 제품의 가격
@@ -15,7 +15,6 @@ function handleCount(e, idx) {
   // 로컬 스토리지 데이터 확인
   const valueString = window.localStorage.getItem(`${idx}item`);
   const valueObj = JSON.parse(valueString);
-  console.log(valueObj);
 
   if (oper === "+") {
     // 개당 가격 계산
@@ -25,7 +24,8 @@ function handleCount(e, idx) {
     itemtotalPriceEl[idx].innerText = `${nextPlus}`;
 
     // 총 가격 계산
-    totalPriceEl.innerText = `${nowTotal + priceVal}`;
+    nowTotal += priceVal;
+    totalPriceEl.innerText = `${nowTotal}`;
   } else {
     if (val > 1) {
       // 개당 가격 계산
@@ -35,13 +35,16 @@ function handleCount(e, idx) {
       itemtotalPriceEl[idx].innerText = `${nextPlus}`;
 
       // 총 가격 계산
-      totalPriceEl.innerText = `${nowTotal - priceVal}`;
+      nowTotal -= priceVal;
+      totalPriceEl.innerText = `${nowTotal}`;
     }
   }
   // 로컬 스토리지 수량 변경 후 다시 string 저장
   valueObj.stock = val;
-  console.log(valueObj);
   window.localStorage.setItem(`${idx}item`, JSON.stringify(valueObj));
+
+  // 로컬 스토리지에 총 가격 저장
+  window.localStorage.setItem("total-price", nowTotal);
 }
 
 // 아이템 식별
