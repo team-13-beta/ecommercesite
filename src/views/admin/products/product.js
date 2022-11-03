@@ -28,6 +28,7 @@ export default function Products({ $app, initialState, searchHandler }) {
   this.$element.addEventListener("click", (e) => {
     e.preventDefault();
     const { type } = e.target.dataset;
+    console.log(type, "product@@@");
     if (type === "search") {
       const $inputVal = this.$element.querySelector(".category-search");
       searchHandler($inputVal.value);
@@ -112,7 +113,6 @@ export default function Products({ $app, initialState, searchHandler }) {
         this.state.productLists,
       );
     }
-    modalHandler(this.state.categoryLists);
   };
 
   this.setState = (state) => {

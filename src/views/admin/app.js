@@ -121,6 +121,9 @@ const productData = {
       category: "닭가슴살",
       price: "2400",
       stock: "100",
+      companyName: "paper company",
+      description: "temp",
+      imageSrc: "base64",
     },
     {
       id: "2",
@@ -128,6 +131,9 @@ const productData = {
       category: "닭가슴살",
       price: "2700",
       stock: "100",
+      companyName: "paper company",
+      description: "temp",
+      imageSrc: "base64",
     },
     {
       id: "3",
@@ -135,6 +141,9 @@ const productData = {
       category: "닭가슴살",
       price: "2200",
       stock: "50",
+      companyName: "paper company",
+      description: "temp",
+      imageSrc: "base64",
     },
     {
       id: "4",
@@ -142,6 +151,9 @@ const productData = {
       category: "닭가슴살",
       price: "1800",
       stock: "100",
+      companyName: "paper company",
+      description: "temp",
+      imageSrc: "base64",
     },
     {
       id: "5",
@@ -149,6 +161,9 @@ const productData = {
       category: "프로틴",
       price: "4000",
       stock: "100",
+      companyName: "paper company",
+      description: "temp",
+      imageSrc: "base64",
     },
     {
       id: "6",
@@ -156,6 +171,9 @@ const productData = {
       category: "프로틴",
       price: "35000",
       stock: "100",
+      companyName: "paper company",
+      description: "temp",
+      imageSrc: "base64",
     },
     {
       id: "7",
@@ -163,6 +181,9 @@ const productData = {
       category: "도시락",
       price: "4500",
       stock: "100",
+      companyName: "paper company",
+      description: "temp",
+      imageSrc: "base64",
     },
     {
       id: "8",
@@ -170,6 +191,9 @@ const productData = {
       category: "도시락",
       price: "4700",
       stock: "100",
+      companyName: "paper company",
+      description: "temp",
+      imageSrc: "base64",
     },
     {
       id: "9",
@@ -177,6 +201,9 @@ const productData = {
       category: "닭가슴살",
       price: "2400",
       stock: "100",
+      companyName: "paper company",
+      description: "temp",
+      imageSrc: "base64",
     },
     {
       id: "10",
@@ -184,6 +211,9 @@ const productData = {
       category: "프로틴음료",
       price: "2400",
       stock: "100",
+      companyName: "paper company",
+      description: "temp",
+      imageSrc: "base64",
     },
     {
       id: "11",
@@ -191,6 +221,9 @@ const productData = {
       category: "프로틴음료",
       price: "2700",
       stock: "100",
+      companyName: "paper company",
+      description: "temp",
+      imageSrc: "base64",
     },
     {
       id: "12",
@@ -198,6 +231,9 @@ const productData = {
       category: "도시락",
       price: "4400",
       stock: "100",
+      companyName: "paper company",
+      description: "temp",
+      imageSrc: "base64",
     },
     {
       id: "13",
@@ -205,6 +241,9 @@ const productData = {
       category: "닭가슴살",
       price: "900",
       stock: "100",
+      companyName: "paper company",
+      description: "temp",
+      imageSrc: "base64",
     },
   ],
 };
@@ -238,7 +277,7 @@ export default function App({ $app }) {
   const products = new Products({
     $app,
     initialState: this.state,
-    onClick: (searchData) => {
+    searchHandler: (searchData) => {
       const productLists =
         searchData === ""
           ? productData.data
@@ -279,18 +318,18 @@ export default function App({ $app }) {
   const productDetail = new ProductDetail({
     $app,
     $initialState: this.state.productDetail,
-    searchHandler: (searchData) => {
-      const productLists =
-        searchData === ""
-          ? productData.data
-          : this.state.productLists.filter((data) =>
-              data.productName.includes(searchData),
-            );
-
-      this.setState({
-        ...this.state,
-        productLists,
-      });
+    $categories: this.state.categoryLists,
+    deleteHandler: (e) => {
+      console.log(e);
+    },
+    updateHandler: (updateData) => {
+      const { id } = updateData;
+      console.log(updateData);
+      const productLists = this.state.productLists.map((product) =>
+        product.id === id ? updateData : product,
+      );
+      alert("수정 완료");
+      this.setState({ productLists, productDetail: updateData });
     },
   });
 
@@ -298,15 +337,15 @@ export default function App({ $app }) {
     $app,
     $initialState: this.state.orderDetail,
     deleteHandler: (e) => {},
-    updateHandler: (updateVal) => {
-      const { id } = updateVal;
+    updateHandler: (updateData) => {
+      const { id } = updateData;
       // 수정 완료가 되어야 함.
       const orderLists = this.state.orderLists.map((order) =>
-        order.id === id ? updateVal : order,
+        order.id === id ? updateData : order,
       );
 
       alert("수정 완료");
-      this.setState({ orderLists, orderDetail: updateVal });
+      this.setState({ orderLists, orderDetail: updateData });
     },
   });
 
@@ -330,10 +369,6 @@ export default function App({ $app }) {
       };
     });
     let match = results.find((route) => route.result != null);
-    // 화면이 변하지 않아서, 그만큼 화면이 쌓이게 되는 것인가?
-    // 값이 변화가 된다면, render가 되어야 함.
-    // setState -> render -> url match -> orderDetail init()
-    //                                 -> orderDetail render();
     if (match) {
       match.route.view.init();
     }
@@ -348,7 +383,7 @@ export default function App({ $app }) {
     categories.setState(this.state.categoryLists);
     products.setState({ ...this.state });
     orderDetail.setState(this.state.orderDetail);
-    productDetail.setState(this.state.productDetail);
+    productDetail.setState(this.state.productDetail, this.state.categoryLists);
 
     // this.render();
   };
