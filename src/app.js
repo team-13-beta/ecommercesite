@@ -9,11 +9,10 @@ import {userModelTest} from "./db/models/user-testData.js";
 (productModelTest()).then(console.log("SUCCESS : [ProductModelData] Created"));
 (userModelTest()).then(console.log("SUCCESS : [UserModelData] Created"));
 
-const GOOGLE_CLIENT_ID = process.env.GOOGLE_ID;
-const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_SECRET;
 
 const app = express();
  
+
 // CORS 에러 방지
 app.use(cors());
 

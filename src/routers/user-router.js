@@ -10,7 +10,7 @@ import MongoStore from "connect-mongo";
 import { config } from "dotenv";
 
 const userRouter = Router();
-
+config();
 // 회원가입 api (아래는 /register이지만, 실제로는 /api/register로 요청해야 함.)
 userRouter.post("/register", async (req, res, next) => {
   try {
@@ -70,11 +70,6 @@ userRouter.post("/login", async function (req, res, next) {
   }
 });
 
-
-
-const GoogleStrategy = oauth2.Strategy;
-const GOOGLE_CLIENT_ID = process.env.GOOGLE_ID;
-const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_SECRET;
 const option = {
   secret: process.env.SESSION_SECRET,
   resave: true,
@@ -85,19 +80,106 @@ const option = {
 
 
 // 세션 
-userRouter.use("/login/auth", session(option), async function(req,res,next) {
-  req.session.email="test@example.com";
-  req.session.uid="OK";
-  req.session.isLogined = true;
-  req.session.save(function(){
-    // res.redirect("/login");
+// userRouter.use("/login/auth/google", session(option), async function(req,res,next) {
+//   req.session.email="test@example.com";
+//   req.session.uid="OK";
+//   req.session.isLogined = true;
+//   req.session.save(function(){
+//     // res.redirect("/login");
+//   })
+//   next();
+// });
+
+
+userRouter.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      httpOnly: true, // js 코드로 쿠키를 가져오지 못하게
+      secure: false // https 에서만 가져오도록 할 것인가?
+    }
   })
-  next();
+);
+
+const GoogleStrategy = oauth2.Strategy;
+
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_ID 
+const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_SECRET; 
+
+//passport 초기화 및 session 연결
+userRouter.use(passport.initialize())
+userRouter.use(passport.session());
+passport.serializeUser(function (user, done) {
+    done(null, user.id);
+});
+// 사용자가 페이지를 방문할 때마다 호출되는 함수
+// done(null, id)로 사용자의 정보를 각 request의 user 변수에 넣어준다.
+passport.deserializeUser(function (id, done) {
+    done(null, id);
 });
 
-userRouter.get("/login/auth" , async function(req,res){
-  return res.status(200).json({ key: req.session.id, expire : req.session.cookie.expires, example:"hoho"});
+
+// Google login 전략
+// 로그인 성공 시 callback으로 request, accessToken, refreshToken, profile 등이 나온다.
+// 해당 콜백 function에서 사용자가 누구인지 done(null, user) 형식으로 넣으면 된다.
+// 이 예시에서는 넘겨받은 profile을 전달하는 것으로 대체했다.
+passport.use(
+  new GoogleStrategy(
+      {
+          clientID: GOOGLE_CLIENT_ID,
+          clientSecret: GOOGLE_CLIENT_SECRET,
+          callbackURL: "http://localhost:5000/api/auth/google/callback",
+          passReqToCallback: true,
+      },
+      function (request, accessToken, refreshToken, profile, done) {
+          console.log("### Profile Value");
+          console.log(profile);
+          console.log("### Profile Value : " + accessToken);
+          console.log("access Token "+accessToken);
+          console.log("refresh Token "+refreshToken);
+          return done(null, profile);
+      }
+  )
+);
+
+userRouter.get('/auth/google',
+  passport.authenticate('google', { scope:
+      [ 'email', 'profile' ] }
+));
+
+userRouter.get('/auth/google/callback', 
+
+    passport.authenticate( 'google', {
+        successRedirect: '/',
+        failureRedirect: '/login'
+    })
+);
+
+/* [Error Code] : 라우팅 간에 /login이 먼저 들어가면 get이 인식이 되지 않는 
+userRouter.get("/login/auth/google" , async function(req,res){
+  passport.authenticate("google", { scope: ["email", "profile"] })
+  // return res.status(200).json({ key: req.session.id, expire : req.session.cookie.expires, example:"hoho"});
 })
+
+userRouter.get("/login/auth/google/callback",
+passport.authenticate("google",{
+  successRedirect : "/",
+  failureRedirect:"/login"
+}))
+*/
+userRouter.get('/logout', (req,res)=> {
+  req.logout(function(err){
+    if(err){return next(err);}
+    res.cookie
+    console.log("logOut합니다.");
+    res.redirect('/');
+  });
+})
+
+
+
 
 // 전체 유저 목록을 가져옴 (배열 형태임)
 // 미들웨어로 loginRequired 를 썼음 (이로써, jwt 토큰이 없으면 사용 불가한 라우팅이 됨)
