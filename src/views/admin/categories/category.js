@@ -16,6 +16,36 @@ export default function Categories({
 
   this.$element = createElement("div"); // closuer가 발동되어서 사용됨.
 
+  this.$element.addEventListener("click", (e) => {
+    e.preventDefault();
+    const { type } = e.target.dataset;
+    if (type === "search") {
+      const $inputVal = this.$element.querySelector(".category-search");
+      searchHandler($inputVal.value);
+    } else if (type === "append") {
+      modalHandler();
+    }
+  });
+
+  function modalHandler() {
+    const $modalLayout = createElement("div");
+    $modalLayout.setAttribute("class", "modal__layout");
+    $modalLayout.innerHTML = categoryModal;
+    document.querySelector("body").prepend($modalLayout);
+
+    const $modalClose = $modalLayout.querySelector(".close-button");
+    const $categoryAppend = $modalLayout.querySelector(".category-append");
+    const $categoryInput = $modalLayout.querySelector(".category-input");
+
+    $categoryAppend.addEventListener("click", (e) =>
+      appendHandler({
+        category_id: Date.now() + "",
+        category_name: $categoryInput.value,
+      }),
+    );
+    $modalClose.addEventListener("click", closeModal);
+  }
+
   this.init = () => {
     clearContainer($app);
     clearContainer(this.$element);
@@ -25,31 +55,6 @@ export default function Categories({
       "beforeend",
       tableTemplate(CATEGORIES_COLUMNS, this.state),
     );
-
-    const $inputVal = this.$element.querySelector(".category-search");
-
-    this.$element
-      .querySelector(".search")
-      .addEventListener("click", (e) => searchHandler($inputVal.value));
-
-    this.$element.querySelector(".append").addEventListener("click", () => {
-      const $modalLayout = createElement("div");
-      $modalLayout.setAttribute("class", "modal__layout");
-      $modalLayout.innerHTML = categoryModal;
-      document.querySelector("body").prepend($modalLayout);
-
-      const $modalClose = $modalLayout.querySelector(".close-button");
-      const $categoryAppend = $modalLayout.querySelector(".category-append");
-      const $categoryInput = $modalLayout.querySelector(".category-input");
-
-      $categoryAppend.addEventListener("click", (e) =>
-        appendHandler({
-          category_id: Date.now() + "",
-          category_name: $categoryInput.value,
-        }),
-      );
-      $modalClose.addEventListener("click", closeModal);
-    });
 
     $app.appendChild(this.$element);
   };

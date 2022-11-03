@@ -1,8 +1,14 @@
-import { clearContainer, createElement } from "../../utility/documentSelect.js";
+import {
+  clearContainer,
+  createElement,
+  returnDocumentClass,
+  returnDocumentId,
+} from "../../utility/documentSelect.js";
 import { appendDetailMoveHandler } from "../../utility/navigate.js";
 import { categoryHeader } from "../components/productHeader.js";
 import { tableTemplate } from "../components/tableTemplate.js";
 import { productModal, closeModal } from "../components/modal.js";
+
 const PRODUCT_COLUMNS = [
   ["id", "상품 아이디"],
   ["productName", "상품명"],
@@ -12,10 +18,73 @@ const PRODUCT_COLUMNS = [
   ["detail_button", "상세정보 가기"],
 ];
 
-export default function Products({ $app, initialState, onClick }) {
+export default function Products({ $app, initialState, searchHandler }) {
   this.state = initialState;
 
   this.$element = createElement("div");
+  const $modalLayout = createElement("div");
+  $modalLayout.setAttribute("class", "modal__layout");
+
+  this.$element.addEventListener("click", (e) => {
+    e.preventDefault();
+    const { type } = e.target.dataset;
+    if (type === "search") {
+      const $inputVal = this.$element.querySelector(".category-search");
+      searchHandler($inputVal.value);
+    } else if (type === "append") {
+      modalHandler(this.state.categoryLists);
+    }
+  });
+
+  function modalHandler(categoryLists = []) {
+    let imageBase64 = "";
+
+    $modalLayout.innerHTML = productModal(categoryLists ?? []);
+    document.querySelector("body").prepend($modalLayout);
+
+    const $modalClose = $modalLayout.querySelector(".close-button");
+    const $appendButton = $modalLayout.querySelector(".append-button");
+    const $file = returnDocumentId("file");
+    $file.addEventListener("input", function (e) {
+      let reader = new FileReader();
+
+      reader.readAsDataURL($file.files[0]);
+
+      reader.onload = function () {
+        imageBase64 = reader.result;
+        const $imageContaier = returnDocumentClass("image-container");
+        $imageContaier.innerHTML = `<img width="478px" height="478px" src=${imageBase64} alt="image" />
+        `;
+      };
+
+      reader.onerror = function (error) {
+        alert("Error: ", error);
+        document.querySelector("body").removeChild(modalEl);
+      };
+    });
+
+    $appendButton.addEventListener("click", () => {
+      const pruductName = returnDocumentId("pruductName");
+      const category = returnDocumentId("category");
+      const company = returnDocumentId("company");
+      const description = returnDocumentId("description");
+      const stock = returnDocumentId("stock");
+      const price = returnDocumentId("price");
+
+      console.log(
+        pruductName.value,
+        category.value,
+        company.value,
+        description.value,
+        stock.value,
+        price.value,
+        imageBase64,
+      );
+      closeModal();
+    });
+
+    $modalClose.addEventListener("click", closeModal);
+  }
 
   this.init = () => {
     clearContainer($app);
@@ -28,55 +97,22 @@ export default function Products({ $app, initialState, onClick }) {
       tableTemplate(PRODUCT_COLUMNS, this.state.productLists),
     );
 
-    const $inputVal = this.$element.querySelector(".category-search");
-
-    this.$element
-      .querySelector(".search")
-      .addEventListener("click", (e) => onClick($inputVal.value));
-
     const $table = this.$element.querySelector("table");
 
     appendDetailMoveHandler($table, this.state.productLists, "ProductDetails");
 
-    this.$element.querySelector(".append").addEventListener("click", () => {
-      const $modalLayout = createElement("div");
-      $modalLayout.setAttribute("class", "modal__layout");
-      $modalLayout.innerHTML = productModal(this.state.categoryLists);
-      document.querySelector("body").prepend($modalLayout);
-
-      const $modalClose = $modalLayout.querySelector(".close-button");
-      const $categoryAppend = $modalLayout.querySelector(".product-append");
-
-      $categoryAppend.addEventListener("click", (e) => {
-        e.preventDefault();
-        this.setState([
-          ...this.state,
-          {
-            category_id: Date.now() + "",
-            category_name: $categoryInput.value,
-          },
-        ]);
-        closeModal();
-      });
-
-      $modalClose.addEventListener("click", closeModal);
-    });
     $app.appendChild(this.$element);
   };
 
   this.render = () => {
     const $table = this.$element.querySelector("table");
-    const $modalLayout = this.$element.querySelector(".modal__layout");
     if ($table) {
       $table.innerHTML = tableTemplate(
         PRODUCT_COLUMNS,
         this.state.productLists,
       );
     }
-
-    if ($modalLayout) {
-      $modalLayout.innerHTML = productModal(this.state.categoryLists);
-    }
+    modalHandler(this.state.categoryLists);
   };
 
   this.setState = (state) => {

@@ -279,6 +279,19 @@ export default function App({ $app }) {
   const productDetail = new ProductDetail({
     $app,
     $initialState: this.state.productDetail,
+    searchHandler: (searchData) => {
+      const productLists =
+        searchData === ""
+          ? productData.data
+          : this.state.productLists.filter((data) =>
+              data.productName.includes(searchData),
+            );
+
+      this.setState({
+        ...this.state,
+        productLists,
+      });
+    },
   });
 
   const orderDetail = new OrderDetail({
@@ -346,7 +359,7 @@ export default function App({ $app }) {
     });
 
     window.addEventListener("DOMContentLoaded", () => {
-      document.body.addEventListener("click", (e) => {
+      document.querySelector("nav").addEventListener("click", (e) => {
         e.preventDefault();
         const { target } = e;
         if (target.matches("[data-link]")) {
