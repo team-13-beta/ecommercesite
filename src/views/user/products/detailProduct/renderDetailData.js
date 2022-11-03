@@ -1,7 +1,7 @@
 export default function renderDetailData(id, img, name, price, des) {
   return `
     <div class="image column img-title">
-        <img src=${img} />
+        <img src=${img} alt="대표 이미지" id="item-img"/>
     </div>
     <div class="column card">
       <div style="display:none;" id="item-id">${id}</div>
@@ -20,7 +20,6 @@ export default function renderDetailData(id, img, name, price, des) {
               <option value="5">5</option>
               <option value="6">6</option>
               <option value="7">7</option>
-
             </select>
           </div>
         </div>

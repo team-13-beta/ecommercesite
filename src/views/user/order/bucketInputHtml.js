@@ -1,5 +1,6 @@
 import renderBucketData from "./renderBucketData.js";
 
+// TODO : 총 결제 금액 수량, 개 당 가격 여기서 계산하기
 function bucketInputHtml() {
   const box = document.querySelector(".product-box");
   for (let i = 0; i < window.localStorage.length; i++) {

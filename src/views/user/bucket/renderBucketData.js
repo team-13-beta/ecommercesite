@@ -1,7 +1,8 @@
-export default function renderBucketData(img, name, price, stock) {
+export default function renderBucketData(id, img, name, price, stock) {
   return `<div class="column is-one-fifth">
             <img src=${img}/>
           </div>
+          <div style="display:none;" id="item-id">${id}</div>
           <div class="column">${name}</div>
           <div class="column price-value">${price}</div>
           <div class="stock-con column">

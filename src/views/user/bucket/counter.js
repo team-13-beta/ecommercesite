@@ -1,58 +1,59 @@
+import calcTotalPrice from "./calcTotalPrice.js";
+
 const minusBtn = document.querySelectorAll(".minus-btn");
 const plusBtn = document.querySelectorAll(".plus-btn");
-const stockEl = document.querySelectorAll(".stock-value");
-const itemtotalPriceEl = document.querySelectorAll(".item-total-price");
-const priceEl = document.querySelectorAll(".price-value");
+
 const totalPriceEl = document.querySelector("#total-price");
 
-function handleCount(e, idx) {
-  const oper = e.target.textContent;
-  let nowTotal = parseInt(totalPriceEl.textContent);
+function handleCount(e) {
+  // 각 요소 값들
+  const parentEl = e.target.parentElement;
 
-  let val = parseInt(stockEl[idx].textContent); // 수량
-  const priceVal = parseInt(priceEl[idx].textContent); // 현재 제품의 가격
+  const quantityEl = parentEl.childNodes[3];
+  let quantityValue = parseInt(quantityEl.textContent);
 
-  // 로컬 스토리지 데이터 확인
-  const valueString = window.localStorage.getItem(`${idx}item`);
-  const valueObj = JSON.parse(valueString);
+  const grandParentEl = parentEl.parentElement;
+  const itemPrice = grandParentEl.childNodes[6].textContent;
+  const itemTotalPriceEl = grandParentEl.childNodes[10];
 
-  if (oper === "+") {
-    // 개당 가격 계산
-    val += 1;
-    const nextPlus = parseInt(priceVal) * val; // 수량 변경 시 가격
-    stockEl[idx].innerText = `${val}`;
-    itemtotalPriceEl[idx].innerText = `${nextPlus}`;
+  const dataIdEl = grandParentEl.id;
+  let totalPrice = calcTotalPrice();
+  // 연산자
+  const operator = e.target.textContent;
 
-    // 총 가격 계산
-    nowTotal += priceVal;
-    totalPriceEl.innerText = `${nowTotal}`;
+  // 로컬 스토리지 데이터 가져오기
+  let bucketData = JSON.parse(window.localStorage.getItem(dataIdEl));
+
+  if (operator === "+") {
+    // 상품별 금액 계산
+    quantityValue += 1;
+    const changePrice = parseInt(itemPrice) * quantityValue;
+    quantityEl.innerText = `${quantityValue}`;
+    itemTotalPriceEl.innerText = `${changePrice}`;
+
+    // 총 금액 계산
+    totalPrice += parseInt(itemPrice);
+    totalPriceEl.innerText = `${totalPrice}`;
   } else {
-    if (val > 1) {
-      // 개당 가격 계산
-      val -= 1;
-      const nextPlus = parseInt(priceVal) * val; // 수량 변경 시 가격
-      stockEl[idx].innerText = `${val}`;
-      itemtotalPriceEl[idx].innerText = `${nextPlus}`;
+    if (quantityValue > 1) {
+      quantityValue -= 1;
+      const changePrice = parseInt(itemPrice) * quantityValue;
+      quantityEl.innerText = `${quantityValue}`;
+      itemTotalPriceEl.innerText = `${changePrice}`;
 
-      // 총 가격 계산
-      nowTotal -= priceVal;
-      totalPriceEl.innerText = `${nowTotal}`;
+      // 총 금액 계산
+      totalPrice -= parseInt(itemPrice);
+      totalPriceEl.innerText = `${totalPrice}`;
     }
   }
-  // 로컬 스토리지 수량 변경 후 다시 string 저장
-  valueObj.stock = val;
-  window.localStorage.setItem(`${idx}item`, JSON.stringify(valueObj));
 
-  // 로컬 스토리지에 총 가격 저장
-  window.localStorage.setItem("total-price", nowTotal);
+  // 변경된 수량 로컬에 저장
+  bucketData.stock = String(quantityValue);
+  window.localStorage.setItem(dataIdEl, JSON.stringify(bucketData));
 }
 
 // 아이템 식별
 for (let i = 0; i < minusBtn.length; i++) {
-  minusBtn[i].addEventListener("click", (event) => {
-    handleCount(event, i);
-  });
-  plusBtn[i].addEventListener("click", (event) => {
-    handleCount(event, i);
-  });
+  minusBtn[i].addEventListener("click", handleCount);
+  plusBtn[i].addEventListener("click", handleCount);
 }

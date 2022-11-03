@@ -9,13 +9,12 @@ async function handleData() {
     .then((data) => {
       const temp = data[0];
       console.log(temp);
-      const [id, img, name, price, des, des_img] = [
+      const [id, img, name, price, [des, des_img]] = [
         temp.product_id,
         temp.imgTitle,
         temp.name,
         temp.price,
-        temp.description[0],
-        temp.description[1],
+        temp.description,
       ];
       const htmlEl = renderDetailData(id, img, name, price, des);
       contentEl.innerHTML = htmlEl;
@@ -29,6 +28,4 @@ async function handleData() {
     });
 }
 
-window.onload = function () {
-  handleData();
-};
+window.onload = handleData;
