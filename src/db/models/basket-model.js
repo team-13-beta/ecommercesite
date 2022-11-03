@@ -55,6 +55,17 @@ export class BasketModel {
         console.log(updatedBasket);
         return updatedBasket;
     }
+    async updatesubQuantity({ basketId,productArr,productCountArr }) {
+        const filter = { _id: basketId };
+        const option = { returnOriginal: false };
+        //const updatedBasket = await Basket.findOne({ _id: basketId}).update({ quantity: productIndex }, { 'quantity.$': productCount });
+        const updatedBasket = await Basket.findOneAndUpdate(filter, {
+            productList : productArr,
+            quantity:productCountArr,
+        }, option);
+        console.log(updatedBasket);
+        return updatedBasket;
+    }
 }
 
 const basketModel = new BasketModel();

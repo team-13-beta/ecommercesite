@@ -44,4 +44,16 @@ basketRouter.patch("/:productId",async(req,res,next)=>{
     }
 })
 
+basketRouter.patch("/sub/:productId",async(req,res,next)=>{
+    try{
+        const productId=req.params.productId;
+        const {basketId}=req.body;
+        const updatedbasketInfo = await basketService.setsubBasket(productId,basketId);
+
+        res.status(200).json(updatedbasketInfo);
+    }catch(err){
+        next(err);
+    }
+})
+
 export { basketRouter };
