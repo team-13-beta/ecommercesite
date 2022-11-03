@@ -18,7 +18,7 @@ export default function ProductDetail({
     if (type === "update") {
       updateHandler({ ...this.state });
     } else if (type === "delete") {
-      deleteHandler(e);
+      if (confirm("정말 삭제하시겠습니까?")) deleteHandler(this.state.id);
     }
   });
   this.$element.addEventListener("change", (e) => {

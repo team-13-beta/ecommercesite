@@ -1,4 +1,5 @@
 import { clearContainer, createElement } from "../../utility/documentSelect.js";
+import { navigate } from "../../utility/navigate.js";
 import { orderDetailTemplate } from "../components/orderTemplate.js";
 
 export default function OrderDetail({
@@ -19,7 +20,7 @@ export default function OrderDetail({
         status: this.$element.querySelector("select").value,
       });
     } else if (type === "delete") {
-      deleteHandler(e);
+      if (confirm("정말 삭제하시겠습니까?")) deleteHandler(this.state.id);
     }
   });
   this.init = () => {

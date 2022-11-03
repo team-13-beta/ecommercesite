@@ -11,7 +11,7 @@ const ORDER_COLUMNS = [
   ["detail_button", "상세정보 가기"],
 ];
 
-export default function Orders({ $app, initialState, onChange, onClick }) {
+export default function Orders({ $app, initialState, searchHandler }) {
   this.state = initialState;
 
   this.$element = createElement("div");
@@ -37,7 +37,7 @@ export default function Orders({ $app, initialState, onChange, onClick }) {
     const $inputVal = this.$element.querySelector(".order-search");
     this.$element
       .querySelector(".search")
-      .addEventListener("click", (e) => onClick($inputVal.value));
+      .addEventListener("click", (e) => searchHandler($inputVal.value));
 
     $app.appendChild(this.$element);
     this.render();

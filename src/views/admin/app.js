@@ -260,7 +260,7 @@ export default function App({ $app }) {
   const orders = new Orders({
     $app,
     initialState: orderData.data,
-    onClick: (searchData) => {
+    searchHandler: (searchData) => {
       const orderLists =
         searchData === ""
           ? orderData.data
@@ -321,12 +321,17 @@ export default function App({ $app }) {
       closeModal();
     },
   });
+
   const productDetail = new ProductDetail({
     $app,
     $initialState: this.state.productDetail,
     $categories: this.state.categoryLists,
-    deleteHandler: (e) => {
-      console.log(e);
+    deleteHandler: (deleteId) => {
+      const productLists = this.state.productLists.filter(
+        (product) => product.id !== deleteId,
+      );
+      navigate(`/admin/products`);
+      this.setState({ productLists, productDetail: {} });
     },
     updateHandler: (updateData) => {
       const { id } = updateData;
@@ -342,7 +347,13 @@ export default function App({ $app }) {
   const orderDetail = new OrderDetail({
     $app,
     $initialState: this.state.orderDetail,
-    deleteHandler: (e) => {},
+    deleteHandler: (deleteId) => {
+      const orderLists = this.state.orderLists.filter(
+        (order) => order.id !== deleteId,
+      );
+      navigate(`/admin/orders`);
+      this.setState({ orderLists });
+    },
     updateHandler: (updateData) => {
       const { id } = updateData;
       // 수정 완료가 되어야 함.
