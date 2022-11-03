@@ -28,6 +28,18 @@
 .stock-con {
   display: flex;
 }
+
+.result-price {
+  float: right;
+}
+.pay-btn {
+  background-color: #ff922b;
+  border: none;
+}
+.pay-btn:hover {
+  color: #fff4e6;
+}
+
 .footer_container {
   width: 1024px;
   margin: 0 auto;
