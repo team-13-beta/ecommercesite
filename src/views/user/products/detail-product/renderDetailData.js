@@ -1,6 +1,6 @@
-export default function renderData(img, name, price, des) {
+export default function renderDetailData(img, name, price, des) {
   return `
-    <div class="image  column img-title">
+    <div class="image column img-title">
         <img src=${img} />
     </div>
     <div class="column card">
