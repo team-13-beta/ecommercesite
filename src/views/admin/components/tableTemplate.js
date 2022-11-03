@@ -12,13 +12,14 @@ export function tableTemplate(columns, datas = []) {
   }
   $thead.appendChild($theadRow);
 
-  console.log(datas);
   for (const data of datas) {
     const $tr = createElement("tr");
     for (const [key, _] of columns) {
       const $td = createElement("td");
       if (key === "detail_button") {
         $td.innerHTML = `<button data-type="detail" data-detail-id=${data["id"]}>상세 정보</button>`;
+      } else if (key === "delete_button") {
+        $td.innerHTML = `<button data-type="delete" data-detail-id=${data["id"]}>삭제</button>`;
       } else {
         $td.innerHTML = data[key] ?? "";
       }

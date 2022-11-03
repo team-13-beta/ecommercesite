@@ -36,7 +36,6 @@ export default function ProductDetail({
     if (!this.state || this.state.id !== history.state.state.id) {
       this.setState(history.state.state);
     }
-    console.log(this.$categories, $categories);
     this.$element.innerHTML = productDetailTemplate(
       this.state,
       this.$categories,

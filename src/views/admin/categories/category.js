@@ -4,13 +4,17 @@ import { tableTemplate } from "../components/tableTemplate.js";
 
 import { categoryModal, closeModal } from "../components/modal.js";
 
-const CATEGORIES_COLUMNS = [["category_name", "카테고리 이름"]];
+const CATEGORIES_COLUMNS = [
+  ["category_name", "카테고리 이름"],
+  ["delete_button", "삭제하기"],
+];
 
 export default function Categories({
   $app,
   initialState,
   searchHandler,
   appendHandler,
+  deleteHandler,
 }) {
   this.state = initialState;
 
@@ -18,12 +22,14 @@ export default function Categories({
 
   this.$element.addEventListener("click", (e) => {
     e.preventDefault();
-    const { type } = e.target.dataset;
+    const { type, detailId } = e.target.dataset;
     if (type === "search") {
       const $inputVal = this.$element.querySelector(".category-search");
       searchHandler($inputVal.value);
     } else if (type === "append") {
       modalHandler();
+    } else if (type === "delete") {
+      if (confirm("정말 삭제하시겠습니까?")) deleteHandler(detailId);
     }
   });
 
@@ -61,7 +67,7 @@ export default function Categories({
 
   this.render = () => {
     const table = this.$element.querySelector("table");
-    console.log(this.state, "category render");
+
     if (table) table.innerHTML = tableTemplate(CATEGORIES_COLUMNS, this.state);
   };
 

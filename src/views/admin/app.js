@@ -96,19 +96,19 @@ const orderData = {
 const categoryData = {
   data: [
     {
-      category_id: "1",
+      id: "1",
       category_name: "닭가슴살",
     },
     {
-      category_id: "2",
+      id: "2",
       category_name: "프로틴음료",
     },
     {
-      category_id: "3",
+      id: "3",
       category_name: "프로틴",
     },
     {
-      category_id: "4",
+      id: "4",
       category_name: "도시락",
     },
   ],
@@ -291,7 +291,6 @@ export default function App({ $app }) {
       });
     },
     appendHandler: (appendData) => {
-      console.log(appendData);
       this.setState({
         productLists: [...this.state.productLists, { ...appendData }],
       });
@@ -320,6 +319,14 @@ export default function App({ $app }) {
       });
       closeModal();
     },
+    deleteHandler: (deleteId) => {
+      const categoryLists = this.state.categoryLists.filter(
+        (category) => category.id !== deleteId,
+      );
+      this.setState({
+        categoryLists,
+      });
+    },
   });
 
   const productDetail = new ProductDetail({
@@ -335,7 +342,6 @@ export default function App({ $app }) {
     },
     updateHandler: (updateData) => {
       const { id } = updateData;
-      console.log(updateData);
       const productLists = this.state.productLists.map((product) =>
         product.id === id ? updateData : product,
       );

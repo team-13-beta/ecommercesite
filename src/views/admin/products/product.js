@@ -125,7 +125,6 @@ export default function Products({
   };
 
   this.setState = (state) => {
-    console.log(state, "!");
     this.state = state;
     this.render();
   };

@@ -19,7 +19,6 @@ export default function Orders({ $app, initialState, searchHandler }) {
   this.$element.addEventListener("click", (e) => {
     e.preventDefault();
     const { type, detailId } = e.target.dataset;
-    console.log(type, detailId, e.target.dataset);
     if (type === "detail") {
       appendDetailMoveHandler(detailId, this.state, "OrderDetails");
     }
