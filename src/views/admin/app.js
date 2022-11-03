@@ -290,6 +290,12 @@ export default function App({ $app }) {
         productLists,
       });
     },
+    appendHandler: (appendData) => {
+      console.log(appendData);
+      this.setState({
+        productLists: [...this.state.productLists, { ...appendData }],
+      });
+    },
   });
   const categories = new Categories({
     $app,

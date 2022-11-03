@@ -18,7 +18,12 @@ const PRODUCT_COLUMNS = [
   ["detail_button", "상세정보 가기"],
 ];
 
-export default function Products({ $app, initialState, searchHandler }) {
+export default function Products({
+  $app,
+  initialState,
+  searchHandler,
+  appendHandler,
+}) {
   this.state = initialState;
 
   this.$element = createElement("div");
@@ -28,7 +33,6 @@ export default function Products({ $app, initialState, searchHandler }) {
   this.$element.addEventListener("click", (e) => {
     e.preventDefault();
     const { type } = e.target.dataset;
-    console.log(type, "product@@@");
     if (type === "search") {
       const $inputVal = this.$element.querySelector(".category-search");
       searchHandler($inputVal.value);
@@ -72,15 +76,17 @@ export default function Products({ $app, initialState, searchHandler }) {
       const stock = returnDocumentId("stock");
       const price = returnDocumentId("price");
 
-      console.log(
-        pruductName.value,
-        category.value,
-        company.value,
-        description.value,
-        stock.value,
-        price.value,
-        imageBase64,
-      );
+      const data = {
+        pruductName: pruductName.value,
+        category: category.value,
+        company: company.value,
+        description: description.value,
+        stock: stock.value,
+        price: price.value,
+        imageSrc: imageBase64,
+      };
+      appendHandler(data);
+      console.log(data);
       closeModal();
     });
 
