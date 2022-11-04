@@ -137,8 +137,7 @@ passport.use(
           console.log("### Profile Value");
           console.log(profile);
           console.log("### Profile Value : " + accessToken);
-          console.log("access Token "+accessToken);
-          console.log("refresh Token "+refreshToken);
+          console.log("access Token")
           return done(null, profile);
       }
   )
@@ -170,12 +169,10 @@ passport.authenticate("google",{
 }))
 */
 userRouter.get('/logout', (req,res)=> {
-  req.logout(function(err){
-    if(err){return next(err);}
-    res.cookie
-    console.log("logOut합니다.");
+  req.logout();
+  req.session.save(function(){
     res.redirect('/');
-  });
+  })();
 })
 
 
@@ -189,10 +186,13 @@ userRouter.get("/userlist", loginRequired, async function (req, res, next) {
     let option = '';
     if(req.currentRole !== 'admin')
     option = req.currentUserId;    
-    const users = await userService.getUsers(option);
-
+    const user = await userService.getUsers(option);
+    if(!user){
+    res.status(502).json("해당 계정이 삭제되었거나 존재하지 않습니다");
+    return ;
+  }
     // 사용자 목록(배열)을 JSON 형태로 프론트에 보냄
-    res.status(200).json(users);
+    res.status(200).json(user);
   } catch (error) {
     next(error);
   }
@@ -230,7 +230,7 @@ userRouter.patch(
       // currentPassword 없을 시, 진행 불가
       if (!currentPassword) {
         throw new Error("정보를 변경하려면, 현재의 비밀번호가 필요합니다.");
-      }
+      } 
 
       const userInfoRequired = { userId, currentPassword };
 
@@ -252,10 +252,18 @@ userRouter.patch(
 
       // 업데이트 이후의 유저 데이터를 프론트에 보내 줌
       res.status(200).json(updatedUserInfo);
+      return;
     } catch (error) {
       next(error);
     }
   },
 );
+
+userRouter.delete('/delete', loginRequired, async (req,res,next)=>{
+const userId = req.currentUserId;
+// res.json({userId, Role });
+const state = await userService.deleteUser(userId);
+res.json(state);
+});
 
 export { userRouter };

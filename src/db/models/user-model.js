@@ -14,6 +14,8 @@ export class UserModel { // 이메일 중복 검사
     return user;
   }
 
+ 
+
   async create(userInfo) { 
     const createdNewUser = await User.create(userInfo);
     return createdNewUser;
@@ -29,6 +31,11 @@ export class UserModel { // 이메일 중복 검사
     const option = { returnOriginal: false };
     const updatedUser = await User.findOneAndUpdate(filter, update, option);
     return updatedUser;
+  }
+
+  async deleteById(userId){
+    const deletedCount =  await User.deleteOne({_id:userId});
+    return deletedCount; 
   }
 }
 

@@ -76,6 +76,8 @@ class UserService {
   // 사용자 목록을 받음. admin이면 다 받을 수 있고 user면 사용자 자신의 정보만 조회가능
   async getUsers(option) {
     const users = (option !== '')? await this.userModel.findById(option): await this.userModel.findAll();
+
+    
     return users;
   }
 
@@ -124,6 +126,15 @@ class UserService {
     });
 
     return user;
+  }
+
+
+  async deleteUser(userId){
+    const state = await this.userModel.deleteById(userId);
+    if(state.acknowledged != true || state.deletedcount == 0)
+    return false;
+    else
+    return true;
   }
 }
 
