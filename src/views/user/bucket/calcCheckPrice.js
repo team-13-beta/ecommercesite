@@ -5,13 +5,15 @@ const checkBoxAllEl = document.querySelector("#checkBoxAll");
 const checkItems = document.querySelectorAll('input[type="checkbox"]');
 const totalPricelEl = document.querySelector("#total-price");
 
-function handleCheckPrice() {
+function handleCheckPrice(e) {
+  const nowTotalPrice = parseInt(totalPricelEl.textContent);
+  const itemPrice = parseInt(e.target.parentElement.childNodes[13].textContent);
   // 부분 선택 가격 계산
-  checkBoxEl.forEach((item) => {
-    console.log(item.parentElement.childNodes);
-    if (!item.checked) {
-    }
-  });
+  if (e.target.checked) {
+    totalPricelEl.innerText = `${nowTotalPrice + itemPrice}`;
+  } else {
+    totalPricelEl.innerText = `${nowTotalPrice - itemPrice}`;
+  }
 }
 
 function handleCheckAllPrice() {

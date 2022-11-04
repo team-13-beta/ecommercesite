@@ -10,11 +10,13 @@ function handleCount(e) {
   const parentEl = e.target.parentElement;
 
   const quantityEl = parentEl.childNodes[3];
+
   let quantityValue = parseInt(quantityEl.textContent);
 
   const grandParentEl = parentEl.parentElement;
-  const itemPrice = grandParentEl.childNodes[6].textContent;
-  const itemTotalPriceEl = grandParentEl.childNodes[10];
+  const itemPrice = grandParentEl.childNodes[9].textContent;
+  console.log(grandParentEl.childNodes);
+  const itemTotalPriceEl = grandParentEl.childNodes[13];
 
   const dataIdEl = grandParentEl.id;
   let totalPrice = calcTotalPrice();
