@@ -30,6 +30,11 @@ export class OrderModel {
         console.log(updatedOrder);
         return updatedOrder;
       }
+
+    async deleteOne(order){
+        const deleteorder=await Order.deleteOne({name: order.name});
+        return deleteorder;
+    }
 }
 
 const orderModel = new OrderModel();

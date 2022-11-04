@@ -71,4 +71,17 @@ orderRouter.patch(
       }
     },
   );
+
+  orderRouter.delete("/:consumerId",async (req,res,next)=>{
+    // 삭제할 상품 이름
+    try{
+      const consumerId = req.params.consumerId;
+      // body data 로부터 업데이트할 사용자 정보를 추출함.
+      const {orderId}=req.body;
+      const deleteorder=await orderService.deleteOrder(consumerId,orderId);
+      res.status(201).json(deleteorder);
+    }catch(err){
+        next(err);
+    }
+  });
 export { orderRouter };

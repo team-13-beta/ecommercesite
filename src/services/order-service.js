@@ -65,6 +65,18 @@ class OrderService {
         return order;
       }
 
+    async deleteOrder(consumerId,orderId){
+        let order = await this.orderModel.findByUser(consumerId,orderId)
+
+        // db에서 찾지 못한 경우, 에러 메시지 반환
+        if (!order) {
+            throw new Error('주문 내역이 없습니다. 다시 한 번 확인해 주세요.');
+          }
+
+        const deleteOrder=await this.orderModel.deleteOne(order);
+        return deleteOrder;
+    }
+
 }
 
 const orderService = new OrderService(orderModel);
