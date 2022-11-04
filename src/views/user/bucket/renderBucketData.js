@@ -1,5 +1,7 @@
 export default function renderBucketData(id, img, name, price, stock) {
-  return `<div class="column is-one-fifth">
+  return `
+          <input type="checkbox" checked=true>
+          <div class="column is-one-fifth">
             <img src=${img}/>
           </div>
           <div style="display:none;" id="item-id">${id}</div>

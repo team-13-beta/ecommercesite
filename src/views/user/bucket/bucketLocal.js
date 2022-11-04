@@ -42,6 +42,16 @@ function handleData() {
   const deletteEl = document.createElement("script");
   deletteEl.setAttribute("src", "deleteItem.js");
   document.querySelector("body").appendChild(deletteEl);
+
+  const checkBucket = document.createElement("script");
+  checkBucket.setAttribute("src", "checkBoxBucket.js");
+  checkBucket.setAttribute("type", "module");
+  document.querySelector("body").appendChild(checkBucket);
+
+  const calcCheckBucket = document.createElement("script");
+  calcCheckBucket.setAttribute("src", "calcCheckPrice.js");
+  calcCheckBucket.setAttribute("type", "module");
+  document.querySelector("body").appendChild(calcCheckBucket);
 }
 
 // html이 로드되면
