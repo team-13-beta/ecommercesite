@@ -10,7 +10,7 @@ import MongoStore from "connect-mongo";
 import { config } from "dotenv";
 
 const userRouter = Router();
-config();
+config(); 
 // 회원가입 api (아래는 /register이지만, 실제로는 /api/register로 요청해야 함.)
 userRouter.post("/register", async (req, res, next) => {
   try {
@@ -95,23 +95,29 @@ userRouter.use(
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     cookie: {
       httpOnly: true, // js 코드로 쿠키를 가져오지 못하게
-      secure: false // https 에서만 가져오도록 할 것인가?
-    }
+      secure: false, // https 에서만 가져오도록 할 것인가?
+      maxAge: 600000 //unit : ms =>  * 1000ms = 1s
+    },
+    store: MongoStore.create({mongoUrl: process.env.MONGO_SESSION_URL}),
+    
   })
 );
 
+
 const GoogleStrategy = oauth2.Strategy;
 
-const GOOGLE_CLIENT_ID = process.env.GOOGLE_ID 
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_ID     
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_SECRET; 
 
 //passport 초기화 및 session 연결
 userRouter.use(passport.initialize())
 userRouter.use(passport.session());
 passport.serializeUser(function (user, done) {
+  // console.log(user);
+  
     done(null, user.id);
 });
 // 사용자가 페이지를 방문할 때마다 호출되는 함수
@@ -134,26 +140,30 @@ passport.use(
           passReqToCallback: true,
       },
       function (request, accessToken, refreshToken, profile, done) {
-          console.log("### Profile Value");
-          console.log(profile);
-          console.log("### Profile Value : " + accessToken);
-          console.log("access Token")
+          // console.log("### Profile Value");
+          // console.log(profile);
+          // console.log("### Profile Value : " + accessToken);
+          // console.log("access Token")
+          request.session.UserData= profile;
           return done(null, profile);
       }
   )
 );
 
 userRouter.get('/auth/google',
-  passport.authenticate('google', { scope:
-      [ 'email', 'profile' ] }
-));
+  passport.authenticate('google',  { scope:[ 'email', 'profile' ] })        
+);
 
 userRouter.get('/auth/google/callback', 
-
-    passport.authenticate( 'google', {
-        successRedirect: '/',
-        failureRedirect: '/login'
-    })
+               passport.authenticate( 'google', {failureRedirect: '/login?loginError' }),
+               function(req,res){
+                req.session.name = req.user.displayName;
+                req.session.email = req.user.email;
+                req.session.role = "user",
+                req.session.idcode = req.user.id
+                // console.log(req);
+                res.redirect("/?loginSuccess");
+               }
 );
 
 /* [Error Code] : 라우팅 간에 /login이 먼저 들어가면 get이 인식이 되지 않는 
@@ -168,11 +178,16 @@ passport.authenticate("google",{
   failureRedirect:"/login"
 }))
 */
-userRouter.get('/logout', (req,res)=> {
-  req.logout();
-  req.session.save(function(){
-    res.redirect('/');
-  })();
+userRouter.get('/logout', async (req,res)=> {
+  req.logout((err)=>{
+    req.session.destroy();
+    if (err) {
+			res.status(502).send("로그아웃 간에 에러발생");
+		} else {
+			res.status(200).redirect("/");
+		}
+  });
+
 })
 
 
