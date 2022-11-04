@@ -4,7 +4,6 @@ const modalCloseBtnEl = document.querySelector("#modal-close");
 const backEl = document.querySelector(".modal-bg");
 
 function openModal() {
-  console.log();
   modalEl.classList.remove("is-close");
 }
 
