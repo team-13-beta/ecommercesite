@@ -9,16 +9,10 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
     />
+    <script type="module" src="../../header-footer/inputComponent.js"></script>
     <link rel="stylesheet" href="productDetail.css" />
   </head>
   <body>
-    <header class="box">
-      <div class="header-container">
-        <div class="logo">β</div>
-        <div class="">로그인/회원가입</div>
-      </div>
-    </header>
-
     <section id="contents" class="box">
       <div class="content_container" id="content_container">
         <div id="input-data" class="columns"></div>
@@ -32,36 +26,10 @@
         </ul>
       </div>
 
-      <div class="columns">
-        <div class="column is-four-fifths">
-          <div class="content is-medium item-des-img">
-            <div id="detail-data"></div>
-          </div>
-        </div>
-
-        <div class="column">
-          <div class="content">주문 선택</div>
-          <div class="select">
-            <select>
-              <option>10팩</option>
-              <option>20팩</option>
-            </select>
-          </div>
-        </div>
+      <div class="content is-medium item-des-img">
+        <div id="detail-data"></div>
       </div>
     </section>
-
-    <footer class="footer_container">
-      <div class="footer_title">β</div>
-      <div class="columns">
-        <div class="cloumn">호진</div>
-        <div class="cloumn">상우</div>
-        <div class="cloumn">세현</div>
-        <div class="cloumn">화낙</div>
-        <div class="cloumn">세은</div>
-      </div>
-      <div class="footer_right">All rights reserved...</div>
-    </footer>
 
     <script type="module" src="productDetail.js"></script>
   </body>
