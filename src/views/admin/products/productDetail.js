@@ -17,58 +17,65 @@ export default function ProductDetail({
   this.$categories = $categories;
 
   this.$element = createElement("div");
-  const $file = createElement("input");
-  $file.type = "file";
-  $file.name = "file";
-  $file.addEventListener("input", (e) => {
-    let reader = new FileReader();
 
-    reader.readAsDataURL($file.files[0]);
+  // this.$element.addEventListener("click", (e) => {});
 
-    reader.onload = () => {
-      const imageBase64 = reader.result;
-      this.setState({ ...this.state, imageSrc: imageBase64 });
-    };
+  const subScribeEventListener = () => {
+    const $modifyContainer = document.querySelector(".modify-container");
+    const $file = document.getElementById("file");
+    if (!$modifyContainer || !$file) return;
+    $modifyContainer.addEventListener("click", (e) => {
+      e.preventDefault();
+      const { type } = e.target.dataset;
 
-    reader.onerror = function (error) {
-      alert("Error: ", error);
-      document.querySelector("body").removeChild(modalEl);
-    };
-  });
+      if (type === "update") {
+        updateHandler({ ...this.state });
+      } else if (type === "delete") {
+        if (confirm("정말 삭제하시겠습니까?")) deleteHandler(this.state.id);
+      }
+    });
 
-  this.$element.addEventListener("click", (e) => {
-    e.preventDefault();
-    const { type } = e.target.dataset;
-    if (type === "update") {
-      updateHandler({ ...this.state });
-    } else if (type === "delete") {
-      if (confirm("정말 삭제하시겠습니까?")) deleteHandler(this.state.id);
-    }
-  });
+    $file.addEventListener("input", (e) => {
+      let reader = new FileReader();
+
+      reader.readAsDataURL($file.files[0]);
+
+      reader.onload = () => {
+        const imageBase64 = reader.result;
+        console.log(imageBase64, "@@");
+        this.setState({ ...this.state, imageSrc: imageBase64 });
+      };
+
+      reader.onerror = function (error) {
+        alert("Error: ", error);
+        document.querySelector("body").removeChild(modalEl);
+      };
+    });
+  };
 
   this.$element.addEventListener("change", (e) => {
     e.preventDefault();
-    console.log(e);
     const {
       dataset: { type },
       value,
     } = e.target;
     this.setState({ ...this.state, [`${type}`]: value });
-    // 뭔가 유동적으로 변하게 하고 싶은데, 그게 잘 안되네...
   });
 
   this.init = () => {
     clearContainer($app);
+    clearContainer(this.$element);
     if (!this.state || this.state.id !== history.state.state.id) {
       this.setState(history.state.state);
     }
+
     this.$element.innerHTML = productDetailTemplate(
       this.state,
       this.$categories,
     );
 
     $app.appendChild(this.$element);
-    $app.appendChild($file);
+    subScribeEventListener();
   };
 
   this.render = () => {
@@ -76,6 +83,8 @@ export default function ProductDetail({
       this.state,
       this.$categories,
     );
+
+    subScribeEventListener();
   };
 
   this.setState = (nextState, categories) => {

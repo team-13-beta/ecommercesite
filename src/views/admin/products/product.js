@@ -57,6 +57,7 @@ export default function Products({
     const $modalClose = $modalLayout.querySelector(".close-button");
     const $appendButton = $modalLayout.querySelector(".append-button");
     const $file = returnDocumentId("file");
+
     $file.addEventListener("input", function (e) {
       e.preventDefault();
       let reader = new FileReader();

@@ -5,7 +5,7 @@ import { tableTemplate } from "../components/tableTemplate.js";
 import { categoryModal, closeModal } from "../components/modal.js";
 
 const CATEGORIES_COLUMNS = [
-  ["category_name", "카테고리 이름"],
+  ["categoryName", "카테고리 이름"],
   ["delete_button", "삭제하기"],
 ];
 
@@ -46,7 +46,7 @@ export default function Categories({
     $categoryAppend.addEventListener("click", (e) =>
       appendHandler({
         id: Date.now() + "",
-        category_name: $categoryInput.value,
+        categoryName: $categoryInput.value,
       }),
     );
     $modalClose.addEventListener("click", closeModal);

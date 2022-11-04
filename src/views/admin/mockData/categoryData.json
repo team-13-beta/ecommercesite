@@ -2,19 +2,19 @@
   "data": [
     {
       "id": "1",
-      "category_name": "닭가슴살"
+      "categoryName": "닭가슴살"
     },
     {
       "id": "2",
-      "category_name": "프로틴음료"
+      "categoryName": "프로틴음료"
     },
     {
       "id": "3",
-      "category_name": "프로틴"
+      "categoryName": "프로틴"
     },
     {
       "id": "4",
-      "category_name": "도시락"
+      "categoryName": "도시락"
     }
   ]
 }

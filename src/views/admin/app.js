@@ -67,7 +67,7 @@ export default function App({ $app }) {
       const categoryLists = checkStringEmpty(searchData)
         ? curCategoryLists
         : curCategoryLists.filter((data) =>
-            data.category_name.includes(searchData),
+            data.categoryName.includes(searchData),
           );
 
       this.setState({

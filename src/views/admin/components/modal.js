@@ -43,8 +43,8 @@ export function productModal(categories) {
                 <select id="category" required>
                   ${categories
                     .map(
-                      ({ id, category_name }) =>
-                        `<option value=${category_name}>${category_name}</option>`,
+                      ({ id, categoryName }) =>
+                        `<option value=${categoryName}>${categoryName}</option>`,
                     )
                     .join("")}
                 </select>
