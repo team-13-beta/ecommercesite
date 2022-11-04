@@ -4,6 +4,7 @@ import productDesData from "./productDesData.js";
 let contentEl = document.getElementById("input-data");
 let detailEl = document.getElementById("detail-data");
 async function handleData() {
+  // 상품 아이디 가져와서 서버에 get 요청
   await fetch("../../tempData.json")
     .then((res) => res.json())
     .then((data) => {
