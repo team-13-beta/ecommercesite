@@ -1,17 +1,9 @@
 import cors from "cors";
 import express from "express";
-import { viewsRouter, userRouter, productRouter,categoryRouter } from "./routers/index.js";
+import { viewsRouter, userRouter, productRouter, categoryRouter, basketRouter, orderRouter } from "./routers/index.js";
 import { errorHandler } from "./middlewares/index.js";
-import {categoryModelTest} from "./db/models/category-testData.js";
-import {productModelTest} from "./db/models/product-testData.js";
-import {userModelTest} from "./db/models/user-testData.js";
-(categoryModelTest()).then(console.log("SUCCESS : [CategoryModelData] Created"));
-(productModelTest()).then(console.log("SUCCESS : [ProductModelData] Created"));
-(userModelTest()).then(console.log("SUCCESS : [UserModelData] Created"));
-
 
 const app = express();
- 
 
 // CORS 에러 방지
 app.use(cors());
@@ -31,6 +23,8 @@ app.use(viewsRouter);
 app.use("/api", userRouter);
 app.use("/products", productRouter);
 app.use("/category",categoryRouter);
+app.use("/basket",basketRouter);
+app.use("/orders",orderRouter);
 // 순서 중요 (errorHandler은 다른 일반 라우팅보다 나중에 있어야 함)
 // 그래야, 에러가 났을 때 next(error) 했을 때 여기로 오게 됨
 app.use((req,res,next)=>{
