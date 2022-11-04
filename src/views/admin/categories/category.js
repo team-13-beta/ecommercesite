@@ -2,11 +2,15 @@ import { createElement, clearContainer } from "../../utility/documentSelect.js";
 import { categoryHeader } from "../components/category/categoryHeader.js";
 import { tableTemplate } from "../components/tableTemplate.js";
 
-import { categoryModal, closeModal } from "../components/modal.js";
+import {
+  categoryAppendModal,
+  categoryUpdateModal,
+  closeModal,
+} from "../components/modal.js";
 
 const CATEGORIES_COLUMNS = [
   ["categoryName", "카테고리 이름"],
-  ["delete_button", "삭제하기"],
+  ["update_button", "수정하기"],
 ];
 
 export default function Categories({
@@ -15,6 +19,7 @@ export default function Categories({
   searchHandler,
   appendHandler,
   deleteHandler,
+  updateHandler,
 }) {
   this.state = initialState;
 
@@ -27,16 +32,16 @@ export default function Categories({
       const $inputVal = this.$element.querySelector(".search-input");
       searchHandler($inputVal.value);
     } else if (type === "append") {
-      modalHandler();
-    } else if (type === "delete") {
-      if (confirm("정말 삭제하시겠습니까?")) deleteHandler(detailId);
+      appendModalHandler();
+    } else if (type === "update") {
+      updateModalHandler(detailId);
     }
   });
 
-  function modalHandler() {
+  const appendModalHandler = () => {
     const $modalLayout = createElement("div");
     $modalLayout.setAttribute("class", "modal is-active");
-    $modalLayout.innerHTML = categoryModal;
+    $modalLayout.innerHTML = categoryAppendModal;
     document.querySelector("body").prepend($modalLayout);
 
     const $modalClose = $modalLayout.querySelector(".close-button");
@@ -50,8 +55,36 @@ export default function Categories({
       }),
     );
     $modalClose.addEventListener("click", closeModal);
-  }
+  };
+  const updateModalHandler = (detailId) => {
+    const targetCategory = this.state.find(
+      (category) => category.id === detailId,
+    );
+    if (!targetCategory) {
+      alert("존저해지 않는 id입니다");
+      return;
+    }
+    const $modalLayout = createElement("div");
+    $modalLayout.setAttribute("class", "modal is-active");
+    $modalLayout.innerHTML = categoryUpdateModal(targetCategory);
+    document.querySelector("body").prepend($modalLayout);
 
+    $modalLayout.addEventListener("click", (e) => {
+      console.log(e.target.dataset);
+      const { type } = e.target.dataset;
+      if (type === "modalClose") {
+        closeModal();
+      } else if (type === "categoryDelete") {
+        if (confirm("정말 삭제하시겠습니까?")) deleteHandler(detailId);
+      } else if (type === "categoryUpdate") {
+        const $categoryInput = $modalLayout.querySelector(".category-input");
+        updateHandler({
+          id: detailId,
+          categoryName: $categoryInput.value,
+        });
+      }
+    });
+  };
   this.init = () => {
     clearContainer($app);
     clearContainer(this.$element);

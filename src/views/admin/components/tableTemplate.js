@@ -18,8 +18,8 @@ export function tableTemplate(columns, datas = []) {
       const $td = createElement("td");
       if (key === "detail_button") {
         $td.innerHTML = `<button class="button is-small" data-type="detail" data-detail-id=${data["id"]}>상세 정보</button>`;
-      } else if (key === "delete_button") {
-        $td.innerHTML = `<button class="button is-small" data-type="delete" data-detail-id=${data["id"]}>삭제</button>`;
+      } else if (key === "update_button") {
+        $td.innerHTML = `<button class="button is-small" data-type="update" data-detail-id=${data["id"]}>수정하기</button>`;
       } else {
         $td.innerHTML = data[key] ?? "";
       }

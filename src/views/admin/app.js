@@ -89,6 +89,15 @@ export default function App({ $app }) {
       this.setState({
         categoryLists,
       });
+      closeModal();
+    },
+    updateHandler: ({ id, categoryName }) => {
+      const categoryLists = this.state.categoryLists.map((category) =>
+        category.id === id ? { id, categoryName } : category,
+      );
+
+      this.setState({ categoryLists });
+      closeModal();
     },
   });
 

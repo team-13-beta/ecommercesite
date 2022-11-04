@@ -1,4 +1,4 @@
-export const categoryModal = `
+export const categoryAppendModal = `
   <div class="modal-background"></div>
   <div class="modal-card">
     <header class="modal-card-head">
@@ -16,6 +16,26 @@ export const categoryModal = `
     </footer>
   </div>
 `;
+
+export const categoryUpdateModal = (data) => {
+  return `<div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">카테고리 수정하기</p>
+      <button class="delete" aria-label="close" data-type="modalClose"></button>
+    </header>
+    <section class="modal-card-body">
+      <div class="content">
+        <label>카테고리 이름</label>
+        <input class="category-input input" value="${data.categoryName}" />
+      </div>
+    </section>
+    <footer class="modal-card-foot">
+      <button class="button is-success" data-type="categoryUpdate">수정하기</button>
+      <button class="button" data-type="categoryDelete">삭제하기</button>
+    </footer>
+  </div>`;
+};
 
 export function productModal(categories) {
   return ` <div class="modal-background"></div>
