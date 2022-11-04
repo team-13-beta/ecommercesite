@@ -1,4 +1,9 @@
-import { clearContainer, createElement } from "../../utility/documentSelect.js";
+import {
+  clearContainer,
+  createElement,
+  returnDocumentClass,
+  returnDocumentId,
+} from "../../utility/documentSelect.js";
 import { productDetailTemplate } from "../components/productTemplate.js";
 
 export default function ProductDetail({
@@ -12,6 +17,25 @@ export default function ProductDetail({
   this.$categories = $categories;
 
   this.$element = createElement("div");
+  const $file = createElement("input");
+  $file.type = "file";
+  $file.name = "file";
+  $file.addEventListener("input", (e) => {
+    let reader = new FileReader();
+
+    reader.readAsDataURL($file.files[0]);
+
+    reader.onload = () => {
+      const imageBase64 = reader.result;
+      this.setState({ ...this.state, imageSrc: imageBase64 });
+    };
+
+    reader.onerror = function (error) {
+      alert("Error: ", error);
+      document.querySelector("body").removeChild(modalEl);
+    };
+  });
+
   this.$element.addEventListener("click", (e) => {
     e.preventDefault();
     const { type } = e.target.dataset;
@@ -21,8 +45,10 @@ export default function ProductDetail({
       if (confirm("정말 삭제하시겠습니까?")) deleteHandler(this.state.id);
     }
   });
+
   this.$element.addEventListener("change", (e) => {
     e.preventDefault();
+    console.log(e);
     const {
       dataset: { type },
       value,
@@ -42,6 +68,7 @@ export default function ProductDetail({
     );
 
     $app.appendChild(this.$element);
+    $app.appendChild($file);
   };
 
   this.render = () => {

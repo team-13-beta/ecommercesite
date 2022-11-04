@@ -36,7 +36,12 @@ export function productDetailTemplate(data, categories = []) {
           <textarea  data-type="description">${data.description}</textarea>
         </div>
         <label>이미지: </label>
-        <img src=${data.imageSrc} data-type="imageSrc"/>
-      </div>
-    `;
+        <img id="product-image" src=${data.imageSrc} data-type="imageSrc"/>
+        <p>이미지 수정</p>
+        <label for="file" >
+            <p>컴퓨터에서 선택</p>
+          </label>
+        </div>
+      `;
 }
+// <input type="file" name="file" id="file" />
