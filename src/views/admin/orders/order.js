@@ -8,7 +8,7 @@ const ORDER_COLUMNS = [
   ["consumerName", "주문자 이름"],
   ["phoneNumber", "전화번호"],
   ["status", "배송 상태"],
-  ["detail_button", "상세정보 가기"],
+  ["detailButton", "상세정보 가기"],
 ];
 
 export default function Orders({ $app, initialState, searchHandler }) {

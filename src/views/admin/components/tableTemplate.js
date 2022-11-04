@@ -1,6 +1,6 @@
 import { createElement } from "../../utility/documentSelect.js";
 
-export function tableTemplate(columns, datas = []) {
+export function tableTemplate(columns, datas = [], categories = []) {
   const $thead = createElement("thead");
   const $theadRow = createElement("tr");
 
@@ -16,10 +16,16 @@ export function tableTemplate(columns, datas = []) {
     const $tr = createElement("tr");
     for (const [key, _] of columns) {
       const $td = createElement("td");
-      if (key === "detail_button") {
+
+      if (key === "detailButton") {
         $td.innerHTML = `<button class="button is-small" data-type="detail" data-detail-id=${data["id"]}>상세 정보</button>`;
       } else if (key === "update_button") {
         $td.innerHTML = `<button class="button is-small" data-type="update" data-detail-id=${data["id"]}>수정하기</button>`;
+      } else if (key === "categoryId") {
+        const { categoryName } = categories.find(
+          (category) => category.id === data[key],
+        ) ?? { categoryName: "none" };
+        $td.innerHTML = categoryName;
       } else {
         $td.innerHTML = data[key] ?? "";
       }

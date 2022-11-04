@@ -30,9 +30,9 @@ export function productDetailTemplate(data, categories = []) {
                 ${categories
                   .map(({ id, categoryName }) => {
                     if (data.category === categoryName) {
-                      return `<option value=${categoryName} selected>${categoryName}</option>`;
+                      return `<option value="${id}" selected>${categoryName}</option>`;
                     } else {
-                      return `<option value=${categoryName}>${categoryName}</option>`;
+                      return `<option value="${id}">${categoryName}</option>`;
                     }
                   })
                   .join("")}

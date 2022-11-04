@@ -52,7 +52,6 @@ export function productModal(categories) {
                 type="text"
                 id="productName"
                 placeholder="상품명을 입력해주세요"
-                required
               />
             </div>
           </div>
@@ -60,11 +59,11 @@ export function productModal(categories) {
             <label class="label">카테고리</label>
             <div class="control">
               <div class="select full-select">
-                <select id="category" required>
+                <select id="categoryId" >
                   ${categories
                     .map(
                       ({ id, categoryName }) =>
-                        `<option value=${categoryName}>${categoryName}</option>`,
+                        `<option value=${id}>${categoryName}</option>`,
                     )
                     .join("")}
                 </select>
@@ -80,7 +79,6 @@ export function productModal(categories) {
                 type="text"
                 id="companyName"
                 placeholder="제조사를 입력해주세요"
-                required
               />
             </div>
           </div>
@@ -91,7 +89,6 @@ export function productModal(categories) {
                 class="textarea"
                 placeholder="제품 설명을 입력해주세요"
                 id="description"
-                required
               ></textarea>
             </div>
           </div>
@@ -120,7 +117,7 @@ export function productModal(categories) {
                 id="stock"
                 placeholder="재고량을 입력해주세요"
                 type="number"
-                required
+                
               />
             </div>
           </div>
@@ -133,7 +130,7 @@ export function productModal(categories) {
                 id="price"
                 placeholder="가격을 입력해주세요"
                 type="number"
-                required
+                
               />
             </div>
           </div>

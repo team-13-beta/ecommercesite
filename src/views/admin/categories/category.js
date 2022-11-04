@@ -9,6 +9,7 @@ import {
 } from "../components/modal.js";
 
 const CATEGORIES_COLUMNS = [
+  ["id", "카테고리 아이디"],
   ["categoryName", "카테고리 이름"],
   ["update_button", "수정하기"],
 ];
@@ -70,7 +71,6 @@ export default function Categories({
     document.querySelector("body").prepend($modalLayout);
 
     $modalLayout.addEventListener("click", (e) => {
-      console.log(e.target.dataset);
       const { type } = e.target.dataset;
       if (type === "modalClose") {
         closeModal();

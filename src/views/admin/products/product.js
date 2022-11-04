@@ -13,10 +13,10 @@ import { checkStringEmpty } from "../../useful-functions.js";
 const PRODUCT_COLUMNS = [
   ["id", "상품 아이디"],
   ["productName", "상품명"],
-  ["category", "카테고리"],
+  ["categoryId", "카테고리"],
   ["price", "가격"],
   ["stock", "남은 개수"],
-  ["detail_button", "상세정보 가기"],
+  ["detailButton", "상세정보 가기"],
 ];
 
 export default function Products({
@@ -79,14 +79,14 @@ export default function Products({
 
     $appendButton.addEventListener("click", () => {
       const productName = returnDocumentId("productName").value;
-      const category = returnDocumentId("category").value;
+      const categoryId = returnDocumentId("categoryId").value;
       const companyName = returnDocumentId("companyName").value;
       const description = returnDocumentId("description").value;
       const stock = returnDocumentId("stock").value;
       const price = returnDocumentId("price").value;
       const isValidate = [
         productName,
-        category,
+        categoryId,
         companyName,
         description,
         stock,
@@ -100,7 +100,7 @@ export default function Products({
       const data = {
         id: String(Date.now()),
         productName,
-        category,
+        categoryId,
         companyName,
         description,
         stock,
@@ -122,7 +122,11 @@ export default function Products({
 
     this.$element.insertAdjacentHTML(
       "beforeend",
-      tableTemplate(PRODUCT_COLUMNS, this.state.productLists),
+      tableTemplate(
+        PRODUCT_COLUMNS,
+        this.state.productLists,
+        this.state.categoryLists,
+      ),
     );
 
     $app.appendChild(this.$element);
@@ -135,6 +139,7 @@ export default function Products({
       $table.innerHTML = tableTemplate(
         PRODUCT_COLUMNS,
         this.state.productLists,
+        this.state.categoryLists,
       );
     }
   };
