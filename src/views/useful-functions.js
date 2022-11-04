@@ -31,3 +31,5 @@ export const wait = (ms) => {
 // path가 올바른 형식인지 확인
 export const pathToRegex = (path) =>
   new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$");
+
+export const checkStringEmpty = (string) => (string === "" ? true : false);

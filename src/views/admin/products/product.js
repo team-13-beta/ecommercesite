@@ -8,6 +8,7 @@ import { appendDetailMoveHandler } from "../../utility/navigate.js";
 import { categoryHeader } from "../components/product/productHeader.js";
 import { tableTemplate } from "../components/tableTemplate.js";
 import { productModal, closeModal } from "../components/modal.js";
+import { checkStringEmpty } from "../../useful-functions.js";
 
 const PRODUCT_COLUMNS = [
   ["id", "상품 아이디"],
@@ -27,8 +28,6 @@ export default function Products({
   this.state = initialState;
 
   this.$element = createElement("div");
-  const $modalLayout = createElement("div");
-  $modalLayout.setAttribute("class", "modal__layout");
 
   this.$element.addEventListener("click", (e) => {
     e.preventDefault();
@@ -48,6 +47,8 @@ export default function Products({
   });
 
   function modalHandler(categoryLists = []) {
+    const $modalLayout = createElement("div");
+    $modalLayout.setAttribute("class", "modal is-active");
     let imageBase64 = "";
 
     $modalLayout.innerHTML = productModal(categoryLists ?? []);
@@ -57,15 +58,16 @@ export default function Products({
     const $appendButton = $modalLayout.querySelector(".append-button");
     const $file = returnDocumentId("file");
     $file.addEventListener("input", function (e) {
+      e.preventDefault();
       let reader = new FileReader();
 
       reader.readAsDataURL($file.files[0]);
 
       reader.onload = function () {
         imageBase64 = reader.result;
-        const $imageContaier = returnDocumentClass("image-container");
-        $imageContaier.innerHTML = `<img width="478px" height="478px" src=${imageBase64} alt="image" />
-        `;
+        const $imageFigure = $modalLayout.querySelector("figure");
+        $imageFigure.setAttribute("class", "image is-square");
+        $imageFigure.innerHTML = `<img id="product-image" src=${imageBase64} alt="상품 이미지" />`;
       };
 
       reader.onerror = function (error) {
@@ -75,21 +77,33 @@ export default function Products({
     });
 
     $appendButton.addEventListener("click", () => {
-      const productName = returnDocumentId("productName");
-      const category = returnDocumentId("category");
-      const companyName = returnDocumentId("companyName");
-      const description = returnDocumentId("description");
-      const stock = returnDocumentId("stock");
-      const price = returnDocumentId("price");
+      const productName = returnDocumentId("productName").value;
+      const category = returnDocumentId("category").value;
+      const companyName = returnDocumentId("companyName").value;
+      const description = returnDocumentId("description").value;
+      const stock = returnDocumentId("stock").value;
+      const price = returnDocumentId("price").value;
+      const isValidate = [
+        productName,
+        category,
+        companyName,
+        description,
+        stock,
+        price,
+      ].every((value) => !checkStringEmpty(value));
 
+      if (!isValidate) {
+        alert("입력된 값을 확인해주세요");
+        return;
+      }
       const data = {
         id: String(Date.now()),
-        productName: productName.value,
-        category: category.value,
-        companyName: companyName.value,
-        description: description.value,
-        stock: stock.value,
-        price: price.value,
+        productName,
+        category,
+        companyName,
+        description,
+        stock,
+        price,
         imageSrc: imageBase64,
       };
       appendHandler(data);

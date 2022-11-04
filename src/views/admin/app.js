@@ -3,7 +3,7 @@ import Orders from "./orders/order.js";
 import Products from "./products/product.js";
 
 import { navigate } from "../utility/navigate.js";
-import { pathToRegex } from "../useful-functions.js";
+import { checkStringEmpty, pathToRegex } from "../useful-functions.js";
 import ProductDetail from "./products/productDetail.js";
 import OrderDetail from "./orders/orderDetail.js";
 import { closeModal } from "./components/modal.js";
@@ -42,12 +42,11 @@ export default function App({ $app }) {
     initialState: this.state,
     searchHandler: (searchData) => {
       const curProductLists = this.state.productLists;
-      const productLists =
-        searchData === ""
-          ? curProductLists
-          : curProductLists.filter((data) =>
-              data.productName.includes(searchData),
-            );
+      const productLists = checkStringEmpty(searchData)
+        ? curProductLists
+        : curProductLists.filter((data) =>
+            data.productName.includes(searchData),
+          );
 
       this.setState({
         ...this.state,
@@ -65,12 +64,11 @@ export default function App({ $app }) {
     initialState: this.state.categoryLists,
     searchHandler: (searchData) => {
       const curCategoryLists = this.state.categoryLists;
-      const categoryLists =
-        searchData === ""
-          ? curCategoryLists
-          : curCategoryLists.filter((data) =>
-              data.category_name.includes(searchData),
-            );
+      const categoryLists = checkStringEmpty(searchData)
+        ? curCategoryLists
+        : curCategoryLists.filter((data) =>
+            data.category_name.includes(searchData),
+          );
 
       this.setState({
         ...this.state,
