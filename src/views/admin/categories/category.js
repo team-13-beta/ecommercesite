@@ -35,7 +35,7 @@ export default function Categories({
 
   function modalHandler() {
     const $modalLayout = createElement("div");
-    $modalLayout.setAttribute("class", "modal__layout");
+    $modalLayout.setAttribute("class", "modal is-active");
     $modalLayout.innerHTML = categoryModal;
     document.querySelector("body").prepend($modalLayout);
 
@@ -45,7 +45,7 @@ export default function Categories({
 
     $categoryAppend.addEventListener("click", (e) =>
       appendHandler({
-        category_id: Date.now() + "",
+        id: Date.now() + "",
         category_name: $categoryInput.value,
       }),
     );

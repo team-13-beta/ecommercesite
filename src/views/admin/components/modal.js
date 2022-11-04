@@ -1,16 +1,21 @@
 export const categoryModal = `
-              <div class="modal__card">
-                <div class="modal__header">
-                  <h2>카테고리 추가하기</h2>
-                  <button class="close-button">닫기</button>
-                  </div>
-                  <div class="modal__main">
-                    <label>카테고리 입력</label>
-                    <input class="category-input" placeholder="카테고리 이름" />
-                    <button class="category-append">추가하기</button>
-                  </div>
-              </div>
-              `;
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">카테고리 추가하기</p>
+    </header>
+    <section class="modal-card-body">
+      <div class="content">
+        <label>카테고리 이름</label>
+        <input class="category-input input" placeholder="카테고리 이름" />
+      </div>
+    </section>
+    <footer class="modal-card-foot">
+      <button class="button is-success category-append">추가하기</button>
+      <button class="button close-button">취소하기</button>
+    </footer>
+  </div>
+`;
 
 export function productModal(categories) {
   return `<div class="modal__card">
@@ -26,7 +31,7 @@ export function productModal(categories) {
         <select id="category" required>
           ${categories
             .map(
-              ({ category_id, category_name }) =>
+              ({ id, category_name }) =>
                 `<option value=${category_name}>${category_name}</option>`,
             )
             .join("")}
