@@ -5,3 +5,5 @@ export * from "./views-router.js";
 export * from "./user-router.js";
 export * from "./product-router.js";
 export * from "./category-router.js";
+export * from "./basket-router.js";
+export * from "./order-router.js";
