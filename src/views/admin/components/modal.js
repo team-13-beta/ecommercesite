@@ -39,7 +39,7 @@ export function productModal(categories) {
           <div class="field">
             <label class="label">카테고리</label>
             <div class="control">
-              <div class="select">
+              <div class="select full-select">
                 <select id="category" required>
                   ${categories
                     .map(
@@ -93,7 +93,7 @@ export function productModal(categories) {
           
 
           <div class="field">
-            <label class="label">상품명</label>
+            <label class="label">재고량</label>
             <div class="control">
               <input
                 class="input"
@@ -106,7 +106,7 @@ export function productModal(categories) {
           </div>
 
           <div class="field">
-            <label class="label">상품명</label>
+            <label class="label">가격</label>
             <div class="control">
               <input
                 class="input"

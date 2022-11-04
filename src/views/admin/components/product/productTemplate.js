@@ -1,47 +1,106 @@
+import { checkStringEmpty } from "../../../useful-functions.js";
+
 export function productDetailTemplate(data, categories = []) {
-  return `
-      <button class="button" data-type="update">
+  return ` <button class="button" data-type="update">
         수정 완료
       </button>
       <button class="button" data-type="delete">
         삭제하기
       </button>
-      <div>
-        <div>
-          <label>제품명: </label>
-          <input value="${data.productName}"  data-type="productName"/>
-          <label>카테고리:</label>
-          <select data-type="category">
-            ${categories
-              .map((category) => {
-                if (category.category_name === data.category) {
-                  return `<option selected>${category.category_name}</option>`;
-                } else {
-                  return `<option>${category.category_name}</option>`;
-                }
-              })
-              .join("")}
-          </select>
-        </div>
-        <div>
-          <label>납품 회사: </label>
-          <input value="${data.companyName}"  data-type="companyName"/>
-          <label>남은 수량: </label>
-          <input value="${data.stock}"  data-type="stock"/>
-          <label>가격: </label>
-          <input value="${data.price}"  data-type="price"/>
-        </div>
-        <div>
-          <label>상세 설명: </label>
-          <textarea  data-type="description">${data.description}</textarea>
-        </div>
-        <label>이미지: </label>
-        <img id="product-image" src=${data.imageSrc} data-type="imageSrc"/>
-        <p>이미지 수정</p>
-        <label for="file" >
-            <p>컴퓨터에서 선택</p>
-          </label>
-        </div>
-      `;
+      <div class = "content">
+         <div class="field">
+            <label class="label">상품명</label>
+            <div class="control">
+              <input
+                class="input"
+                type="text"
+                id="productName"
+                value="${data.productName}"
+              />
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">카테고리</label>
+            <div class="control">
+              <div class="select full-select">
+                <select data-type="category">
+                  ${categories
+                    .map(
+                      ({ id, category_name }) =>
+                        `<option value=${category_name}>${category_name}</option>`,
+                    )
+                    .join("")}
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">납품 회사</label>
+            <div class="control">
+              <input
+                class="input"
+                type="text"
+                id="companyName"
+                value="${data.companyName}"
+              />
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">제품 설명</label>
+            <div class="control">
+              <textarea
+                class="textarea"
+                id="description"
+              >${data.description}</textarea>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">제품 이미지</label>
+            <div class="file">
+              <label class="file-label">
+                <input class="file-input" type="file" name="resume" id="file" />
+                <span class="file-cta">
+                  <span class="file-icon">
+                    <i class="fas fa-upload"></i>
+                  </span>
+                  <span class="file-label">컴퓨터에서 선택</span>
+                </span>
+              </label>
+            </div>
+            <figure class=${
+              checkStringEmpty(data.imageSrc) ? "" : "modal is-active"
+            }>
+            <img id="product-image" src=${
+              data.imageSrc
+            } data-type="imageSrc" alt="제품  이미지"/>
+
+            </figure>
+          </div>
+          
+
+          <div class="field">
+            <label class="label">재고량</label>
+            <div class="control">
+              <input
+                class="input"
+                id="stock"
+                value="${data.stock}"
+                type="number"
+              />
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">가격</label>
+            <div class="control">
+              <input
+                class="input"
+                id="price"
+                value="${data.price}"
+                type="number"
+              />
+            </div>
+          </div>`;
 }
-// <input type="file" name="file" id="file" />
