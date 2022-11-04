@@ -17,14 +17,6 @@ export const addCommas = (n) => {
   return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
 
-export const checkPhoneNumberValid = (phoneNumber) => {
-  const input = phoneNumber;
-  if (input[3] == "-" && input[8] == "-") {
-    return true;
-  }
-  return false;
-};
-
 // 13,000원, 2개 등의 문자열에서 쉼표, 글자 등 제외 후 숫자만 뺴냄
 // 예시: 13,000원 -> 13000, 20,000개 -> 20000
 export const convertToNumber = (string) => {
@@ -43,3 +35,9 @@ export const checkPhoneNumberValid = (phoneNumber) => {
 export const wait = (ms) => {
   return new Promise((r) => setTimeout(r, ms));
 };
+
+// path가 올바른 형식인지 확인
+export const pathToRegex = (path) =>
+  new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$");
+
+export const checkStringEmpty = (string) => (string === "" ? true : false);

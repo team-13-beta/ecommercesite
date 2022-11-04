@@ -1,8 +1,8 @@
 import express from "express";
 import path from "path";
-import {dirname} from 'path';
-import { fileURLToPath } from 'url';
-import {adminRouter} from "./admin-router.js";
+import { dirname } from "path";
+import { fileURLToPath } from "url";
+import { adminRouter } from "./admin-router.js";
 // import {adminRouter} from "./admin-router"
 const viewsRouter = express.Router();
 
@@ -12,7 +12,7 @@ const viewsRouter = express.Router();
 viewsRouter.use("/", serveStatic("user/home"));
 viewsRouter.use("/register", serveStatic("auth/register"));
 viewsRouter.use("/login", serveStatic("auth/login"));
-viewsRouter.use("/admin",serveStatic("admin/admin"),adminRouter); // 아래 split 연산때문에 admin/admin으로 인자 pass
+viewsRouter.use("/admin", serveStatic("admin/admin"), adminRouter); // 아래 split 연산때문에 admin/admin으로 인자 pass
 
 // views 폴더의 최상단 파일인 rabbit.png, api.js 등을 쓸 수 있게 함
 viewsRouter.use("/", serveStatic(""));
@@ -21,17 +21,16 @@ viewsRouter.use("/", serveStatic(""));
 // 이 때 ${resource}.html 을 기본 파일로 설정함.
 function serveStatic(resource) {
   // const __dirname = path.resolve();
-  
-  const fileName =  resource.split("/")[1];
+
+  const fileName = resource.split("/")[1];
   const __dirname = dirname(fileURLToPath(import.meta.url));
-  
-  // admin만 예외처리 
-  if(resource === "admin/admin")
-  resource = "admin";
+
+  // admin만 예외처리
+  if (resource === "admin/admin") resource = "admin";
 
   const resourcePath = path.join(__dirname, `../views/${resource}`);
 
-console.log("fineName is "+fileName);
+  console.log("fineName is " + fileName);
   const option = { index: `${fileName}.html` };
 
   // express.static 은 express 가 기본으로 제공하는 함수임

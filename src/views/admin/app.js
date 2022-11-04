@@ -1,109 +1,144 @@
-import Categories from "./categories/index.js";
-import Orders from "./orders/index.js";
-import Products from "./products/index.js";
+import Categories from "./categories/category.js";
+import Orders from "./orders/order.js";
+import Products from "./products/product.js";
 
 import { navigate } from "../utility/navigate.js";
-import { pathToRegex } from "../useful-functions.js";
+import { checkStringEmpty, pathToRegex } from "../useful-functions.js";
+import ProductDetail from "./products/productDetail.js";
+import OrderDetail from "./orders/orderDetail.js";
+import { closeModal } from "./components/modal.js";
 
-const INITNAI_URL = `http://localhost:5000/admin`;
-const orderData = {
-  data: [
-    {
-      order_id: "1",
-      address: "경기도 수원시 장안구 엄복동",
-      consumerName: "정호진",
-      phoneNumber: "010-2333-9654",
-      status: "배송전",
-      totalPrice: 10000,
-    },
-    {
-      order_id: "2",
-      address: "경기도 수원시 장안구 엄복동",
-      consumerName: "정호진",
-      phoneNumber: "010-2333-9654",
-      status: "배송전",
-      totalPrice: 10000,
-    },
-    {
-      order_id: "3",
-      address: "경기도 수원시 장안구 엄복동",
-      consumerName: "정호진",
-      phoneNumber: "010-2333-9654",
-      status: "배송전",
-      totalPrice: 10000,
-    },
-    {
-      order_id: "4",
-      address: "경기도 수원시 장안구 엄복동",
-      consumerName: "정호진",
-      phoneNumber: "010-2333-9654",
-      status: "배송전",
-      totalPrice: 10000,
-    },
-    {
-      order_id: "5",
-      address: "경기도 수원시 장안구 엄복동",
-      consumerName: "정호진",
-      phoneNumber: "010-2333-9654",
-      status: "배송전",
-      totalPrice: 10000,
-    },
-    {
-      order_id: "6",
-      address: "경기도 수원시 장안구 엄복동",
-      consumerName: "정호진",
-      phoneNumber: "010-2333-9654",
-      status: "배송전",
-      totalPrice: 10000,
-    },
-    {
-      order_id: "7",
-      address: "경기도 수원시 장안구 엄복동",
-      consumerName: "정호진",
-      phoneNumber: "010-2333-9654",
-      status: "배송전",
-      totalPrice: 10000,
-    },
-    {
-      order_id: "8",
-      address: "경기도 수원시 장안구 엄복동",
-      consumerName: "정호진",
-      phoneNumber: "010-2333-9654",
-      status: "배송전",
-      totalPrice: 10000,
-    },
-    {
-      order_id: "9",
-      address: "경기도 수원시 장안구 엄복동",
-      consumerName: "정호진",
-      phoneNumber: "010-2333-9654",
-      status: "배송전",
-      totalPrice: 10000,
-    },
-    {
-      order_id: "10",
-      address: "경기도 수원시 장안구 엄복동",
-      consumerName: "정호진",
-      phoneNumber: "010-2333-9654",
-      status: "배송전",
-      totalPrice: 10000,
-    },
-  ],
-};
+const BASE_URL = `http://localhost:5000/admin`;
 
 export default function App({ $app }) {
   this.state = {
     orderLists: [],
+    categoryLists: [],
+    productLists: [],
+    orderDetail: {},
+    productDetail: {},
   };
 
-  const orders = new Orders({ $app, initialState: this.state.orderLists });
-  const products = new Products({ $app });
-  const categories = new Categories({ $app });
+  const orders = new Orders({
+    $app,
+    initialState: this.state.orderLists,
+    searchHandler: (searchData) => {
+      console.log(orders.state, searchData);
+      const orderLists = checkStringEmpty(searchData)
+        ? this.state.orderLists
+        : orders.state.filter((order) =>
+            order.consumerName.includes(searchData),
+          );
+      orders.setState(orderLists);
+    },
+  });
+  const products = new Products({
+    $app,
+    initialState: this.state,
+    searchHandler: (searchData) => {
+      const productLists = checkStringEmpty(searchData)
+        ? this.state.productLists
+        : products.state.productLists.filter((product) =>
+            product.productName.includes(searchData),
+          );
+      products.setState({ ...products.state, productLists });
+    },
+    appendHandler: (appendData) => {
+      this.setState({
+        productLists: [...this.state.productLists, { ...appendData }],
+      });
+    },
+  });
+  const categories = new Categories({
+    $app,
+    initialState: this.state.categoryLists,
+    searchHandler: (searchData) => {
+      const categoryLists = checkStringEmpty(searchData)
+        ? this.state.categoryLists
+        : categories.state.filter((category) =>
+            category.categoryName.includes(searchData),
+          );
+      categories.setState(categoryLists);
+    },
+    appendHandler: (appendItem) => {
+      this.setState({
+        ...this.state,
+        categoryLists: [...this.state.categoryLists, appendItem],
+      });
+      closeModal();
+    },
+    deleteHandler: (deleteId) => {
+      const categoryLists = this.state.categoryLists.filter(
+        (category) => category.id !== deleteId,
+      );
+      this.setState({
+        categoryLists,
+      });
+      closeModal();
+    },
+    updateHandler: ({ id, categoryName }) => {
+      const categoryLists = this.state.categoryLists.map((category) =>
+        category.id === id ? { id, categoryName } : category,
+      );
+
+      this.setState({ categoryLists });
+      closeModal();
+    },
+  });
+
+  const productDetail = new ProductDetail({
+    $app,
+    $initialState: this.state.productDetail,
+    $categories: this.state.categoryLists,
+    deleteHandler: (deleteId) => {
+      const productLists = this.state.productLists.filter(
+        (product) => product.id !== deleteId,
+      );
+      navigate(`/admin/products`);
+      this.setState({ productLists, productDetail: {} });
+    },
+    updateHandler: (updateData) => {
+      const { id } = updateData;
+      const productLists = this.state.productLists.map((product) =>
+        product.id === id ? updateData : product,
+      );
+      alert("수정 완료");
+      this.setState({ productLists, productDetail: updateData });
+    },
+  });
+
+  const orderDetail = new OrderDetail({
+    $app,
+    $initialState: this.state.orderDetail,
+    deleteHandler: (deleteId) => {
+      const orderLists = this.state.orderLists.filter(
+        (order) => order.id !== deleteId,
+      );
+      navigate(`/admin/orders`);
+      this.setState({ orderLists });
+    },
+    updateHandler: (updateData) => {
+      const { id } = updateData;
+      // 수정 완료가 되어야 함.
+      const orderLists = this.state.orderLists.map((order) =>
+        order.id === id ? updateData : order,
+      );
+
+      alert("수정 완료");
+      this.setState({ orderLists, orderDetail: updateData });
+    },
+  });
 
   const routes = [
     { path: "/admin/orders", view: orders, title: "Orders" },
     { path: "/admin/products", view: products, title: "Products" },
     { path: "/admin/categories", view: categories, title: "Categories" },
+    {
+      path: "/admin/products/:id",
+      view: productDetail,
+      title: "ProductDetails",
+    },
+    { path: "/admin/orders/:id", view: orderDetail, title: "OrderDetails" },
   ];
 
   this.render = () => {
@@ -114,28 +149,50 @@ export default function App({ $app }) {
       };
     });
     let match = results.find((route) => route.result != null);
-
     if (match) {
+      this.setState(); // 테이블 초기화.
       match.route.view.init();
     }
   };
 
-  this.setState = (state) => {
-    this.state = { ...state };
+  this.setState = (nextState) => {
+    this.state = {
+      ...this.state,
+      ...nextState,
+    };
+    orders.setState(this.state.orderLists);
+    categories.setState(this.state.categoryLists);
+    products.setState({ ...this.state });
+    orderDetail.setState(this.state.orderDetail);
+    productDetail.setState(this.state.productDetail, this.state.categoryLists);
   };
 
-  this.init = () => {
-    window.addEventListener("popstate", () => this.render());
-
+  this.init = async () => {
+    window.addEventListener("popstate", () => {
+      this.render();
+    });
     window.addEventListener("DOMContentLoaded", () => {
-      document.body.addEventListener("click", (e) => {
+      document.body.querySelector(".tabs").addEventListener("click", (e) => {
         e.preventDefault();
         const { target } = e;
         if (target.matches("[data-link]")) {
-          const BASE_URL = `http://localhost:5000`;
           const targetURL = target.href.replace(BASE_URL, "");
+
+          const $ul = e.target.closest("ul");
+          const $li = e.target.closest("li");
+
+          for (const node of $ul.childNodes) {
+            if (node.nodeType === 1) {
+              if ($li === node) $li.classList.add("is-active");
+              else node.classList.remove("is-active");
+            }
+          }
+
           if (targetURL !== location.pathname) {
-            navigate(targetURL, { title: target.dataset.link, state: "load" });
+            navigate(`/admin${targetURL}`, {
+              title: target.dataset.link,
+              state: "load",
+            });
           }
         }
       });
@@ -150,10 +207,19 @@ export default function App({ $app }) {
       this.render();
     });
 
-    console.log(orderData);
-    this.setState({ ...this.state, orderLists: orderData.data });
+    const [orderData, productData, categoryData] = await Promise.all([
+      fetch("./mockData/orderData.json").then((res) => res.json()),
+      fetch("./mockData/productData.json").then((res) => res.json()),
+      fetch("./mockData/categoryData.json").then((res) => res.json()),
+    ]);
 
-    navigate(`${INITNAI_URL}/orders`, {
+    this.setState({
+      orderLists: orderData.data,
+      productLists: productData.data,
+      categoryLists: categoryData.data,
+    });
+
+    navigate(`${BASE_URL}/orders`, {
       title: "Orders",
       state: "initial",
     });
