@@ -1,11 +1,16 @@
 import { Router } from "express";
 import is from "@sindresorhus/is";
 // 폴더에서 import하면, 자동으로 폴더의 index.js에서 가져옴
-import { loginRequired } from "../middlewares";
-import { userService } from "../services";
+import { loginRequired } from "../middlewares/index.js";
+import { userService } from "../services/index.js";
+import oauth2 from "passport-google-oauth2";
+import passport from "passport";
+import session from "express-session";
+import MongoStore from "connect-mongo";
+import { config } from "dotenv";
 
 const userRouter = Router();
-
+config();
 // 회원가입 api (아래는 /register이지만, 실제로는 /api/register로 요청해야 함.)
 userRouter.post("/register", async (req, res, next) => {
   try {
@@ -21,12 +26,16 @@ userRouter.post("/register", async (req, res, next) => {
     const fullName = req.body.fullName;
     const email = req.body.email;
     const password = req.body.password;
+    const address = req.body.exAddress;
+    const phoneNumber = req.body.exPhoneNumber;
 
     // 위 데이터를 유저 db에 추가하기
     const newUser = await userService.addUser({
       fullName,
       email,
       password,
+      address,
+      phoneNumber
     });
 
     // 추가된 유저의 db 데이터를 프론트에 다시 보내줌
@@ -61,15 +70,129 @@ userRouter.post("/login", async function (req, res, next) {
   }
 });
 
+const option = {
+  secret: process.env.SESSION_SECRET,
+  resave: true,
+  saveUninitialized: true,
+  store:MongoStore.create({mongoUrl:process.env.MONGO_SESSION_URL}),
+  cookie:{maxAge:600000,httpOnly:true}// 1000ms = 1s
+}
+
+
+// 세션 
+// userRouter.use("/login/auth/google", session(option), async function(req,res,next) {
+//   req.session.email="test@example.com";
+//   req.session.uid="OK";
+//   req.session.isLogined = true;
+//   req.session.save(function(){
+//     // res.redirect("/login");
+//   })
+//   next();
+// });
+
+
+userRouter.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      httpOnly: true, // js 코드로 쿠키를 가져오지 못하게
+      secure: false // https 에서만 가져오도록 할 것인가?
+    }
+  })
+);
+
+const GoogleStrategy = oauth2.Strategy;
+
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_ID 
+const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_SECRET; 
+
+//passport 초기화 및 session 연결
+userRouter.use(passport.initialize())
+userRouter.use(passport.session());
+passport.serializeUser(function (user, done) {
+    done(null, user.id);
+});
+// 사용자가 페이지를 방문할 때마다 호출되는 함수
+// done(null, id)로 사용자의 정보를 각 request의 user 변수에 넣어준다.
+passport.deserializeUser(function (id, done) {
+    done(null, id);
+});
+
+
+// Google login 전략
+// 로그인 성공 시 callback으로 request, accessToken, refreshToken, profile 등이 나온다.
+// 해당 콜백 function에서 사용자가 누구인지 done(null, user) 형식으로 넣으면 된다.
+// 이 예시에서는 넘겨받은 profile을 전달하는 것으로 대체했다.
+passport.use(
+  new GoogleStrategy(
+      {
+          clientID: GOOGLE_CLIENT_ID,
+          clientSecret: GOOGLE_CLIENT_SECRET,
+          callbackURL: "http://localhost:5000/api/auth/google/callback",
+          passReqToCallback: true,
+      },
+      function (request, accessToken, refreshToken, profile, done) {
+          console.log("### Profile Value");
+          console.log(profile);
+          console.log("### Profile Value : " + accessToken);
+          console.log("access Token")
+          return done(null, profile);
+      }
+  )
+);
+
+userRouter.get('/auth/google',
+  passport.authenticate('google', { scope:
+      [ 'email', 'profile' ] }
+));
+
+userRouter.get('/auth/google/callback', 
+
+    passport.authenticate( 'google', {
+        successRedirect: '/',
+        failureRedirect: '/login'
+    })
+);
+
+/* [Error Code] : 라우팅 간에 /login이 먼저 들어가면 get이 인식이 되지 않는 
+userRouter.get("/login/auth/google" , async function(req,res){
+  passport.authenticate("google", { scope: ["email", "profile"] })
+  // return res.status(200).json({ key: req.session.id, expire : req.session.cookie.expires, example:"hoho"});
+})
+
+userRouter.get("/login/auth/google/callback",
+passport.authenticate("google",{
+  successRedirect : "/",
+  failureRedirect:"/login"
+}))
+*/
+userRouter.get('/logout', (req,res)=> {
+  req.logout();
+  req.session.save(function(){
+    res.redirect('/');
+  })();
+})
+
+
+
+
 // 전체 유저 목록을 가져옴 (배열 형태임)
 // 미들웨어로 loginRequired 를 썼음 (이로써, jwt 토큰이 없으면 사용 불가한 라우팅이 됨)
 userRouter.get("/userlist", loginRequired, async function (req, res, next) {
   try {
-    // 전체 사용자 목록을 얻음
-    const users = await userService.getUsers();
-
+    // 사용자의 권한(Role)에 따라 사용자 목록을 얻음 || admin : 전체 데이터, user : 본인의 데이터
+    let option = '';
+    if(req.currentRole !== 'admin')
+    option = req.currentUserId;    
+    const user = await userService.getUsers(option);
+    if(!user){
+    res.status(502).json("해당 계정이 삭제되었거나 존재하지 않습니다");
+    return ;
+  }
     // 사용자 목록(배열)을 JSON 형태로 프론트에 보냄
-    res.status(200).json(users);
+    res.status(200).json(user);
   } catch (error) {
     next(error);
   }
@@ -92,6 +215,7 @@ userRouter.patch(
 
       // params로부터 id를 가져옴
       const userId = req.params.userId;
+      // const currentUserId = req.currentUserId;
 
       // body data 로부터 업데이트할 사용자 정보를 추출함.
       const fullName = req.body.fullName;
@@ -106,7 +230,7 @@ userRouter.patch(
       // currentPassword 없을 시, 진행 불가
       if (!currentPassword) {
         throw new Error("정보를 변경하려면, 현재의 비밀번호가 필요합니다.");
-      }
+      } 
 
       const userInfoRequired = { userId, currentPassword };
 
@@ -128,10 +252,18 @@ userRouter.patch(
 
       // 업데이트 이후의 유저 데이터를 프론트에 보내 줌
       res.status(200).json(updatedUserInfo);
+      return;
     } catch (error) {
       next(error);
     }
   },
 );
+
+userRouter.delete('/delete', loginRequired, async (req,res,next)=>{
+const userId = req.currentUserId;
+// res.json({userId, Role });
+const state = await userService.deleteUser(userId);
+res.json(state);
+});
 
 export { userRouter };
