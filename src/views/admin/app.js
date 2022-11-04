@@ -23,35 +23,25 @@ export default function App({ $app }) {
     $app,
     initialState: this.state.orderLists,
     searchHandler: (searchData) => {
-      const curOrderLists = this.state.orderLists;
-      const orderLists =
-        searchData === ""
-          ? wholeOrderLists
-          : curOrderLists.filter((data) =>
-              data.consumerName.includes(searchData),
-            );
-
-      this.setState({
-        ...this.state,
-        orderLists,
-      });
+      console.log(orders.state, searchData);
+      const orderLists = checkStringEmpty(searchData)
+        ? this.state.orderLists
+        : orders.state.filter((order) =>
+            order.consumerName.includes(searchData),
+          );
+      orders.setState(orderLists);
     },
   });
   const products = new Products({
     $app,
     initialState: this.state,
     searchHandler: (searchData) => {
-      const curProductLists = this.state.productLists;
       const productLists = checkStringEmpty(searchData)
-        ? curProductLists
-        : curProductLists.filter((data) =>
-            data.productName.includes(searchData),
+        ? this.state.productLists
+        : products.state.productLists.filter((product) =>
+            product.productName.includes(searchData),
           );
-
-      this.setState({
-        ...this.state,
-        productLists,
-      });
+      products.setState({ ...products.state, productLists });
     },
     appendHandler: (appendData) => {
       this.setState({
@@ -63,17 +53,12 @@ export default function App({ $app }) {
     $app,
     initialState: this.state.categoryLists,
     searchHandler: (searchData) => {
-      const curCategoryLists = this.state.categoryLists;
       const categoryLists = checkStringEmpty(searchData)
-        ? curCategoryLists
-        : curCategoryLists.filter((data) =>
-            data.categoryName.includes(searchData),
+        ? this.state.categoryLists
+        : categories.state.filter((category) =>
+            category.categoryName.includes(searchData),
           );
-
-      this.setState({
-        ...this.state,
-        categoryLists,
-      });
+      categories.setState(categoryLists);
     },
     appendHandler: (appendItem) => {
       this.setState({
@@ -165,6 +150,7 @@ export default function App({ $app }) {
     });
     let match = results.find((route) => route.result != null);
     if (match) {
+      this.setState(); // 테이블 초기화.
       match.route.view.init();
     }
   };
@@ -179,8 +165,6 @@ export default function App({ $app }) {
     products.setState({ ...this.state });
     orderDetail.setState(this.state.orderDetail);
     productDetail.setState(this.state.productDetail, this.state.categoryLists);
-
-    // this.render();
   };
 
   this.init = async () => {
