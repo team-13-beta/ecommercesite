@@ -17,9 +17,9 @@ export function tableTemplate(columns, datas = []) {
     for (const [key, _] of columns) {
       const $td = createElement("td");
       if (key === "detail_button") {
-        $td.innerHTML = `<button data-type="detail" data-detail-id=${data["id"]}>상세 정보</button>`;
+        $td.innerHTML = `<button class="button is-small" data-type="detail" data-detail-id=${data["id"]}>상세 정보</button>`;
       } else if (key === "delete_button") {
-        $td.innerHTML = `<button data-type="delete" data-detail-id=${data["id"]}>삭제</button>`;
+        $td.innerHTML = `<button class="button is-small" data-type="delete" data-detail-id=${data["id"]}>삭제</button>`;
       } else {
         $td.innerHTML = data[key] ?? "";
       }
@@ -30,7 +30,7 @@ export function tableTemplate(columns, datas = []) {
   }
 
   return `
-    <table>
+    <table class="table is-fullwidth">
       ${$thead.outerHTML}
       ${$tbody.outerHTML}
     </table>

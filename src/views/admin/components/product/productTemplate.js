@@ -1,9 +1,9 @@
 export function productDetailTemplate(data, categories = []) {
   return `
-      <button class="update_button" data-type="update">
+      <button class="button" data-type="update">
         수정 완료
       </button>
-      <button class="delete_button" data-type="delete">
+      <button class="button" data-type="delete">
         삭제하기
       </button>
       <div>

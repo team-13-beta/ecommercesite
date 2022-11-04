@@ -1,6 +1,6 @@
 import { clearContainer, createElement } from "../../utility/documentSelect.js";
 import { navigate } from "../../utility/navigate.js";
-import { orderDetailTemplate } from "../components/orderTemplate.js";
+import { orderDetailTemplate } from "../components/order/orderTemplate.js";
 
 export default function OrderDetail({
   $app,
@@ -11,6 +11,7 @@ export default function OrderDetail({
   this.state = initialState;
 
   this.$element = createElement("div");
+  this.$element.className = "container";
   this.$element.addEventListener("click", (e) => {
     e.preventDefault();
     const { type } = e.target.dataset;

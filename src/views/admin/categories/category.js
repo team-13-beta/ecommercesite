@@ -1,5 +1,5 @@
 import { createElement, clearContainer } from "../../utility/documentSelect.js";
-import { categoryHeader } from "../components/categoryHeader.js";
+import { categoryHeader } from "../components/category/categoryHeader.js";
 import { tableTemplate } from "../components/tableTemplate.js";
 
 import { categoryModal, closeModal } from "../components/modal.js";
@@ -24,7 +24,7 @@ export default function Categories({
     e.preventDefault();
     const { type, detailId } = e.target.dataset;
     if (type === "search") {
-      const $inputVal = this.$element.querySelector(".category-search");
+      const $inputVal = this.$element.querySelector(".search-input");
       searchHandler($inputVal.value);
     } else if (type === "append") {
       modalHandler();

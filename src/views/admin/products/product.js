@@ -5,7 +5,7 @@ import {
   returnDocumentId,
 } from "../../utility/documentSelect.js";
 import { appendDetailMoveHandler } from "../../utility/navigate.js";
-import { categoryHeader } from "../components/productHeader.js";
+import { categoryHeader } from "../components/product/productHeader.js";
 import { tableTemplate } from "../components/tableTemplate.js";
 import { productModal, closeModal } from "../components/modal.js";
 
@@ -34,7 +34,7 @@ export default function Products({
     e.preventDefault();
     const { type, detailId } = e.target.dataset;
     if (type === "search") {
-      const $inputVal = this.$element.querySelector(".category-search");
+      const $inputVal = this.$element.querySelector(".search-input");
       searchHandler($inputVal.value);
     } else if (type === "append") {
       modalHandler(this.state.categoryLists);

@@ -180,13 +180,23 @@ export default function App({ $app }) {
     window.addEventListener("popstate", () => {
       this.render();
     });
-
     window.addEventListener("DOMContentLoaded", () => {
-      document.querySelector("nav").addEventListener("click", (e) => {
+      document.body.querySelector(".tabs").addEventListener("click", (e) => {
         e.preventDefault();
         const { target } = e;
         if (target.matches("[data-link]")) {
           const targetURL = target.href.replace(BASE_URL, "");
+
+          const $ul = e.target.closest("ul");
+          const $li = e.target.closest("li");
+
+          for (const node of $ul.childNodes) {
+            if (node.nodeType === 1) {
+              if ($li === node) $li.classList.add("is-active");
+              else node.classList.remove("is-active");
+            }
+          }
+
           if (targetURL !== location.pathname) {
             navigate(`/admin${targetURL}`, {
               title: target.dataset.link,

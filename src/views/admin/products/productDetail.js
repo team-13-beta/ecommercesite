@@ -4,7 +4,7 @@ import {
   returnDocumentClass,
   returnDocumentId,
 } from "../../utility/documentSelect.js";
-import { productDetailTemplate } from "../components/productTemplate.js";
+import { productDetailTemplate } from "../components/product/productTemplate.js";
 
 export default function ProductDetail({
   $app,
