@@ -1,38 +1,42 @@
 import * as Api from "../../api.js";
-import {
-  validateEmail,
-  checkPhoneNumberValid,
-} from "../../useful-functions.js";
+import { checkPhoneNumberValid } from "../../useful-functions.js";
 
 // 요소(element), input 혹은 상수
 const fullNameInput = document.querySelector("#fullNameInput");
-const emailInput = document.querySelector("#emailInput");
-const passwordInput = document.querySelector("#passwordInput");
-const passwordConfirmInput = document.querySelector("#passwordConfirmInput");
+const CurrentpasswordInput = document.querySelector("#CurrentpasswordInput");
+const passwordInput = document.querySelector("#NewpasswordInput");
+const passwordConfirmInput = document.querySelector("#NewpasswordConfirmInput");
 const postalCodeInput = document.querySelector("#postalCode");
 const address1Input = document.querySelector("#address1");
 const address2Input = document.querySelector("#address2");
 const phoneNumberInput = document.querySelector("#phoneNumberInput");
 
-//버튼들
+// // html에 요소를 추가하는 함수들을 묶어주어서 코드를 깔끔하게 하는 역할임.
+// async function addAllElements() {}
+
+// //버튼들
 const searchAddressButton = document.querySelector("#searchAddressButton");
-const submitButton = document.querySelector("#submitButton");
-addAllElements();
+const saveAccountButton = document.querySelector("#saveAccountButton");
+const deleteAccountButton = document.querySelector("#deleteAccountButton");
+const cancelButton = document.querySelector("#cancelButton");
+// addAllElements();
 addAllEvents();
 
-// html에 요소를 추가하는 함수들을 묶어주어서 코드를 깔끔하게 하는 역할임.
-async function addAllElements() {}
+// // html에 요소를 추가하는 함수들을 묶어주어서 코드를 깔끔하게 하는 역할임.
+// async function addAllElements() {}
 
-// 여러 개의 addEventListener들을 묶어주어서 코드를 깔끔하게 하는 역할임.
+// // 여러 개의 addEventListener들을 묶어주어서 코드를 깔끔하게 하는 역할임.
 function addAllEvents() {
   searchAddressButton.addEventListener("click", searchAddress);
-  submitButton.addEventListener("click", handleSubmit);
+  saveAccountButton.addEventListener("click", updateAccount);
+  // deleteAccountButton.addEventListener("click",deleteAccount);
+  cancelButton.addEventListener("click", cancelHandler);
 }
 
-// daum post api 불러오기.
-
+//주소 찾기
 function searchAddress(e) {
   e.preventDefault();
+
   new daum.Postcode({
     oncomplete: function (data) {
       let addr = "";
@@ -59,18 +63,19 @@ function searchAddress(e) {
       }
       postalCodeInput.value = data.zonecode;
       address1Input.value = `${addr} ${extraAddr}`;
+      address2Input.value = "";
       address2Input.placeholder = "상세 주소를 입력해 주세요.";
       address2Input.focus();
     },
   }).open();
 }
 
-// 회원가입 진행
-async function handleSubmit(e) {
+//계정 업데이트 함수
+async function updateAccount(e) {
   e.preventDefault();
 
   const fullName = fullNameInput.value;
-  const email = emailInput.value;
+  const currentPassword = CurrentpasswordInput.value;
   const password = passwordInput.value;
   const passwordConfirm = passwordConfirmInput.value;
   const postalCode = postalCodeInput.value;
@@ -78,26 +83,24 @@ async function handleSubmit(e) {
   const address2 = address2Input.value;
   const phoneNumber = phoneNumberInput.value;
 
-  //객체 형태로 주소 데이터 보내기.
   const address = { postalCode, address1, address2 };
 
-  // 잘 입력했는지 확인
+  // 잘 입력했는지 확인 하는 상수
   const isFullNameValid = fullName.length >= 2;
-  const isEmailValid = validateEmail(email);
   const isPasswordValid = password.length >= 4;
   const isPasswordSame = password === passwordConfirm;
   const isPhoneNumberValid = checkPhoneNumberValid(phoneNumber);
 
-  if (!isFullNameValid || !isPasswordValid) {
-    return alert("이름은 2글자 이상, 비밀번호는 4글자 이상이어야 합니다.");
+  if (!isFullNameValid) {
+    return alert("이름은 2글자 이상 입력해주세요.");
   }
 
-  if (!isEmailValid) {
-    return alert("이메일 형식이 맞지 않습니다.");
+  if (!isPasswordValid) {
+    return alert("비밀번호는 4글자 이상이어야 합니다.");
   }
 
   if (!isPasswordSame) {
-    return alert("비밀번호가 일치하지 않습니다.");
+    return alert("새 비밀번호가 일치하지 않습니다.");
   }
 
   if (!isPhoneNumberValid) {
@@ -106,18 +109,39 @@ async function handleSubmit(e) {
     );
   }
 
-  // 회원가입 api 요청
+  // 유저 정보 수정 api 요청
+
   try {
-    const data = { fullName, email, password, address, phoneNumber };
+    const data = {
+      fullName,
+      currentPassword,
+      password,
+      address,
+      phoneNumber,
+    };
 
-    await Api.post("/api/register", data);
+    // const user = await Api.get("/api/users/:userId");
+    //뭔지 물어보기.
+    // await Api.patch("/api/users/:userId", data);
+    alert(`정상적으로 정보 수정되었습니다.`);
 
-    alert(`정상적으로 회원가입되었습니다.`);
-
-    // 로그인 페이지 이동
-    window.location.href = "/login";
+    window.location.href = "";
   } catch (err) {
     console.error(err.stack);
     alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
   }
+}
+
+//계정 삭제 함수
+async function deleteAccount(e) {
+  e.preventDefault();
+
+  try {
+  } catch (err) {}
+}
+
+//수정 취소 함수
+function cancelHandler(e) {
+  e.preventDefault();
+  window.location.href = "/";
 }
