@@ -1,1 +1,5 @@
-export * from "./user-service";
+export * from "./user-service.js";
+export * from "./product-service.js";
+export * from "./category-service.js";
+export * from "./basket-service.js";
+export * from "./order-service.js";
