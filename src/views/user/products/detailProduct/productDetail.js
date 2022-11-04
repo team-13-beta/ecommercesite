@@ -4,18 +4,18 @@ import productDesData from "./productDesData.js";
 let contentEl = document.getElementById("input-data");
 let detailEl = document.getElementById("detail-data");
 async function handleData() {
+  // 상품 아이디 가져와서 서버에 get 요청
   await fetch("../../tempData.json")
     .then((res) => res.json())
     .then((data) => {
       const temp = data[0];
       console.log(temp);
-      const [id, img, name, price, des, des_img] = [
+      const [id, img, name, price, [des, des_img]] = [
         temp.product_id,
         temp.imgTitle,
         temp.name,
         temp.price,
-        temp.description[0],
-        temp.description[1],
+        temp.description,
       ];
       const htmlEl = renderDetailData(id, img, name, price, des);
       contentEl.innerHTML = htmlEl;
@@ -29,6 +29,4 @@ async function handleData() {
     });
 }
 
-window.onload = function () {
-  handleData();
-};
+window.onload = handleData;
