@@ -1,6 +1,7 @@
 import { checkStringEmpty } from "../../../useful-functions.js";
 
 export function productDetailTemplate(data, categories = []) {
+  if (!data) return `<div>데이터가 없습니다.</div>`;
   return `<div class="modify-container">
         <button class="button" data-type="update">
           수정 완료

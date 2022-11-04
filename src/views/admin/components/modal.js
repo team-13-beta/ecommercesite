@@ -18,6 +18,7 @@ export const categoryAppendModal = `
 `;
 
 export const categoryUpdateModal = (data) => {
+  if (!data) return `<div>데이터가 없습니다.</div>`;
   return `<div class="modal-background"></div>
   <div class="modal-card">
     <header class="modal-card-head">
@@ -37,7 +38,7 @@ export const categoryUpdateModal = (data) => {
   </div>`;
 };
 
-export function productModal(categories) {
+export function productModal(categories = []) {
   return ` <div class="modal-background"></div>
       <div class="modal-card">
         <header class="modal-card-head">

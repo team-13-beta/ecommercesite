@@ -70,7 +70,7 @@ export default function ProductDetail({
     }
 
     this.$element.innerHTML = productDetailTemplate(
-      this.state,
+      this.state ?? null,
       this.$categories,
     );
 
@@ -80,7 +80,7 @@ export default function ProductDetail({
 
   this.render = () => {
     this.$element.innerHTML = productDetailTemplate(
-      this.state,
+      this.state ?? null,
       this.$categories,
     );
 
