@@ -1,25 +1,7 @@
-.header-container {
-  display: flex;
-}
-
-.logo {
-  background-color: #ff922b;
-  width: 80px;
-  font-size: 20px;
-  text-align: center;
-  border-radius: 10px;
-}
-
 .content_container {
   width: 1024px;
 }
 
 .product-item:hover {
   background-color: #ffe8cc;
-}
-.footer_container {
-  width: 1024px;
-  margin: 0 auto;
-  background-color: #ff922b;
-  color: #ffe8cc;
 }
