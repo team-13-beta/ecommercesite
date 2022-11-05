@@ -177,12 +177,12 @@ const getItemList = async () => {
       else {
         return `<div class ="bottom-products column">
           <div class="bottom-product-image-container"> 
-              <a href="/${data.id}"><img class="bottom-product-image" src="${
-          data.img
-        }" alt=""></a>
+              <a href="/user/products/${
+                data.id
+              }"><img class="bottom-product-image" src="${data.img}" alt=""></a>
           </div>
           <div class="bottom-product-name">
-              <a href="/${data.id}">${data.item}</a>
+              <a href="/user/products/${data.id}">${data.item}</a>
           </div>
           <div class="bottom-product-price">
               ${addCommas(data.Price) + "원"}

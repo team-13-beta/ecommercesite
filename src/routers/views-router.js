@@ -13,20 +13,20 @@ viewsRouter.use("/", serveStatic("user/home/home"));
 viewsRouter.use("/register", serveStatic("auth/register/register"));
 viewsRouter.use("/login", serveStatic("auth/login/login"));
 viewsRouter.use("/admin", serveStatic("admin/admin"), adminRouter); // 아래 split 연산때문에 admin/admin으로 인자 pass
-viewsRouter.use("/user/accoutUpdate", serveStatic("user/accountUpdate/accountUpdate"))
-viewsRouter.use("/user/bucket",serveStatic("user/bucket/bucket"))
-viewsRouter.use("/user/order",serveStatic("user/order/order"))
-viewsRouter.use("/user/products/productDetail",serveStatic("user/products/detailProduct/productDetail"))
-viewsRouter.use("/user/products/product",serveStatic("user/products/mainProduct/product"))
-viewsRouter.use("/user/userorder",serveStatic("user/userorder/userorder"))
+viewsRouter.use(
+  "/user/accoutUpdate",
+  serveStatic("user/accountUpdate/accountUpdate"),
+);
+viewsRouter.use("/user/bucket", serveStatic("user/bucket/bucket"));
+viewsRouter.use("/user/order", serveStatic("user/order/order"));
+viewsRouter.use("/user/products/:id", serveStatic("user/products/products"));
+viewsRouter.use("/user/userorder", serveStatic("user/userorder/userorder"));
 
 // user/accountUpdate/accountUpdate.html
 // user/bucket/bucket.html
 // user/order/order.html
-// user/products/detailproduct/productDetail.html
-// user/products/mainProduct/product.html
+// user/products/products.html
 // user/userorder/userorder.html
-
 
 // views 폴더의 최상단 파일인 rabbit.png, api.js 등을 쓸 수 있게 함
 viewsRouter.use("/", serveStatic(""));
@@ -35,11 +35,13 @@ viewsRouter.use("/", serveStatic(""));
 // 이 때 ${resource}.html 을 기본 파일로 설정함.
 function serveStatic(resource) {
   // const __dirname = path.resolve();
-const splitedResource = resource.split("/");
-const fileName = splitedResource[splitedResource.length-1];
-const filePath = splitedResource.slice(0,splitedResource.length-1).join("/");
+  const splitedResource = resource.split("/");
+  const fileName = splitedResource[splitedResource.length - 1];
+  const filePath = splitedResource
+    .slice(0, splitedResource.length - 1)
+    .join("/");
 
-/*
+  /*
 경로 정상 출력 확인 코드
 console.log("splitedResource : "+splitedResource);
 console.log("fileName : "+fileName);

@@ -3,9 +3,10 @@ import productDesData from "./productDesData.js";
 
 let contentEl = document.getElementById("input-data");
 let detailEl = document.getElementById("detail-data");
+// TODO : 상품 아이디 받아오기
 async function handleData() {
-  // 상품 아이디 가져와서 서버에 get 요청
-  await fetch("../../tempData.json")
+  // TODO : 상품 아이디 가져와서 서버에 get 요청
+  await fetch("/user/tempData.json")
     .then((res) => res.json())
     .then((data) => {
       const temp = data[0];
