@@ -9,10 +9,24 @@ const viewsRouter = express.Router();
 // 페이지별로 html, css, js 파일들을 라우팅함ㅅ
 // 아래와 같이 하면, http://localhost:5000/ 에서는 views/home/home.html 파일을,
 // http://localhost:5000/register 에서는 views/register/register.html 파일을 화면에 띄움
-viewsRouter.use("/", serveStatic("user/home"));
-viewsRouter.use("/register", serveStatic("auth/register"));
-viewsRouter.use("/login", serveStatic("auth/login"));
+viewsRouter.use("/", serveStatic("user/home/home"));
+viewsRouter.use("/register", serveStatic("auth/register/register"));
+viewsRouter.use("/login", serveStatic("auth/login/login"));
 viewsRouter.use("/admin", serveStatic("admin/admin"), adminRouter); // 아래 split 연산때문에 admin/admin으로 인자 pass
+viewsRouter.use("/user/accoutUpdate", serveStatic("user/accountUpdate/accountUpdate"))
+viewsRouter.use("/user/bucket",serveStatic("user/bucket/bucket"))
+viewsRouter.use("/user/order",serveStatic("user/order/order"))
+viewsRouter.use("/user/products/productDetail",serveStatic("user/products/detailProduct/productDetail"))
+viewsRouter.use("/user/products/product",serveStatic("user/products/mainProduct/product"))
+viewsRouter.use("/user/userorder",serveStatic("user/userorder/userorder"))
+
+// user/accountUpdate/accountUpdate.html
+// user/bucket/bucket.html
+// user/order/order.html
+// user/products/detailproduct/productDetail.html
+// user/products/mainProduct/product.html
+// user/userorder/userorder.html
+
 
 // views 폴더의 최상단 파일인 rabbit.png, api.js 등을 쓸 수 있게 함
 viewsRouter.use("/", serveStatic(""));
@@ -21,16 +35,20 @@ viewsRouter.use("/", serveStatic(""));
 // 이 때 ${resource}.html 을 기본 파일로 설정함.
 function serveStatic(resource) {
   // const __dirname = path.resolve();
+const splitedResource = resource.split("/");
+const fileName = splitedResource[splitedResource.length-1];
+const filePath = splitedResource.slice(0,splitedResource.length-1).join("/");
 
-  const fileName = resource.split("/")[1];
+/*
+경로 정상 출력 확인 코드
+console.log("splitedResource : "+splitedResource);
+console.log("fileName : "+fileName);
+console.log("filePath : "+filePath);
+*/
+
   const __dirname = dirname(fileURLToPath(import.meta.url));
+  const resourcePath = path.join(__dirname, `../views/${filePath}`);
 
-  // admin만 예외처리
-  if (resource === "admin/admin") resource = "admin";
-
-  const resourcePath = path.join(__dirname, `../views/${resource}`);
-
-  console.log("fineName is " + fileName);
   const option = { index: `${fileName}.html` };
 
   // express.static 은 express 가 기본으로 제공하는 함수임
