@@ -171,6 +171,8 @@ const getItemList = async () => {
       console.log(data.id);
     }),
   );
+  // TODO : 부모 요소로 클릭해서 페이지 이동하게 변경해주세요.
+  // TODO : 리턴값을 따로 함수로 빼는게 어떨까요..
   const result = data
     .map((data, i) => {
       if (i > 6) return;

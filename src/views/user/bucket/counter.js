@@ -5,6 +5,7 @@ const plusBtn = document.querySelectorAll(".plus-btn");
 
 const totalPriceEl = document.querySelector("#total-price");
 
+// TODO : 체크박스가 해제가 될 때 수량을 변경하면 총 금액이 안나오게 해주세요.
 function handleCount(e) {
   // 각 요소 값들
   const parentEl = e.target.parentElement;
