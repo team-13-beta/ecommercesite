@@ -2,7 +2,7 @@ import cors from "cors";
 import express from "express";
 import { viewsRouter, userRouter, productRouter, categoryRouter, basketRouter, orderRouter } from "./routers/index.js";
 import { errorHandler } from "./middlewares/index.js";
-
+import {productModelTest, userModelTest, categoryModelTest} from "./db/testmodel.js";
 const app = express();
 
 // CORS 에러 방지
@@ -27,6 +27,10 @@ app.use("/basket",basketRouter);
 app.use("/orders",orderRouter);
 // 순서 중요 (errorHandler은 다른 일반 라우팅보다 나중에 있어야 함)
 // 그래야, 에러가 났을 때 next(error) 했을 때 여기로 오게 됨
+productModelTest()
+userModelTest()
+categoryModelTest()
+
 app.use((req,res,next)=>{
     res.status(404).send('요청하시는 페이지가 존재하지 않습니다. Error:404');
 })

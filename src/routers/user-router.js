@@ -8,7 +8,6 @@ import passport from "passport";
 import session from "express-session";
 import MongoStore from "connect-mongo";
 import { config } from "dotenv";
-import cookieParser from "cookie-parser";
 
 const userRouter = Router();
 config();
@@ -71,35 +70,15 @@ userRouter.post("/login", async function (req, res, next) {
   }
 });
 
-const option = {
-  secret: process.env.SESSION_SECRET,
-  resave: true,
-  saveUninitialized: true,
-  store:MongoStore.create({mongoUrl:process.env.MONGO_SESSION_URL}),
-  cookie:{maxAge:600000,httpOnly:true}// 1000ms = 1s
-}
-
-
-// 세션 
-// userRouter.use("/login/auth/google", session(option), async function(req,res,next) {
-//   req.session.email="test@example.com";
-//   req.session.uid="OK";
-//   req.session.isLogined = true;
-//   req.session.save(function(){
-//     // res.redirect("/login");
-//   })
-//   next();
-// });
-
-
 userRouter.use(
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {
-      httpOnly: true, // js 코드로 쿠키를 가져오지 못하게
-      secure: false // https 에서만 가져오도록 할 것인가?
+      httpOnly: false, // js 코드로 쿠키를 가져오지 못하게
+      secure: false, // https 에서만 가져오도록 할 것인가?
+      maxAge:1800000 // cookie expired : 30minute 
     },
     store: MongoStore.create({mongoUrl: process.env.MONGO_SESSION_URL}),
   })
@@ -114,6 +93,7 @@ const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_SECRET;
 userRouter.use(passport.initialize())
 userRouter.use(passport.session());
 passport.serializeUser(function (user, done) {
+  console.log(user.id);
     done(null, user.id);
 });
 // 사용자가 페이지를 방문할 때마다 호출되는 함수
@@ -154,13 +134,11 @@ userRouter.get('/auth/google/callback',
 
   passport.authenticate( 'google', {failureRedirect: '/login?loginError' }),
     function(req,res){
-      req.session.name = req.user.displayName;
-      req.session.email = req.user.email;
-      req.session.role = "user",
-      req.session.idcode = req.user.id
-      // console.log(req.sessionID)
-      // console.log(req.session.id)
-      // console.log(req);
+      // req.session.name = req.user.displayName;
+      // req.session.email = req.user.email;
+      // req.session.role = "user",
+      // req.session.idcode = req.user.id
+    
       res.redirect("/?loginSuccess");
     }
 
@@ -178,11 +156,15 @@ passport.authenticate("google",{
   failureRedirect:"/login"
 }))
 */
-userRouter.get('/logout', (req,res)=> {
-  req.logout();
-  req.session.save(function(){
-    res.redirect('/');
-  })();
+userRouter.get('/logout', async (req,res,next)=> {
+  req.logout((err)=>{
+    if (err) { 
+      req.session.redirect('/?logoutFailure') }
+    else{
+    req.session.destroy();
+    res.redirect('/?logoutSuccess');
+  }
+  });
 })
 
 

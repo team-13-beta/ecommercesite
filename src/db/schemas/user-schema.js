@@ -33,9 +33,13 @@ const UserSchema = new Schema(
     },
     role: { // authority : user || admin
       type: String,
-      required: false,
       default: "user",
     },
+    access:{
+      type:String,
+      default:"general"
+     
+    }
   },
   {
     collection: "users",

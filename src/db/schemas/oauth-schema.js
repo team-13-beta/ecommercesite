@@ -17,6 +17,10 @@ const OauthSchema = new Schema(
     role:{
       type:String,
       default:"user"
+    },
+    access:{
+      type:String,
+      default:"oauth"
     }
   },
   {

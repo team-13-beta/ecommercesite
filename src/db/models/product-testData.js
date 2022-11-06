@@ -1,5 +1,5 @@
 import {productModel} from './product-model.js';
-import {categoryModel} from './category-model.js';
+
 async function productModelTest(){
     if(!await productModel.findByName("닭가슴살"))
     productModel.create({
