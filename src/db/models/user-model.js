@@ -34,9 +34,10 @@ export class UserModel { // 이메일 중복 검사
   }
 
   async deleteById(userId){
-    const deletedCount =  await User.deleteOne({_id:userId});
-    return deletedCount; 
+    const state =  await User.deleteOne({_id:userId});
+    return state; 
   }
+  // "acknowledged:true, deletedcount : 1 or 0 "
 }
 
 const userModel = new UserModel();

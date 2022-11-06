@@ -8,6 +8,7 @@ import passport from "passport";
 import session from "express-session";
 import MongoStore from "connect-mongo";
 import { config } from "dotenv";
+import cookieParser from "cookie-parser";
 
 const userRouter = Router();
 config();
@@ -99,7 +100,8 @@ userRouter.use(
     cookie: {
       httpOnly: true, // js 코드로 쿠키를 가져오지 못하게
       secure: false // https 에서만 가져오도록 할 것인가?
-    }
+    },
+    store: MongoStore.create({mongoUrl: process.env.MONGO_SESSION_URL}),
   })
 );
 
@@ -134,10 +136,10 @@ passport.use(
           passReqToCallback: true,
       },
       function (request, accessToken, refreshToken, profile, done) {
-          console.log("### Profile Value");
-          console.log(profile);
-          console.log("### Profile Value : " + accessToken);
-          console.log("access Token")
+          // console.log("### Profile Value");
+          // console.log(profile);
+          // console.log("### Profile Value : " + accessToken);
+          // console.log("access Token")
           return done(null, profile);
       }
   )
@@ -150,10 +152,18 @@ userRouter.get('/auth/google',
 
 userRouter.get('/auth/google/callback', 
 
-    passport.authenticate( 'google', {
-        successRedirect: '/',
-        failureRedirect: '/login'
-    })
+  passport.authenticate( 'google', {failureRedirect: '/login?loginError' }),
+    function(req,res){
+      req.session.name = req.user.displayName;
+      req.session.email = req.user.email;
+      req.session.role = "user",
+      req.session.idcode = req.user.id
+      // console.log(req.sessionID)
+      // console.log(req.session.id)
+      // console.log(req);
+      res.redirect("/?loginSuccess");
+    }
+
 );
 
 /* [Error Code] : 라우팅 간에 /login이 먼저 들어가면 get이 인식이 되지 않는 
@@ -199,9 +209,8 @@ userRouter.get("/userlist", loginRequired, async function (req, res, next) {
 });
 
 // 사용자 정보 수정
-// (예를 들어 /api/users/abc12345 로 요청하면 req.params.userId는 'abc12345' 문자열로 됨)
-userRouter.patch(
-  "/users/:userId",
+// (예를 들어 /api/users/abc12345@example.com => req.params.userEmail
+userRouter.patch("/users",
   loginRequired,
   async function (req, res, next) {
     try {
@@ -213,9 +222,9 @@ userRouter.patch(
         );
       }
 
-      // params로부터 id를 가져옴
-      const userId = req.params.userId;
-      // const currentUserId = req.currentUserId;
+      // params로부터 Email을 가져옴
+      // const userEmail = req.params.userEmail;
+       const userId = req.currentUserId;
 
       // body data 로부터 업데이트할 사용자 정보를 추출함.
       const fullName = req.body.fullName;
@@ -236,6 +245,7 @@ userRouter.patch(
 
       // 위 데이터가 undefined가 아니라면, 즉, 프론트에서 업데이트를 위해
       // 보내주었다면, 업데이트용 객체에 삽입함.
+      // req.body로 보내주지 않은 필드는 업데이트를 진행하지 않음
       const toUpdate = {
         ...(fullName && { fullName }),
         ...(password && { password }),
@@ -245,7 +255,7 @@ userRouter.patch(
       };
 
       // 사용자 정보를 업데이트함.
-      const updatedUserInfo = await userService.setUser(
+      const updatedUserInfo = await userService.updateUser(
         userInfoRequired,
         toUpdate,
       );
