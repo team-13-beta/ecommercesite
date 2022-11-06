@@ -138,7 +138,8 @@ userRouter.get('/auth/google/callback',
       // req.session.email = req.user.email;
       // req.session.role = "user",
       // req.session.idcode = req.user.id
-    
+      
+      
       res.redirect("/?loginSuccess");
     }
 

@@ -37,13 +37,18 @@ const UserSchema = new Schema(
     },
     access:{
       type:String,
-      default:"general"
-     
+      default:"general" 
+    },
+    createdTime : { 
+      type: String
+    },
+    updatedTime : { 
+      type: String
     }
   },
   {
     collection: "users",
-    timestamps: true,
+    timestamps: false,
   }
 );
 

@@ -1,11 +1,11 @@
 import {userModel} from './user-model.js';
 import bcypt from 'bcrypt';
-
+import {getLocalTime} from '../../services/timeZone.js';
 async function userModelTest(){
 
 const pw = await bcypt.hash('1111',10);
 
-
+const time = getLocalTime();
 if(!await userModel.findByEmail("admin@example.com"))
     await userModel.create({
         email:"admin@example.com",
@@ -17,7 +17,9 @@ if(!await userModel.findByEmail("admin@example.com"))
             address1: "ex_City",
             address2: "ex_apartMent"
         },
-        role:'admin'
+        role:'admin',
+        createdTime:time,
+        updatedTime:time
     });
    
     
@@ -32,6 +34,8 @@ if(!await userModel.findByEmail("abc@example.com"))
             address1: "ex_City",
             address2: "ex_apartMent"
         },
+        createdTime:time,
+        updatedTime:time
     });    
 
 if(!await userModel.findByEmail("aaa@example.com"))
@@ -45,10 +49,13 @@ if(!await userModel.findByEmail("aaa@example.com"))
             address1: "ex_City",
             address2: "ex_apartMent"
         },
+        createdTime:time,
+        updatedTime:time
     })
 
-if(!await userModel.findByEmail("bbb@example.com"))
-   await userModel.create({
+if(!await userModel.findByEmail("bbb@example.com")){
+    
+    await userModel.create({
         email:"bbb@example.com",
         name:"다다",
         password:pw,
@@ -58,7 +65,10 @@ if(!await userModel.findByEmail("bbb@example.com"))
             address1: "ex_City",
             address2: "ex_apartMent"
         },
+        createdTime:time,
+        updatedTime:time
     });
+}
 if(!await userModel.findByEmail("ccc@example.com"))
     await userModel.create({
         email:"ccc@example.com",
@@ -70,6 +80,8 @@ if(!await userModel.findByEmail("ccc@example.com"))
             address1: "ex_City",
             address2: "ex_apartMent"
         },
+        createdTime:time,
+        updatedTime:time
     });
     
 }
