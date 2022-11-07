@@ -1,6 +1,6 @@
 import { model } from "mongoose";
 import { ProductSchema } from "../schemas/product-schema.js";
-
+import {timeZone} from '../../services/timeZone.js';
 const Product = model("products", ProductSchema);
 
 export class ProductModel {
@@ -8,17 +8,20 @@ export class ProductModel {
     const product = await Product.findOne({ name });
     return product;
   }
-  async findById(productId) {
-    const product = await Product.findOne({ _id: productId });
+  async findById(id) {
+    const product = await Product.findOne({ id });
     return product;
   }
 
   async create(productInfo) {
-    const createdNewProduct = await Product.create(productInfo);
+    const time = timeZone();
+    const timeInfo = {'createdTime':time,'updatedTime':time};
+    const info = {...productInfo , ...timeInfo};
+    const createdNewProduct = await Product.create(info);
     return createdNewProduct;
   }
   async findAll() {
-    const products = await Product.find({}).populate("categoryId");
+    const products = await Product.find().populate("categoryId");
     return products;
   }
 
@@ -26,8 +29,9 @@ export class ProductModel {
   async update({ productId, update }) {
     const filter = { _id: productId };
     const option = { returnOriginal: false };
-
-    const updatedProduct = await Product.findOneAndUpdate(filter, update, option);
+    const time = timeZone();
+    const updateInfo = {...update, updatedTime:time}
+    const updatedProduct = await Product.findOneAndUpdate(filter, updateInfo, option);
     console.log(updatedProduct);
     return updatedProduct;
   }

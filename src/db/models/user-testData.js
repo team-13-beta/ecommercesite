@@ -1,11 +1,11 @@
 import {userModel} from './user-model.js';
 import bcypt from 'bcrypt';
-import {getLocalTime} from '../../services/timeZone.js';
+import {timeZone} from '../../services/timeZone.js';
 async function userModelTest(){
 
 const pw = await bcypt.hash('1111',10);
 
-const time = getLocalTime();
+const time = timeZone();
 if(!await userModel.findByEmail("admin@example.com"))
     await userModel.create({
         email:"admin@example.com",
