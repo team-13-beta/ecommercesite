@@ -83,7 +83,8 @@ userRouter.use(
       secure: false, // https 에서만 가져오도록 할 것인가?
       maxAge:1800000 // cookie expired : 30minute 
     },
-    store: MongoStore.create({mongoUrl: process.env.MONGO_SESSION_URL}),
+    store: MongoStore.create({mongoUrl: process.env.MONGO_SESSION_URL}), 
+    //store: MongoStore.create({mongoUrl: process.env.MONGO_SESSION_URL}), 
   })
 );
 

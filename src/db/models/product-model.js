@@ -8,8 +8,8 @@ export class ProductModel {
     const product = await Product.findOne({ name });
     return product;
   }
-  async findById(productId) {
-    const product = await Product.findOne({ _id: productId });
+  async findById(id) {
+    const product = await Product.findOne({ id });
     return product;
   }
 
@@ -21,7 +21,7 @@ export class ProductModel {
     return createdNewProduct;
   }
   async findAll() {
-    const products = await Product.find({}).populate("categoryId");
+    const products = await Product.find().populate("categoryId");
     return products;
   }
 
@@ -31,7 +31,7 @@ export class ProductModel {
     const option = { returnOriginal: false };
     const time = timeZone();
     const updateInfo = {...update, updatedTime:time}
-    const updatedProduct = await Product.findOneAndUpdate(filter, update, option);
+    const updatedProduct = await Product.findOneAndUpdate(filter, updateInfo, option);
     console.log(updatedProduct);
     return updatedProduct;
   }

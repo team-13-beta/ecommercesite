@@ -12,6 +12,10 @@ class ProductService {
         return products;
     }
 
+    async getProduct(id){
+        const product = await this.productModel.findById(id);
+        return product;
+    }
     async addProduct(productInfo){
         // 객체 destructuring
         const { name,stock, price, description,company,categoryName } = productInfo;

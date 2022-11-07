@@ -2,8 +2,8 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 
 dotenv.config({ path: "../../.env" });
-const DB_URL = "mongodb+srv://betaUser:lg0n7wsxWi4VU9Dq@cluster0.hl0qqs1.mongodb.net/?retryWrites=true&w=majority"
-//"mongodb://127.0.0.1:27017/product_test";
+//const DB_URL = process.env.MONGO_ATALS_URL;
+const DB_URL = "mongodb://127.0.0.1:27017/product_test";
 // process.env.MONGODB_URL ||
 // "MongoDB 서버 주소가 설정되지 않았습니다.\n./db/index.ts 파일을 확인해 주세요. \n.env 파일도 필요합니다.\n";
 

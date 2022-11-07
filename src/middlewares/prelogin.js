@@ -3,7 +3,8 @@ import { connect } from "mongoose";
 
 function preLogin_Oauth(req,res,next){
     console.log(req.cookies['connect.sid'], 'oauth 미들웨어');
-    if(req.cookies['connect.sid']){
+    console.log(req.cookies['fwfwf']);
+    if(req.cookies['connect.sid'] !== undefined || req.cookies['connect.sid'] == ''){
         throw new Error("이미 로그인 되어있습니다");
         return;        
     }
