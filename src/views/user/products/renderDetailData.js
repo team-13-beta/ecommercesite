@@ -28,7 +28,7 @@ export default function renderDetailData(id, img, name, price, des) {
         <button class="button is-medium column bucket-btn">
           장바구니
         </button>
-        <button class="button is-medium column">
+        <button class="button is-medium column direct-pay">
           바로구매
         </button>
       </div>
