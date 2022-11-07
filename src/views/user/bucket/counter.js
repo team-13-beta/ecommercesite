@@ -6,21 +6,20 @@ const plusBtn = document.querySelectorAll(".plus-btn");
 const totalPriceEl = document.querySelector("#total-price");
 
 // TODO : 체크박스가 해제가 될 때 수량을 변경하면 총 금액이 안나오게 해주세요.
+
 function handleCount(e) {
   // 각 요소 값들
-  const parentEl = e.target.parentElement;
 
-  const quantityEl = parentEl.childNodes[3];
+  const parentEl = e.target.parentElement; // 상품 수량 박스
+  const quantityEl = parentEl.querySelector(".stock-value");
+  let quantityValue = parseInt(quantityEl.textContent); // 현재 수량 값
+  const grandParentEl = parentEl.parentElement; // 상품 박스
+  const itemPrice = grandParentEl.querySelector(".price-value").textContent; // 상품 가격
+  const itemTotalPriceEl = grandParentEl.querySelector(".item-total-price"); // 상품 총 가격
+  const dataIdEl = grandParentEl.id; // 상품의 각 id
+  const checkedEl = grandParentEl.querySelector(".checkbox");
 
-  let quantityValue = parseInt(quantityEl.textContent);
-
-  const grandParentEl = parentEl.parentElement;
-  const itemPrice = grandParentEl.childNodes[9].textContent;
-  console.log(grandParentEl.childNodes);
-  const itemTotalPriceEl = grandParentEl.childNodes[13];
-
-  const dataIdEl = grandParentEl.id;
-  let totalPrice = calcTotalPrice();
+  let totalPrice = calcTotalPrice(); // 장바구니 전체 가격
   // 연산자
   const operator = e.target.textContent;
 
@@ -35,8 +34,10 @@ function handleCount(e) {
     itemTotalPriceEl.innerText = `${changePrice}`;
 
     // 총 금액 계산
-    totalPrice += parseInt(itemPrice);
-    totalPriceEl.innerText = `${totalPrice}`;
+    if (checkedEl.checked) {
+      totalPrice += parseInt(itemPrice);
+      totalPriceEl.innerText = `${totalPrice}`;
+    }
   } else {
     if (quantityValue > 1) {
       quantityValue -= 1;
@@ -45,8 +46,10 @@ function handleCount(e) {
       itemTotalPriceEl.innerText = `${changePrice}`;
 
       // 총 금액 계산
-      totalPrice -= parseInt(itemPrice);
-      totalPriceEl.innerText = `${totalPrice}`;
+      if (checkedEl.checked) {
+        totalPrice -= parseInt(itemPrice);
+        totalPriceEl.innerText = `${totalPrice}`;
+      }
     }
   }
 
