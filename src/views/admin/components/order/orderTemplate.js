@@ -45,13 +45,13 @@ export function orderDetailTemplate(data) {
             <label>배송 상태</label>
             <div class="select">
               <select>
-              ${deliveryState
-                .map((state) => {
-                  if (state === data.status) {
-                    return `<option selected>${state}</option>`;
-                  } else return `<option >${state}</option>`;
-                })
-                .join("")}
+              ${deliveryState.reduce(
+                (acc, cur) =>
+                  (acc += `<option 
+                  ${cur === data.status ? "selected" : ""}
+                  }>${cur}</option>`),
+                "",
+              )}
                 </select>
               </div>
             </div>

@@ -79,11 +79,12 @@ export default function ProductDetail({
   };
 
   this.render = () => {
+    if (!this.state || JSON.stringify(this.state) === "{}") return;
     this.$element.innerHTML = productDetailTemplate(
       this.state ?? null,
       this.$categories,
     );
-
+    console.log(this.$element.innerHTML);
     subScribeEventListener();
   };
 

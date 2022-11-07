@@ -28,15 +28,13 @@ export function productDetailTemplate(data, categories = []) {
           <div class="control">
             <div class="select full-select">
               <select data-type="category">
-                ${categories
-                  .map(({ id, categoryName }) => {
-                    if (data.category === categoryName) {
-                      return `<option value="${id}" selected>${categoryName}</option>`;
-                    } else {
-                      return `<option value="${id}">${categoryName}</option>`;
-                    }
-                  })
-                  .join("")}
+                ${categories.reduce(
+                  (acc, { id, categoryName }) =>
+                    (acc += `<option value="${id}" 
+                    ${data.categoryId === id ? "selected" : ""}
+                    >${categoryName}</option>`),
+                  "",
+                )}
               </select>
             </div>
           </div>

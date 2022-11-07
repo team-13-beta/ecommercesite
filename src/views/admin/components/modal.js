@@ -61,12 +61,11 @@ export function productModal(categories = []) {
             <div class="control">
               <div class="select full-select">
                 <select id="categoryId" >
-                  ${categories
-                    .map(
-                      ({ id, categoryName }) =>
-                        `<option value=${id}>${categoryName}</option>`,
-                    )
-                    .join("")}
+                  ${categories.reduce(
+                    (acc, { id, categoryName }) =>
+                      (acc += `<option value=${id}>${categoryName}</option>`),
+                    "",
+                  )}
                 </select>
               </div>
             </div>
