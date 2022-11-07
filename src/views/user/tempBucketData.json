@@ -1,0 +1,23 @@
+[
+  {
+    "product_id": 1,
+    "imgTitle": "https://file.rankingdak.com/image/RANK/PRODUCT/PRD001/20220325/27911dead8ad9647baf7c7ceee46e362_100_100.jpg",
+    "name": "닭1",
+    "stock": 3,
+    "price": 1000
+  },
+  {
+    "product_id": 2,
+    "imgTitle": "https://file.rankingdak.com/image/RANK/PRODUCT/PRD001/20220325/27911dead8ad9647baf7c7ceee46e362_100_100.jpg",
+    "name": "닭2",
+    "stock": 5,
+    "price": 2000
+  },
+  {
+    "product_id": 3,
+    "imgTitle": "https://file.rankingdak.com/image/RANK/PRODUCT/PRD001/20220325/27911dead8ad9647baf7c7ceee46e362_100_100.jpg",
+    "name": "닭3",
+    "stock": 1,
+    "price": 3000
+  }
+]

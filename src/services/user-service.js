@@ -1,4 +1,4 @@
-import { userModel } from '../db';
+import { userModel } from '../db/index.js';
 
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
@@ -12,8 +12,7 @@ class UserService {
   // 회원가입
   async addUser(userInfo) {
     // 객체 destructuring
-    const { email, fullName, password } = userInfo;
-
+    const { email, fullName:name, password, phoneNumber, address } = userInfo;
     // 이메일 중복 확인
     const user = await this.userModel.findByEmail(email);
     if (user) {
@@ -27,7 +26,7 @@ class UserService {
     // 우선 비밀번호 해쉬화(암호화)
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const newUserInfo = { fullName, email, password: hashedPassword };
+    const newUserInfo = { name, email, password: hashedPassword , phoneNumber, address };
 
     // db에 저장
     const createdNewUser = await this.userModel.create(newUserInfo);
@@ -74,14 +73,16 @@ class UserService {
     return { token };
   }
 
-  // 사용자 목록을 받음.
-  async getUsers() {
-    const users = await this.userModel.findAll();
+  // 사용자 목록을 받음. admin이면 다 받을 수 있고 user면 사용자 자신의 정보만 조회가능
+  async getUsers(option) {
+    const users = (option !== '')? await this.userModel.findById(option): await this.userModel.findAll();
+
+    
     return users;
   }
 
   // 유저정보 수정, 현재 비밀번호가 있어야 수정 가능함.
-  async setUser(userInfoRequired, toUpdate) {
+  async updateUser(userInfoRequired, toUpdate) {
     // 객체 destructuring
     const { userId, currentPassword } = userInfoRequired;
 
@@ -125,6 +126,15 @@ class UserService {
     });
 
     return user;
+  }
+
+
+  async deleteUser(userId){
+    const state = await this.userModel.deleteById(userId);
+    if(state.acknowledged != true || state.deletedcount == 0)
+    return false;
+    else
+    return true;
   }
 }
 
