@@ -14,7 +14,7 @@ export function tableTemplate(columns, datas = [], categories = []) {
 
   for (const data of datas) {
     const $tr = createElement("tr");
-    for (const [key, _] of columns) {
+    for (const [key] of columns) {
       const $td = createElement("td");
 
       if (key === "detailButton") {
