@@ -28,4 +28,9 @@ window.onload = function () {
   paymentBtnEl.addEventListener("click", openModal);
   modalCloseBtnEl.addEventListener("click", closeModal);
   backEl.addEventListener("click", closeModal);
+
+  const searchAddressEl = document.createElement("script");
+  searchAddressEl.setAttribute("src", "searchAddress.js");
+  searchAddressEl.setAttribute("type", "module");
+  document.querySelector("body").appendChild(searchAddressEl);
 };
