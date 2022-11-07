@@ -174,3 +174,9 @@ section#photo {
 .bottom-container {
   border: solid 1px black;
 }
+.bottom-header {
+  width: 100%;
+  font-size: 30px;
+  padding-bottom: 30px;
+  text-align: center;
+}
