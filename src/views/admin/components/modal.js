@@ -148,7 +148,6 @@ export function productModal(categories = []) {
 }
 
 export function closeModal() {
-  document
-    .querySelector("body")
-    .removeChild(document.querySelector("body").firstChild);
+  const $modal = document.querySelector(".modal");
+  document.querySelector("body").removeChild($modal);
 }

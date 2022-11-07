@@ -68,7 +68,7 @@ export default function Categories({
       (category) => category.id === detailId,
     );
     if (!targetCategory) {
-      alert("존저해지 않는 id입니다");
+      alert("존저해지 않는 카테고리입니다");
       return;
     }
     const $modalLayout = createElement("div");
