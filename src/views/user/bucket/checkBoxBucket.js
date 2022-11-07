@@ -13,16 +13,17 @@ function handleSelectItem() {
     '.item-box > input[type="checkbox"]:checked',
   );
 
-  if (checkBoxEl.length === checkedEl.length) checkBoxAllEl.checked = true;
-  else checkBoxAllEl.checked = false;
+  // if (checkBoxEl.length === checkedEl.length) checkBoxAllEl.checked = true;
+  // else checkBoxAllEl.checked = false;
+  checkBoxAllEl.checked = checkBoxEl.length === checkedEl.length;
 }
 
 // 전체 선택, 전체 해제
 function handleSelectAll() {
   const checkItems = document.querySelectorAll('input[type="checkbox"]');
 
-  checkItems.forEach((checkBox) => {
-    checkBox.checked = this.checked;
+  checkItems.forEach((checkItem) => {
+    checkItem.checked = this.checked;
   });
 }
 

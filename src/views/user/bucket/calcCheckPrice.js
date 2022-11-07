@@ -7,7 +7,9 @@ const totalPricelEl = document.querySelector("#total-price");
 
 function handleCheckPrice(e) {
   const nowTotalPrice = parseInt(totalPricelEl.textContent);
-  const itemPrice = parseInt(e.target.parentElement.childNodes[13].textContent);
+  const itemPrice = parseInt(
+    e.target.parentElement.querySelector(".item-total-price").textContent,
+  );
   // 부분 선택 가격 계산
   if (e.target.checked) {
     totalPricelEl.innerText = `${nowTotalPrice + itemPrice}`;
@@ -18,6 +20,7 @@ function handleCheckPrice(e) {
 
 function handleCheckAllPrice() {
   // 전체 해제 0원
+
   if ([...checkItems].every((item) => !item.checked)) {
     totalPricelEl.innerText = "0";
   }
