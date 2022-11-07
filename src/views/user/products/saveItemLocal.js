@@ -1,5 +1,5 @@
 const bucketBtnEl = document.querySelector(".bucket-btn");
-const itemNameEl = document.querySelector(".item-title");
+const itemNameEl = document.querySelector(".item-name");
 const itemPriceEl = document.querySelector(".item-price");
 const itemImgEl = document.querySelector("#item-img");
 const itemIdEl = document.querySelector("#item-id");

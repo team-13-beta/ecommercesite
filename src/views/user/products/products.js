@@ -6,22 +6,22 @@ let detailEl = document.getElementById("detail-data");
 // TODO : 상품 아이디 받아오기
 function handleData() {
   // TODO : 상품 아이디 가져와서 서버에 get 요청
+  console.log();
+  const url = window.location.pathname;
+  const product_id = url.split("/")[3];
 
-  // const data = axios.get('http://localhost/')
-
-  fetch("/user/tempData.json")
+  fetch(`/products/${product_id}`)
     .then((res) => res.json())
     .then((data) => {
-      const temp = data[0];
-      console.log(temp);
-      const [id, img, name, price, [des, des_img1, des_img2, des_img3]] = [
-        temp.product_id,
-        temp.imgTitle,
-        temp.name,
-        temp.price,
-        temp.description,
+      console.log(data);
+      const [id, name, price, [title_img, des_img1, des_img2, des_img3]] = [
+        product_id,
+        data.name,
+        data.price,
+        data.description.imageUrl,
       ];
-      const htmlEl = renderDetailData(id, img, name, price, des);
+
+      const htmlEl = renderDetailData(id, title_img, name, price);
       contentEl.innerHTML = htmlEl;
 
       const html2El = productDesData(des_img1, des_img2, des_img3);

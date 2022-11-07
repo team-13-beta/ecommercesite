@@ -1,13 +1,12 @@
-export default function renderDetailData(id, img, name, price, des) {
+export default function renderDetailData(id, titleImg, name, price) {
   return `
     <div class="image column img-title">
-        <img src=${img} alt="대표 이미지" id="item-img"/>
+        <img src=${titleImg} alt="대표 이미지" id="item-img"/>
     </div>
     <div class="column card">
       <div style="display:none;" id="item-id">${id}</div>
-      <div class="card-title item-title">${name}</div>
-      <div class="card-content item-des">${des}</div>
-      <div class="card-content item-price">${price}</div>
+      <div class="card-content item-name">${name}</div>
+      <div class="card-content item-price">${price}원</div>
       <div class="card-content columns">
         <div class="column is-one-third">제품 옵션</div>
         <div class="column">
