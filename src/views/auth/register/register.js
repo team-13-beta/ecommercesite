@@ -1,21 +1,11 @@
-import * as Api from "../../api.js";
-import {
-  validateEmail,
-  checkPhoneNumberValid,
-} from "../../useful-functions.js";
+import * as Api from "/api.js";
+import { validateEmail } from "/useful-functions.js";
 
 // 요소(element), input 혹은 상수
 const fullNameInput = document.querySelector("#fullNameInput");
 const emailInput = document.querySelector("#emailInput");
 const passwordInput = document.querySelector("#passwordInput");
 const passwordConfirmInput = document.querySelector("#passwordConfirmInput");
-const postalCodeInput = document.querySelector("#postalCode");
-const address1Input = document.querySelector("#address1");
-const address2Input = document.querySelector("#address2");
-const phoneNumberInput = document.querySelector("#phoneNumberInput");
-
-//버튼들
-const searchAddressButton = document.querySelector("#searchAddressButton");
 const submitButton = document.querySelector("#submitButton");
 addAllElements();
 addAllEvents();
@@ -25,10 +15,8 @@ async function addAllElements() {}
 
 // 여러 개의 addEventListener들을 묶어주어서 코드를 깔끔하게 하는 역할임.
 function addAllEvents() {
-  searchAddressButton.addEventListener("click", searchAddress);
   submitButton.addEventListener("click", handleSubmit);
 }
-
 // daum post api 불러오기.
 
 function searchAddress(e) {
@@ -38,11 +26,7 @@ function searchAddress(e) {
       let addr = "";
       let extraAddr = "";
 
-      if (data.userSelectedType === "R") {
-        addr = data.roadAddress;
-      } else {
-        addr = data.jibunAddress;
-      }
+// TODO : 주소찾기 버튼을 누르면 회원가입 입력값들이 초기화가 되면서 에러 발생합니다.
 
       if (data.userSelectedType === "R") {
         if (data.bname !== "" && /[동|로|가]$/g.test(data.bname)) {
@@ -64,7 +48,6 @@ function searchAddress(e) {
     },
   }).open();
 }
-
 // 회원가입 진행
 async function handleSubmit(e) {
   e.preventDefault();
@@ -73,20 +56,12 @@ async function handleSubmit(e) {
   const email = emailInput.value;
   const password = passwordInput.value;
   const passwordConfirm = passwordConfirmInput.value;
-  const postalCode = postalCodeInput.value;
-  const address1 = address1Input.value;
-  const address2 = address2Input.value;
-  const phoneNumber = phoneNumberInput.value;
-
-  //객체 형태로 주소 데이터 보내기.
-  const address = { postalCode, address1, address2 };
 
   // 잘 입력했는지 확인
   const isFullNameValid = fullName.length >= 2;
   const isEmailValid = validateEmail(email);
   const isPasswordValid = password.length >= 4;
   const isPasswordSame = password === passwordConfirm;
-  const isPhoneNumberValid = checkPhoneNumberValid(phoneNumber);
 
   if (!isFullNameValid || !isPasswordValid) {
     return alert("이름은 2글자 이상, 비밀번호는 4글자 이상이어야 합니다.");
@@ -100,19 +75,20 @@ async function handleSubmit(e) {
     return alert("비밀번호가 일치하지 않습니다.");
   }
 
-  if (!isPhoneNumberValid) {
-    return alert(
-      "잘못된 양식의 휴대폰 번호입니다. 010-****-**** 양식으로 입력해주세요.",
-    );
-  }
-
   // 회원가입 api 요청
   try {
-    const data = { fullName, email, password, address, phoneNumber };
+    const exAddress = {
+      postalCode: "2435",
+      address1: "geg",
+      address2: "example sangwoo",
+    };
+    const exPhoneNumber = "02-000-0000";
+
+    const data = { fullName, email, password, exAddress, exPhoneNumber };
 
     await Api.post("/api/register", data);
 
-    alert(`정상적으로 회원가입되었습니다.`);
+    alert('정상적으로 회원가입되었습니다.');
 
     // 로그인 페이지 이동
     window.location.href = "/login";

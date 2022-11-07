@@ -7,6 +7,12 @@ class OrderService {
     }
     
     // 전체 상품 데이터를 조회하는 함수
+    async getAllOrders() {
+        const orders = await this.orderModel.findAll();
+        return orders;
+    }
+
+
     async getOrders(consumer_id) {
         const user = await userModel.findById(consumer_id);
 

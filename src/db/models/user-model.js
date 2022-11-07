@@ -1,5 +1,6 @@
 import { model } from "mongoose";
 import { UserSchema } from "../schemas/user-schema.js";
+import { timeZone } from "../../services/timeZone.js";
 
 const User = model("users", UserSchema);
 
@@ -17,7 +18,10 @@ export class UserModel { // 이메일 중복 검사
  
 
   async create(userInfo) { 
-    const createdNewUser = await User.create(userInfo);
+    const time = timeZone();
+    const timeInfo = {createdTime:time,updatedTime:time};
+    const Info = {...userInfo , ...timeInfo };
+    const createdNewUser = await User.create(Info);
     return createdNewUser;
   }
 
@@ -29,7 +33,10 @@ export class UserModel { // 이메일 중복 검사
   async update({ userId, update }) {
     const filter = { _id: userId };
     const option = { returnOriginal: false };
-    const updatedUser = await User.findOneAndUpdate(filter, update, option);
+    const time = timeZone();
+    const timeInfo = {createdTime:time,updatedTime:time};
+    const updateInfo = {...userInfo , ...timeInfo };
+    const updatedUser = await User.findOneAndUpdate(filter, updateInfo, option);
     return updatedUser;
   }
 
