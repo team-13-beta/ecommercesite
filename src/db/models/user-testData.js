@@ -1,11 +1,13 @@
 import {userModel} from './user-model.js';
 import bcypt from 'bcrypt';
-
+import {getLocalTime} from '../../services/timeZone.js';
 async function userModelTest(){
 
 const pw = await bcypt.hash('1111',10);
-     if(!await userModel.findByEmail("admin@example.com"))
-    userModel.create({
+
+const time = getLocalTime();
+if(!await userModel.findByEmail("admin@example.com"))
+    await userModel.create({
         email:"admin@example.com",
         name:"admin",
         password:pw,
@@ -15,11 +17,14 @@ const pw = await bcypt.hash('1111',10);
             address1: "ex_City",
             address2: "ex_apartMent"
         },
-        role:'admin'
+        role:'admin',
+        createdTime:time,
+        updatedTime:time
     });
-
-    if(!await userModel.findByEmail("abc@example.com"))
-    userModel.create({
+   
+    
+if(!await userModel.findByEmail("abc@example.com"))
+    await userModel.create({
         email:"abc@example.com",
         name:"가가",
         password:pw,
@@ -29,9 +34,12 @@ const pw = await bcypt.hash('1111',10);
             address1: "ex_City",
             address2: "ex_apartMent"
         },
-    });
-    if(!await userModel.findByEmail("aaa@example.com"))
-    userModel.create({
+        createdTime:time,
+        updatedTime:time
+    });    
+
+if(!await userModel.findByEmail("aaa@example.com"))
+    await userModel.create({
         email:"aaa@example.com",
         name:"나나",
         password:pw,
@@ -41,9 +49,13 @@ const pw = await bcypt.hash('1111',10);
             address1: "ex_City",
             address2: "ex_apartMent"
         },
-    });
-    if(!await userModel.findByEmail("bbb@example.com"))
-    userModel.create({
+        createdTime:time,
+        updatedTime:time
+    })
+
+if(!await userModel.findByEmail("bbb@example.com")){
+    
+    await userModel.create({
         email:"bbb@example.com",
         name:"다다",
         password:pw,
@@ -53,9 +65,12 @@ const pw = await bcypt.hash('1111',10);
             address1: "ex_City",
             address2: "ex_apartMent"
         },
+        createdTime:time,
+        updatedTime:time
     });
-    if(!await userModel.findByEmail("ccc@example.com"))
-    userModel.create({
+}
+if(!await userModel.findByEmail("ccc@example.com"))
+    await userModel.create({
         email:"ccc@example.com",
         name:"라라",
         password:pw,
@@ -65,7 +80,9 @@ const pw = await bcypt.hash('1111',10);
             address1: "ex_City",
             address2: "ex_apartMent"
         },
+        createdTime:time,
+        updatedTime:time
     });
+    
 }
-
-export {userModelTest}
+export {userModelTest};
