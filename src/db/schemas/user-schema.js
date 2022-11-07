@@ -6,7 +6,7 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
-    fullName: {
+    name: {
       type: String,
       required: true,
     },
@@ -31,15 +31,24 @@ const UserSchema = new Schema(
       ),
       required: false,
     },
-    role: {
+    role: { // authority : user || admin
       type: String,
-      required: false,
-      default: "basic-user",
+      default: "user",
     },
+    access:{
+      type:String,
+      default:"general" 
+    },
+    createdTime : { 
+      type: String
+    },
+    updatedTime : { 
+      type: String
+    }
   },
   {
     collection: "users",
-    timestamps: true,
+    timestamps: false,
   }
 );
 

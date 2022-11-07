@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>쇼핑-n팀</title>
+    <!-- 커스텀 css, js -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+
+    <script type="module" src="user/header-footer/inputHeader.js"></script>
+    <script type="module" src="user/header-footer/inputFooter.js"></script>
+    <link rel="stylesheet" href="order.css" />
+  </head>
+  <body>
+    <section id="contents" class="box">
+      <div class="columns">
+        <div class="column is-three-fifths">
+          <div class="card block">
+            <div class="card-header-title">주문정보</div>
+            <div class="card-content">주문 번호</div>
+            <div class="card-content">주문자 정보</div>
+            <div class="card-content">주문자 주소지</div>
+          </div>
+
+          <div class="card block">
+            <div class="card-header-title">제품 목록</div>
+            <div class="product-box"></div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="card">
+            <div class="card-header-title">주문 결제 금액</div>
+            <div class="card-content">결제 금액</div>
+            <div class="card-content title total-price">0000</div>
+            <button class="card-content button" id="paymentBtn">
+              결제 하기
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div id="modal-payment" class="modal-container is-close">
+      <div class="modal-bg"></div>
+      <div class="modal-box">
+        <div class="card">
+          <div class="card-header-title">결제 목록</div>
+          <div class="card-content">
+            <div class="content">결제 금액</div>
+            <div class="total-price title"></div>
+          </div>
+        </div>
+
+        <button id="modal-close" class="button close-btn">닫기</button>
+        <button class="button">결제 하기</button>
+      </div>
+    </div>
+
+    <script type="module" src="order.js"></script>
+    <script type="module" src="bucketInputHtml.js"></script>
+  </body>
+</html>
