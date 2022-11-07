@@ -2,6 +2,9 @@ import { Schema } from "mongoose";
 
 const OrderSchema = new Schema(
   {
+    orderId:{
+      type:String,
+    },
     userId:{
         type : Schema.Types.ObjectId,
         ref : "users"
@@ -10,9 +13,18 @@ const OrderSchema = new Schema(
         type : [Schema.Types.Mixed],
         required:true,
     },
-    address:{
-        type:String,
-        required:true
+    address: {
+      type: new Schema(
+        {
+          postalCode: String,
+          address1: String,
+          address2: String,
+        },
+        {
+          _id: false,
+        }
+      ),
+      required: false,
     },
     status:{
         type:String, 

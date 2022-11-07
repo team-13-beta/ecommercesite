@@ -45,7 +45,7 @@ class OrderService {
         const createdNewOrder = await this.orderModel.create({
             userId:user._id,
             buying_product:basket,
-            address,
+            // address,
             status,
             totalPrice,
         });
