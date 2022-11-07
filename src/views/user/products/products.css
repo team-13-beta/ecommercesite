@@ -1,0 +1,11 @@
+#contents {
+  width: 1024px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+}
+
+/* 제품 상단 컴포넌트 */
+.content_container {
+  margin-bottom: 20px;
+}

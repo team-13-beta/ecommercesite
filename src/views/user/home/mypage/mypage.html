@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>쇼핑-n팀</title>
+    <!-- 아이콘 -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/elice-rabbit-favicon.png"
+    />
+    <!-- bulma css -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+    <!-- 폰트 어썸: 아이콘 -->
+    <script
+      defer
+      src="https://kit.fontawesome.com/9daa42bcef.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- 커스텀 css, js -->
+    <link rel="stylesheet" href="mypage.css" />
+    <script src="mypage.js" type="module" defer></script>
+  </head>
+  <body>
+    <header class="box">
+      <div class="header-container">
+        <nav class="level">
+          <div class="level-left">
+            <div
+              class="logo level-item"
+              style="
+                background-color: #ff922b;
+                width: 80px;
+                font-size: 20px;
+                text-align: center;
+                border-radius: 10px;
+              "
+            >
+            <a href="/">β</a>
+            </div>
+          </div>
+          <div class="level-right">
+            <div class="level-item"><a href="/mypage">계정관리</a></div>
+            <div class="level-item"><a href="/logout">로그아웃</a></div>
+            <div class="level-item">
+              <a href="/cart" aria-current="page">장바구니</a>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <div class="manageContainer">
+      <div class="block account-header">
+        <h1 class="title">계정관리</h1>
+      </div>
+
+      <div class="menuContainer">
+        <!-- 주문 조회 -->
+        <a class="menuCard" href="/orderlist" id="orderlist">
+          <div class="menuBody">
+            <p class="title is-3">주문 조회</p>
+            <p class="subtitle is-5">
+              주문 내역을 조회하고, 취소할 수 있습니다.
+            </p>
+          </div>
+        </a>
+
+        <!-- 내 정보 관리 -->
+        <a class="menuCard" href="/accountUpdate" id="accountupdate">
+          <div class="menuBody">
+            <p class="title is-3">내 정보 관리</p>
+            <p class="subtitle is-5">
+              나의 회원정보를 수정하고 탈퇴할 수 있습니다.
+            </p>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <footer class="has-text-centered" style="background-color: #ff922b; color: #ffe8cc;">
+      <div class="" style="font-size: 50px; ">β</div>
+        <span class="">호진</span>
+        <span class="">상우</span>
+        <span class="">세현</span>
+        <span class="">화낙</span>
+        <span class="">세은</span>
+      </div>
+      <div class="" style="font-weight: bold;">β Team All rights reserved</div>
+    </footer>
+  </body>
+</html>
