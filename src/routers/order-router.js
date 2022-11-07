@@ -9,6 +9,16 @@ import { orderService } from "../services/index.js";
 const orderRouter = Router();
 
 
+orderRouter.get("/",async (req,res,next)=>{
+  try{
+    const orders=await orderService.getAllOrders();
+
+    res.status(200).json(orders)
+  }catch(err){
+    next(err);
+  }
+})
+
 orderRouter.get("/:consumer_id", async (req,res,next)=>{
     try{
         const consumer_id=req.params.consumer_id;

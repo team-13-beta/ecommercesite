@@ -2,6 +2,9 @@ import { Schema } from "mongoose";
 
 const ProductSchema = new Schema(
   {
+    productId:{
+      type:String,
+    },
     name:{
         type:String,
         required:true,
