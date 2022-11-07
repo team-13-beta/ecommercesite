@@ -7,8 +7,9 @@ import { checkStringEmpty, pathToRegex } from "../useful-functions.js";
 import ProductDetail from "./products/productDetail.js";
 import OrderDetail from "./orders/orderDetail.js";
 import { closeModal } from "./components/modal.js";
+import { get } from "../api.js";
 
-const BASE_URL = `http://localhost:5000/admin`;
+const BASE_URL = `http://localhost:5000`;
 
 export default function App({ $app }) {
   this.state = {
@@ -176,7 +177,7 @@ export default function App({ $app }) {
         e.preventDefault();
         const { target } = e;
         if (target.matches("[data-link]")) {
-          const targetURL = target.href.replace(BASE_URL, "");
+          const targetURL = target.href.replace(`${BASE_URL}/admin`, "");
 
           const $ul = e.target.closest("ul");
           const $li = e.target.closest("li");
@@ -207,19 +208,19 @@ export default function App({ $app }) {
       this.render();
     });
 
-    const [orderData, productData, categoryData] = await Promise.all([
-      fetch("./mockData/orderData.json").then((res) => res.json()),
-      fetch("./mockData/productData.json").then((res) => res.json()),
-      fetch("./mockData/categoryData.json").then((res) => res.json()),
+    const [productLists, categoryLists, orderLists] = await Promise.all([
+      get(`${BASE_URL}/products`),
+      get(`${BASE_URL}/category`),
+      // get(`${BASE_URL}/`).then((res) => res.json()),
     ]);
-
+    // console.log(orderLists, productLists);
     this.setState({
-      orderLists: orderData.data,
-      productLists: productData.data,
-      categoryLists: categoryData.data,
+      productLists,
+      categoryLists,
+      // categoryLists: categoryData.data,
     });
 
-    navigate(`${BASE_URL}/orders`, {
+    navigate(`${BASE_URL}/admin/orders`, {
       title: "Orders",
       state: "initial",
     });

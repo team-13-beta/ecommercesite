@@ -12,7 +12,7 @@ import { checkStringEmpty } from "../../useful-functions.js";
 
 const PRODUCT_COLUMNS = [
   ["id", "상품 아이디"],
-  ["productName", "상품명"],
+  ["name", "상품명"],
   ["categoryId", "카테고리"],
   ["price", "가격"],
   ["stock", "남은 개수"],
@@ -141,6 +141,7 @@ export default function Products({
 
   this.render = () => {
     const $table = this.$element.querySelector("table");
+    console.log($table, this.state.productLists, this.state.categoryLists);
     if ($table) {
       $table.innerHTML = tableTemplate(
         PRODUCT_COLUMNS,
