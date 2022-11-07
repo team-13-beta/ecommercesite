@@ -27,28 +27,31 @@ export default function ProductDetail({
     $modifyContainer.addEventListener("click", (e) => {
       e.preventDefault();
       const { type } = e.target.dataset;
-
-      if (type === "update") {
-        updateHandler({ ...this.state });
-      } else if (type === "delete") {
-        if (confirm("정말 삭제하시겠습니까?")) deleteHandler(this.state.id);
+      switch (type) {
+        case "update":
+          updateHandler({ ...this.state });
+          break;
+        case "delete":
+          if (confirm("정말 삭제하시겠습니까?")) deleteHandler(this.state.id);
+          break;
+        default:
+          return;
       }
     });
 
     $file.addEventListener("input", (e) => {
       let reader = new FileReader();
-
-      reader.readAsDataURL($file.files[0]);
+      const selectedFile = $file.files[0];
+      reader.readAsDataURL(selectedFile);
 
       reader.onload = () => {
         const imageBase64 = reader.result;
-        console.log(imageBase64, "@@");
         this.setState({ ...this.state, imageSrc: imageBase64 });
       };
 
       reader.onerror = function (error) {
-        alert("Error: ", error);
-        document.querySelector("body").removeChild(modalEl);
+        alert("Error occurred reading file: ", selectedFile.name);
+        closeModal();
       };
     });
   };
@@ -79,11 +82,12 @@ export default function ProductDetail({
   };
 
   this.render = () => {
+    if (!this.state || JSON.stringify(this.state) === "{}") return;
     this.$element.innerHTML = productDetailTemplate(
       this.state ?? null,
       this.$categories,
     );
-
+    console.log(this.$element.innerHTML);
     subScribeEventListener();
   };
 

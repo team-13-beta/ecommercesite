@@ -14,11 +14,12 @@ viewsRouter.use("/register", serveStatic("auth/register/register"));
 viewsRouter.use("/login", serveStatic("auth/login/login"));
 viewsRouter.use("/admin", serveStatic("admin/admin"), adminRouter); // 아래 split 연산때문에 admin/admin으로 인자 pass
 viewsRouter.use(
-  "/user/accoutUpdate",
+  "/user/accountUpdate",
   serveStatic("user/accountUpdate/accountUpdate"),
 );
 viewsRouter.use("/user/bucket", serveStatic("user/bucket/bucket"));
 viewsRouter.use("/user/order", serveStatic("user/order/order"));
+viewsRouter.use("/user/order/success", serveStatic("/user/order/orderSuccess"));
 viewsRouter.use("/user/products/:id", serveStatic("user/products/products"));
 viewsRouter.use("/user/userorder", serveStatic("user/userorder/userorder"));
 

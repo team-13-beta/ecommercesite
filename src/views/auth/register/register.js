@@ -14,10 +14,10 @@ const address1Input = document.querySelector("#address1");
 const address2Input = document.querySelector("#address2");
 const phoneNumberInput = document.querySelector("#phoneNumberInput");
 
+
 //버튼들
 const searchAddressButton = document.querySelector("#searchAddressButton");
 const submitButton = document.querySelector("#submitButton");
-
 addAllElements();
 addAllEvents();
 
@@ -30,6 +30,7 @@ function addAllEvents() {
   submitButton.addEventListener("click", handleSubmit);
 }
 // daum post api 불러오기.
+
 
 function searchAddress(e) {
   e.preventDefault();
@@ -64,6 +65,7 @@ function searchAddress(e) {
     },
   }).open();
 }
+
 // 회원가입 진행
 async function handleSubmit(e) {
   e.preventDefault();
@@ -101,7 +103,7 @@ async function handleSubmit(e) {
 
   if (!isPhoneNumberValid) {
     return alert(
-      "잘못된 양식의 휴대폰 번호입니다. 010-- 양식으로 입력해주세요.",
+      "잘못된 양식의 휴대폰 번호입니다. 010-****-**** 양식으로 입력해주세요.",
     );
   }
 

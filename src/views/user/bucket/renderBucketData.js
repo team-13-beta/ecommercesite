@@ -1,6 +1,6 @@
 export default function renderBucketData(id, img, name, price, stock) {
   return `
-          <input type="checkbox" checked=true>
+          <input type="checkbox" class="checkbox" checked=true>
           <div class="column is-one-fifth">
             <img src=${img}/>
           </div>

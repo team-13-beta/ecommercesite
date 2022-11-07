@@ -22,8 +22,7 @@ function handleData() {
     // 페이지에 뿌려준다.
     const htmlStr = renderBucketData(id, img, name, price, stock);
     let el = document.createElement("div");
-    el.classList.add("columns");
-    el.classList.add("item-box");
+    el.classList.add("columns", "item-box");
     el.id = `${id}`;
     el.innerHTML = htmlStr;
     bucketDataEl.append(el);

@@ -2,8 +2,7 @@ const payBtn = document.querySelector(".pay-btn");
 
 function handleMove() {
   console.log("click pay");
-  window.location.href =
-    "http://127.0.0.1:5501/src/views/user/order/order.html";
+  window.location.href = "/user/order";
 }
 
 payBtn.addEventListener("click", handleMove);

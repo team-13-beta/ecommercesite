@@ -32,17 +32,23 @@ export default function Products({
   this.$element.addEventListener("click", (e) => {
     e.preventDefault();
     const { type, detailId } = e.target.dataset;
-    if (type === "search") {
-      const $inputVal = this.$element.querySelector(".search-input");
-      searchHandler($inputVal.value);
-    } else if (type === "append") {
-      modalHandler(this.state.categoryLists);
-    } else if (type === "detail") {
-      appendDetailMoveHandler(
-        detailId,
-        this.state.productLists,
-        "ProductDetails",
-      );
+    switch (type) {
+      case "search":
+        const $inputVal = this.$element.querySelector(".search-input");
+        searchHandler($inputVal.value);
+        break;
+      case "append":
+        modalHandler(this.state.categoryLists);
+        break;
+      case "detail":
+        appendDetailMoveHandler(
+          detailId,
+          this.state.productLists,
+          "ProductDetails",
+        );
+        break;
+      default:
+        return;
     }
   });
 
@@ -73,7 +79,7 @@ export default function Products({
 
       reader.onerror = function (error) {
         alert("Error: ", error);
-        document.querySelector("body").removeChild(modalEl);
+        closeModal();
       };
     });
 

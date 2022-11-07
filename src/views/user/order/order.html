@@ -10,7 +10,8 @@
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
     />
 
-    <script type="module" src="../header-footer/inputComponent.js"></script>
+    <script type="module" src="/user/header-footer/inputHeader.js"></script>
+    <script type="module" src="/user/header-footer/inputFooter.js"></script>
     <link rel="stylesheet" href="order.css" />
   </head>
   <body>
@@ -18,10 +19,7 @@
       <div class="columns">
         <div class="column is-three-fifths">
           <div class="card block">
-            <div class="card-header-title">주문정보</div>
-            <div class="card-content">주문 번호</div>
-            <div class="card-content">주문자 정보</div>
-            <div class="card-content">주문자 주소지</div>
+            <div class="card-header-title order-info">주문 정보</div>
           </div>
 
           <div class="card block">
@@ -54,11 +52,12 @@
         </div>
 
         <button id="modal-close" class="button close-btn">닫기</button>
-        <button class="button">결제 하기</button>
+        <button class="button" id="send-order">결제 하기</button>
       </div>
     </div>
 
     <script type="module" src="order.js"></script>
     <script type="module" src="bucketInputHtml.js"></script>
+    <script type="module" src="sendOrderData.js"></script>
   </body>
 </html>

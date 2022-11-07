@@ -8,7 +8,6 @@ import { productService } from "../services/index.js";
 //상품 관련 라우터
 const productRouter = Router();
 
-// TODO : 상품 아이디까지 리턴이 가능할까요?
 productRouter.get("/", async (req, res, next) => {
   try {
     const products = await productService.getProducts();

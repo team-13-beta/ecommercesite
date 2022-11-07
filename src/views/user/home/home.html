@@ -24,6 +24,8 @@
     ></script>
     <!-- 커스텀 css, js -->
     <link rel="stylesheet" href="home.css" />
+    <script type="module" src="user/header-footer/inputHeader.js"></script>
+    <script type="module" src="user/header-footer/inputFooter.js"></script>
     <script src="home.js" type="module" defer></script>
   </head>
   <body>
@@ -54,7 +56,7 @@
             <li><a href="/login">로그인</a></li>
             <li><a href="/register">회원가입</a></li>
             <li>
-              <a href="#cart" aria-current="page">
+              <a href="/user/bucket" aria-current="page">
                 <span class="icon">
                   <i class="fas fa-cart-shopping"></i>
                 </span>
@@ -119,7 +121,11 @@
         >
       </div>
     </div>
-
+    <div class="container">
+      <div class="bottom-header">
+        <h1>최신 상품</h1>
+      </div>
+    </div>
     <div class="container bottom-container">
       <div class="bottom-products-Total-container">
         <div class="bottom-products-container columns"></div>

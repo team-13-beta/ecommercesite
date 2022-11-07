@@ -177,14 +177,14 @@ const getItemList = async () => {
     .map((data, i) => {
       if (i > 6) return;
       else {
-        return `<div class ="bottom-products column">
+        return `<div class ="bottom-products column"><a href="/user/products/${
+          data.id
+        }">
           <div class="bottom-product-image-container"> 
-              <a href="/user/products/${
-                data.id
-              }"><img class="bottom-product-image" src="${data.img}" alt=""></a>
+            <img class="bottom-product-image" src="${data.img}" alt="">
           </div>
           <div class="bottom-product-name">
-              <a href="/user/products/${data.id}">${data.item}</a>
+              <p>${data.item}</p>
           </div>
           <div class="bottom-product-price">
               ${addCommas(data.Price) + "원"}
