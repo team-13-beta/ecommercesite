@@ -33,3 +33,12 @@ export const pathToRegex = (path) =>
   new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$");
 
 export const checkStringEmpty = (string) => (string === "" ? true : false);
+
+// 핸드폰 번호 체크
+export const checkPhoneNumberValid = (phoneNumber) => {
+  const input = phoneNumber;
+  if (input[3] == "-" && input[8] == "-") {
+    return true;
+  }
+  return false;
+};
