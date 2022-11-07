@@ -9,8 +9,8 @@ export class OrderModel {
         const order = await Order.findOne({ _id: orderId });
         return order;
       }
-    async findByUser(consumerId,orderId) {
-        const orderByUser = await Order.find({ userId: consumerId }).findOne({_id:orderId});
+    async findByUsers(consumerId) {
+        const orderByUser = await Order.find({ userId: consumerId });
         return orderByUser;
     }
     async findAll() {
