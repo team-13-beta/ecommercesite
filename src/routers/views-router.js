@@ -19,6 +19,7 @@ viewsRouter.use(
 );
 viewsRouter.use("/user/bucket", serveStatic("user/bucket/bucket"));
 viewsRouter.use("/user/order", serveStatic("user/order/order"));
+viewsRouter.use("/user/order/success", serveStatic("/user/order/orderSuccess"));
 viewsRouter.use("/user/products/:id", serveStatic("user/products/products"));
 viewsRouter.use("/user/userorder", serveStatic("user/userorder/userorder"));
 

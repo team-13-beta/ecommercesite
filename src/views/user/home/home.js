@@ -177,7 +177,9 @@ const getItemList = async () => {
     .map((data, i) => {
       if (i > 6) return;
       else {
-        return `<div class ="bottom-products column"><a href="/${data.id}">
+        return `<div class ="bottom-products column"><a href="/user/products/${
+          data.id
+        }">
           <div class="bottom-product-image-container"> 
             <img class="bottom-product-image" src="${data.img}" alt="">
           </div>
