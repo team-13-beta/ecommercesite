@@ -8,7 +8,7 @@ export const validateEmail = (email) => {
   return String(email)
     .toLowerCase()
     .match(
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
     );
 };
 
@@ -23,7 +23,21 @@ export const convertToNumber = (string) => {
   return parseInt(string.replace(/(,|개|원)/g, ""));
 };
 
+export const checkPhoneNumberValid = (phoneNumber) => {
+  const input = phoneNumber;
+  if (input[3] == "-" && input[8] == "-") {
+    return true;
+  }
+  return false;
+};
+
 // ms만큼 기다리게 함.
 export const wait = (ms) => {
   return new Promise((r) => setTimeout(r, ms));
 };
+
+// path가 올바른 형식인지 확인
+export const pathToRegex = (path) =>
+  new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$");
+
+export const checkStringEmpty = (string) => (string === "" ? true : false);

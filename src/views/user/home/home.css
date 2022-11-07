@@ -1,19 +1,176 @@
-.div-container {
+/*************
+*** Section ***
+*************/
+
+section {
+  position: relative;
+  width: 100%;
+  padding: 0px 0px 0;
+}
+
+section .title {
+  width: 760px;
+  text-align: center;
+  margin: 0 auto 60px;
+}
+
+section .title h2 {
+  font-size: 40px;
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+section .title p {
+  font-size: 14px;
+  line-height: 24px;
+  font-family: Helvetica, Arial, sans-serif;
+  color: #8c979e;
+}
+
+section .row {
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  align-content: stretch;
+}
+
+section .team-intro {
+  width: 300px;
+  text-align: center;
+}
+
+section .team-intro img {
+  width: 225px;
+  height: 225px;
+  border: 7px solid #fff;
+  border-radius: 50%;
+
+  margin-bottom: 25px;
+}
+
+section .team-intro h3 {
+  margin-bottom: 15px;
+}
+
+section .team-intro p {
+  line-height: 24px;
+}
+
+section#photo {
+  padding-bottom: 100px;
+}
+
+/* 포토 슬라이더 */
+#photo .slider {
+  position: relative;
+  width: 100%;
+  height: 400px;
+
+  margin-bottom: 10px;
+  box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 10%),
+    0 0 0 1px rgb(10 10 10 / 2%);
+}
+
+#photo .slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+#photo .slide:nth-child(1) {
+  background: url("../../images/도시락 이벤트.jpg") no-repeat center;
+  background-size: cover;
+}
+
+#photo .slide:nth-child(2) {
+  background: url("../../images/샐러드 이벤트.jpg") no-repeat center;
+  background-size: cover;
+}
+
+#photo .slide:nth-child(3) {
+  background: url("../../images/엘리.webp") no-repeat center;
+  background-size: auto;
+}
+
+#photo .slide.active {
+  display: block;
+}
+
+.left-arrow {
+  position: absolute;
+
+  width: 22px;
+  height: 22px;
+  background: url("../../images/img_arrow-left.png");
+
+  left: 20px;
+
+  cursor: pointer;
+}
+
+.right-arrow {
+  position: absolute;
+
+  width: 22px;
+  height: 22px;
+  background: url("../../images/img_arrow-right.png");
+
+  right: 20px;
+
+  cursor: pointer;
+}
+
+/* 카테고리 */
+.category {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
   align-items: center;
-  justify-content: center;
-  height: 100vh;
+  box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 10%),
+    0 0 0 1px rgb(10 10 10 / 2%);
+
+  padding-top: 10px;
+  margin-bottom: 30px;
 }
 
-.landing {
-  cursor: pointer;
-  border: 1px solid red;
-  padding: 10px;
+.category-img {
+  width: 80px;
+  height: 90px;
 }
 
-.greeting {
-  cursor: pointer;
-  border: 1px solid blue;
-  padding: 10px;
-  margin-left: 3rem;
+.category label {
+  text-align: center;
+}
+
+.category-header {
+  width: 100%;
+  font-size: 30px;
+  padding-bottom: 30px;
+  text-align: center;
+  border-bottom: solid black 1px;
+}
+
+.bottom-container {
+  width: 100%;
+  height: 180px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.bottom-products {
+  margin-right: 50px;
+  border: 1px black solid;
+  padding: 0px;
+  text-align: center;
+}
+.bottom-product-image-container {
+  width: 80px;
+  height: 90px;
+}
+.bottom-container {
+  border: solid 1px black;
 }

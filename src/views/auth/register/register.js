@@ -19,6 +19,8 @@ function addAllEvents() {
   submitButton.addEventListener("click", handleSubmit);
 }
 
+// TODO : 주소찾기 버튼을 누르면 회원가입 입력값들이 초기화가 되면서 에러 발생합니다.
+
 // 회원가입 진행
 async function handleSubmit(e) {
   e.preventDefault();
@@ -48,7 +50,14 @@ async function handleSubmit(e) {
 
   // 회원가입 api 요청
   try {
-    const data = { fullName, email, password };
+    const exAddress = {
+      postalCode: "2435",
+      address1: "geg",
+      address2: "example sangwoo",
+    };
+    const exPhoneNumber = "02-000-0000";
+
+    const data = { fullName, email, password, exAddress, exPhoneNumber };
 
     await Api.post("/api/register", data);
 
