@@ -22,11 +22,17 @@ const OrderSchema = new Schema(
     totalPrice:{
         type:Number,
         default:0,
+    },
+    createdTime : { 
+      type: String
+    },
+    updatedTime : { 
+      type: String
     }
   },
   {
     collection: "orders",
-    timestamps: true,
+    timestamps: false,
   }
 );
 

@@ -1,5 +1,7 @@
 import {productModel} from './product-model.js';
+import {timeZone} from '../../services/timeZone.js';
 
+const time = timeZone();
 async function productModelTest(){
     if(!await productModel.findByName("닭가슴살"))
     productModel.create({
@@ -8,7 +10,9 @@ async function productModelTest(){
         price:2000,
         description:"닭가슴살 초기 테스트 데이터",
         company:"허닭",
-        categoryId:"6362576490d1a27fbf0238fe"
+        categoryId:"6362576490d1a27fbf0238fe",
+        createdTime:time,
+        updatedTime:time
     });
 
     if(!await productModel.findByName("돼지고기"))
@@ -18,7 +22,9 @@ async function productModelTest(){
         price:8000,
         description:"돼지고기 초기 테스트 데이터",
         company:"forking",
-        categoryId:"636257ba18d12f3ff9684e77"
+        categoryId:"636257ba18d12f3ff9684e77",
+        createdTime:time,
+        updatedTime:time
     });
 
     if(!await productModel.findByName("소고기"))
@@ -28,7 +34,9 @@ async function productModelTest(){
         price:2000,
         description:"스테이크 초기 테스트 데이터",
         company:"blackCow",
-        categoryId:"636257ba18d12f3ff9684e7d"
+        categoryId:"636257ba18d12f3ff9684e7d",
+        createdTime:time,
+        updatedTime:time
     });
     if(!await productModel.findByName("샐러드"))
     productModel.create({
@@ -37,7 +45,9 @@ async function productModelTest(){
         price:2000,
         description:"샐러드 초기 테스트 데이터",
         company:"허닭",
-        categoryId:"636257ba18d12f3ff9684e80"
+        categoryId:"636257ba18d12f3ff9684e80",
+        createdTime:time,
+        updatedTime:time
     });
     if(!await productModel.findByName("밀킷"))
     productModel.create({
@@ -46,7 +56,9 @@ async function productModelTest(){
         price:2000,
         description:"밀킷 초기 테스트 데이터",
         company:"밀킷회사",
-        categoryId:"636257ba18d12f3ff9684e83"
+        categoryId:"636257ba18d12f3ff9684e83",
+        createdTime:time,
+        updatedTime:time
     });
     if(!await productModel.findByName("단백질음료"))
     productModel.create({
@@ -55,7 +67,9 @@ async function productModelTest(){
         price:2000,
         description:"단백질음료 초기 테스트 데이터",
         company:"이온음료회사",
-        categoryId:"63626533abebe123aafbf696"
+        categoryId:"63626533abebe123aafbf696",
+        createdTime:time,
+        updatedTime:time
     });
 }
 

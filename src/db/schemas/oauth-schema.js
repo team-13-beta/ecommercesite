@@ -21,11 +21,17 @@ const OauthSchema = new Schema(
     access:{
       type:String,
       default:"oauth"
+    },
+    createdTime : { 
+      type: String
+    },
+    updatedTime : { 
+      type: String
     }
   },
   {
     collection: "Oauths",
-    timestamps: true,
+    timestamps: false,
   }
 );
 

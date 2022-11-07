@@ -1,6 +1,6 @@
 import { model } from "mongoose";
 import { OrderSchema } from "../schemas/order-schema.js";
-
+import {timeZone} from '../../services/timeZone.js';
 
 const Order = model("orders", OrderSchema);
 
@@ -18,15 +18,20 @@ export class OrderModel {
         return orders;
     }
     async create(orderInfo) {
-        const createdNewOrder = await Order.create(orderInfo);
+        const time = timeZone();
+        const timeInfo = {createdTime:time,updatedTime:time};
+        const info = {...orderInfo , ...timeInfo};
+        const createdNewOrder = await Order.create(info);
         return createdNewOrder;
     }
 
     async update({ orderId, update }) {
         const filter = { _id: orderId };
         const option = { returnOriginal: false };
-    
-        const updatedOrder = await Order.findOneAndUpdate(filter, update, option);
+        const time = timeZone();
+        const updateInfo = {...update, updatedTime:time}
+       
+        const updatedOrder = await Order.findOneAndUpdate(filter, updateInfo, option);
         console.log(updatedOrder);
         return updatedOrder;
       }
