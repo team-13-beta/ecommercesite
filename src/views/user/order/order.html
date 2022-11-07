@@ -19,10 +19,108 @@
       <div class="columns">
         <div class="column is-three-fifths">
           <div class="card block">
-            <div class="card-header-title">주문정보</div>
-            <div class="card-content">주문 번호</div>
-            <div class="card-content">주문자 정보</div>
-            <div class="card-content">주문자 주소지</div>
+            <div class="card-header-title">주문 정보</div>
+            <div class="card-content">
+              <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                  <label class="label" for="receiverName">이름</label>
+                </div>
+                <div class="field-body">
+                  <div class="field">
+                    <p class="control">
+                      <input
+                        class="input"
+                        id="receiverName"
+                        type="text"
+                        placeholder="받는 분 이름을 입력해 주세요."
+                        autocomplete="on"
+                      />
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                  <label class="label" for="receiverPhoneNumber">연락처</label>
+                </div>
+                <div class="field-body">
+                  <div class="field">
+                    <p class="control">
+                      <input
+                        class="input"
+                        id="receiverPhoneNumber"
+                        type="number"
+                        placeholder="- 없이 입력해 주세요."
+                        autocomplete="on"
+                      />
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                  <label class="label" for="address2">주소</label>
+                </div>
+                <div class="field-body search">
+                  <div class="field">
+                    <p class="control">
+                      <input
+                        class="input"
+                        id="postalCode"
+                        type="text"
+                        placeholder="주소찾기를 클릭해 주세요."
+                        readonly
+                      />
+                    </p>
+                  </div>
+                  <div>
+                    <button
+                      class="button is-light is-hovered"
+                      id="searchAddressButton"
+                    >
+                      주소찾기
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="field is-horizontal">
+                <div class="field-label is-normal no-label"></div>
+                <div class="field-body">
+                  <div class="field">
+                    <p class="control">
+                      <input
+                        class="input"
+                        id="address1"
+                        type="text"
+                        placeholder=""
+                        autocomplete="on"
+                        readonly
+                      />
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="field is-horizontal">
+                <div class="field-label is-normal no-label"></div>
+                <div class="field-body">
+                  <div class="field">
+                    <p class="control">
+                      <input
+                        class="input"
+                        id="address2"
+                        type="text"
+                        placeholder=""
+                        autocomplete="on"
+                      />
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div class="card block">
