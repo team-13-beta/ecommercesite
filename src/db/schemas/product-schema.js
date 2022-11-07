@@ -25,11 +25,17 @@ const ProductSchema = new Schema(
       type: Schema.Types.ObjectId,
       requried: true,
       ref: 'categories',
+    },
+    createdTime : { 
+      type: String
+    },
+    updatedTime : { 
+      type: String
     }
   },
   {
     collection: "products",
-    timestamps: true,
+    timestamps: false,
   }
 );
 

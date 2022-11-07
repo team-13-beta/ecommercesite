@@ -14,6 +14,7 @@ const address1Input = document.querySelector("#address1");
 const address2Input = document.querySelector("#address2");
 const phoneNumberInput = document.querySelector("#phoneNumberInput");
 
+
 //버튼들
 const searchAddressButton = document.querySelector("#searchAddressButton");
 const submitButton = document.querySelector("#submitButton");
@@ -28,8 +29,8 @@ function addAllEvents() {
   searchAddressButton.addEventListener("click", searchAddress);
   submitButton.addEventListener("click", handleSubmit);
 }
-
 // daum post api 불러오기.
+
 
 function searchAddress(e) {
   e.preventDefault();
@@ -112,7 +113,7 @@ async function handleSubmit(e) {
 
     await Api.post("/api/register", data);
 
-    alert(`정상적으로 회원가입되었습니다.`);
+    alert('정상적으로 회원가입되었습니다.');
 
     // 로그인 페이지 이동
     window.location.href = "/login";
