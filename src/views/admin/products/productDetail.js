@@ -27,11 +27,15 @@ export default function ProductDetail({
     $modifyContainer.addEventListener("click", (e) => {
       e.preventDefault();
       const { type } = e.target.dataset;
-
-      if (type === "update") {
-        updateHandler({ ...this.state });
-      } else if (type === "delete") {
-        if (confirm("정말 삭제하시겠습니까?")) deleteHandler(this.state.id);
+      switch (type) {
+        case "update":
+          updateHandler({ ...this.state });
+          break;
+        case "delete":
+          if (confirm("정말 삭제하시겠습니까?")) deleteHandler(this.state.id);
+          break;
+        default:
+          return;
       }
     });
 
@@ -42,7 +46,6 @@ export default function ProductDetail({
 
       reader.onload = () => {
         const imageBase64 = reader.result;
-        console.log(imageBase64, "@@");
         this.setState({ ...this.state, imageSrc: imageBase64 });
       };
 

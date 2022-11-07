@@ -19,11 +19,16 @@ export default function Orders({ $app, initialState, searchHandler }) {
   this.$element.addEventListener("click", (e) => {
     e.preventDefault();
     const { type, detailId } = e.target.dataset;
-    if (type === "detail") {
-      appendDetailMoveHandler(detailId, this.state, "OrderDetails");
-    } else if (type === "search") {
-      const $inputVal = this.$element.querySelector(".search-input");
-      searchHandler($inputVal.value);
+    switch (type) {
+      case "detail":
+        appendDetailMoveHandler(detailId, this.state, "OrderDetails");
+        break;
+      case "search":
+        const $inputVal = this.$element.querySelector(".search-input");
+        searchHandler($inputVal.value);
+        break;
+      default:
+        return;
     }
   });
 

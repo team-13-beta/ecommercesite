@@ -29,13 +29,19 @@ export default function Categories({
   this.$element.addEventListener("click", (e) => {
     e.preventDefault();
     const { type, detailId } = e.target.dataset;
-    if (type === "search") {
-      const $inputVal = this.$element.querySelector(".search-input");
-      searchHandler($inputVal.value);
-    } else if (type === "append") {
-      appendModalHandler();
-    } else if (type === "update") {
-      updateModalHandler(detailId);
+    switch (type) {
+      case "search":
+        const $inputVal = this.$element.querySelector(".search-input");
+        searchHandler($inputVal.value);
+        break;
+      case "append":
+        appendModalHandler();
+        break;
+      case "update":
+        updateModalHandler(detailId);
+        break;
+      default:
+        return;
     }
   });
 
@@ -72,16 +78,22 @@ export default function Categories({
 
     $modalLayout.addEventListener("click", (e) => {
       const { type } = e.target.dataset;
-      if (type === "modalClose") {
-        closeModal();
-      } else if (type === "categoryDelete") {
-        if (confirm("정말 삭제하시겠습니까?")) deleteHandler(detailId);
-      } else if (type === "categoryUpdate") {
-        const $categoryInput = $modalLayout.querySelector(".category-input");
-        updateHandler({
-          id: detailId,
-          categoryName: $categoryInput.value,
-        });
+      switch (type) {
+        case "modalClose":
+          closeModal();
+          break;
+        case "categoryDelete":
+          if (confirm("정말 삭제하시겠습니까?")) deleteHandler(detailId);
+          break;
+        case "categoryUpdate":
+          const $categoryInput = $modalLayout.querySelector(".category-input");
+          updateHandler({
+            id: detailId,
+            categoryName: $categoryInput.value,
+          });
+          break;
+        default:
+          return;
       }
     });
   };
