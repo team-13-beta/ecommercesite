@@ -41,8 +41,8 @@ export default function ProductDetail({
 
     $file.addEventListener("input", (e) => {
       let reader = new FileReader();
-
-      reader.readAsDataURL($file.files[0]);
+      const selectedFile = $file.files[0];
+      reader.readAsDataURL(selectedFile);
 
       reader.onload = () => {
         const imageBase64 = reader.result;
@@ -50,8 +50,8 @@ export default function ProductDetail({
       };
 
       reader.onerror = function (error) {
-        alert("Error: ", error);
-        document.querySelector("body").removeChild(modalEl);
+        alert("Error occurred reading file: ", selectedFile.name);
+        closeModal();
       };
     });
   };

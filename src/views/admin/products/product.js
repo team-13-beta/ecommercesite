@@ -79,7 +79,7 @@ export default function Products({
 
       reader.onerror = function (error) {
         alert("Error: ", error);
-        document.querySelector("body").removeChild(modalEl);
+        closeModal();
       };
     });
 
