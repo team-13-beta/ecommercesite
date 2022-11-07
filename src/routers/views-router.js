@@ -14,7 +14,7 @@ viewsRouter.use("/register", serveStatic("auth/register/register"));
 viewsRouter.use("/login", serveStatic("auth/login/login"));
 viewsRouter.use("/admin", serveStatic("admin/admin"), adminRouter); // 아래 split 연산때문에 admin/admin으로 인자 pass
 viewsRouter.use(
-  "/user/accoutUpdate",
+  "/user/accountUpdate",
   serveStatic("user/accountUpdate/accountUpdate"),
 );
 viewsRouter.use("/user/bucket", serveStatic("user/bucket/bucket"));
