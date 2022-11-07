@@ -4,17 +4,24 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "type": "module",
   "scripts": {
     "start": "nodemon index.js --exec babel-node"
   },
   "dependencies": {
     "@sindresorhus/is": "^4.6.0",
     "bcrypt": "^5.0.1",
+    "bulma": "^0.9.4",
+    "connect-mongo": "^4.6.0",
+    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
-    "dotenv": "^16.0.0",
+    "dotenv": "^16.0.3",
     "express": "^4.17.3",
+    "express-session": "^1.17.3",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.3.1",
+    "mongoose": "^6.7.0",
+    "passport": "^0.6.0",
+    "passport-google-oauth2": "^0.2.0",
     "prettier": "^2.7.1"
   },
   "devDependencies": {
@@ -25,5 +32,10 @@
     "@babel/preset-env": "^7.16.11",
     "eslint": "^8.26.0",
     "nodemon": "^2.0.15"
+  },
+  "description": "EcommerceSite : Web Service \r Front : Vanilla JS\r Back : Node.js, Express",
+  "repository": {
+    "type": "git",
+    "url": "https://kdt-gitlab.elice.io/sw_track/class_03/web_project/team13/ecommercesite"
   }
 }

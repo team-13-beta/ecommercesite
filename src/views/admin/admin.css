@@ -1,0 +1,61 @@
+main {
+  width: 1024px;
+  margin: 30px auto 80px auto;
+}
+.none-flex {
+  flex: none;
+}
+
+.search-input {
+  width: 30%;
+}
+
+.info-input {
+  width: 80%;
+  border-radius: 10px;
+}
+
+.content > .detail-div {
+  display: flex;
+  align-items: center;
+}
+
+.content > .detail-div > div {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-right: 20px;
+}
+.content > .detail-div > div > label {
+  font-weight: bold;
+}
+
+.select {
+  width: 80%;
+}
+
+.full-select {
+  width: 100%;
+}
+
+.select > select {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.table > thead {
+  font-weight: bold;
+}
+
+.table > tbody > tr:hover {
+  background-color: orange;
+}
+
+.button {
+  border-radius: 15px;
+}
+
+button:hover {
+  cursor: pointer;
+}

@@ -1,0 +1,24 @@
+#contents {
+  width: 1024px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+.content_container {
+  margin-bottom: 20px;
+}
+
+.stock-con {
+  display: flex;
+}
+
+.result-price {
+  float: right;
+}
+.pay-btn {
+  background-color: #ff922b;
+  border: none;
+}
+.pay-btn:hover {
+  color: #fff4e6;
+}

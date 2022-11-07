@@ -1,0 +1,72 @@
+[
+  {
+    "product_id": 1,
+    "imgTitle": "https://file.rankingdak.com/image/RANK/PRODUCT/PRD001/20220510/IMG1652kJD147903763_600_600.jpg",
+    "name": "닭1",
+    "stock": 3,
+    "price": 13500,
+    "description": [
+      "so yummy~",
+      "https://file.rankingdak.com/store/msd/item/msd_n_sales.jpg",
+      "https://file.rankingdak.com/store/msd/item/msd_n_sales.jpg",
+      "https://file.rankingdak.com/store/msd/item/msd_n_sales.jpg"
+    ],
+    "company": "elice"
+  },
+  {
+    "product_id": 2,
+    "imgTitle": "https://file.rankingdak.com/image/RANK/PRODUCT/PRD001/20220510/IMG1652kJD147903763_600_600.jpg",
+    "name": "닭2",
+    "stock": 5,
+    "price": 156500,
+    "description": [
+      "so yummy~",
+      "https://file.rankingdak.com/store/msd/item/msd_n_sales.jpg",
+      "https://file.rankingdak.com/store/msd/item/msd_n_sales.jpg",
+      "https://file.rankingdak.com/store/msd/item/msd_n_sales.jpg"
+    ],
+    "company": "elice"
+  },
+  {
+    "product_id": 3,
+    "imgTitle": "https://file.rankingdak.com/image/RANK/PRODUCT/PRD001/20220510/IMG1652kJD147903763_600_600.jpg",
+    "name": "닭3",
+    "stock": 1,
+    "price": 138500,
+    "description": [
+      "so yummy~",
+      "https://file.rankingdak.com/store/msd/item/msd_n_sales.jpg",
+      "https://file.rankingdak.com/store/msd/item/msd_n_sales.jpg",
+      "https://file.rankingdak.com/store/msd/item/msd_n_sales.jpg"
+    ],
+    "company": "elice"
+  },
+  {
+    "product_id": 4,
+    "imgTitle": "https://file.rankingdak.com/image/RANK/PRODUCT/PRD001/20220510/IMG1652kJD147903763_600_600.jpg",
+    "name": "닭4",
+    "stock": 5,
+    "price": 133500,
+    "description": [
+      "so yummy~",
+      "https://file.rankingdak.com/store/msd/item/msd_n_sales.jpg",
+      "https://file.rankingdak.com/store/msd/item/msd_n_sales.jpg",
+      "https://file.rankingdak.com/store/msd/item/msd_n_sales.jpg"
+    ],
+    "company": "elice"
+  },
+  {
+    "product_id": 5,
+    "imgTitle": "https://file.rankingdak.com/image/RANK/PRODUCT/PRD001/20220510/IMG1652kJD147903763_600_600.jpg",
+    "name": "닭5",
+    "stock": 2,
+    "price": 135000,
+    "description": [
+      "so yummy~",
+      "https://file.rankingdak.com/store/msd/item/msd_n_sales.jpg",
+      "https://file.rankingdak.com/store/msd/item/msd_n_sales.jpg",
+      "https://file.rankingdak.com/store/msd/item/msd_n_sales.jpg"
+    ],
+    "company": "elice"
+  }
+]
