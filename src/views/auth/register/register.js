@@ -6,6 +6,14 @@ const fullNameInput = document.querySelector("#fullNameInput");
 const emailInput = document.querySelector("#emailInput");
 const passwordInput = document.querySelector("#passwordInput");
 const passwordConfirmInput = document.querySelector("#passwordConfirmInput");
+const postalCodeInput = document.querySelector("#postalCode");
+const address1Input = document.querySelector("#address1");
+const address2Input = document.querySelector("#address2");
+const phoneNumberInput = document.querySelector("#phoneNumberInput");
+
+
+//버튼들
+const searchAddressButton = document.querySelector("#searchAddressButton");
 const submitButton = document.querySelector("#submitButton");
 addAllElements();
 addAllEvents();
@@ -26,7 +34,11 @@ function searchAddress(e) {
       let addr = "";
       let extraAddr = "";
 
-// TODO : 주소찾기 버튼을 누르면 회원가입 입력값들이 초기화가 되면서 에러 발생합니다.
+      if (data.userSelectedType === "R") {
+        addr = data.roadAddress;
+      } else {
+        addr = data.jibunAddress;
+      }
 
       if (data.userSelectedType === "R") {
         if (data.bname !== "" && /[동|로|가]$/g.test(data.bname)) {
@@ -73,6 +85,12 @@ async function handleSubmit(e) {
 
   if (!isPasswordSame) {
     return alert("비밀번호가 일치하지 않습니다.");
+  }
+
+  if (!isPhoneNumberValid) {
+    return alert(
+      "잘못된 양식의 휴대폰 번호입니다. 010-****-**** 양식으로 입력해주세요.",
+    );
   }
 
   // 회원가입 api 요청
