@@ -11,10 +11,10 @@ import {
 import ProductDetail from "./products/productDetail.js";
 import OrderDetail from "./orders/orderDetail.js";
 import { closeModal } from "./components/modal.js";
-import { get, post, del, patch } from "../api.js";
+import { get, post, dels, patch } from "../api.js";
 import { addImageToS3 } from "../aw3-s3.js";
 
-const BASE_URL = `http://localhost:5001`;
+const BASE_URL = `http://localhost:5000`;
 
 export default function App({ $app }) {
   this.state = {
@@ -80,7 +80,7 @@ export default function App({ $app }) {
       closeModal();
     },
     deleteHandler: async (deleteId) => {
-      const deleteResult = await del(`${BASE_URL}/category`, `${deleteId}`);
+      const deleteResult = await dels(`${BASE_URL}/category`, `${deleteId}`);
       console.log(deleteResult); // 여기서 값 처리 되는지 확인
       const categoryLists = this.state.categoryLists.filter(
         (category) => category.id !== deleteId,
@@ -105,13 +105,12 @@ export default function App({ $app }) {
       closeModal();
     },
   });
-
   const productDetail = new ProductDetail({
     $app,
     $initialState: this.state.productDetail,
     $categories: this.state.categoryLists,
     deleteHandler: async (deleteId) => {
-      const delResult = await del(`${BASE_URL}/products`, `${deleteId}`);
+      const delResult = await dels(`${BASE_URL}/products`, `${deleteId}`);
       console.log(delResult);
       const productLists = this.state.productLists.filter(
         (product) => product.id !== deleteId,
@@ -152,12 +151,11 @@ export default function App({ $app }) {
       this.setState({ productLists, productDetail: updateData });
     },
   });
-
   const orderDetail = new OrderDetail({
     $app,
     $initialState: this.state.orderDetail,
     deleteHandler: async (deleteId) => {
-      const delResult = await del(`${BASE_URL}/orders`, `${deleteId}`);
+      const delResult = await dels(`${BASE_URL}/orders`, `${deleteId}`);
       console.log(delResult);
       const orderLists = this.state.orderLists.filter(
         (order) => order.id !== deleteId,
@@ -265,23 +263,25 @@ export default function App({ $app }) {
       this.render();
     });
 
-    // const [productLists, categoryLists, orderLists] = await Promise.all([
-    //   get(`${BASE_URL}/products`),
-    //   get(`${BASE_URL}/category`),
-    //   get(`${BASE_URL}/`).then((res) => res.json()),
-    // ]);
-
     const [productLists, categoryLists, orderLists] = await Promise.all([
-      fetch("./mockData/productData.json").then((res) => res.json()),
-      fetch("./mockData/categoryData.json").then((res) => res.json()),
-      fetch("./mockData/orderData.json").then((res) => res.json()),
+      get(`${BASE_URL}/products`),
+      get(`${BASE_URL}/category`),
+      get(`${BASE_URL}/orders`),
     ]);
+
+    // const [productLists, categoryLists, orderLists] = await Promise.all([
+    //   fetch("./mockData/productData.json").then((res) => res.json()),
+    //   fetch("./mockData/categoryData.json").then((res) => res.json()),
+    //   fetch("./mockData/orderData.json").then((res) => res.json()),
+    // ]);
 
     this.setState({
       productLists,
       categoryLists,
       orderLists,
     });
+
+    console.log(this.state);
 
     navigate(`${BASE_URL}/admin/orders`, {
       title: "Orders",

@@ -1,6 +1,6 @@
 import { model } from "mongoose";
 import { ProductSchema } from "../schemas/product-schema.js";
-
+import {timeZone} from '../../services/timeZone.js';
 const Product = model("products", ProductSchema);
 
 export class ProductModel {
@@ -9,25 +9,33 @@ export class ProductModel {
     return product;
   }
   async findById(productId) {
-    const product = await Product.findOne({ _id: productId });
+    const product = await Product.findOne({ productId : productId });
     return product;
   }
 
   async create(productInfo) {
-    const createdNewProduct = await Product.create(productInfo);
+    const num = await Product.find().sort({productId:-1}).limit(1);
+    console.log(num);
+    const productId= (num[0])?  num[0].productId+1 : 1; 
+    
+    const time = timeZone();
+    const timeInfo = {'createdTime':time,'updatedTime':time};
+    const info = {productId, ...productInfo , ...timeInfo};
+    const createdNewProduct = await Product.create(info);
     return createdNewProduct;
   }
   async findAll() {
-    const products = await Product.find({}).populate("categoryId");
+    const products = await Product.find().sort({productId:1}).populate("categoryId");
     return products;
   }
-
+ 
 
   async update({ productId, update }) {
-    const filter = { _id: productId };
+    const filter = { productId : productId };
     const option = { returnOriginal: false };
-
-    const updatedProduct = await Product.findOneAndUpdate(filter, update, option);
+    const time = timeZone();
+    const updateInfo = {...update, updatedTime:time}
+    const updatedProduct = await Product.findOneAndUpdate(filter, updateInfo, option);
     console.log(updatedProduct);
     return updatedProduct;
   }

@@ -1,6 +1,6 @@
 import { model } from "mongoose";
 import { OrderSchema } from "../schemas/order-schema.js";
-
+import {timeZone} from '../../services/timeZone.js';
 
 const Order = model("orders", OrderSchema);
 
@@ -9,24 +9,42 @@ export class OrderModel {
         const order = await Order.findOne({ _id: orderId });
         return order;
       }
-    async findByUser(consumerId,orderId) {
-        const orderByUser = await Order.find({ userId: consumerId }).findOne({_id:orderId});
+    async findByUsers(consumerId) {
+        const orderByUser = await Order.find({ userId: consumerId });
         return orderByUser;
     }
+
+    async findByOrderId(Id) {
+        let ordId = Number(Id);
+        const findorder = await Order.findOne( { orderId: ordId } );
+        if(findorder == null) throw new Error("찾고계신 주문번호는 존재하지 않습니다. ")
+        return findorder;
+    }
+
     async findAll() {
         const orders = await Order.find({});
         return orders;
     }
     async create(orderInfo) {
-        const createdNewOrder = await Order.create(orderInfo);
+        const num2= await Order.find().sort({"orderId":-1}).limit(1);
+        console.log(num2);
+        // Order Id 생성  
+        const orderId = (num2[0])? num2[0].orderId+1 : 1;
+        console.log(orderId);
+        const time = timeZone();
+        const timeInfo = {createdTime:time,updatedTime:time};
+        const info = { orderId, ...orderInfo , ...timeInfo};
+        const createdNewOrder = await Order.create(info);
         return createdNewOrder;
     }
 
     async update({ orderId, update }) {
         const filter = { _id: orderId };
         const option = { returnOriginal: false };
-    
-        const updatedOrder = await Order.findOneAndUpdate(filter, update, option);
+        const time = timeZone();
+        const updateInfo = {...update, updatedTime:time}
+       
+        const updatedOrder = await Order.findOneAndUpdate(filter, updateInfo, option);
         console.log(updatedOrder);
         return updatedOrder;
       }

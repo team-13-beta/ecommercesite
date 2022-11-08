@@ -1,4 +1,4 @@
-import { orderModel,userModel } from '../db/index.js';
+import { orderModel,userModel, productModel } from '../db/index.js';
 
 
 class OrderService {
@@ -7,19 +7,39 @@ class OrderService {
     }
     
     // 전체 상품 데이터를 조회하는 함수
-    async getOrders(consumer_id) {
-        const user = await userModel.findById(consumer_id);
-
-        const orders = await this.orderModel.findAll({userId:user._id});
+    async getAllOrders() {
+        const orders = await this.orderModel.findAll();
         return orders;
     }
 
+    // 유저의 주문 내역을 조회하는 함수
+    async getOrders(consumer_id) {
+        const user = await userModel.findById(consumer_id);
+
+        if(!user) throw new Error('사용자의 주문내역을 요청하셨지만 해당하는 사용자가 존재하지 않거나 토큰이 유효하지 않습니다');
+
+        const orders = await this.orderModel.findByUsers(user._id);
+        return orders;
+    }
+
+    // 해당 주문 내역을 상세 조회하는 함수
+    async getOrder(order_id) {
+        const order = await this.orderModel.findByOrderId(order_id);
+        return order;
+    }
+
+    // 주문을 하는데 재고가 0인 경우를 고려한 코드 작성 필요!!!! 
+
     async addOrder(orderInfo){
         // 객체 destructuring
-        const { user_Id,basket } = orderInfo;
-        console.log(user_Id,basket);
-        
-        const user=await userModel.findById(user_Id);
+        const { userObjId , basket } = orderInfo;
+        console.log(userObjId);
+        const user=await userModel.findById(userObjId);
+
+        if(!user) throw new Error('주문을 요청하셨지만 해당하는 사용자가 없거나 토큰이 유효하지 않습니다.');
+        let userId = user._id;
+        userId = userId.toString()
+            
         //console.log(user);
         if(!user){
             throw new Error("사용자를 찾을 수 없습니다.");
@@ -30,20 +50,35 @@ class OrderService {
         //console.log(status);
         let totalPrice=0;
 
-        for(let b of basket){
-            totalPrice+=Number(b.price)*Number(b.stock);
+        // 상품 총액 계산
+        for(let b of basket.buyingProduct){
+            totalPrice+=b.price*b.stock;
         }
-        console.log(totalPrice);
-
+        console.log(user)
         // db에 저장
         const createdNewOrder = await this.orderModel.create({
-            userId:user._id,
-            buying_product:basket,
-            address,
+            userId,
+            userName:basket.userName,
+            buyingProduct:basket.buyingProduct,
+            address:basket.address,
+            phoneNumber:basket.phoneNumber,
+            // address,
             status,
             totalPrice,
         });
 
+        for(let item of basket.buyingProduct){
+            let product = await productModel.findByName(item.name);
+            console.log(product);
+            const stock = product.stock - item.stock;
+            const productId = product.productId;
+            const toUpdate = {stock:stock};
+            product = await productModel.update({
+                productId,
+                update: toUpdate,
+              });
+             console.log(`${product.name}의 현 재고 : ${product.stock}입니다.`);
+        }
         return createdNewOrder;
     }
 

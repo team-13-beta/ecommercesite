@@ -8,10 +8,20 @@ import { productService } from "../services/index.js";
 //상품 관련 라우터
 const productRouter = Router();
 
-// TODO : 상품 아이디까지 리턴이 가능할까요?
 productRouter.get("/", async (req, res, next) => {
   try {
     const products = await productService.getProducts();
+    console.log(products);
+    res.status(200).json(products);
+  } catch (err) {
+    next(err);
+  }
+});
+
+productRouter.get("/:id", async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const products = await productService.getProduct(id);
     console.log(products);
     res.status(200).json(products);
   } catch (err) {
@@ -43,12 +53,11 @@ productRouter.post("/", async (req, res, next) => {
   }
 });
 
-productRouter.delete("/:product_name", async (req, res, next) => {
+productRouter.delete("/:productId", async (req, res, next) => {
   // 삭제할 상품 이름
   try {
-    const { product_name } = req.params;
-    const name = "닭가슴살 소시지";
-    const deleteproduct = await productService.deleteProduct(product_name);
+    const { productId } = req.params.productId;
+    const deleteproduct = await productService.deleteProduct(productId);
 
     res.status(201).json(deleteproduct);
   } catch (err) {
@@ -60,7 +69,6 @@ productRouter.patch("/:productId", async function (req, res, next) {
   try {
     // params로부터 id를 가져옴
     const productId = req.params.productId;
-
     // body data 로부터 업데이트할 사용자 정보를 추출함.
     const { name, stock, price, description, company } = req.body;
 
@@ -73,7 +81,6 @@ productRouter.patch("/:productId", async function (req, res, next) {
       ...(description && { description }),
       ...(company && { company }),
     };
-    console.log(toUpdate);
     // 사용자 정보를 업데이트함.
     const updatedProductInfo = await productService.setProduct(
       productId,

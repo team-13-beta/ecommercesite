@@ -8,7 +8,7 @@ const categoryRouter = Router();
 categoryRouter.get("/", async (req,res,next)=>{
     try{
         const categories=await categoryService.getProducts();
-        console.log(categories);
+        //console.log(categories);
         res.status(200).json(categories);
     }catch(err){
         next(err);
@@ -19,7 +19,7 @@ categoryRouter.post("/",async(req,res,next)=>{
         // req (request)의 body 에서 데이터 가져오기
         // 추가해볼 데이터
         const { name }=req.body;
-    
+        
         // 위 데이터를 유저 db에 추가하기
         const newCategory = await categoryService.addCategory({
           name,
@@ -46,6 +46,7 @@ categoryRouter.patch(
       // 위 데이터가 undefined가 아니라면, 즉, 프론트에서 업데이트를 위해
       // 보내주었다면, 업데이트용 객체에 삽입함.
       const toUpdate = {
+        ...(categoryId && {categoryId}),
         ...(name && { name }),
       };
       //console.log(toUpdate);

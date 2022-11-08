@@ -11,7 +11,11 @@ class ProductService {
         const products = await this.productModel.findAll();
         return products;
     }
-
+ 
+    async getProduct(id){
+        const product = await this.productModel.findById(id);
+        return product;
+    }
     async addProduct(productInfo){
         // 객체 destructuring
         const { name,stock, price, description,company,categoryName } = productInfo;
@@ -21,11 +25,9 @@ class ProductService {
         const product = await this.productModel.findByName(name);
         if (product) {
             throw new Error(
-                '이 상품은 현재 등록중입니다. 다른 상품을 등록해 주세요.',
+                '이 상품은 현재 등록되었습니다. 다른 상품을 등록해 주세요.',
             );
         }
-
-
         // db에 저장
         const createdNewProduct = await this.productModel.create({
             name,
@@ -40,9 +42,9 @@ class ProductService {
     }
 
     // 상품 이름을 매개변수로 받아서 삭제 기능 구현
-    async deleteProduct(productName){
+    async deleteProduct(productId){
         // 만약
-        const product = await this.productModel.findByName(productName);
+        const product = await this.productModel.findById(productId);
         if (!product) {
             throw new Error(
                 '삭제 불가능합니다.',
