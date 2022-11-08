@@ -47,6 +47,7 @@ export default function App({ $app }) {
     appendHandler: async (appendItem) => {
       const postResult = await post(`${BASE_URL}/products`, appendItem);
       // 상품, 카테고리, 주무 조회 관련해서 데이터 schema 통일 시킬 것.
+
       this.setState({
         productLists: [...this.state.productLists, { ...postResult }],
       });
@@ -59,7 +60,7 @@ export default function App({ $app }) {
       const categoryLists = checkStringEmpty(searchData)
         ? this.state.categoryLists
         : categories.state.filter((category) =>
-            category.categoryName.includes(searchData),
+            category.name.includes(searchData),
           );
       categories.setState(categoryLists);
     },
@@ -84,14 +85,14 @@ export default function App({ $app }) {
       });
       closeModal();
     },
-    updateHandler: async ({ id, categoryName }) => {
+    updateHandler: async ({ id, name }) => {
       const updateResult = await patch(`${BASE_URL}/category`, `${id}`, {
-        categoryName,
+        name,
       });
       console.log(updateResult); // 여기서도 확인
 
       const categoryLists = this.state.categoryLists.map((category) =>
-        category.id === id ? { id, categoryName } : category,
+        category.id === id ? { id, name } : category,
       );
 
       this.setState({ categoryLists });
@@ -162,7 +163,7 @@ export default function App({ $app }) {
     { path: "/admin/orders/:id", view: orderDetail, title: "OrderDetails" },
   ];
 
-  this.render = () => {
+  this.render = async () => {
     const results = routes.map((route) => {
       return {
         route,
@@ -172,6 +173,12 @@ export default function App({ $app }) {
     let match = results.find((route) => route.result != null);
     if (match) {
       this.setState(); // 테이블 초기화.
+      // switch (match.route.view) {
+      //   case orders:
+      //     const orderLists = await get(`${BASE_URL}/orders`);
+      //     console.log(orderLists);
+      //     break;
+      // }
       match.route.view.init();
     }
   };
@@ -181,6 +188,8 @@ export default function App({ $app }) {
       ...this.state,
       ...nextState,
     };
+    // orderList가 애매함...
+    // 동기화 기준을 어떻게 잡아야 할 지 모르겠다
     orders.setState(this.state.orderLists);
     categories.setState(this.state.categoryLists);
     products.setState({ ...this.state });
@@ -228,16 +237,22 @@ export default function App({ $app }) {
       this.render();
     });
 
+    // const [productLists, categoryLists, orderLists] = await Promise.all([
+    //   get(`${BASE_URL}/products`),
+    //   get(`${BASE_URL}/category`),
+    //   get(`${BASE_URL}/`).then((res) => res.json()),
+    // ]);
+
     const [productLists, categoryLists, orderLists] = await Promise.all([
-      get(`${BASE_URL}/products`),
-      get(`${BASE_URL}/category`),
-      // get(`${BASE_URL}/`).then((res) => res.json()),
+      fetch("./mockData/productData.json").then((res) => res.json()),
+      fetch("./mockData/categoryData.json").then((res) => res.json()),
+      fetch("./mockData/orderData.json").then((res) => res.json()),
     ]);
-    // console.log(orderLists, productLists);
+
     this.setState({
       productLists,
       categoryLists,
-      // categoryLists: categoryData.data,
+      orderLists,
     });
 
     navigate(`${BASE_URL}/admin/orders`, {

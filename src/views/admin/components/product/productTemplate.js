@@ -29,10 +29,10 @@ export function productDetailTemplate(data, categories = []) {
             <div class="select full-select">
               <select data-type="category">
                 ${categories.reduce(
-                  (acc, { id, categoryName }) =>
+                  (acc, { id, name }) =>
                     (acc += `<option value="${id}" 
                     ${data.categoryId === id ? "selected" : ""}
-                    >${categoryName}</option>`),
+                    >${name}</option>`),
                   "",
                 )}
               </select>

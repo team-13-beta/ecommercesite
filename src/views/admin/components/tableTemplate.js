@@ -20,31 +20,20 @@ export function tableTemplate(columns, datas = [], categories = []) {
         case "detailButton":
           $td.innerHTML = `<button class="button is-small" data-type="detail" data-detail-id=${data["id"]}>상세 정보</button>`;
           break;
-        case "update_button":
+        case "updateButton":
           $td.innerHTML = `<button class="button is-small" data-type="update" data-detail-id=${data["id"]}>수정하기</button>`;
           break;
         case "categoryId":
-          const { categoryName } = categories.find(
+          const { name } = categories.find(
             (category) => category.id === data[key],
-          ) ?? { categoryName: "none" };
-          $td.innerHTML = categoryName;
+          ) ?? { name: "none" };
+          $td.innerHTML = name;
           break;
         default:
           $td.innerHTML = data[key] ?? "";
           break;
       }
-      // if (key === "detailButton") {
-      //   $td.innerHTML = `<button class="button is-small" data-type="detail" data-detail-id=${data["id"]}>상세 정보</button>`;
-      // } else if (key === "update_button") {
-      //   $td.innerHTML = `<button class="button is-small" data-type="update" data-detail-id=${data["id"]}>수정하기</button>`;
-      // } else if (key === "categoryId") {
-      //   const { categoryName } = categories.find(
-      //     (category) => category.id === data[key],
-      //   ) ?? { categoryName: "none" };
-      //   $td.innerHTML = categoryName;
-      // } else {
-      //   $td.innerHTML = data[key] ?? "";
-      // }
+
       $tr.appendChild($td);
     }
 

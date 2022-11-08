@@ -28,7 +28,7 @@ export const categoryUpdateModal = (data) => {
     <section class="modal-card-body">
       <div class="content">
         <label>카테고리 이름</label>
-        <input class="category-input input" value="${data.categoryName}" />
+        <input class="category-input input" value="${data.name}" />
       </div>
     </section>
     <footer class="modal-card-foot">
@@ -62,8 +62,8 @@ export function productModal(categories = []) {
               <div class="select full-select">
                 <select id="categoryId" >
                   ${categories.reduce(
-                    (acc, { id, categoryName }) =>
-                      (acc += `<option value=${id}>${categoryName}</option>`),
+                    (acc, { id, name }) =>
+                      (acc += `<option value=${id}>${name}</option>`),
                     "",
                   )}
                 </select>
