@@ -7,7 +7,7 @@ const categoryRouter = Router();
 
 categoryRouter.get("/", async (req,res,next)=>{
     try{
-        const categories=await categoryService.getProducts();
+        const categories=await categoryService.getCategories();
         //console.log(categories);
         res.status(200).json(categories);
     }catch(err){

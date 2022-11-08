@@ -1,5 +1,6 @@
 import { Router } from "express";
 import is from "@sindresorhus/is";
+import { categoryService } from "../services/index.js";
 // 폴더에서 import하면, 자동으로 폴더의 index.js에서 가져옴
 //import { loginRequired } from "../middlewares";
 //import { userService } from "../services";
@@ -18,16 +19,16 @@ productRouter.get("/", async (req, res, next) => {
   }
 });
 
-productRouter.get("/:id", async (req, res, next) => {
-  try {
-    const id = req.params.id;
-    const products = await productService.getProduct(id);
-    console.log(products);
-    res.status(200).json(products);
-  } catch (err) {
-    next(err);
-  }
-});
+// productRouter.get("/:id", async (req, res, next) => {
+//   try {
+//     const id = req.params.id;
+//     const products = await productService.getProduct(id);
+//     console.log(products);
+//     res.status(200).json(products);
+//   } catch (err) {
+//     next(err);
+//   }
+// });
 
 productRouter.post("/", async (req, res, next) => {
   try {
@@ -50,6 +51,31 @@ productRouter.post("/", async (req, res, next) => {
     res.status(201).json(newProduct);
   } catch (error) {
     next(error);
+  }
+});
+
+// 카테고리 종속 상품 조회
+productRouter.get('/:categoryId', async(req,res,next)=>{
+  try{
+    const categoryId = req.params.categoryId;
+    const category = await categoryService.getCategoryById(categoryId);
+    if(!category) throw new Error('요청하신 카테고리는 존재하지 않습니다.')
+    let categoryObjId = category._id.toString();
+    const products = await productService.getProductByCategory(categoryObjId);
+    res.status(200).json(products);
+  }catch(error){
+    next(error)
+  }
+})
+
+//상품 상세 조회
+productRouter.get('/item/:productId', async (req,res,next)=>{
+    try {
+    const productId = req.params.productId;
+    const product = await productService.getProduct(productId);
+    res.status(200).json(product);
+  } catch (err) {
+    next(err);
   }
 });
 
