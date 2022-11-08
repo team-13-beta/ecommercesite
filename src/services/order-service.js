@@ -22,7 +22,7 @@ class OrderService {
 
     // 해당 주문 내역을 상세 조회하는 함수
     async getOrder(order_id) {
-        const order = await this.orderModel.findByOrderId(Number(order_id));
+        const order = await this.orderModel.findByOrderId(order_id);
         return order;
     }
 

@@ -3,7 +3,7 @@ import { Schema } from "mongoose";
 const OrderSchema = new Schema(
   {
     orderId:{
-      type:Number,
+      type : Number,
       required:true,      
     },
     userId:{
