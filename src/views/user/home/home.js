@@ -112,7 +112,9 @@ Category.addEventListener("click", (e) => {
 const result = data
   .map((data, i) => {
     {
-      return `<div class ="bottom-products"><a href="/${data.productId}">
+      return `<div class ="bottom-products"><a href="/user/products/${
+        data.productId
+      }">
           <div class="bottom-product-image-container">
             <img class="bottom-product-image" src="${data.titleImage}" alt="">
           </div>
@@ -144,54 +146,3 @@ const categoryResult = categoryData
   .join("");
 
 Category.innerHTML = categoryResult;
-
-// 아이템 받아오기.
-// const getItemList = async (e) => {
-//   const data = await Api.get("/products");
-//   console.log(data);
-//   // TODO : 부모 요소로 클릭해서 페이지 이동하게 변경해주세요.
-//   // TODO : 리턴값을 따로 함수로 빼는게 어떨까요..
-//   const result = data
-//     .map((data, i) => {
-//       {
-//         return `<div class ="bottom-products"><a href="/${data.productId}">
-//           <div class="bottom-product-image-container">
-//             <img class="bottom-product-image" src="${data.titleImage}" alt="">
-//           </div>
-//           <div class="bottom-product-name">
-//               <p>${data.name}</p>
-//           </div>
-//           <div class="bottom-product-price">
-//               ${addCommas(data.price) + "원"}
-//           </div>
-//           </div>
-//           `;
-//       }
-//     })
-//     .join("");
-
-//   bottomInner.innerHTML = result;
-// };
-
-// getItemList();
-
-// 카테고리 값 가져오기
-// const getCategory = async () => {
-//   const data = await Api.get("/category");
-
-//   const result = data
-//     .map((data, i) => {
-//       {
-//         return `    <div class ="category-item" id="${data._id}">
-//         <div class="bottom-product-name">
-//             <p>${data.name}</p>
-//         </div>
-//         </div>
-//         `;
-//       }
-//     })
-//     .join("");
-//   Category.innerHTML = result;
-// };
-
-// getCategory();
