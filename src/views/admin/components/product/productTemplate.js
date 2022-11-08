@@ -1,15 +1,12 @@
 import { getImageUrl } from "../../../aw3-s3.js";
-import { checkStringEmpty } from "../../../useful-functions.js";
 
-export async function productDetailTemplate(data, categories = []) {
+export function productDetailTemplate(data, categories = [], imgaes = {}) {
   if (!data) return `<div>데이터가 없습니다.</div>`;
-
-  const titleImage = await getImageUrl(data.titleImage);
-  const detailImage = await getImageUrl(data.detailImage);
-  const deliveryImage = await getImageUrl(data.deliveryImage);
-  const nutritionImage = await getImageUrl(data.nutritionImage);
-
-  console.log(titleImage, detailImage, deliveryImage, nutritionImage, 123);
+  const { titleImage, detailImage, deliveryImage, nutritionImage } = imgaes;
+  // const titleImage = await getImageUrl(data.titleImage);
+  // const detailImage = await getImageUrl(data.detailImage);
+  // const deliveryImage = await getImageUrl(data.deliveryImage);
+  // const nutritionImage = await getImageUrl(data.nutritionImage);
 
   return `<div class="modify-container">
         <button class="button" data-type="update">
@@ -36,7 +33,7 @@ export async function productDetailTemplate(data, categories = []) {
           <label class="label">카테고리</label>
           <div class="control">
             <div class="select full-select">
-              <select data-type="category">
+              <select id="categoryId" data-type="category">
                 ${categories.reduce(
                   (acc, { id, name }) =>
                     (acc += `<option value="${id}" 
@@ -69,9 +66,12 @@ export async function productDetailTemplate(data, categories = []) {
               data.description
             }</textarea>
           </div>
+
+
         </div>
 
-        <div class="field">
+        <div class="field file-field">
+          
           <label class="label">메인 이미지</label>
           <div class="file">
             <label class="file-label">
@@ -85,9 +85,7 @@ export async function productDetailTemplate(data, categories = []) {
             </label>
           </div>
           ${`<img id="title-image" src=${titleImage} data-type="imageSrc" alt="메인  이미지"/>`}
-        </div>
-
-        <div class="field">
+          
           <label class="label">상세 이미지</label>
           <div class="file">
             <label class="file-label">
@@ -100,10 +98,8 @@ export async function productDetailTemplate(data, categories = []) {
               </span>
             </label>
           </div>
-          ${`<img id="product-image" src=${detailImage} data-type="imageSrc" alt="제품  이미지"/>`}
-        </div>
+          ${`<img id="detail-image" src=${detailImage} data-type="imageSrc" alt="제품  이미지"/>`}
 
-        <div class="field">
           <label class="label">배달 이미지</label>
           <div class="file">
             <label class="file-label">
@@ -116,14 +112,12 @@ export async function productDetailTemplate(data, categories = []) {
               </span>
             </label>
           </div>
-          ${`<img id="product-image" src=${deliveryImage} data-type="imageSrc" alt="배달  이미지"/>`}
-        </div>
+          ${`<img id="delivery-image" src=${deliveryImage} data-type="imageSrc" alt="배달  이미지"/>`}
 
-        <div class="field">
           <label class="label">영양 이미지</label>
           <div class="file">
             <label class="file-label">
-              <input class="file-input" type="file" name="resume" id="file" />
+              <input class="file-input" type="file" name="resume" id="file" data-type="nutrition" />
               <span class="file-cta">
                 <span class="file-icon">
                   <i class="fas fa-upload"></i>
@@ -132,8 +126,11 @@ export async function productDetailTemplate(data, categories = []) {
               </span>
             </label>
           </div>
-          ${`<img id="product-image" src=${nutritionImage} data-type="imageSrc" alt="영양  이미지"/>`}
+          ${`<img id="nutrition-image" src=${nutritionImage} data-type="imageSrc" alt="영양  이미지"/>`}
+        
         </div>
+
+  
 
         <div class="field">
           <label class="label">재고량</label>

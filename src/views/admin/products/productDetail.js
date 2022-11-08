@@ -1,10 +1,7 @@
-import {
-  clearContainer,
-  createElement,
-  returnDocumentClass,
-  returnDocumentId,
-} from "../../utility/documentSelect.js";
+import { checkStringEmpty, fileUpdateImage } from "../../useful-functions.js";
+import { clearContainer, createElement } from "../../utility/documentSelect.js";
 import { productDetailTemplate } from "../components/product/productTemplate.js";
+import { getImageUrl } from "../../aw3-s3.js";
 
 export default function ProductDetail({
   $app,
@@ -17,18 +14,50 @@ export default function ProductDetail({
   this.$categories = $categories;
 
   this.$element = createElement("div");
+  let titleImage = "";
+  let detailImage = "";
+  let deliveryImage = "";
+  let nutritionImage = "";
 
   const subScribeEventListener = () => {
     const $modifyContainer = document.querySelector(".modify-container");
-    // const $file = document.getElementById("file");
-    if (!$modifyContainer) return;
+    const $fileField = document.querySelector(".file-field");
+    if (!$modifyContainer || !$fileField) return;
 
     $modifyContainer.addEventListener("click", (e) => {
       e.preventDefault();
       const { type } = e.target.dataset;
       switch (type) {
         case "update":
-          updateHandler({ ...this.state });
+          const name = this.$element.querySelector("#productName").value;
+          const categoryId = this.$element.querySelector("#categoryId").value;
+          const companyName = this.$element.querySelector("#companyName").value;
+          const description = this.$element.querySelector("#description").value;
+          const stock = this.$element.querySelector("#stock").value;
+          const price = this.$element.querySelector("#price").value;
+
+          updateHandler({
+            ...this.state,
+            name,
+            categoryId,
+            companyName,
+            description,
+            stock,
+            price,
+            titleImage: checkStringEmpty(titleImage)
+              ? this.state.titleImage
+              : titleImage,
+            detailImage: checkStringEmpty(detailImage)
+              ? this.state.detailImage
+              : detailImage,
+            deliveryImage: checkStringEmpty(deliveryImage)
+              ? this.state.deliveryImage
+              : deliveryImage,
+            nutritionImage: checkStringEmpty(nutritionImage)
+              ? this.state.nutritionImage
+              : nutritionImage,
+          });
+
           break;
         case "delete":
           if (confirm("정말 삭제하시겠습니까?")) deleteHandler(this.state.id);
@@ -38,30 +67,39 @@ export default function ProductDetail({
       }
     });
 
-    // $file.addEventListener("input", (e) => {
-    //   let reader = new FileReader();
-    //   const selectedFile = $file.files[0];
-    //   reader.readAsDataURL(selectedFile);
-
-    //   reader.onload = () => {
-    //     const imageBase64 = reader.result;
-    //     this.setState({ ...this.state, imageSrc: imageBase64 });
-    //   };
-
-    //   reader.onerror = function (error) {
-    //     alert("Error occurred reading file: ", selectedFile.name);
-    //     closeModal();
-    //   };
-    // });
+    $fileField.addEventListener("input", (e) => {});
   };
 
   this.$element.addEventListener("change", (e) => {
     e.preventDefault();
+    console.log("change occure");
     const {
       dataset: { type },
-      value,
     } = e.target;
-    this.setState({ ...this.state, [`${type}`]: value });
+    const $image = this.$element.querySelector(`#${type}-image`);
+    console.log($image); // 수정 완료시에 해당 값을 적용
+
+    switch (type) {
+      case "title":
+        titleImage = e.target; // 또한 여기서 값이 dataKey로 변경되어야 함.
+        fileUpdateImage(e.target, $image); // 해당 이미지로 변경하는데, 이게 템플릿이 그려지면서 값이 애매해짐.
+        break;
+      case "detail":
+        detailImage = e.target;
+        fileUpdateImage(e.target, $image);
+        break;
+      case "delivery":
+        deliveryImage = e.target;
+        fileUpdateImage(e.target, $image);
+        break;
+      case "nutrition":
+        nutritionImage = e.target;
+        fileUpdateImage(e.target, $image);
+        break;
+      default:
+        // this.setState({ ...this.state, [`${type}`]: value });
+        return;
+    }
   });
 
   this.init = async () => {
@@ -71,9 +109,18 @@ export default function ProductDetail({
       this.setState(history.state.state);
     }
 
-    this.$element.innerHTML = await productDetailTemplate(
+    const [titleImage, detailImage, deliveryImage, nutritionImage] =
+      await Promise.all([
+        getImageUrl(this.state.titleImage),
+        getImageUrl(this.state.detailImage),
+        getImageUrl(this.state.deliveryImage),
+        getImageUrl(this.state.nutritionImage),
+      ]);
+
+    this.$element.innerHTML = productDetailTemplate(
       this.state ?? null,
       this.$categories,
+      { titleImage, detailImage, deliveryImage, nutritionImage },
     );
 
     $app.appendChild(this.$element);
@@ -82,9 +129,17 @@ export default function ProductDetail({
 
   this.render = async () => {
     if (!this.state || JSON.stringify(this.state) === "{}") return;
-    this.$element.innerHTML = await productDetailTemplate(
+    const [titleImage, detailImage, deliveryImage, nutritionImage] =
+      await Promise.all([
+        getImageUrl(this.state.titleImage),
+        getImageUrl(this.state.detailImage),
+        getImageUrl(this.state.deliveryImage),
+        getImageUrl(this.state.nutritionImage),
+      ]);
+    this.$element.innerHTML = productDetailTemplate(
       this.state ?? null,
       this.$categories,
+      { titleImage, detailImage, deliveryImage, nutritionImage },
     );
     subScribeEventListener();
   };

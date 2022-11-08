@@ -3,13 +3,18 @@ import Orders from "./orders/order.js";
 import Products from "./products/product.js";
 
 import { navigate } from "../utility/navigate.js";
-import { checkStringEmpty, pathToRegex } from "../useful-functions.js";
+import {
+  checkStringEmpty,
+  getImageKeyByCheckType,
+  pathToRegex,
+} from "../useful-functions.js";
 import ProductDetail from "./products/productDetail.js";
 import OrderDetail from "./orders/orderDetail.js";
 import { closeModal } from "./components/modal.js";
 import { get, post, del, patch } from "../api.js";
+import { addImageToS3 } from "../aw3-s3.js";
 
-const BASE_URL = `http://localhost:5000`;
+const BASE_URL = `http://localhost:5001`;
 
 export default function App({ $app }) {
   this.state = {
@@ -115,9 +120,31 @@ export default function App({ $app }) {
       this.setState({ productLists, productDetail: {} });
     },
     updateHandler: async (updateData) => {
-      const { id } = updateData;
-      const patchResult = patch(`${BASE_URL}/products`, id, updateData);
-      consnole.log(patchResult);
+      const {
+        id,
+        categoryId,
+        titleImage,
+        detailImage,
+        deliveryImage,
+        nutritionImage,
+      } = updateData;
+      console.log(updateData, typeof titleImage, typeof detailImage, 123);
+
+      updateData = {
+        ...updateData,
+        titleImage: await getImageKeyByCheckType(titleImage, categoryId),
+        detailImage: await getImageKeyByCheckType(detailImage, categoryId),
+        deliveryImage: await getImageKeyByCheckType(deliveryImage, categoryId),
+        nutritionImage: await getImageKeyByCheckType(
+          nutritionImage,
+          categoryId,
+        ),
+      };
+
+      console.log(updateData, 1231231212);
+
+      // const patchResult = await patch(`${BASE_URL}/products`, id, updateData);
+      // consnole.log(patchResult);
       const productLists = this.state.productLists.map((product) =>
         product.id === id ? updateData : product,
       );

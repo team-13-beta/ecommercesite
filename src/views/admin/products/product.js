@@ -7,7 +7,7 @@ import { appendDetailMoveHandler } from "../../utility/navigate.js";
 import { categoryHeader } from "../components/product/productHeader.js";
 import { tableTemplate } from "../components/tableTemplate.js";
 import { productModal, closeModal } from "../components/modal.js";
-import { checkStringEmpty } from "../../useful-functions.js";
+import { checkStringEmpty, fileAppendImage } from "../../useful-functions.js";
 import { addImageToS3 } from "../../aw3-s3.js";
 
 const PRODUCT_COLUMNS = [
@@ -72,23 +72,23 @@ export default function Products({
       e.preventDefault();
       const { type } = e.target.dataset;
       const $figure = $fileField.querySelector(`.${type}-image`);
-      console.log($figure, type);
+
       switch (type) {
         case "title":
           titleImage = e.target;
-          fileRead(e.target, $figure);
+          fileAppendImage(titleImage, $figure);
           break;
         case "detail":
           detailImage = e.target;
-          fileRead(e.target, $figure);
+          fileAppendImage(detailImage, $figure);
           break;
         case "delivery":
           deliveryImage = e.target;
-          fileRead(e.target, $figure);
+          fileAppendImage(deliveryImage, $figure);
           break;
         case "nutrition":
           nutritionImage = e.target;
-          fileRead(e.target, $figure);
+          fileAppendImage(nutritionImage, $figure);
           break;
       }
     });
@@ -146,22 +146,6 @@ export default function Products({
 
     $modalClose.addEventListener("click", closeModal);
   }
-
-  const fileRead = (file, figure) => {
-    let reader = new FileReader();
-
-    reader.readAsDataURL(file.files[0]);
-
-    reader.onload = function () {
-      const imageBase64 = reader.result;
-      figure.setAttribute("class", "image is-square");
-      figure.innerHTML = `<img id="product-image" src=${imageBase64} alt="상품 이미지" />`;
-    };
-
-    reader.onerror = function (error) {
-      alert("Error: ", error);
-    };
-  };
 
   this.init = () => {
     clearContainer($app);
