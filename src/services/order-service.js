@@ -40,20 +40,23 @@ class OrderService {
         let totalPrice=0;
 
         // 상품 총액 계산
-        for(let b of basket){
-            totalPrice+=Number(b.price)*Number(b.stock);
+        for(let b of basket.buyingProduct){
+            totalPrice+=b.price*b.stock;
         }
         console.log(user)
         // db에 저장
         const createdNewOrder = await this.orderModel.create({
             userId,
-            buying_product:basket,
+            userName:basket.userName,
+            buyingProduct:basket.buyingProduct,
+            address:basket.address,
+            phoneNumber:basket.phoneNumber,
             // address,
             status,
             totalPrice,
         });
 
-        for(let item of basket){
+        for(let item of basket.buyingProduct){
             let product = await productModel.findByName(item.name);
             console.log(product);
             const stock = product.stock - item.stock;
