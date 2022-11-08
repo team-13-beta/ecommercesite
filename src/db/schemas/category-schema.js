@@ -3,7 +3,7 @@ import { Schema } from "mongoose";
 const CategorySchema = new Schema(
   {
     categoryId:{
-      type:String,
+      type:Number,
     },
     name:{
         type:String,

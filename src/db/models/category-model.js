@@ -21,7 +21,7 @@ export class CategoryModel {
       const num2=await Category.find().sort({"categoryId":-1}).limit(1);
       //console.log(num2[0].categoryId);
       //const num = await Category.find()
-      const categoryId= (num2 === [])? 1 : Number(num2[0].categoryId)+1; 
+      const categoryId= (num2[0])? (num2[0].categoryId)+1:1; 
       const time = timeZone();
       const timeInfo = {createdTime:time,updatedTime:time};
       const info = {categoryId, ...categoryInfo , ...timeInfo};
