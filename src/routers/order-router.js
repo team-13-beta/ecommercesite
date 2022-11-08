@@ -36,7 +36,7 @@ orderRouter.get("/:consumer_id", async (req,res,next)=>{
 orderRouter.get("/item/:order_id", async (req,res,next)=>{
   try{
       const order_id = req.params.order_id;
-      console.log(order_id);
+      console.log(Number(order_id));
       const order=await orderService.getOrder(Number(order_id));
       //console.log(products);
       res.status(200).json(order);

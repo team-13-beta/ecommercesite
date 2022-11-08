@@ -13,9 +13,9 @@ export class OrderModel {
         const orderByUser = await Order.find({ userId: consumerId });
         return orderByUser;
     }
-    
-    async findByOrderId(orderId) {
-        const findorder = await Order.find( { orderId: orderId } );
+
+    async findByOrderId(Id) {
+        const findorder = await Order.find( { orderId: Id } );
         console.log(findorder);
         return findorder;
     }
