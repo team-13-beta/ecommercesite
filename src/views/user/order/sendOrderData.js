@@ -37,8 +37,11 @@ function handleSend() {
   };
   console.log(sendData);
   const res = Api.post("/orders", sendData);
-  console.log(res);
-  // window.localStorage.clear();
-  // window.location.href = "/user/order/success";
+  if (res) {
+    window.localStorage.clear();
+    window.location.href = "/user/order/success";
+  } else {
+    alert("주문에 실패했습니다! 다시 확인해주세요");
+  }
 }
 sendOrderEl.addEventListener("click", handleSend);

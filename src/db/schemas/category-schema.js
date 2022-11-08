@@ -2,19 +2,20 @@ import { Schema } from "mongoose";
 
 const CategorySchema = new Schema(
   {
-    categoryId:{
-      type:String,
+    categoryId: {
+      type: Number,
+      required: true,
     },
-    name:{
-        type:String,
-        required:true,
+    name: {
+      type: String,
+      required: true,
     },
-    createdTime : { 
-      type: String
+    createdTime: {
+      type: String,
     },
-    updatedTime : { 
-      type: String
-    }
+    updatedTime: {
+      type: String,
+    },
   },
   {
     collection: "categories",

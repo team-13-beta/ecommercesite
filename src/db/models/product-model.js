@@ -8,8 +8,8 @@ export class ProductModel {
     const product = await Product.findOne({ name });
     return product;
   }
-  async findById(id) {
-    const product = await Product.findOne({ productId: id });
+  async findById(productId) {
+    const product = await Product.findOne({ productId: productId });
     return product;
   }
 
@@ -32,7 +32,7 @@ export class ProductModel {
   }
 
   async update({ productId, update }) {
-    const filter = { _id: productId };
+    const filter = { productId: productId };
     const option = { returnOriginal: false };
     const time = timeZone();
     const updateInfo = { ...update, updatedTime: time };

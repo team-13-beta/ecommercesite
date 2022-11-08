@@ -13,15 +13,21 @@ export class OrderModel {
     const orderByUser = await Order.find({ userId: consumerId });
     return orderByUser;
   }
+  async findByOrderId(Id) {
+    const findorder = await Order.find({ orderId: Id });
+    console.log(findorder);
+    return findorder;
+  }
   async findAll() {
     const orders = await Order.find({});
     return orders;
   }
   async create(orderInfo) {
     const num2 = await Order.find().sort({ orderId: -1 }).limit(1);
-    const orderId = num2 ? num2[0].orderId + 1 : 1;
-    console.log(`(주문 생성) 주문 번호 : ${orderId}`);
-
+    console.log(num2);
+    // Order Id 생성
+    const orderId = num2[0] ? num2[0].orderId + 1 : 1;
+    console.log(orderId);
     const time = timeZone();
     const timeInfo = { createdTime: time, updatedTime: time };
     const info = { orderId, ...orderInfo, ...timeInfo };

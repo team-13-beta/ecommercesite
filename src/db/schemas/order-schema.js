@@ -4,12 +4,17 @@ const OrderSchema = new Schema(
   {
     orderId: {
       type: Number,
+      required: true,
+    },
+    userName: {
+      type: String,
+      required: true,
     },
     userId: {
       type: Schema.Types.ObjectId,
       ref: "users",
     },
-    buying_product: {
+    buyingProduct: {
       type: [Schema.Types.Mixed],
       required: true,
     },
@@ -24,8 +29,12 @@ const OrderSchema = new Schema(
           _id: false,
         },
       ),
-      required: false,
+      required: true,
     },
+    phoneNumber: {
+      type: String,
+    },
+
     status: {
       type: String,
       required: true,
