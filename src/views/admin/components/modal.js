@@ -28,7 +28,7 @@ export const categoryUpdateModal = (data) => {
     <section class="modal-card-body">
       <div class="content">
         <label>카테고리 이름</label>
-        <input class="category-input input" value="${data.categoryName}" />
+        <input class="category-input input" value="${data.name}" />
       </div>
     </section>
     <footer class="modal-card-foot">
@@ -62,8 +62,8 @@ export function productModal(categories = []) {
               <div class="select full-select">
                 <select id="categoryId" >
                   ${categories.reduce(
-                    (acc, { id, categoryName }) =>
-                      (acc += `<option value=${id}>${categoryName}</option>`),
+                    (acc, { id, name }) =>
+                      (acc += `<option value=${id}>${name}</option>`),
                     "",
                   )}
                 </select>
@@ -92,35 +92,78 @@ export function productModal(categories = []) {
               ></textarea>
             </div>
           </div>
-          <div class="field">
-            <label class="label">제품 이미지</label>
-            <div class="file">
-              <label class="file-label">
-                <input class="file-input" type="file" name="resume" id="file" />
-                <span class="file-cta">
-                  <span class="file-icon">
-                    <i class="fas fa-upload"></i>
-                  </span>
-                  <span class="file-label">컴퓨터에서 선택</span>
-                </span>
-              </label>
-            </div>
-            <figure></figure>
-          </div>
           
-
-          <div class="field">
-            <label class="label">재고량</label>
-            <div class="control">
-              <input
-                class="input"
-                id="stock"
-                placeholder="재고량을 입력해주세요"
-                type="number"
-                
-              />
-            </div>
+        <div class="field file-field">
+          <label class="label">메인 이미지</label>
+          <div class="file">
+            <label class="file-label">
+              <input class="file-input" type="file" name="resume" data-type="title" />
+              <span class="file-cta">
+                <span class="file-icon">
+                  <i class="fas fa-upload"></i>
+                </span>
+                <span class="file-label">컴퓨터에서 선택</span>
+              </span>
+            </label>
           </div>
+          <figure class="title-image"></figure>
+
+          <label class="label">상세 이미지</label>
+          <div class="file">
+            <label class="file-label">
+              <input class="file-input" type="file" name="resume" data-type="detail" />
+              <span class="file-cta">
+                <span class="file-icon">
+                  <i class="fas fa-upload"></i>
+                </span>
+                <span class="file-label">컴퓨터에서 선택</span>
+              </span>
+            </label>
+          </div>
+          <figure class="detail-image"></figure>
+
+          <label class="label">배달 이미지</label>
+          <div class="file">
+            <label class="file-label">
+              <input class="file-input" type="file" name="resume" data-type="delivery" />
+              <span class="file-cta">
+                <span class="file-icon">
+                  <i class="fas fa-upload"></i>
+                </span>
+                <span class="file-label">컴퓨터에서 선택</span>
+              </span>
+            </label>
+          </div>
+          <figure class="delivery-image"></figure>
+
+          <label class="label">영양 이미지</label>
+          <div class="file">
+            <label class="file-label">
+              <input class="file-input" type="file" name="resume"  data-type="nutrition"/>
+              <span class="file-cta">
+                <span class="file-icon">
+                  <i class="fas fa-upload"></i>
+                </span>
+                <span class="file-label">컴퓨터에서 선택</span>
+              </span>
+            </label>
+          </div>
+          <figure class="nutrition-image"></figure>
+        </div>
+
+
+        <div class="field">
+          <label class="label">재고량</label>
+          <div class="control">
+            <input
+              class="input"
+              id="stock"
+              placeholder="재고량을 입력해주세요"
+              type="number"
+              
+            />
+          </div>
+        </div>
 
           <div class="field">
             <label class="label">가격</label>

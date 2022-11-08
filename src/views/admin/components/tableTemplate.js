@@ -3,8 +3,8 @@ import { createElement } from "../../utility/documentSelect.js";
 export function tableTemplate(columns, datas = [], categories = []) {
   const $thead = createElement("thead");
   const $theadRow = createElement("tr");
-
   const $tbody = createElement("tbody");
+
   for (const [key, value] of columns) {
     const $td = createElement("td");
     $td.innerHTML = value;
@@ -16,19 +16,24 @@ export function tableTemplate(columns, datas = [], categories = []) {
     const $tr = createElement("tr");
     for (const [key] of columns) {
       const $td = createElement("td");
-
-      if (key === "detailButton") {
-        $td.innerHTML = `<button class="button is-small" data-type="detail" data-detail-id=${data["id"]}>상세 정보</button>`;
-      } else if (key === "update_button") {
-        $td.innerHTML = `<button class="button is-small" data-type="update" data-detail-id=${data["id"]}>수정하기</button>`;
-      } else if (key === "categoryId") {
-        const { categoryName } = categories.find(
-          (category) => category.id === data[key],
-        ) ?? { categoryName: "none" };
-        $td.innerHTML = categoryName;
-      } else {
-        $td.innerHTML = data[key] ?? "";
+      switch (key) {
+        case "detailButton":
+          $td.innerHTML = `<button class="button is-small" data-type="detail" data-detail-id=${data["id"]}>상세 정보</button>`;
+          break;
+        case "updateButton":
+          $td.innerHTML = `<button class="button is-small" data-type="update" data-detail-id=${data["id"]}>수정하기</button>`;
+          break;
+        case "categoryId":
+          const { name } = categories.find(
+            (category) => category.id === data[key],
+          ) ?? { name: "none" };
+          $td.innerHTML = name;
+          break;
+        default:
+          $td.innerHTML = data[key] ?? "";
+          break;
       }
+
       $tr.appendChild($td);
     }
 

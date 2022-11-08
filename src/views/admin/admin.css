@@ -10,6 +10,15 @@ main {
   width: 30%;
 }
 
+.subSpan {
+  font-weight: 700;
+}
+
+.small-span {
+  font-size: 13px;
+  color: grey;
+}
+
 .info-input {
   width: 80%;
   border-radius: 10px;
