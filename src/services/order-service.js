@@ -16,6 +16,8 @@ class OrderService {
     async getOrders(consumer_id) {
         const user = await userModel.findById(consumer_id);
 
+        if(!user) throw new Error('사용자의 주문내역을 요청하셨지만 해당하는 사용자가 존재하지 않거나 토큰이 유효하지 않습니다');
+
         const orders = await this.orderModel.findByUsers(user._id);
         return orders;
     }
@@ -30,8 +32,11 @@ class OrderService {
 
     async addOrder(orderInfo){
         // 객체 destructuring
-        const { userObjId,basket } = orderInfo;
+        const { userObjId , basket } = orderInfo;
+        console.log(userObjId);
         const user=await userModel.findById(userObjId);
+
+        if(!user) throw new Error('주문을 요청하셨지만 해당하는 사용자가 없거나 토큰이 유효하지 않습니다.');
         let userId = user._id;
         userId = userId.toString()
             

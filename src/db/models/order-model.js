@@ -15,8 +15,9 @@ export class OrderModel {
     }
 
     async findByOrderId(Id) {
-        const findorder = await Order.find( { orderId: Id } );
-        console.log(findorder);
+        let ordId = Number(Id);
+        const findorder = await Order.findOne( { orderId: ordId } );
+        if(findorder == null) throw new Error("찾고계신 주문번호는 존재하지 않습니다. ")
         return findorder;
     }
 
@@ -25,7 +26,7 @@ export class OrderModel {
         return orders;
     }
     async create(orderInfo) {
-        const num2=await Order.find().sort({"orderId":-1}).limit(1);
+        const num2= await Order.find().sort({"orderId":-1}).limit(1);
         console.log(num2);
         // Order Id 생성  
         const orderId = (num2[0])? num2[0].orderId+1 : 1;
