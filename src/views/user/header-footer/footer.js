@@ -1,6 +1,6 @@
 export default function footerComponent() {
   return `
-    <footer class="footer has-text-centered" style="background-color: #ff922b; color: #ffe8cc;">
+    <footer class="footer has-text-centered" style="background-color: #ff922b; color: #ffe8cc; margin-top:0.5rem">
       <div style="font-size: 50px; ">β</div>
         <span>호진</span>
         <span>상우</span>

@@ -1,6 +1,6 @@
 import { model } from "mongoose";
 import { ProductSchema } from "../schemas/product-schema.js";
-import {timeZone} from '../../services/timeZone.js';
+import { timeZone } from "../../services/timeZone.js";
 const Product = model("products", ProductSchema);
 
 export class ProductModel {
@@ -14,12 +14,12 @@ export class ProductModel {
   }
 
   async create(productInfo) {
-    const num = await Product.find()
-    const productId= (num === [])? 1 : num.length+1; 
+    const num = await Product.find();
+    const productId = num === [] ? 1 : num.length + 1;
 
     const time = timeZone();
-    const timeInfo = {'createdTime':time,'updatedTime':time};
-    const info = {productId, ...productInfo , ...timeInfo};
+    const timeInfo = { createdTime: time, updatedTime: time };
+    const info = { productId, ...productInfo, ...timeInfo };
     const createdNewProduct = await Product.create(info);
     return createdNewProduct;
   }
@@ -27,20 +27,23 @@ export class ProductModel {
     const products = await Product.find().populate("categoryId");
     return products;
   }
- 
 
   async update({ productId, update }) {
     const filter = { _id: productId };
     const option = { returnOriginal: false };
     const time = timeZone();
-    const updateInfo = {...update, updatedTime:time}
-    const updatedProduct = await Product.findOneAndUpdate(filter, updateInfo, option);
+    const updateInfo = { ...update, updatedTime: time };
+    const updatedProduct = await Product.findOneAndUpdate(
+      filter,
+      updateInfo,
+      option,
+    );
     console.log(updatedProduct);
     return updatedProduct;
   }
 
-  async deleteOne(product){
-    const deleteproduct=await Product.deleteOne({name: product.name});
+  async deleteOne(product) {
+    const deleteproduct = await Product.deleteOne({ name: product.name });
     return deleteproduct;
   }
 }

@@ -30,7 +30,7 @@ export default function renderOrderData() {
             class="input"
             id="receiverPhoneNumber"
             type="number"
-            placeholder="- 없이 입력해 주세요."
+            placeholder="- 포함해서 입력해 주세요."
             autocomplete="on"
           />
         </p>

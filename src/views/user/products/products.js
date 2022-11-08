@@ -9,7 +9,7 @@ function handleData() {
   console.log();
   const url = window.location.pathname;
   const product_id = url.split("/")[3];
-
+  console.log(url);
   fetch(`/products/${product_id}`)
     .then((res) => res.json())
     .then((data) => {

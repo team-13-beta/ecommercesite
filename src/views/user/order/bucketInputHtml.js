@@ -9,11 +9,12 @@ function bucketInputHtml() {
 
     totalPrice += parseInt(item.price) * parseInt(item.stock);
     if (item) {
-      const htmlStr = renderBucketData(item.name, item.stock);
+      const htmlStr = renderBucketData(item.name, item.stock, item.price);
       // html에 추가
       let el = document.createElement("div");
+      el.classList.add("card-content");
       el.innerHTML = htmlStr;
-      box.append(el);
+      box.after(el);
     }
   }
 

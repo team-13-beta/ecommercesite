@@ -24,7 +24,14 @@
 
           <div class="card block">
             <div class="card-header-title">제품 목록</div>
-            <div class="product-box"></div>
+            <div
+              class="card-content columns product-box"
+              style="margin-bottom: 0"
+            >
+              <div class="column bold">제품명</div>
+              <div class="column bold">제품 수량</div>
+              <div class="column bold">제품 가격</div>
+            </div>
           </div>
         </div>
         <div class="column">
@@ -32,7 +39,10 @@
             <div class="card-header-title">주문 결제 금액</div>
             <div class="card-content">결제 금액</div>
             <div class="card-content title total-price">0000</div>
-            <button class="card-content button" id="paymentBtn">
+            <button
+              class="card-footer-item button is-fullwidth"
+              id="paymentBtn"
+            >
               결제 하기
             </button>
           </div>
