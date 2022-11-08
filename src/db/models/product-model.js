@@ -9,13 +9,14 @@ export class ProductModel {
     return product;
   }
   async findById(id) {
-    const product = await Product.findOne({ productId : id });
+    const product = await Product.findOne({ productId: id });
     return product;
   }
 
   async create(productInfo) {
-    const num = await Product.find();
-    const productId = num === [] ? 1 : num.length + 1;
+    const num = await Product.find().sort({ productId: -1 }).limit(1);
+    console.log(num);
+    const productId = num[0] ? num[0].productId + 1 : 1;
 
     const time = timeZone();
     const timeInfo = { createdTime: time, updatedTime: time };
