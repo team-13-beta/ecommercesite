@@ -5,6 +5,7 @@ function handleSend() {
 
   // TODO : 성공시 이동 실패시 경고
   // TODO : 성공하면 로컬 비우기
+  window.localStorage.clear();
   window.location.href = "/user/order/success";
 }
 sendOrderEl.addEventListener("click", handleSend);

@@ -1,6 +1,7 @@
 const directBtnEl = document.querySelector(".direct-pay");
 
 function handleOrder() {
-  window.location.href = "/user/order";
+  if (sessionStorage.getItem("token")) window.location.href = "/user/order";
+  else window.location.href = "/login";
 }
 directBtnEl.addEventListener("click", handleOrder);

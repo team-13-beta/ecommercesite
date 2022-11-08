@@ -14,18 +14,18 @@ function handleData() {
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
-      const [id, name, price, [title_img, des_img1, des_img2, des_img3]] = [
+      const [id, name, price, des] = [
         product_id,
         data.name,
         data.price,
-        data.description.imageUrl,
+        data.description,
       ];
 
-      const htmlEl = renderDetailData(id, title_img, name, price);
+      const htmlEl = renderDetailData(id, name, price, des);
       contentEl.innerHTML = htmlEl;
 
-      const html2El = productDesData(des_img1, des_img2, des_img3);
-      detailEl.innerHTML = html2El;
+      //const html2El = productDesData(des_img1, des_img2, des_img3);
+      //detailEl.innerHTML = html2El;
 
       const counterEl = document.createElement("script");
       counterEl.setAttribute("src", "saveItemLocal.js");
