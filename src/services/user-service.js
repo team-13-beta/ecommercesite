@@ -76,7 +76,7 @@ class UserService {
   // 사용자 목록을 받음. admin이면 다 받을 수 있고 user면 사용자 자신의 정보만 조회가능
   // Obj ID를 통해서 정보 출력
   async getUsers(objId) {
-    const users = (option !== '')? await this.userModel.findById(objId): await this.userModel.findAll();
+    const users = (objId !== '')? await this.userModel.findById(objId): await this.userModel.findAll();
     return users;
   }
 
