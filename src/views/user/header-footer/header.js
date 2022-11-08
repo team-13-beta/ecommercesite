@@ -1,4 +1,4 @@
-export default function headerComponent() {
+export default function headerComponent(login, join) {
   return `
     <header class="box">
         <div class="header-container">
@@ -11,9 +11,9 @@ export default function headerComponent() {
             border-radius: 10px;"><a href="/">β</a></div>
           </div>
           <div class="level-right">
-            <div class="level-item"><a href="/login">로그인</a></div>
-            <div class="level-item"><a href="/register">회원가입</a></div>
-            <div class="level-item">장바구니</div>
+            <div class="level-item ${login}"><a href="/${login}">${login}</a></div>
+            <div class="level-item ${join}"><a href="/${join}">${join}</a></div>
+            <div class="level-item"><a href="/user/bucket/">Cart</a></div>
           </div>
         </nav>
         </div>
