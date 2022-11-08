@@ -1,7 +1,6 @@
 import {
   clearContainer,
   createElement,
-  returnDocumentClass,
   returnDocumentId,
 } from "../../utility/documentSelect.js";
 import { appendDetailMoveHandler } from "../../utility/navigate.js";
@@ -9,6 +8,7 @@ import { categoryHeader } from "../components/product/productHeader.js";
 import { tableTemplate } from "../components/tableTemplate.js";
 import { productModal, closeModal } from "../components/modal.js";
 import { checkStringEmpty } from "../../useful-functions.js";
+import { addImageToS3 } from "../../aw3-s3.js";
 
 const PRODUCT_COLUMNS = [
   ["id", "상품 아이디"],
@@ -53,45 +53,55 @@ export default function Products({
   });
 
   function modalHandler(categoryLists = []) {
+    let nutritionImage = "";
+    let deliveryImage = "";
+    let detailImage = "";
+    let titleImage = "";
+
     const $modalLayout = createElement("div");
     $modalLayout.setAttribute("class", "modal is-active");
-    let imageBase64 = "";
 
     $modalLayout.innerHTML = productModal(categoryLists ?? []);
     document.querySelector("body").prepend($modalLayout);
 
     const $modalClose = $modalLayout.querySelector(".close-button");
     const $appendButton = $modalLayout.querySelector(".append-button");
-    const $file = returnDocumentId("file");
+    const $fileField = $modalLayout.querySelector(".file-field");
 
-    $file.addEventListener("input", function (e) {
+    $fileField.addEventListener("input", (e) => {
       e.preventDefault();
-      let reader = new FileReader();
-
-      reader.readAsDataURL($file.files[0]);
-
-      reader.onload = function () {
-        imageBase64 = reader.result;
-        const $imageFigure = $modalLayout.querySelector("figure");
-        $imageFigure.setAttribute("class", "image is-square");
-        $imageFigure.innerHTML = `<img id="product-image" src=${imageBase64} alt="상품 이미지" />`;
-      };
-
-      reader.onerror = function (error) {
-        alert("Error: ", error);
-        closeModal();
-      };
+      const { type } = e.target.dataset;
+      const $figure = $fileField.querySelector(`.${type}-image`);
+      console.log($figure, type);
+      switch (type) {
+        case "title":
+          titleImage = e.target;
+          fileRead(e.target, $figure);
+          break;
+        case "detail":
+          detailImage = e.target;
+          fileRead(e.target, $figure);
+          break;
+        case "delivery":
+          deliveryImage = e.target;
+          fileRead(e.target, $figure);
+          break;
+        case "nutrition":
+          nutritionImage = e.target;
+          fileRead(e.target, $figure);
+          break;
+      }
     });
 
-    $appendButton.addEventListener("click", () => {
-      const productName = returnDocumentId("productName").value;
+    $appendButton.addEventListener("click", async () => {
+      const name = returnDocumentId("productName").value;
       const categoryId = returnDocumentId("categoryId").value;
       const companyName = returnDocumentId("companyName").value;
       const description = returnDocumentId("description").value;
       const stock = returnDocumentId("stock").value;
       const price = returnDocumentId("price").value;
       const isValidate = [
-        productName,
+        name,
         categoryId,
         companyName,
         description,
@@ -103,22 +113,55 @@ export default function Products({
         alert("입력된 값을 확인해주세요");
         return;
       }
-      const data = {
-        id: String(Date.now()),
-        productName,
-        categoryId,
-        companyName,
-        description,
-        stock,
-        price,
-        imageSrc: imageBase64,
-      };
-      appendHandler(data);
-      closeModal();
+      try {
+        const [titleKey, detailKey, deliveryKey, nutritionKey] =
+          await Promise.all([
+            addImageToS3(titleImage, categoryId),
+            addImageToS3(detailImage, categoryId),
+            addImageToS3(deliveryImage, categoryId),
+            addImageToS3(nutritionImage, categoryId),
+          ]);
+
+        const data = {
+          id: String(Date.now()),
+          name,
+          categoryId,
+          companyName,
+          description,
+          stock,
+          price,
+          titleImage: titleKey,
+          detailImage: detailKey,
+          deliveryImage: deliveryKey,
+          nutritionImage: nutritionKey,
+        };
+        await appendHandler(data);
+        closeModal();
+      } catch (err) {
+        alert(
+          `문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`,
+        );
+      }
     });
 
     $modalClose.addEventListener("click", closeModal);
   }
+
+  const fileRead = (file, figure) => {
+    let reader = new FileReader();
+
+    reader.readAsDataURL(file.files[0]);
+
+    reader.onload = function () {
+      const imageBase64 = reader.result;
+      figure.setAttribute("class", "image is-square");
+      figure.innerHTML = `<img id="product-image" src=${imageBase64} alt="상품 이미지" />`;
+    };
+
+    reader.onerror = function (error) {
+      alert("Error: ", error);
+    };
+  };
 
   this.init = () => {
     clearContainer($app);
@@ -141,7 +184,6 @@ export default function Products({
 
   this.render = () => {
     const $table = this.$element.querySelector("table");
-    console.log($table, this.state.productLists, this.state.categoryLists);
     if ($table) {
       $table.innerHTML = tableTemplate(
         PRODUCT_COLUMNS,

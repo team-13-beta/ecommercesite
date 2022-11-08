@@ -71,7 +71,6 @@ export default function ProductDetail({
     if (!this.state || this.state.id !== history.state.state.id) {
       this.setState(history.state.state);
     }
-
     this.$element.innerHTML = productDetailTemplate(
       this.state ?? null,
       this.$categories,
@@ -87,7 +86,6 @@ export default function ProductDetail({
       this.state ?? null,
       this.$categories,
     );
-    console.log(this.$element.innerHTML);
     subScribeEventListener();
   };
 

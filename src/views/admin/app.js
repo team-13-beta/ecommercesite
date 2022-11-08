@@ -40,16 +40,17 @@ export default function App({ $app }) {
       const productLists = checkStringEmpty(searchData)
         ? this.state.productLists
         : products.state.productLists.filter((product) =>
-            product.productName.includes(searchData),
+            product.name.includes(searchData),
           );
       products.setState({ ...products.state, productLists });
     },
     appendHandler: async (appendItem) => {
-      const postResult = await post(`${BASE_URL}/products`, appendItem);
+      // const postResult = await post(`${BASE_URL}/products`, appendItem);
       // 상품, 카테고리, 주무 조회 관련해서 데이터 schema 통일 시킬 것.
+      console.log(appendItem);
 
       this.setState({
-        productLists: [...this.state.productLists, { ...postResult }],
+        productLists: [...this.state.productLists, { ...appendItem }],
       });
     },
   });
