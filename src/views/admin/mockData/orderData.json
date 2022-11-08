@@ -1,84 +1,208 @@
-{
-  "data": [
-    {
-      "id": "1",
-      "address": "경기도 수원시 장안구 엄복동",
-      "consumerName": "정호진",
-      "phoneNumber": "010-2333-9654",
-      "status": "배송전",
-      "totalPrice": 10000
+[
+  {
+    "id": "1",
+    "address": {
+      "postCode": "",
+      "address1": "경기도 수원시 장안구 엄복동",
+      "address2": ""
     },
-    {
-      "id": "2",
-      "address": "경기도 수원시 장안구 엄복동",
-      "consumerName": "김민수",
-      "phoneNumber": "010-2333-9654",
-      "status": "배송전",
-      "totalPrice": 10000
+    "consumerName": "정호진",
+    "phoneNumber": "010-2333-9654",
+    "status": "배송전",
+    "totalPrice": 10000,
+    "buyingProduct": [
+      {
+        "productId": "1",
+        "stock": "10",
+        "name": "김계란 닭가슴살",
+        "price": "2400"
+      },
+      {
+        "productId": "5",
+        "stock": "1",
+        "name": "김계란 프로틴",
+        "price": "4000"
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "address": {
+      "postCode": "",
+      "address1": "경기도 수원시 장안구 엄복동",
+      "address2": ""
     },
-    {
-      "id": "3",
-      "address": "경기도 수원시 장안구 엄복동",
-      "consumerName": "김민수",
-      "phoneNumber": "010-2333-9654",
-      "status": "배송전",
-      "totalPrice": 10000
+    "consumerName": "김민수",
+    "phoneNumber": "010-2333-9654",
+    "status": "배송전",
+    "totalPrice": 10000,
+    "buyingProduct": [
+      {
+        "productId": "string",
+        "stock": "string",
+        "name": "string",
+        "price": "string"
+      }
+    ]
+  },
+  {
+    "id": "3",
+    "address": {
+      "postCode": "",
+      "address1": "경기도 수원시 장안구 엄복동",
+      "address2": ""
     },
-    {
-      "id": "4",
-      "address": "경기도 수원시 장안구 엄복동",
-      "consumerName": "김민수",
-      "phoneNumber": "010-2333-9654",
-      "status": "배송전",
-      "totalPrice": 10000
+    "consumerName": "김민수",
+    "phoneNumber": "010-2333-9654",
+    "status": "배송전",
+    "totalPrice": 10000,
+    "buyingProduct": [
+      {
+        "productId": "string",
+        "stock": "string",
+        "name": "string",
+        "price": "string"
+      }
+    ]
+  },
+  {
+    "id": "4",
+    "address": {
+      "postCode": "",
+      "address1": "경기도 수원시 장안구 엄복동",
+      "address2": ""
     },
-    {
-      "id": "5",
-      "address": "경기도 수원시 장안구 엄복동",
-      "consumerName": "김민수",
-      "phoneNumber": "010-2333-9654",
-      "status": "배송전",
-      "totalPrice": 10000
+    "consumerName": "김민수",
+    "phoneNumber": "010-2333-9654",
+    "status": "배송전",
+    "totalPrice": 10000,
+    "buyingProduct": [
+      {
+        "productId": "string",
+        "stock": "string",
+        "name": "string",
+        "price": "string"
+      }
+    ]
+  },
+  {
+    "id": "5",
+    "address": {
+      "postCode": "",
+      "address1": "경기도 수원시 장안구 엄복동",
+      "address2": ""
     },
-    {
-      "id": "6",
-      "address": "경기도 수원시 장안구 엄복동",
-      "consumerName": "김민수",
-      "phoneNumber": "010-2333-9654",
-      "status": "배송전",
-      "totalPrice": 10000
+    "consumerName": "김민수",
+    "phoneNumber": "010-2333-9654",
+    "status": "배송전",
+    "totalPrice": 10000,
+    "buyingProduct": [
+      {
+        "productId": "string",
+        "stock": "string",
+        "name": "string",
+        "price": "string"
+      }
+    ]
+  },
+  {
+    "id": "6",
+    "address": {
+      "postCode": "",
+      "address1": "경기도 수원시 장안구 엄복동",
+      "address2": ""
     },
-    {
-      "id": "7",
-      "address": "경기도 수원시 장안구 엄복동",
-      "consumerName": "김민수",
-      "phoneNumber": "010-2333-9654",
-      "status": "배송전",
-      "totalPrice": 10000
+    "consumerName": "김민수",
+    "phoneNumber": "010-2333-9654",
+    "status": "배송전",
+    "totalPrice": 10000,
+    "buyingProduct": [
+      {
+        "productId": "string",
+        "stock": "string",
+        "name": "string",
+        "price": "string"
+      }
+    ]
+  },
+  {
+    "id": "7",
+    "address": {
+      "postCode": "",
+      "address1": "경기도 수원시 장안구 엄복동",
+      "address2": ""
     },
-    {
-      "id": "8",
-      "address": "경기도 수원시 장안구 엄복동",
-      "consumerName": "김민수",
-      "phoneNumber": "010-2333-9654",
-      "status": "배송전",
-      "totalPrice": 10000
+    "consumerName": "김민수",
+    "phoneNumber": "010-2333-9654",
+    "status": "배송전",
+    "totalPrice": 10000,
+    "buyingProduct": [
+      {
+        "productId": "string",
+        "stock": "string",
+        "name": "string",
+        "price": "string"
+      }
+    ]
+  },
+  {
+    "id": "8",
+    "address": {
+      "postCode": "",
+      "address1": "경기도 수원시 장안구 엄복동",
+      "address2": ""
     },
-    {
-      "id": "9",
-      "address": "경기도 수원시 장안구 엄복동",
-      "consumerName": "asdf",
-      "phoneNumber": "010-2333-9654",
-      "status": "배송전",
-      "totalPrice": 10000
+    "consumerName": "김민수",
+    "phoneNumber": "010-2333-9654",
+    "status": "배송전",
+    "totalPrice": 10000,
+    "buyingProduct": [
+      {
+        "productId": "string",
+        "stock": "string",
+        "name": "string",
+        "price": "string"
+      }
+    ]
+  },
+  {
+    "id": "9",
+    "address": {
+      "postCode": "",
+      "address1": "경기도 수원시 장안구 엄복동",
+      "address2": ""
     },
-    {
-      "id": "10",
-      "address": "경기도 수원시 장안구 엄복동",
-      "consumerName": "한정환",
-      "phoneNumber": "010-2333-9654",
-      "status": "배송전",
-      "totalPrice": 10000
-    }
-  ]
-}
+    "consumerName": "asdf",
+    "phoneNumber": "010-2333-9654",
+    "status": "배송전",
+    "totalPrice": 10000,
+    "buyingProduct": [
+      {
+        "productId": "string",
+        "stock": "string",
+        "name": "string",
+        "price": "string"
+      }
+    ]
+  },
+  {
+    "id": "10",
+    "address": {
+      "postCode": "",
+      "address1": "경기도 수원시 장안구 엄복동",
+      "address2": ""
+    },
+    "consumerName": "한정환",
+    "phoneNumber": "010-2333-9654",
+    "status": "배송전",
+    "totalPrice": 10000,
+    "buyingProduct": [
+      {
+        "productId": "string",
+        "stock": "string",
+        "name": "string",
+        "price": "string"
+      }
+    ]
+  }
+]

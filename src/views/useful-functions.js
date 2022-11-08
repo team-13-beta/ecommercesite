@@ -1,3 +1,5 @@
+import { addImageToS3 } from "./aw3-s3.js";
+
 // 문자열+숫자로 이루어진 랜덤 5글자 반환
 export const randomId = () => {
   return Math.random().toString(36).substring(2, 7);
@@ -41,4 +43,48 @@ export const checkPhoneNumberValid = (phoneNumber) => {
     return true;
   }
   return false;
+};
+
+export const checkObjectEmpty = (object) => {
+  return JSON.stringify(object) === "{}";
+};
+
+export const fileAppendImage = (file, figure) => {
+  let reader = new FileReader();
+
+  reader.readAsDataURL(file.files[0]);
+
+  reader.onload = function () {
+    const imageBase64 = reader.result;
+    figure.setAttribute("class", "image is-square");
+    figure.innerHTML = `<img id="product-image" src=${imageBase64} alt="상품 이미지" />`;
+  };
+
+  reader.onerror = function (error) {
+    alert("Error: ", error);
+  };
+};
+
+export const fileUpdateImage = (file, img) => {
+  let reader = new FileReader();
+
+  reader.readAsDataURL(file.files[0]);
+
+  reader.onload = function () {
+    const imageBase64 = reader.result;
+    img.src = imageBase64;
+  };
+
+  reader.onerror = function (error) {
+    alert("Error: ", error);
+  };
+};
+
+export const getImageKeyByCheckType = async (element, categoryId) => {
+  let result = element;
+  if (typeof element === "object") {
+    result = await addImageToS3(element, categoryId);
+  }
+
+  return result;
 };

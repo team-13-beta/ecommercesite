@@ -10,8 +10,8 @@ import {
 
 const CATEGORIES_COLUMNS = [
   ["id", "카테고리 아이디"],
-  ["categoryName", "카테고리 이름"],
-  ["update_button", "수정하기"],
+  ["name", "카테고리 이름"],
+  ["updateButton", "수정하기"],
 ];
 
 export default function Categories({
@@ -58,7 +58,7 @@ export default function Categories({
     $categoryAppend.addEventListener("click", (e) =>
       appendHandler({
         id: Date.now() + "",
-        categoryName: $categoryInput.value,
+        name: $categoryInput.value,
       }),
     );
     $modalClose.addEventListener("click", closeModal);
@@ -89,7 +89,7 @@ export default function Categories({
           const $categoryInput = $modalLayout.querySelector(".category-input");
           updateHandler({
             id: detailId,
-            categoryName: $categoryInput.value,
+            name: $categoryInput.value,
           });
           break;
         default:
