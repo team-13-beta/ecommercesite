@@ -13,19 +13,25 @@ export class CategoryModel {
         const categories = await Category.find({});
         return categories;
       }
-    async findById(categoryId) {
-        const category = await Category.findOne({ _id: categoryId });
+    async findById(Id) {
+        const category = await Category.findOne({ categoryId: Id });
         return category;
     }
     async create(categoryInfo) {
-    const time = timeZone();
-    const timeInfo = {createdTime:time,updatedTime:time};
-    const info = {...categoryInfo , ...timeInfo};
-        const createdNewCategory = await Category.create(info);
-        return createdNewCategory;
-      }
-    async update({ categoryId, update }) {
-      const filter = { _id: categoryId };
+      const num2=await Category.find().sort({"categoryId":-1}).limit(1);
+      //console.log(num2[0].categoryId);
+      //const num = await Category.find()
+      const categoryId= (num2 === [])? 1 : Number(num2[0].categoryId)+1; 
+      const time = timeZone();
+      const timeInfo = {createdTime:time,updatedTime:time};
+      const info = {categoryId, ...categoryInfo , ...timeInfo};
+      const createdNewCategory = await Category.create(info);
+
+      return createdNewCategory;
+    }
+    async update({ category, update }) {
+      console.log(category,update);
+      const filter = { _id: category._id };
       const option = { returnOriginal: false };
       const time = timeZone();
       const updateInfo = {...update, updatedTime:time}

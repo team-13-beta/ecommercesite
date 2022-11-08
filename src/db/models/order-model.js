@@ -18,9 +18,20 @@ export class OrderModel {
         return orders;
     }
     async create(orderInfo) {
+        const num2=await Order.find().sort({"orderId":-1}).limit(1);
+        console.log(num2);
+        let orderId=1;
+        if(num2===[]){
+            orderId=1;
+        }else{
+            orderId=Number(num2[0].orderId)+1;
+        }
+        //const orderId = (num2 === [])? 1 : Number(num2[0].orderId)+1;
+        console.log(orderId);
+        //console.log(num2);
         const time = timeZone();
         const timeInfo = {createdTime:time,updatedTime:time};
-        const info = {...orderInfo , ...timeInfo};
+        const info = { orderId, ...orderInfo , ...timeInfo};
         const createdNewOrder = await Order.create(info);
         return createdNewOrder;
     }
