@@ -12,10 +12,16 @@
     "totalPrice": 10000,
     "buyingProduct": [
       {
-        "productId": "string",
-        "stock": "string",
-        "name": "string",
-        "price": "string"
+        "productId": "1",
+        "stock": "10",
+        "name": "김계란 닭가슴살",
+        "price": "2400"
+      },
+      {
+        "productId": "5",
+        "stock": "1",
+        "name": "김계란 프로틴",
+        "price": "4000"
       }
     ]
   },

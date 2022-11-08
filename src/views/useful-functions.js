@@ -45,6 +45,10 @@ export const checkPhoneNumberValid = (phoneNumber) => {
   return false;
 };
 
+export const checkObjectEmpty = (object) => {
+  return JSON.stringify(object) === "{}";
+};
+
 export const fileAppendImage = (file, figure) => {
   let reader = new FileReader();
 
