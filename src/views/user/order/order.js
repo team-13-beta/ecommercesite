@@ -5,6 +5,7 @@ const paymentBtnEl = document.querySelector("#paymentBtn");
 const modalCloseBtnEl = document.querySelector("#modal-close");
 const backEl = document.querySelector(".modal-bg");
 const orderInfoEl = document.querySelector(".order-info");
+
 function openModal() {
   modalEl.classList.remove("is-close");
 }
@@ -15,7 +16,41 @@ function closeModal() {
 
 function handleUserData() {
   // TODO : 유저 정보 데이터 가져오기
-  // get /orders/:user-id
+  // get /api/userlist
+  fetch("/api/userlist", {
+    headers: {
+      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+    },
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      const [userName, phoneNumber, userAddress] = [
+        data.name,
+        data.phoneNumber,
+        data.address,
+      ];
+
+      const userNameEl = document.querySelector("#receiverName");
+      const phoneNumberEl = document.querySelector("#receiverPhoneNumber");
+      const postalCodeEl = document.querySelector("#postalCode");
+      const address1El = document.querySelector("#address1");
+      const address2El = document.querySelector("#address2");
+
+      if (data.name) {
+        userNameEl.value = userName;
+      }
+
+      if (data.phoneNumber) {
+        phoneNumberEl.value = phoneNumber;
+      }
+
+      if (data.address) {
+        postalCodeEl.value = userAddress.postalCode;
+        address1El.value = userAddress.address1;
+        address2El.value = userAddress.address2;
+      }
+    });
+
   const divEl = document.createElement("div");
   divEl.classList.add("card-content");
   divEl.innerHTML = renderOrderData();
@@ -33,4 +68,9 @@ window.onload = function () {
   searchAddressEl.setAttribute("src", "searchAddress.js");
   searchAddressEl.setAttribute("type", "module");
   document.querySelector("body").appendChild(searchAddressEl);
+
+  const sendOrderEl = document.createElement("script");
+  sendOrderEl.setAttribute("src", "sendOrderData.js");
+  sendOrderEl.setAttribute("type", "module");
+  document.querySelector("body").appendChild(sendOrderEl);
 };

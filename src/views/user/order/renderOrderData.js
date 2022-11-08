@@ -29,8 +29,9 @@ export default function renderOrderData() {
           <input
             class="input"
             id="receiverPhoneNumber"
-            type="number"
-            placeholder="- 포함해서 입력해 주세요."
+            type="tel"
+            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+            placeholder="핸드폰 번호를 입력해주세요."
             autocomplete="on"
           />
         </p>

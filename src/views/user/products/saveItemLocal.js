@@ -6,7 +6,9 @@ const itemIdEl = document.querySelector("#item-id");
 const selectValueEl = document.querySelector("#select-value");
 
 function handleSave() {
-  const value = selectValueEl.options[selectValueEl.selectedIndex].value;
+  const value = parseInt(
+    selectValueEl.options[selectValueEl.selectedIndex].value,
+  );
   const obj = {
     id: `${itemIdEl.textContent}`,
     img: `${itemImgEl.src}`,
