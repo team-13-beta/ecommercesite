@@ -1,9 +1,9 @@
 import { randomId } from "./useful-functions.js";
 
 // aws-s3 사이트에서의 설정값들
-const s3BucketName = "elice-shopping";
+const s3BucketName = "elice-ecommerce-site";
 const bucketRegion = "ap-northeast-2"; // 한국은 항상 ap-northeast-2임.
-const IdentityPoolId = "ap-northeast-2:e328a1b0-7264-4923-8606-a8f0a5dbc995";
+const IdentityPoolId = "ap-northeast-2:79660084-2bc8-4a47-ab67-3d754252e3ad";
 
 // aws 공식문서 그대로 가져옴
 AWS.config.update({
@@ -25,8 +25,9 @@ const s3 = new AWS.S3({
 async function addImageToS3(fileInputElement, album) {
   // 파일 input 요소에, 사용자가 올린 파일이 있는지 여부 확인
   const files = fileInputElement.files;
+
   if (!files.length) {
-    throw new Error("사진 파일을 업로드해 주세요.");
+    throw new Error("파일을 업로드해주세요");
   }
 
   // 파일 input 요소에서 사진파일 추출 등 AWS S3로의 업로드 준비
@@ -57,6 +58,7 @@ async function addImageToS3(fileInputElement, album) {
 
     return fileKey;
   } catch (err) {
+    console.error(err);
     throw new Error(
       `S3에 업로드하는 과정에서 에러가 발생하였습니다.\n${err.message}`,
     );

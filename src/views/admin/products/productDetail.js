@@ -18,12 +18,11 @@ export default function ProductDetail({
 
   this.$element = createElement("div");
 
-  // this.$element.addEventListener("click", (e) => {});
-
   const subScribeEventListener = () => {
     const $modifyContainer = document.querySelector(".modify-container");
-    const $file = document.getElementById("file");
-    if (!$modifyContainer || !$file) return;
+    // const $file = document.getElementById("file");
+    if (!$modifyContainer) return;
+
     $modifyContainer.addEventListener("click", (e) => {
       e.preventDefault();
       const { type } = e.target.dataset;
@@ -39,21 +38,21 @@ export default function ProductDetail({
       }
     });
 
-    $file.addEventListener("input", (e) => {
-      let reader = new FileReader();
-      const selectedFile = $file.files[0];
-      reader.readAsDataURL(selectedFile);
+    // $file.addEventListener("input", (e) => {
+    //   let reader = new FileReader();
+    //   const selectedFile = $file.files[0];
+    //   reader.readAsDataURL(selectedFile);
 
-      reader.onload = () => {
-        const imageBase64 = reader.result;
-        this.setState({ ...this.state, imageSrc: imageBase64 });
-      };
+    //   reader.onload = () => {
+    //     const imageBase64 = reader.result;
+    //     this.setState({ ...this.state, imageSrc: imageBase64 });
+    //   };
 
-      reader.onerror = function (error) {
-        alert("Error occurred reading file: ", selectedFile.name);
-        closeModal();
-      };
-    });
+    //   reader.onerror = function (error) {
+    //     alert("Error occurred reading file: ", selectedFile.name);
+    //     closeModal();
+    //   };
+    // });
   };
 
   this.$element.addEventListener("change", (e) => {
@@ -65,13 +64,14 @@ export default function ProductDetail({
     this.setState({ ...this.state, [`${type}`]: value });
   });
 
-  this.init = () => {
+  this.init = async () => {
     clearContainer($app);
     clearContainer(this.$element);
     if (!this.state || this.state.id !== history.state.state.id) {
       this.setState(history.state.state);
     }
-    this.$element.innerHTML = productDetailTemplate(
+
+    this.$element.innerHTML = await productDetailTemplate(
       this.state ?? null,
       this.$categories,
     );
@@ -80,9 +80,9 @@ export default function ProductDetail({
     subScribeEventListener();
   };
 
-  this.render = () => {
+  this.render = async () => {
     if (!this.state || JSON.stringify(this.state) === "{}") return;
-    this.$element.innerHTML = productDetailTemplate(
+    this.$element.innerHTML = await productDetailTemplate(
       this.state ?? null,
       this.$categories,
     );

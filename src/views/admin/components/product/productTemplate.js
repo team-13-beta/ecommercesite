@@ -8,7 +8,8 @@ export async function productDetailTemplate(data, categories = []) {
   const detailImage = await getImageUrl(data.detailImage);
   const deliveryImage = await getImageUrl(data.deliveryImage);
   const nutritionImage = await getImageUrl(data.nutritionImage);
-  console.log(titleImage, detailImage, deliveryImage, nutritionImage);
+
+  console.log(titleImage, detailImage, deliveryImage, nutritionImage, 123);
 
   return `<div class="modify-container">
         <button class="button" data-type="update">
@@ -83,11 +84,7 @@ export async function productDetailTemplate(data, categories = []) {
               </span>
             </label>
           </div>
-          ${
-            checkStringEmpty(data.titleImage)
-              ? ""
-              : `<img id="title-image" src=${titleImage} data-type="imageSrc" alt="메인  이미지"/>`
-          }
+          ${`<img id="title-image" src=${titleImage} data-type="imageSrc" alt="메인  이미지"/>`}
         </div>
 
         <div class="field">
@@ -103,11 +100,7 @@ export async function productDetailTemplate(data, categories = []) {
               </span>
             </label>
           </div>
-          ${
-            checkStringEmpty(data.detailImage)
-              ? ""
-              : `<img id="product-image" src=${detailImage} data-type="imageSrc" alt="제품  이미지"/>`
-          }
+          ${`<img id="product-image" src=${detailImage} data-type="imageSrc" alt="제품  이미지"/>`}
         </div>
 
         <div class="field">
@@ -123,11 +116,7 @@ export async function productDetailTemplate(data, categories = []) {
               </span>
             </label>
           </div>
-          ${
-            checkStringEmpty(data.deliveryImage)
-              ? ""
-              : `<img id="product-image" src=${deliveryImage} data-type="imageSrc" alt="배달  이미지"/>`
-          }
+          ${`<img id="product-image" src=${deliveryImage} data-type="imageSrc" alt="배달  이미지"/>`}
         </div>
 
         <div class="field">
@@ -143,11 +132,7 @@ export async function productDetailTemplate(data, categories = []) {
               </span>
             </label>
           </div>
-          ${
-            checkStringEmpty(data.nutritionImage)
-              ? ""
-              : `<img id="product-image" src=${nutritionImage} data-type="imageSrc" alt="영양  이미지"/>`
-          }
+          ${`<img id="product-image" src=${nutritionImage} data-type="imageSrc" alt="영양  이미지"/>`}
         </div>
 
         <div class="field">
