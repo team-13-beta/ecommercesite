@@ -10,23 +10,33 @@ export class UserModel { // 이메일 중복 검사
     return user;
   }
 
-  async findById(userId) {
-    const user = await User.findOne({ _id: userId });
+  async findById(objId) {
+    const user = await User.findOne({ _id: objId });
     return user;
   }
+
+  async findByUserId(userId){
+    const user = await User.findOne({userId});
+    return user;
+  }
+
 
  
 
   async create(userInfo) { 
+    const num = await User.find({}).sort({userId:-1}).limit(1);
+    console.log(num);
+    const userId= (num[0])? num[0].userId+1: 1; 
+
     const time = timeZone();
     const timeInfo = {createdTime:time,updatedTime:time};
-    const Info = {...userInfo , ...timeInfo };
+    const Info = {userId,...userInfo , ...timeInfo };
     const createdNewUser = await User.create(Info);
     return createdNewUser;
   }
 
   async findAll() {
-    const users = await User.find({});
+    const users = await User.find({}).sort({userId:1});
     return users;
   }
 

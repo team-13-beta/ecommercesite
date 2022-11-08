@@ -25,11 +25,9 @@ class ProductService {
         const product = await this.productModel.findByName(name);
         if (product) {
             throw new Error(
-                '이 상품은 현재 등록중입니다. 다른 상품을 등록해 주세요.',
+                '이 상품은 현재 등록되었습니다. 다른 상품을 등록해 주세요.',
             );
         }
-
-
         // db에 저장
         const createdNewProduct = await this.productModel.create({
             name,

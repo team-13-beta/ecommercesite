@@ -263,4 +263,21 @@ const state = await userService.deleteUser(userId);
 res.json(state);
 });
 
+userRouter.get('/:user_id',loginRequired, async (req,res,next)=>{
+  try {
+    // 사용자의 권한(Role)에 따라 사용자 목록을 얻음 || admin : 전체 데이터, user : 본인의 데이터
+    const userId = req.params.user_id;
+    if(req.currentRole !== 'admin') throw new Error("일반 사용자는 접근권한이 없습니다.") 
+    const user = await userService.getUserByUserId(userId);
+    if(!user){
+    res.status(502).json("해당 계정이 삭제되었거나 존재하지 않습니다");
+    return ;
+  }
+    // 사용자 목록(배열)을 JSON 형태로 프론트에 보냄
+    res.status(200).json(user);
+  } catch (error) {
+    next(error);
+  }
+})
+
 export { userRouter };

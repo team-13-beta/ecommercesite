@@ -8,6 +8,7 @@ const pw = await bcypt.hash('1111',10);
 const time = timeZone();
 if(!await userModel.findByEmail("admin@example.com"))
     await userModel.create({
+        userId:1,
         email:"admin@example.com",
         name:"admin",
         password:pw,
@@ -25,6 +26,7 @@ if(!await userModel.findByEmail("admin@example.com"))
     
 if(!await userModel.findByEmail("abc@example.com"))
     await userModel.create({
+        userId:2,
         email:"abc@example.com",
         name:"가가",
         password:pw,
@@ -40,6 +42,7 @@ if(!await userModel.findByEmail("abc@example.com"))
 
 if(!await userModel.findByEmail("aaa@example.com"))
     await userModel.create({
+        userId:3,
         email:"aaa@example.com",
         name:"나나",
         password:pw,
@@ -56,6 +59,7 @@ if(!await userModel.findByEmail("aaa@example.com"))
 if(!await userModel.findByEmail("bbb@example.com")){
     
     await userModel.create({
+        userId:4,
         email:"bbb@example.com",
         name:"다다",
         password:pw,
@@ -71,6 +75,7 @@ if(!await userModel.findByEmail("bbb@example.com")){
 }
 if(!await userModel.findByEmail("ccc@example.com"))
     await userModel.create({
+        userId:5,
         email:"ccc@example.com",
         name:"라라",
         password:pw,

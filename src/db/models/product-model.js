@@ -14,9 +14,10 @@ export class ProductModel {
   }
 
   async create(productInfo) {
-    const num = await Product.find()
-    const productId= (num === [])? 1 : num.length+1; 
-
+    const num = await Product.find().sort({productId:-1}).limit(1);
+    console.log(num);
+    const productId= (num[0])?  num[0].productId+1 : 1; 
+    
     const time = timeZone();
     const timeInfo = {'createdTime':time,'updatedTime':time};
     const info = {productId, ...productInfo , ...timeInfo};
@@ -24,7 +25,7 @@ export class ProductModel {
     return createdNewProduct;
   }
   async findAll() {
-    const products = await Product.find().populate("categoryId");
+    const products = await Product.find().sort({productId:1}).populate("categoryId");
     return products;
   }
  

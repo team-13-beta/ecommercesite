@@ -3,7 +3,8 @@ import { Schema } from "mongoose";
 const ProductSchema = new Schema(
   {
     productId:{
-      type:String,
+      type:Number,
+      required:true,
     },
     name:{
         type:String,
