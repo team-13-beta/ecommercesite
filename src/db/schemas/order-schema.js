@@ -2,16 +2,16 @@ import { Schema } from "mongoose";
 
 const OrderSchema = new Schema(
   {
-    orderId:{
-      type:String,
+    orderId: {
+      type: Number,
     },
-    userId:{
-        type : Schema.Types.ObjectId,
-        ref : "users"
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: "users",
     },
-    buying_product:{
-        type : [Schema.Types.Mixed],
-        required:true,
+    buying_product: {
+      type: [Schema.Types.Mixed],
+      required: true,
     },
     address: {
       type: new Schema(
@@ -22,30 +22,30 @@ const OrderSchema = new Schema(
         },
         {
           _id: false,
-        }
+        },
       ),
       required: false,
     },
-    status:{
-        type:String, 
-        required:true, 
-        default: '주문 중'
+    status: {
+      type: String,
+      required: true,
+      default: "주문 중",
     },
-    totalPrice:{
-        type:Number,
-        default:0,
+    totalPrice: {
+      type: Number,
+      default: 0,
     },
-    createdTime : { 
-      type: String
+    createdTime: {
+      type: String,
     },
-    updatedTime : { 
-      type: String
-    }
+    updatedTime: {
+      type: String,
+    },
   },
   {
     collection: "orders",
     timestamps: false,
-  }
+  },
 );
 
 export { OrderSchema };
