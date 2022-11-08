@@ -21,3 +21,12 @@
   border-color: #3488ce;
   box-shadow: 0 0 0 0.125em rgb(200, 226, 247);
 }
+
+.title {
+  color: #ff922b;
+}
+
+.button {
+  background-color: #ff922b;
+  color: white;
+}
