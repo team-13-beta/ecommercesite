@@ -33,7 +33,7 @@ async function productModelTest(){
     productModel.create({
         productId:3,
         name:"소고기",
-        stock:20,
+        stock:200,
         price:2000,
         description:"스테이크 초기 테스트 데이터",
         company:"blackCow",

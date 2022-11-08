@@ -4,6 +4,7 @@ const OrderSchema = new Schema(
   {
     orderId:{
       type:Number,
+      required:true,      
     },
     userId:{
         type : Schema.Types.ObjectId,

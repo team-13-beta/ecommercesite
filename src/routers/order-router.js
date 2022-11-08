@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { loginRequired } from "../middlewares/login-required.js";
 import is from "@sindresorhus/is";
 // 폴더에서 import하면, 자동으로 폴더의 index.js에서 가져옴
 //import { loginRequired } from "../middlewares";
@@ -11,7 +12,7 @@ const orderRouter = Router();
 
 orderRouter.get("/",async (req,res,next)=>{
   try{
-    const orders=await orderService.getAllOrders();
+    const orders = await orderService.getAllOrders();
 
     res.status(200).json(orders)
   }catch(err){
@@ -21,7 +22,7 @@ orderRouter.get("/",async (req,res,next)=>{
 
 orderRouter.get("/:consumer_id", async (req,res,next)=>{
     try{
-        const consumer_id=req.params.consumer_id;
+        const consumer_id = req.params.consumer_id;
 
         const order=await orderService.getOrders(consumer_id);
         //console.log(products);
@@ -31,15 +32,18 @@ orderRouter.get("/:consumer_id", async (req,res,next)=>{
     }
 })
 
-orderRouter.post("/",async(req,res,next)=>{
+// order 생성 loginRequired로 누군지 사전 파악 후 처리
+orderRouter.post("/", loginRequired, async(req,res,next)=>{
     try {
         // req (request)의 body 에서 데이터 가져오기
         // 추가해볼 데이터
-        const { user_Id,basket }=req.body;
+        
+        const userObjId = req.currentUserId;
+        const { basket } = req.body;
         //console.log(userId,basket);
         // 위 데이터를 유저 db에 추가하기
         const newOrder = await orderService.addOrder({
-            user_Id,
+            userObjId,
             basket
         });
     
@@ -87,8 +91,8 @@ orderRouter.patch(
     try{
       const consumerId = req.params.consumerId;
       // body data 로부터 업데이트할 사용자 정보를 추출함.
-      const {orderId}=req.body;
-      const deleteorder=await orderService.deleteOrder(consumerId,orderId);
+      const {orderId} = req.body;
+      const deleteorder = await orderService.deleteOrder(consumerId,orderId);
       res.status(201).json(deleteorder);
     }catch(err){
         next(err);

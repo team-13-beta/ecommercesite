@@ -19,16 +19,17 @@ export class OrderModel {
     }
     async create(orderInfo) {
         const num2=await Order.find().sort({"orderId":-1}).limit(1);
-        const orderId = (num2) ? (num2[0].orderId)+1 : 1;
+        const orderId = (num2[0]) ? (num2[0].orderId)+1 : 1;
         console.log(`(주문 생성) 주문 번호 : ${orderId}`);
         
         const time = timeZone();
         const timeInfo = {createdTime:time,updatedTime:time};
+        console.log(orderInfo);
         const info = { orderId, ...orderInfo , ...timeInfo};
         const createdNewOrder = await Order.create(info);
         return createdNewOrder;
     }
-
+    
     async update({ orderId, update }) {
         const filter = { _id: orderId };
         const option = { returnOriginal: false };

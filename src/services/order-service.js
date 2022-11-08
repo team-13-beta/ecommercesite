@@ -1,4 +1,4 @@
-import { orderModel,userModel } from '../db/index.js';
+import { orderModel,userModel, productModel } from '../db/index.js';
 
 
 class OrderService {
@@ -20,12 +20,15 @@ class OrderService {
         return orders;
     }
 
+    // 주문을 하는데 재고가 0인 경우를 고려한 코드 작성 필요!!!! 
+
     async addOrder(orderInfo){
         // 객체 destructuring
-        const { user_Id,basket } = orderInfo;
-        console.log(user_Id,basket);
-        
-        const user=await userModel.findById(user_Id);
+        const { userObjId,basket } = orderInfo;
+        const user=await userModel.findById(userObjId);
+        let userId = user._id;
+        userId = userId.toString()
+            
         //console.log(user);
         if(!user){
             throw new Error("사용자를 찾을 수 없습니다.");
@@ -36,20 +39,32 @@ class OrderService {
         //console.log(status);
         let totalPrice=0;
 
+        // 상품 총액 계산
         for(let b of basket){
             totalPrice+=Number(b.price)*Number(b.stock);
         }
-        console.log(totalPrice);
-
+        console.log(user)
         // db에 저장
         const createdNewOrder = await this.orderModel.create({
-            userId:user._id,
+            userId,
             buying_product:basket,
             // address,
             status,
             totalPrice,
         });
 
+        for(let item of basket){
+            let product = await productModel.findByName(item.name);
+            console.log(product);
+            const stock = product.stock - item.stock;
+            const productId = product.productId;
+            const toUpdate = {stock:stock};
+            product = await productModel.update({
+                productId,
+                update: toUpdate,
+              });
+             console.log(`${product.name}의 현 재고 : ${product.stock}입니다.`);
+        }
         return createdNewOrder;
     }
 

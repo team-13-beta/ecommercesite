@@ -42,9 +42,9 @@ class ProductService {
     }
 
     // 상품 이름을 매개변수로 받아서 삭제 기능 구현
-    async deleteProduct(productName){
+    async deleteProduct(productId){
         // 만약
-        const product = await this.productModel.findByName(productName);
+        const product = await this.productModel.findById(productId);
         if (!product) {
             throw new Error(
                 '삭제 불가능합니다.',
