@@ -25,7 +25,9 @@ export class ProductModel {
     return createdNewProduct;
   }
   async findAll() {
-    const products = await Product.find().populate("categoryId");
+    const products = await Product.find()
+      .sort({ productId: 1 })
+      .populate("categoryId");
     return products;
   }
 

@@ -2,44 +2,45 @@ import { Schema } from "mongoose";
 
 const ProductSchema = new Schema(
   {
-    productId:{
-      type:String,
+    productId: {
+      type: Number,
+      required: true,
     },
-    name:{
-        type:String,
-        required:true,
+    name: {
+      type: String,
+      required: true,
     },
-    stock:{
-        type:Number,
-        required:true,
+    stock: {
+      type: Number,
+      required: true,
     },
-    price:{
-        type:Number,
-        required:true,
+    price: {
+      type: Number,
+      required: true,
     },
-    description:{
-        type:Schema.Types.Mixed,
+    description: {
+      type: Schema.Types.Mixed,
     },
-    company:{
-        type:String,
-        required:true,
+    company: {
+      type: String,
+      required: true,
     },
-    categoryId:{
+    categoryId: {
       type: Schema.Types.ObjectId,
       requried: true,
-      ref: 'categories',
+      ref: "categories",
     },
-    createdTime : { 
-      type: String
+    createdTime: {
+      type: String,
     },
-    updatedTime : { 
-      type: String
-    }
+    updatedTime: {
+      type: String,
+    },
   },
   {
     collection: "products",
     timestamps: false,
-  }
+  },
 );
 
 export { ProductSchema };
