@@ -38,8 +38,8 @@ export class OrderModel {
         return createdNewOrder;
     }
 
-    async update({ orderId, update }) {
-        const filter = { _id: orderId };
+    async update({ order_Id, update }) {
+        const filter = { _id: order_Id };
         const option = { returnOriginal: false };
         const time = timeZone();
         const updateInfo = {...update, updatedTime:time}
@@ -50,7 +50,7 @@ export class OrderModel {
       }
 
     async deleteOne(order){
-        const deleteorder=await Order.deleteOne({name: order.name});
+        const deleteorder=await Order.deleteOne({orderId: order.orderId});
         return deleteorder;
     }
 }

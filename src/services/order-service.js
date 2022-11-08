@@ -39,13 +39,13 @@ class OrderService {
         if(!user) throw new Error('주문을 요청하셨지만 해당하는 사용자가 없거나 토큰이 유효하지 않습니다.');
         let userId = user._id;
         userId = userId.toString()
-            
-        //console.log(user);
+
+        console.log(user);
         if(!user){
             throw new Error("사용자를 찾을 수 없습니다.");
         }
         const address=user.address.address1;
-        //console.log(address);
+        console.log(address);
         const status="주문 결제 전";
         //console.log(status);
         let totalPrice=0;
@@ -82,26 +82,28 @@ class OrderService {
         return createdNewOrder;
     }
 
-    async setOrder(consumerId, orderId, toUpdate) {
+    async setOrder(orderId, toUpdate) {
    
         // 우선 해당 id의 유저가 db에 있는지 확인
-        let order = await this.orderModel.findByUser(consumerId,orderId)
-    
+        let order = await this.orderModel.findByOrderId(Number(orderId))
+        
         // db에서 찾지 못한 경우, 에러 메시지 반환
         if (!order) {
           throw new Error('주문 내역이 없습니다. 다시 한 번 확인해 주세요.');
         }
-    
+        let order_Id=order._id;
+        //console.log(orderid);
         order = await this.orderModel.update({
-          orderId,
+          order_Id,
           update: toUpdate,
         });
     
         return order;
       }
 
-    async deleteOrder(consumerId,orderId){
-        let order = await this.orderModel.findByUser(consumerId,orderId)
+    async deleteOrder(order_Id){
+        let orderId=Number(order_Id);
+        let order = await this.orderModel.findByOrderId(orderId);
 
         // db에서 찾지 못한 경우, 에러 메시지 반환
         if (!order) {
