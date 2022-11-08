@@ -12,12 +12,18 @@ class OrderService {
         return orders;
     }
 
-
+    // 유저의 주문 내역을 조회하는 함수
     async getOrders(consumer_id) {
         const user = await userModel.findById(consumer_id);
 
         const orders = await this.orderModel.findByUsers(user._id);
         return orders;
+    }
+
+    // 해당 주문 내역을 상세 조회하는 함수
+    async getOrder(order_id) {
+        const order = await this.orderModel.findByOrderId(Number(order_id));
+        return order;
     }
 
     // 주문을 하는데 재고가 0인 경우를 고려한 코드 작성 필요!!!! 

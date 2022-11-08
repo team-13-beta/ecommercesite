@@ -32,6 +32,19 @@ orderRouter.get("/:consumer_id", async (req,res,next)=>{
     }
 })
 
+//주문 상세조회 API
+orderRouter.get("/item/:order_id", async (req,res,next)=>{
+  try{
+      const order_id = req.params.order_id;
+      console.log(typeof order_id);
+      const order=await orderService.getOrder(order_id);
+      //console.log(products);
+      res.status(200).json(order);
+  }catch(err){
+      next(err);
+  }
+})
+
 // order 생성 loginRequired로 누군지 사전 파악 후 처리
 orderRouter.post("/", loginRequired, async(req,res,next)=>{
     try {
