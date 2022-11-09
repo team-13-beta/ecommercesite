@@ -28,7 +28,8 @@
   border-radius: 0.25rem;
 }
 
-#paymentBtn:hover {
+#paymentBtn:hover,
+.modal-btn:hover {
   background-color: #ff922b;
   color: #fff4e6;
   border: none;

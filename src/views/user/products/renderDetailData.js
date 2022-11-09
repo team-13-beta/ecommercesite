@@ -11,7 +11,7 @@ export default function renderDetailData(id, title, name, price, des) {
       <div class="card-content columns">
         <div class="column is-one-third">제품 수량 선택</div>
         <div class="column">
-          <div class="select is-medium">
+          <div class="select">
             <select id="select-value">
               <option value="1">1</option>
               <option value="2">2</option>

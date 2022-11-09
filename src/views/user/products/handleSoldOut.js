@@ -1,5 +1,6 @@
 const bucketBtnEl = document.querySelector(".bucket-btn");
 const directBtnEl = document.querySelector(".direct-pay");
+const selectEl = document.querySelector("#select-value");
 const soldEl = document.querySelector("#item-id");
 
 function handleShowSoldOut() {
@@ -8,6 +9,8 @@ function handleShowSoldOut() {
   boxEl.textContent = "품절입니다.";
 
   soldEl.before(boxEl);
+
+  selectEl.setAttribute("disabled", true);
 }
 
 function handleAlert() {
