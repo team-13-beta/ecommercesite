@@ -27,9 +27,26 @@ app.use("/basket",basketRouter);
 app.use("/orders",orderRouter);
 // 순서 중요 (errorHandler은 다른 일반 라우팅보다 나중에 있어야 함)
 // 그래야, 에러가 났을 때 next(error) 했을 때 여기로 오게 됨
-productModelTest()
-userModelTest()
-categoryModelTest()
+new Promise((resolve, reject)=>{
+            categoryModelTest()
+            console.log("** category 초기 데이터 생성 완료 **")
+            resolve();    
+            })
+            .then(()=>{
+                userModelTest()
+                console.log("** user 초기 데이터 생성 완료 **")
+                return;
+            }).then(()=>{
+                console.log("Product 초기 데이터 생성 3초 소요됩니다.");
+                setTimeout(()=>{
+                    productModelTest();
+                    console.log("** Product 초기 데이터 생성 완료 **")
+                },3000);
+                return ;
+            })
+           
+
+
 
 app.use((req,res,next)=>{
     res.status(404).send('요청하시는 페이지가 존재하지 않습니다. Error:404');

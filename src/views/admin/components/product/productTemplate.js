@@ -3,10 +3,6 @@ import { getImageUrl } from "../../../aw3-s3.js";
 export function productDetailTemplate(data, categories = [], imgaes = {}) {
   if (!data) return `<div>데이터가 없습니다.</div>`;
   const { titleImage, detailImage, deliveryImage, nutritionImage } = imgaes;
-  // const titleImage = await getImageUrl(data.titleImage);
-  // const detailImage = await getImageUrl(data.detailImage);
-  // const deliveryImage = await getImageUrl(data.deliveryImage);
-  // const nutritionImage = await getImageUrl(data.nutritionImage);
 
   return `<div class="modify-container">
         <button class="button" data-type="update">

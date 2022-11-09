@@ -1,4 +1,4 @@
-import { addImageToS3 } from "./aw3-s3.js";
+import { addImageToS3, deletePhoto } from "./aw3-s3.js";
 
 // 문자열+숫자로 이루어진 랜덤 5글자 반환
 export const randomId = () => {
@@ -80,9 +80,10 @@ export const fileUpdateImage = (file, img) => {
   };
 };
 
-export const getImageKeyByCheckType = async (element, categoryId) => {
+export const getImageKeyByCheckType = async (element, categoryId, imageKey) => {
   let result = element;
   if (typeof element === "object") {
+    deletePhoto(imageKey);
     result = await addImageToS3(element, categoryId);
   }
 

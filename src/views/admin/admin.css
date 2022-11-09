@@ -58,7 +58,7 @@ main {
 }
 
 .table > tbody > tr:hover {
-  background-color: orange;
+  background-color: ff922b;
 }
 
 .button {
@@ -67,4 +67,14 @@ main {
 
 button:hover {
   cursor: pointer;
+}
+
+.primary {
+  background-color: #ff922b;
+  color: white;
+}
+
+.primary:hover {
+  background-color: #ff7b00;
+  color: white;
 }

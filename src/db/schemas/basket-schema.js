@@ -9,11 +9,17 @@ const basketSchema = new Schema(
     },
     quantity:{
         type:[Number]
+    },
+    createdTime : { 
+      type: String
+    },
+    updatedTime : { 
+      type: String
     }
   },
   {
     collection: "baskets",
-    timestamps: true,
+    timestamps: false,
   }
 );
 

@@ -7,9 +7,17 @@ const categoryRouter = Router();
 
 categoryRouter.get("/", async (req,res,next)=>{
     try{
-        const categories=await categoryService.getProducts();
-        console.log(categories);
-        res.status(200).json(categories);
+        const categories=await categoryService.getCategories();
+        //console.log(categories);
+        let result = [];
+        for (let item of categories){
+          let content = {
+            id:String(item.categoryId),
+            name:item.name
+          }
+          result.push(content);
+        }
+        res.status(200).json(result);
     }catch(err){
         next(err);
     }
@@ -19,15 +27,23 @@ categoryRouter.post("/",async(req,res,next)=>{
         // req (request)의 body 에서 데이터 가져오기
         // 추가해볼 데이터
         const { name }=req.body;
-    
+        
         // 위 데이터를 유저 db에 추가하기
         const newCategory = await categoryService.addCategory({
           name,
         });
-    
+      const result = {
+        code : 201,
+        data : {
+          id:String(newCategory.categoryId),
+          name:newCategory.name,
+          created_date:newCategory.createdTime,
+          updated_date:newCategory.updatedTime
+        }
+      };
         // 추가된 유저의 db 데이터를 프론트에 다시 보내줌
         // 물론 프론트에서 안 쓸 수도 있지만, 편의상 일단 보내 줌
-        res.status(201).json(newCategory);
+        res.status(200).json(result);
       } catch (error) {
         next(error);
       }
@@ -46,6 +62,7 @@ categoryRouter.patch(
       // 위 데이터가 undefined가 아니라면, 즉, 프론트에서 업데이트를 위해
       // 보내주었다면, 업데이트용 객체에 삽입함.
       const toUpdate = {
+        ...(categoryId && {categoryId}),
         ...(name && { name }),
       };
       //console.log(toUpdate);
@@ -54,9 +71,16 @@ categoryRouter.patch(
         categoryId,
         toUpdate,
       );
+      const result = {
+        code : 200,
+        data : {
+          id:String(updatedCategoryInfo.categoryId),
+          name:updatedCategoryInfo.name,
+        }
+      };  
 
       // 업데이트 이후의 유저 데이터를 프론트에 보내 줌
-      res.status(200).json(updatedCategoryInfo);
+      res.status(200).json(result);
     } catch (error) {
       next(error);
     }
@@ -69,7 +93,15 @@ categoryRouter.delete("/:categoryId",async (req,res,next)=>{
       const categoryId=req.params.categoryId;
       const deleteCategory=await categoryService.deleteCategory(categoryId);
   
-      res.status(201).json(deleteCategory);
+      const result = {
+        code:200,
+        data:{
+          id:String(deleteCategory.categoryId),
+          name:deleteCategory.name
+        }
+      }
+
+      res.status(200).json(result);
   }catch(err){
       next(err);
   }

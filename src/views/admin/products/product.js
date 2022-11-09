@@ -123,9 +123,8 @@ export default function Products({
           ]);
 
         const data = {
-          id: String(Date.now()),
           name,
-          categoryId,
+          categoryId: +categoryId,
           companyName,
           description,
           stock,

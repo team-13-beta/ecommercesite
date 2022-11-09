@@ -34,6 +34,10 @@ function handleData() {
       const scrollEl = document.createElement("script");
       scrollEl.setAttribute("src", "tabClickScroll.js");
       document.querySelector("body").appendChild(scrollEl);
+
+      const directEl = document.createElement("script");
+      directEl.setAttribute("src", "directPay.js");
+      document.querySelector("body").appendChild(directEl);
     });
 }
 
