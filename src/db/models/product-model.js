@@ -12,7 +12,13 @@ export class ProductModel {
     const product = await Product.findOne({ productId : productId });
     return product;
   }
+  async findByCategory(categoryObjId){
+    const product = await Product.find({categoryId:categoryObjId});
+    if(product.length == 0) throw new Error("선택하신 카테고리에 해당하는 품목들은 없습니다.");
+    return product;
+  }
 
+  
   async create(productInfo) {
     const num = await Product.find().sort({productId:-1}).limit(1);
     console.log(num);
@@ -29,6 +35,7 @@ export class ProductModel {
     return products;
   }
  
+
 
   async update({ productId, update }) {
     const filter = { productId : productId };

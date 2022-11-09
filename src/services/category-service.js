@@ -7,10 +7,17 @@ class CategoryService {
     }
     
     // 전체 상품 데이터를 조회하는 함수
-    async getProducts() {
+    async getCategories() {
         const categories = await this.categoryModel.findAll();
         return categories;
     }
+
+
+    async getCategoryById(categoryId){
+        const category = await this.categoryModel.findById(categoryId);
+        return category;
+    }
+
 
     async addCategory(categoryInfo){
         // 객체 destructuring
