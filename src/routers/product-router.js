@@ -22,10 +22,6 @@ productRouter.get("/", async (req, res, next) => {
         stock: product.stock,
         companyName: product.company,
         description: product.description,
-        nutritionImage: product.description.nutritionImage,
-        deliveryImage: product.description.deliveryImage,
-        detailImage: product.description.detailImage,
-        titleImage: product.description.titleImage,
         createdTime: product.createdTime,
         updateTime: product.updateTime
       }
@@ -91,15 +87,11 @@ productRouter.get('/:categoryId', async(req,res,next)=>{
       let content={
         id: String(product.productId),
         name: product.name,
-        categoryId: product.categoryId,
+        categoryId: String(product.categoryId.categoryId),
         price: product.price,
         stock: product.stock,
         companyName: product.company,
         description: product.description,
-        nutritionImage: product.description.nutritionImage,
-        deliveryImage: product.description.deliveryImage,
-        detailImage: product.description.detailImage,
-        titleImage: product.description.titleImage,
         createdTime: product.createdTime,
         updateTime: product.updateTime
       }
@@ -116,20 +108,17 @@ productRouter.get('/item/:productId', async (req,res,next)=>{
     try {
     const productId = req.params.productId;
     const product = await productService.getProduct(productId);
+    console.log(product);
     const result={
       code:200,
       data :{
         id: String(product.productId),
         name: product.name,
-        categoryId: product.categoryId,
+        categoryId: String(product.categoryId.categoryId),
         price: product.price,
         stock: product.stock,
         companyName: product.company,
         description: product.description,
-        nutritionImage: product.description.nutritionImage,
-        deliveryImage: product.description.deliveryImage,
-        detailImage: product.description.detailImage,
-        titleImage: product.description.titleImage,
         createdTime: product.createdTime,
         updateTime: product.updateTime
       }
