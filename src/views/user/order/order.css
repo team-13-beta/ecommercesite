@@ -25,6 +25,7 @@
   width: 400px;
   height: 400px;
   padding: 20px;
+  border-radius: 0.25rem;
 }
 
 #paymentBtn:hover {

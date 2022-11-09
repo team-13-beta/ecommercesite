@@ -23,7 +23,9 @@ function bucketInputHtml() {
   // 로컬 스토리지 데이터 총 결제 금액 계산 후 붙이기
   const priceEl = document.querySelectorAll(".total-price");
 
-  priceEl.forEach((price) => (price.innerText = `${totalPrice}`));
+  priceEl.forEach(
+    (price) => (price.innerText = `${totalPrice.toLocaleString("ko-KR")}원`),
+  );
 }
 
 bucketInputHtml();
