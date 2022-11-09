@@ -3,17 +3,20 @@ import is from "@sindresorhus/is";
 // 폴더에서 import하면, 자동으로 폴더의 index.js에서 가져옴
 import { loginRequired } from "../middlewares/index.js";
 import { userService } from "../services/index.js";
+import { preLogin_General } from "../middlewares/index.js";
+import { preLogin_Oauth } from "../middlewares/index.js";
 import oauth2 from "passport-google-oauth2";
 import passport from "passport";
 import session from "express-session";
 import MongoStore from "connect-mongo";
+import cookieParser from "cookie-parser";
 import { config } from "dotenv";
-
-const userRouter = Router();
 config();
+const userRouter = Router();
+userRouter.use(cookieParser())
 // 회원가입 api (아래는 /register이지만, 실제로는 /api/register로 요청해야 함.)
 userRouter.post("/register", async (req, res, next) => {
-  try {
+  try { 
     // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
     // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
     if (is.emptyObject(req.body)) {
@@ -26,8 +29,8 @@ userRouter.post("/register", async (req, res, next) => {
     const fullName = req.body.fullName;
     const email = req.body.email;
     const password = req.body.password;
-    const address = req.body.exAddress;
-    const phoneNumber = req.body.exPhoneNumber;
+    const address = req.body.address;
+    const phoneNumber = req.body.phoneNumber;
 
     // 위 데이터를 유저 db에 추가하기
     const newUser = await userService.addUser({
@@ -40,14 +43,19 @@ userRouter.post("/register", async (req, res, next) => {
 
     // 추가된 유저의 db 데이터를 프론트에 다시 보내줌
     // 물론 프론트에서 안 쓸 수도 있지만, 편의상 일단 보내 줌
-    res.status(201).json(newUser);
+    const result = {
+      code : 200,
+      data : null,
+    }
+
+    res.status(200).json(result);
   } catch (error) {
     next(error);
   }
 });
 
 // 로그인 api (아래는 /login 이지만, 실제로는 /api/login로 요청해야 함.)
-userRouter.post("/login", async function (req, res, next) {
+userRouter.post("/login",preLogin_Oauth, preLogin_General, async function (req, res, next) {
   try {
     // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
     if (is.emptyObject(req.body)) {
@@ -62,9 +70,13 @@ userRouter.post("/login", async function (req, res, next) {
 
     // 로그인 진행 (로그인 성공 시 jwt 토큰을 프론트에 보내 줌)
     const userToken = await userService.getUserToken({ email, password });
-
     // jwt 토큰을 프론트에 보냄 (jwt 토큰은, 문자열임)
-    res.status(200).json(userToken);
+
+    const result = {
+      code:200,
+      token : "bearer "+userToken.token
+    }
+    res.status(200).json(result);
   } catch (error) {
     next(error);
   }
@@ -80,7 +92,8 @@ userRouter.use(
       secure: false, // https 에서만 가져오도록 할 것인가?
       maxAge:1800000 // cookie expired : 30minute 
     },
-    store: MongoStore.create({mongoUrl: process.env.MONGO_SESSION_URL}),
+    store: MongoStore.create({mongoUrl: process.env.MONGO_SESSION_URL}), 
+    //store: MongoStore.create({mongoUrl: process.env.MONGO_SESSION_URL}), 
   })
 );
 
@@ -125,7 +138,7 @@ passport.use(
   )
 );
 
-userRouter.get('/auth/google',
+userRouter.get('/auth/google',preLogin_General, preLogin_Oauth,  
   passport.authenticate('google', { scope:
       [ 'email', 'profile' ] }
 ));
@@ -258,5 +271,22 @@ const userId = req.currentUserId;
 const state = await userService.deleteUser(userId);
 res.json(state);
 });
+
+userRouter.get('/:user_id',loginRequired, async (req,res,next)=>{
+  try {
+    // 사용자의 권한(Role)에 따라 사용자 목록을 얻음 || admin : 전체 데이터, user : 본인의 데이터
+    const userId = req.params.user_id;
+    if(req.currentRole !== 'admin') throw new Error("일반 사용자는 접근권한이 없습니다.") 
+    const user = await userService.getUserByUserId(userId);
+    if(!user){
+    res.status(502).json("해당 계정이 삭제되었거나 존재하지 않습니다");
+    return ;
+  }
+    // 사용자 목록(배열)을 JSON 형태로 프론트에 보냄
+    res.status(200).json(user);
+  } catch (error) {
+    next(error);
+  }
+})
 
 export { userRouter };

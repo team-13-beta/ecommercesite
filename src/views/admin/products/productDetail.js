@@ -13,6 +13,13 @@ export default function ProductDetail({
   this.state = initialState;
   this.$categories = $categories;
 
+  this.preImageKey = {
+    titleImage: "",
+    detailImage: "",
+    deliveryImage: "",
+    nutritionImage: "",
+  }; // 이미지의 과거 imageKey를 저장한 path
+
   this.$element = createElement("div");
   let titleImage = "";
   let detailImage = "";
@@ -36,31 +43,38 @@ export default function ProductDetail({
           const stock = this.$element.querySelector("#stock").value;
           const price = this.$element.querySelector("#price").value;
 
-          updateHandler({
-            ...this.state,
-            name,
-            categoryId,
-            companyName,
-            description,
-            stock,
-            price,
-            titleImage: checkStringEmpty(titleImage)
-              ? this.state.titleImage
-              : titleImage,
-            detailImage: checkStringEmpty(detailImage)
-              ? this.state.detailImage
-              : detailImage,
-            deliveryImage: checkStringEmpty(deliveryImage)
-              ? this.state.deliveryImage
-              : deliveryImage,
-            nutritionImage: checkStringEmpty(nutritionImage)
-              ? this.state.nutritionImage
-              : nutritionImage,
-          });
-
+          updateHandler(
+            {
+              ...this.state,
+              name,
+              categoryId: +categoryId,
+              companyName,
+              description,
+              stock,
+              price,
+              titleImage: checkStringEmpty(titleImage)
+                ? this.state.titleImage
+                : titleImage,
+              detailImage: checkStringEmpty(detailImage)
+                ? this.state.detailImage
+                : detailImage,
+              deliveryImage: checkStringEmpty(deliveryImage)
+                ? this.state.deliveryImage
+                : deliveryImage,
+              nutritionImage: checkStringEmpty(nutritionImage)
+                ? this.state.nutritionImage
+                : nutritionImage,
+            },
+            this.preImageKey,
+          );
+          titleImage = "";
+          detailImage = "";
+          deliveryImage = "";
+          nutritionImage = "";
           break;
         case "delete":
-          if (confirm("정말 삭제하시겠습니까?")) deleteHandler(this.state.id);
+          if (confirm("정말 삭제하시겠습니까?"))
+            deleteHandler(this.state.id, this.preImageKey);
           break;
         default:
           return;
@@ -72,12 +86,10 @@ export default function ProductDetail({
 
   this.$element.addEventListener("change", (e) => {
     e.preventDefault();
-    console.log("change occure");
     const {
       dataset: { type },
     } = e.target;
     const $image = this.$element.querySelector(`#${type}-image`);
-    console.log($image); // 수정 완료시에 해당 값을 적용
 
     switch (type) {
       case "title":
@@ -102,13 +114,7 @@ export default function ProductDetail({
     }
   });
 
-  this.init = async () => {
-    clearContainer($app);
-    clearContainer(this.$element);
-    if (!this.state || this.state.id !== history.state.state.id) {
-      this.setState(history.state.state);
-    }
-
+  const getImageUrls = async () => {
     const [titleImage, detailImage, deliveryImage, nutritionImage] =
       await Promise.all([
         getImageUrl(this.state.titleImage),
@@ -116,6 +122,25 @@ export default function ProductDetail({
         getImageUrl(this.state.deliveryImage),
         getImageUrl(this.state.nutritionImage),
       ]);
+    return { titleImage, detailImage, deliveryImage, nutritionImage };
+  };
+
+  this.init = async () => {
+    clearContainer($app);
+    clearContainer(this.$element);
+    if (!this.state || this.state.id !== history.state.state.id) {
+      this.setState(history.state.state);
+    }
+
+    const { titleImage, detailImage, deliveryImage, nutritionImage } =
+      await getImageUrls();
+
+    this.preImageKey = {
+      titleImage: this.state.titleImage,
+      detailImage: this.state.detailImage,
+      deliveryImage: this.state.deliveryImage,
+      nutritionImage: this.state.nutritionImage,
+    };
 
     this.$element.innerHTML = productDetailTemplate(
       this.state ?? null,
@@ -129,13 +154,15 @@ export default function ProductDetail({
 
   this.render = async () => {
     if (!this.state || JSON.stringify(this.state) === "{}") return;
-    const [titleImage, detailImage, deliveryImage, nutritionImage] =
-      await Promise.all([
-        getImageUrl(this.state.titleImage),
-        getImageUrl(this.state.detailImage),
-        getImageUrl(this.state.deliveryImage),
-        getImageUrl(this.state.nutritionImage),
-      ]);
+    const { titleImage, detailImage, deliveryImage, nutritionImage } =
+      await getImageUrls();
+    this.preImageKey = {
+      titleImage: this.state.titleImage,
+      detailImage: this.state.detailImage,
+      deliveryImage: this.state.deliveryImage,
+      nutritionImage: this.state.nutritionImage,
+    };
+
     this.$element.innerHTML = productDetailTemplate(
       this.state ?? null,
       this.$categories,

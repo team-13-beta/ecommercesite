@@ -1,6 +1,6 @@
-function getLocalTime(){
+function timeZone(){
 const timestamp = new Date().toLocaleString()+'';
 return timestamp;
 }
 
-export {getLocalTime};
+export {timeZone};

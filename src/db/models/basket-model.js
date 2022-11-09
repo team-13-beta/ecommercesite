@@ -1,12 +1,14 @@
 import { model } from "mongoose";
 import { basketSchema } from "../schemas/basket-schema.js";
-
+import {timeZone} from '../../services/timeZone.js';
 
 const Basket = model("baskets", basketSchema);
 
 export class BasketModel {
     async create() {
-        const createdNewBasket = await Basket.create({});
+        const time = timeZone();
+        const timeInfo = {createdTime:time,updatedTime:time};
+        const createdNewBasket = await Basket.create(timeInfo);
         return createdNewBasket;
       }
 
@@ -35,10 +37,14 @@ export class BasketModel {
         const filter = { _id: basketId };
         const option = { returnOriginal: false };
     
+        const time = timeZone();
+        const updateInfo = {updatedTime:time}
+
         const updatedBasket = await Basket.findOneAndUpdate(filter, {
             $push: {
                 productList : {_id : productId},
                 quantity:1,
+                ...updateInfo
             }
 
         }, option);

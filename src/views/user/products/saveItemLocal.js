@@ -18,7 +18,10 @@ function handleSave() {
     alert("장바구니에 같은 상품이 있습니다!");
   } else {
     window.localStorage.setItem(`${itemIdEl.textContent}`, JSON.stringify(obj));
-    alert("장바구니에 담겼습니다!");
+    const result = confirm(
+      "장바구니에 상품이 담겼습니다! 장바구니로 이동하시겠습니까?",
+    );
+    if (result) window.location.href = "/user/bucket";
   }
 }
 

@@ -7,10 +7,17 @@ class CategoryService {
     }
     
     // 전체 상품 데이터를 조회하는 함수
-    async getProducts() {
+    async getCategories() {
         const categories = await this.categoryModel.findAll();
         return categories;
     }
+
+
+    async getCategoryById(categoryId){
+        const category = await this.categoryModel.findById(categoryId);
+        return category;
+    }
+
 
     async addCategory(categoryInfo){
         // 객체 destructuring
@@ -33,7 +40,7 @@ class CategoryService {
         return createdNewCategory;
     }
     
-    async setCategory(categoryId,toUpdate,) {
+    async setCategory(categoryId,toUpdate) {
    
         // 우선 해당 id의 유저가 db에 있는지 확인
         let category = await this.categoryModel.findById(categoryId);
@@ -42,13 +49,15 @@ class CategoryService {
         if (!category) {
           throw new Error('카테고리가 없습니다. 다시 한 번 확인해 주세요.');
         }
-    
+        //console.log(category['categoryId']);
+        const findCId=category["_id"].toString();
+        console.log(findCId);
         // 이제 드디어 업데이트 시작
- 
+        console.log(toUpdate);
         // 업데이트 진행
         category = await this.categoryModel.update({
-          categoryId,
-          update: toUpdate,
+            category,
+            update: toUpdate,
         });
     
         return category;
@@ -59,13 +68,16 @@ class CategoryService {
         const category = await this.categoryModel.findById(categoryId);
         if (!category) {
             throw new Error(
-                '삭제 불가능합니다.',
+                '카테고리가 존재하지 않아 삭제 불가능합니다.',
             );
         }
 
         const deleteCategory=await this.categoryModel.deleteOne(category);
 
-        return deleteCategory;
+        if (deleteCategory.acknowledged)
+        return category 
+        else
+        throw new Error("카테고리 삭제가 실패했습니다")
     }
 }
 
