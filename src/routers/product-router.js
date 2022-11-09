@@ -51,10 +51,10 @@ productRouter.post("/", async (req, res, next) => {
   try {
     // req (request)의 body 에서 데이터 가져오기
     // 추가해볼 데이터
-    const { name,stock,price, company, categoryId, nutritionImage, deleveryImage, detailImage, titleImage } = req.body;
+    const { name,stock,price, company, categoryId, nutritionImage, deliveryImage, detailImage, titleImage } = req.body;
     const description = {
       nutritionImage,
-      deleveryImage,
+      deliveryImage,
       detailImage,
       titleImage
     }
@@ -166,10 +166,10 @@ productRouter.patch("/:productId", async function (req, res, next) {
     // params로부터 id를 가져옴
     const productId = req.params.productId;
     // body data 로부터 업데이트할 사용자 정보를 추출함.
-    const { name, stock, price, company, nutritionImage, deleveryImage, detailImage, titleImage } = req.body;
+    const { name, stock, price, company, nutritionImage, deliveryImage, detailImage, titleImage } = req.body;
     const description = {
       nutritionImage,
-      deleveryImage,
+      deliveryImage,
       detailImage,
       titleImage
     }
