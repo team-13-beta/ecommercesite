@@ -68,7 +68,6 @@ productRouter.post("/", async (req, res, next) => {
       price,
       company,
       categoryId,
-      categoryName,
       description
     });
 
