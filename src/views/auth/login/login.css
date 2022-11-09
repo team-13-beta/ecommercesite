@@ -16,3 +16,12 @@
 .login-form-box .button {
   font-weight: bold;
 }
+
+.title {
+  color: #ff922b;
+}
+
+.button {
+  background-color: #ff922b;
+  color: white;
+}

@@ -24,40 +24,11 @@
     ></script>
     <!-- 커스텀 css, js -->
     <link rel="stylesheet" href="userorder.css" />
-    <script type="module" src="user/header-footer/inputHeader.js"></script>
-    <script type="module" src="user/header-footer/inputFooter.js"></script>
+    <script type="module" src="../header-footer/inputHeader.js"></script>
+    <script type="module" src="../header-footer/inputFooter.js"></script>
     <script src="userorder.js" type="module" defer></script>
   </head>
   <body>
-
-    <header class="box">
-      <div class="header-container">
-        <nav class="level">
-          <div class="level-left">
-            <div
-              class="logo level-item"
-              style="
-                background-color: #ff922b;
-                width: 80px;
-                font-size: 20px;
-                text-align: center;
-                border-radius: 10px;
-              "
-            >
-            <a href="/">β</a>
-            </div>
-          </div>
-          <div class="level-right">
-            <div class="level-item"><a href="/mypage">마이페이지</a></div>
-            <div class="level-item"><a href="/logout">로그아웃</a></div>
-            <div class="level-item">
-              <a href="/cart" aria-current="page">장바구니</a>
-            </div>
-          </div>
-        </nav>
-      </div>
-    </header>
-
     <section class="orders-container">
       <div class="block order-h1">
         <h1 class="ordersH1 is-4">주문조회</h1>
@@ -66,9 +37,9 @@
       <table class="table">
         <thead class="thead">
           <tr>
-            <td id="color">no.</td>
             <td id="color">주문 날짜</td>
-            <td id="color">주문 정보</td>
+            <td id="color">주문 상품</td>
+            <td id="color">주문 가격</td>
             <td id="color">상태</td>
             <td id="color">신청</td>
           </tr>
@@ -100,16 +71,5 @@
         </tbody>
       </table>
     </section>
-
-    <footer class="has-text-centered" style="background-color: #ff922b; color: #ffe8cc;">
-      <div class="" style="font-size: 50px; ">β</div>
-        <span class="">호진</span>
-        <span class="">상우</span>
-        <span class="">세현</span>
-        <span class="">화낙</span>
-        <span class="">세은</span>
-      </div>
-      <div class="" style="font-weight: bold;">β Team All rights reserved</div>
-    </footer>
   </body>
 </html>

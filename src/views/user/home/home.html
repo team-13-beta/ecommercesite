@@ -24,49 +24,12 @@
     ></script>
     <!-- 커스텀 css, js -->
     <link rel="stylesheet" href="home.css" />
-    <script type="module" src="user/header-footer/inputHeader.js"></script>
-    <script type="module" src="user/header-footer/inputFooter.js"></script>
+    <script type="module" src="../user/header-footer/inputHeader.js"></script>
+    <script type="module" src="../user/header-footer/inputFooter.js"></script>
     <script src="home.js" type="module" defer></script>
   </head>
   <body>
     <!-- 헤더 -->
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-      <div class="container mt-3">
-        <div class="navbar-brand">
-          <a class="navbar-item" href="/">
-            <!-- <img src="/elice-rabbit.png" width="30" height="30" /> -->
-            <span class="has-text-link">13팀</span>
-          </a>
-
-          <a
-            role="button"
-            class="navbar-burger"
-            aria-label="menu"
-            aria-expanded="false"
-            data-target="navbarBasicExample"
-          >
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-          </a>
-        </div>
-
-        <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
-          <ul id="navbar">
-            <li><a href="/login">로그인</a></li>
-            <li><a href="/register">회원가입</a></li>
-            <li>
-              <a href="/user/bucket" aria-current="page">
-                <span class="icon">
-                  <i class="fas fa-cart-shopping"></i>
-                </span>
-                <span>카트</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
 
     <!-- 슬라이더 -->
     <section id="photo">
@@ -81,55 +44,26 @@
       <p class="left-arrow"></p>
       <p class="right-arrow"></p>
     </section>
+
     <!-- 카테고리 -->
     <div class="container">
       <div class="category-header">
         <h1>카테고리</h1>
       </div>
-      <div class="category">
-        <a href="/"
-          ><img
-            class="category-img"
-            id="chicken"
-            src="../../images/닭가슴살.png"
-            alt=""
-          /><label class="label" for="chicken">닭가슴살</label></a
-        >
-        <a href="/"
-          ><img
-            class="category-img"
-            id="lunch-box"
-            src="../../images/도시락.png"
-            alt=""
-          /><label class="label" for="lunch-box">도시락</label></a
-        >
-        <a href="/"
-          ><img
-            id="protein"
-            class="category-img"
-            src="../../images/프로틴음료.png"
-            alt=""
-          /><label class="label" for="protein">프로틴음료</label></a
-        >
-        <a href="/"
-          ><img
-            class="category-img"
-            id="health"
-            src="../../images/건강식품.png"
-            alt=""
-          /><label class="label" for="health">건강식품</label></a
-        >
-      </div>
+
+      <!-- 카테고리 데이터 -->
+      <div class="category"></div>
     </div>
+
+    <!-- 상품 데이터 -->
     <div class="container">
       <div class="bottom-header">
-        <h1>최신 상품</h1>
+        <h1>최신상품</h1>
       </div>
     </div>
+
     <div class="container bottom-container">
-      <div class="bottom-products-Total-container">
-        <div class="bottom-products-container columns"></div>
-      </div>
+      <div class="bottom-products-container"></div>
     </div>
   </body>
 </html>
