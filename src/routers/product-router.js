@@ -17,7 +17,7 @@ productRouter.get("/", async (req, res, next) => {
       let content={
         id: String(product.productId),
         name: product.name,
-        categoryId: product.categoryId,
+        categoryId: String(product.categoryId.categoryId),
         price: product.price,
         stock: product.stock,
         companyName: product.company,
