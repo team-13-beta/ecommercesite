@@ -1,5 +1,3 @@
-import { getImageUrl } from "../../../aw3-s3.js";
-
 export function productDetailTemplate(data, categories = [], imgaes = {}) {
   if (!data) return `<div>데이터가 없습니다.</div>`;
   const { titleImage, detailImage, deliveryImage, nutritionImage } = imgaes;

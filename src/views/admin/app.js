@@ -53,10 +53,13 @@ export default function App({ $app }) {
       console.log(appendItem);
       const postResult = await post(`${BASE_URL}/products`, appendItem);
       // 상품, 카테고리, 주무 조회 관련해서 데이터 schema 통일 시킬 것.
-      console.log(appendItem);
+      console.log(appendItem, postResult);
 
       this.setState({
-        productLists: [...this.state.productLists, { ...appendItem }],
+        productLists: [
+          ...this.state.productLists,
+          { ...postResult, id: postResult.productId },
+        ],
       });
     },
   });
@@ -113,8 +116,8 @@ export default function App({ $app }) {
     $categories: this.state.categoryLists,
     deleteHandler: async (deleteId, preImageKey) => {
       Object.values(preImageKey).forEach((imageKey) => deletePhoto(imageKey));
-      // const delResult = await dels(`${BASE_URL}/products`, `${deleteId}`);
-      // console.log(delResult);
+      const delResult = await dels(`${BASE_URL}/products/${deleteId}`);
+      console.log(delResult);
       const productLists = this.state.productLists.filter(
         (product) => product.id !== deleteId,
       );

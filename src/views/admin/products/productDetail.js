@@ -117,10 +117,10 @@ export default function ProductDetail({
   const getImageUrls = async () => {
     const [titleImage, detailImage, deliveryImage, nutritionImage] =
       await Promise.all([
-        getImageUrl(this.state.titleImage),
-        getImageUrl(this.state.detailImage),
-        getImageUrl(this.state.deliveryImage),
-        getImageUrl(this.state.nutritionImage),
+        getImageUrl(this.state.description.titleImage),
+        getImageUrl(this.state.description.detailImage),
+        getImageUrl(this.state.description.deliveryImage),
+        getImageUrl(this.state.description.nutritionImage),
       ]);
     return { titleImage, detailImage, deliveryImage, nutritionImage };
   };
@@ -136,10 +136,10 @@ export default function ProductDetail({
       await getImageUrls();
 
     this.preImageKey = {
-      titleImage: this.state.titleImage,
-      detailImage: this.state.detailImage,
-      deliveryImage: this.state.deliveryImage,
-      nutritionImage: this.state.nutritionImage,
+      titleImage: this.state.description.titleImage,
+      detailImage: this.state.description.detailImage,
+      deliveryImage: this.state.description.deliveryImage,
+      nutritionImage: this.state.description.nutritionImage,
     };
 
     this.$element.innerHTML = productDetailTemplate(
@@ -157,10 +157,10 @@ export default function ProductDetail({
     const { titleImage, detailImage, deliveryImage, nutritionImage } =
       await getImageUrls();
     this.preImageKey = {
-      titleImage: this.state.titleImage,
-      detailImage: this.state.detailImage,
-      deliveryImage: this.state.deliveryImage,
-      nutritionImage: this.state.nutritionImage,
+      titleImage: this.state.description.titleImage,
+      detailImage: this.state.description.detailImage,
+      deliveryImage: this.state.description.deliveryImage,
+      nutritionImage: this.state.description.nutritionImage,
     };
 
     this.$element.innerHTML = productDetailTemplate(

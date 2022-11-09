@@ -125,7 +125,7 @@ export default function Products({
         const data = {
           name,
           categoryId: +categoryId,
-          companyName,
+          company: companyName,
           description,
           stock,
           price,
@@ -134,7 +134,7 @@ export default function Products({
           deliveryImage: deliveryKey,
           nutritionImage: nutritionKey,
         };
-        await appendHandler(data);
+        await appendHandler({ ...data });
         closeModal();
       } catch (err) {
         alert(
