@@ -39,7 +39,6 @@ export default function ProductDetail({
           const name = this.$element.querySelector("#productName").value;
           const categoryId = this.$element.querySelector("#categoryId").value;
           const companyName = this.$element.querySelector("#companyName").value;
-          const description = this.$element.querySelector("#description").value;
           const stock = this.$element.querySelector("#stock").value;
           const price = this.$element.querySelector("#price").value;
 
@@ -49,20 +48,19 @@ export default function ProductDetail({
               name,
               categoryId: +categoryId,
               companyName,
-              description,
               stock,
               price,
               titleImage: checkStringEmpty(titleImage)
-                ? this.state.titleImage
+                ? this.state.description.titleImage
                 : titleImage,
               detailImage: checkStringEmpty(detailImage)
-                ? this.state.detailImage
+                ? this.state.description.detailImage
                 : detailImage,
               deliveryImage: checkStringEmpty(deliveryImage)
-                ? this.state.deliveryImage
+                ? this.state.description.deliveryImage
                 : deliveryImage,
               nutritionImage: checkStringEmpty(nutritionImage)
-                ? this.state.nutritionImage
+                ? this.state.description.nutritionImage
                 : nutritionImage,
             },
             this.preImageKey,
@@ -117,10 +115,10 @@ export default function ProductDetail({
   const getImageUrls = async () => {
     const [titleImage, detailImage, deliveryImage, nutritionImage] =
       await Promise.all([
-        getImageUrl(this.state.titleImage),
-        getImageUrl(this.state.detailImage),
-        getImageUrl(this.state.deliveryImage),
-        getImageUrl(this.state.nutritionImage),
+        getImageUrl(this.state.description.titleImage),
+        getImageUrl(this.state.description.detailImage),
+        getImageUrl(this.state.description.deliveryImage),
+        getImageUrl(this.state.description.nutritionImage),
       ]);
     return { titleImage, detailImage, deliveryImage, nutritionImage };
   };
@@ -136,10 +134,10 @@ export default function ProductDetail({
       await getImageUrls();
 
     this.preImageKey = {
-      titleImage: this.state.titleImage,
-      detailImage: this.state.detailImage,
-      deliveryImage: this.state.deliveryImage,
-      nutritionImage: this.state.nutritionImage,
+      titleImage: this.state.description.titleImage,
+      detailImage: this.state.description.detailImage,
+      deliveryImage: this.state.description.deliveryImage,
+      nutritionImage: this.state.description.nutritionImage,
     };
 
     this.$element.innerHTML = productDetailTemplate(
@@ -157,10 +155,10 @@ export default function ProductDetail({
     const { titleImage, detailImage, deliveryImage, nutritionImage } =
       await getImageUrls();
     this.preImageKey = {
-      titleImage: this.state.titleImage,
-      detailImage: this.state.detailImage,
-      deliveryImage: this.state.deliveryImage,
-      nutritionImage: this.state.nutritionImage,
+      titleImage: this.state.description.titleImage,
+      detailImage: this.state.description.detailImage,
+      deliveryImage: this.state.description.deliveryImage,
+      nutritionImage: this.state.description.nutritionImage,
     };
 
     this.$element.innerHTML = productDetailTemplate(

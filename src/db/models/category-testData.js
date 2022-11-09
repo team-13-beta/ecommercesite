@@ -5,7 +5,7 @@ const time = timeZone();
 
 async function categoryModelTest(){
     if(!await categoryModel.findByName("chicken")){
-        categoryService.addCategory({
+        await categoryService.addCategory({
             name:"chicken"
             })
     }

@@ -82,16 +82,6 @@ export function productModal(categories = []) {
               />
             </div>
           </div>
-          <div class="field">
-            <label class="label">제품 설명</label>
-            <div class="control">
-              <textarea
-                class="textarea"
-                placeholder="제품 설명을 입력해주세요"
-                id="description"
-              ></textarea>
-            </div>
-          </div>
           
         <div class="field file-field">
           <label class="label">메인 이미지</label>

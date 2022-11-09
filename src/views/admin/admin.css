@@ -14,14 +14,16 @@ main {
   font-weight: 700;
 }
 
-.small-span {
-  font-size: 13px;
-  color: grey;
+.divideTitle {
+  font-weight: 900;
 }
-
 .info-input {
   width: 80%;
   border-radius: 10px;
+}
+
+.content {
+  margin-bottom: 2rem;
 }
 
 .content > .detail-div {
@@ -58,11 +60,7 @@ main {
 }
 
 .table > tbody > tr:hover {
-  background-color: ff922b;
-}
-
-.button {
-  border-radius: 15px;
+  background-color: #ffdfc2;
 }
 
 button:hover {

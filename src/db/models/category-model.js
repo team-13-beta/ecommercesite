@@ -17,6 +17,11 @@ export class CategoryModel {
         const category = await Category.findOne({ categoryId: Id });
         return category;
     }
+    async findByObjId(Id){
+      const category = await Category.findOne({_id:Id});
+      return category;
+    }
+
     async create(categoryInfo) {
       const num2=await Category.find().sort({"categoryId":-1}).limit(1);
       //console.log(num2[0].categoryId);
