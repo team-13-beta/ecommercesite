@@ -21,8 +21,8 @@ export class ProductModel {
   
   async create(productInfo) {
     const num = await Product.find().sort({productId:-1}).limit(1);
-    console.log(num);
-    const productId= (num[0])?  num[0].productId+1 : 1; 
+    console.log(num.productId);
+    const productId= (num[0].productId !== undefined)?  num[0].productId+1 : 1;
     
     const time = timeZone();
     const timeInfo = {'createdTime':time,'updatedTime':time};
