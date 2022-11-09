@@ -9,7 +9,7 @@ export class ProductModel {
     return product;
   }
   async findById(productId) {
-    const product = await Product.findOne({ productId : productId });
+    const product = await Product.findOne({ productId : productId }).populate("categoryId");
     return product;
   }
   async findByCategory(categoryObjId){
