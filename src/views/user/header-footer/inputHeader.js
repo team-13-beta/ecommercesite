@@ -14,6 +14,7 @@ function inputHeader() {
     logout.addEventListener("click", (e) => {
       e.preventDefault();
       sessionStorage.removeItem("token");
+      sessionStorage.removeItem("admin");
       window.location.href = "/";
     });
   }
