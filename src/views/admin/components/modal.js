@@ -11,7 +11,7 @@ export const categoryAppendModal = `
       </div>
     </section>
     <footer class="modal-card-foot">
-      <button class="button is-success category-append">추가하기</button>
+      <button class="button primary category-append">추가하기</button>
       <button class="button close-button">취소하기</button>
     </footer>
   </div>
@@ -32,7 +32,7 @@ export const categoryUpdateModal = (data) => {
       </div>
     </section>
     <footer class="modal-card-foot">
-      <button class="button is-success" data-type="categoryUpdate">수정하기</button>
+      <button class="button primary" data-type="categoryUpdate">수정하기</button>
       <button class="button" data-type="categoryDelete">삭제하기</button>
     </footer>
   </div>`;
@@ -179,7 +179,7 @@ export function productModal(categories = []) {
           </div>
         </section>
         <footer class="modal-card-foot">
-          <button class="button is-success append-button" data-type="submit">
+          <button class="button primary append-button" data-type="submit">
             추가하기
           </button>
           <button class="button close-button" data-type="close">
