@@ -24,7 +24,9 @@ async function handleData() {
         data.stock,
       ];
 
-      const htmlEl = renderDetailData(id, temp, name, price, des);
+      const koprice = price.toLocaleString("ko-KR");
+
+      const htmlEl = renderDetailData(id, temp, name, koprice, des);
       contentEl.innerHTML = htmlEl;
 
       //const html2El = productDesData(des_img1, des_img2, des_img3);

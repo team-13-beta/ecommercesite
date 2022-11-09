@@ -9,7 +9,7 @@ function handleData() {
   for (let i = 0; i < window.localStorage.length; i++) {
     // 로컬 데이터 가져오기
     const key = window.localStorage.key(i);
-    console.log(key);
+
     if (Number.isInteger(parseInt(key))) {
       const bucketData = JSON.parse(window.localStorage.getItem(key));
 
@@ -22,6 +22,7 @@ function handleData() {
       ];
 
       // 페이지에 뿌려준다.
+
       const htmlStr = renderBucketData(id, img, name, price, stock);
       let el = document.createElement("div");
       el.classList.add("columns", "item-box");
@@ -33,7 +34,7 @@ function handleData() {
 
   let totalPrice = calcTotalPrice();
 
-  totalPriceEl.innerText = `${totalPrice}`;
+  totalPriceEl.innerText = `${totalPrice.toLocaleString("ko-KR")}원`;
 
   // 렌더링이 되면 스크립트 파일을 추가한다.
   const counterEl = document.createElement("script");

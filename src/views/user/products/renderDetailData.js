@@ -7,7 +7,7 @@ export default function renderDetailData(id, title, name, price, des) {
       <div style="display:none;" id="item-id">${id}</div>
       <div class="card-content item-name">${name}</div>
       <div class="card-content item-des">${des}</div>
-      <div class="card-content item-price">${price}</div>
+      <div class="card-content item-price">${price}<span>원</span></div>
       <div class="card-content columns">
         <div class="column is-one-third">제품 수량 선택</div>
         <div class="column">

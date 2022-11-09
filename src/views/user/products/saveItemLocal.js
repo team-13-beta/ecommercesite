@@ -5,15 +5,20 @@ const itemImgEl = document.querySelector("#item-img");
 const itemIdEl = document.querySelector("#item-id");
 const selectValueEl = document.querySelector("#select-value");
 
+let str = itemPriceEl.textContent;
+const price = parseInt(str.replace(/,/g, ""));
+console.log(price);
+
 function handleSave() {
   const value = parseInt(
     selectValueEl.options[selectValueEl.selectedIndex].value,
   );
+
   const obj = {
     id: `${itemIdEl.textContent}`,
     img: `${itemImgEl.src}`,
     name: `${itemNameEl.textContent}`,
-    price: `${itemPriceEl.textContent}`,
+    price: `${price}`,
     stock: `${value}`,
   };
   if (window.localStorage.getItem(`${itemIdEl.textContent}`)) {
