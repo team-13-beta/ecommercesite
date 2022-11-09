@@ -1,12 +1,16 @@
 import renderDetailData from "./renderDetailData.js";
 import productDesData from "./productDesData.js";
+import { getImageUrl } from "/aws-s3.js";
 
 let contentEl = document.getElementById("input-data");
 let detailEl = document.getElementById("detail-data");
 
-function handleData() {
+async function handleData() {
   const url = window.location.pathname;
   const product_id = url.split("/")[3];
+
+  const [temp] = await Promise.all([getImageUrl("1/9l62l_스크린샷(3).png")]);
+  console.log("temp:", temp);
 
   fetch(`/products/${product_id}`)
     .then((res) => res.json())
@@ -20,7 +24,7 @@ function handleData() {
         data.stock,
       ];
 
-      const htmlEl = renderDetailData(id, name, price, des);
+      const htmlEl = renderDetailData(id, temp, name, price, des);
       contentEl.innerHTML = htmlEl;
 
       //const html2El = productDesData(des_img1, des_img2, des_img3);

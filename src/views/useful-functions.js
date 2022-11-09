@@ -1,4 +1,4 @@
-import { addImageToS3 } from "./aw3-s3.js";
+import { addImageToS3 } from "./aws-s3.js";
 
 // 문자열+숫자로 이루어진 랜덤 5글자 반환
 export const randomId = () => {
