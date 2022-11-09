@@ -73,7 +73,8 @@ export default function ProductDetail({
           nutritionImage = "";
           break;
         case "delete":
-          if (confirm("정말 삭제하시겠습니까?")) deleteHandler(this.state.id);
+          if (confirm("정말 삭제하시겠습니까?"))
+            deleteHandler(this.state.id, this.preImageKey);
           break;
         default:
           return;
@@ -85,12 +86,10 @@ export default function ProductDetail({
 
   this.$element.addEventListener("change", (e) => {
     e.preventDefault();
-    console.log("change occure");
     const {
       dataset: { type },
     } = e.target;
     const $image = this.$element.querySelector(`#${type}-image`);
-    console.log($image, titleImage, detailImage, deliveryImage, nutritionImage); // 수정 완료시에 해당 값을 적용
 
     switch (type) {
       case "title":
@@ -143,8 +142,6 @@ export default function ProductDetail({
       nutritionImage: this.state.nutritionImage,
     };
 
-    console.log(this.state, this.preImageKey, "initial state");
-
     this.$element.innerHTML = productDetailTemplate(
       this.state ?? null,
       this.$categories,
@@ -165,7 +162,7 @@ export default function ProductDetail({
       deliveryImage: this.state.deliveryImage,
       nutritionImage: this.state.nutritionImage,
     };
-    console.log(this.state, "renderState");
+
     this.$element.innerHTML = productDetailTemplate(
       this.state ?? null,
       this.$categories,

@@ -85,7 +85,6 @@ function getImageUrl(imageKey) {
 }
 
 function deletePhoto(imageKey) {
-  console.log(imageKey);
   s3.deleteObject({ Key: imageKey }, function (err, data) {
     if (err) {
       return alert("There was an error deleting your photo: ", err.message);

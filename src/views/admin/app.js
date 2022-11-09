@@ -12,7 +12,7 @@ import ProductDetail from "./products/productDetail.js";
 import OrderDetail from "./orders/orderDetail.js";
 import { closeModal } from "./components/modal.js";
 import { get, post, dels, patch } from "../api.js";
-import { addImageToS3 } from "../aw3-s3.js";
+import { addImageToS3, deletePhoto } from "../aw3-s3.js";
 
 const BASE_URL = `http://localhost:5000`;
 
@@ -109,9 +109,10 @@ export default function App({ $app }) {
     $app,
     $initialState: this.state.productDetail,
     $categories: this.state.categoryLists,
-    deleteHandler: async (deleteId) => {
-      const delResult = await dels(`${BASE_URL}/products`, `${deleteId}`);
-      console.log(delResult);
+    deleteHandler: async (deleteId, preImageKey) => {
+      Object.values(preImageKey).forEach((imageKey) => deletePhoto(imageKey));
+      // const delResult = await dels(`${BASE_URL}/products`, `${deleteId}`);
+      // console.log(delResult);
       const productLists = this.state.productLists.filter(
         (product) => product.id !== deleteId,
       );
@@ -130,7 +131,6 @@ export default function App({ $app }) {
 
       // 넘겨주는 image의 타입이 object라면, 기존에 있던 값을 삭제하고 해당 값을 넣어줘야 함.
       // this.state.productDetail에 데이터가 들어가야 하는데, 그게 들어가지 않음.
-      console.log(updateData, preImageKey);
       updateData = {
         ...updateData,
         titleImage: await getImageKeyByCheckType(
@@ -154,8 +154,6 @@ export default function App({ $app }) {
           preImageKey.nutritionImage,
         ),
       };
-
-      console.log(updateData, 1231231212);
 
       // const patchResult = await patch(`${BASE_URL}/products`, id, updateData);
       // consnole.log(patchResult);
