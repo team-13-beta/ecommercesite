@@ -25,7 +25,6 @@ export class UserModel { // 이메일 중복 검사
 
   async create(userInfo) { 
     const num = await User.find({}).sort({userId:-1}).limit(1);
-    console.log(num);
     const userId= (num[0])? num[0].userId+1: 1; 
 
     const time = timeZone();

@@ -9,7 +9,15 @@ categoryRouter.get("/", async (req,res,next)=>{
     try{
         const categories=await categoryService.getCategories();
         //console.log(categories);
-        res.status(200).json(categories);
+        let result = [];
+        for (let item of categories){
+          let content = {
+            id:item.categoryId,
+            name:item.name
+          }
+          result.push(content);
+        }
+        res.status(200).json(result);
     }catch(err){
         next(err);
     }
@@ -24,10 +32,18 @@ categoryRouter.post("/",async(req,res,next)=>{
         const newCategory = await categoryService.addCategory({
           name,
         });
-    
+      const result = {
+        code : 201,
+        data : {
+          id:newCategory.categoryId,
+          name:newCategory.name,
+          created_date:newCategory.createdTime,
+          updated_date:newCategory.updatedTime
+        }
+      };
         // 추가된 유저의 db 데이터를 프론트에 다시 보내줌
         // 물론 프론트에서 안 쓸 수도 있지만, 편의상 일단 보내 줌
-        res.status(201).json(newCategory);
+        res.status(200).json(result);
       } catch (error) {
         next(error);
       }
@@ -55,14 +71,33 @@ categoryRouter.patch(
         categoryId,
         toUpdate,
       );
+      const result = {
+        code : 200,
+        data : {
+          id:updatedCategoryInfo.categoryId,
+          name:updatedCategoryInfo.name,
+        }
+      };  
 
       // 업데이트 이후의 유저 데이터를 프론트에 보내 줌
-      res.status(200).json(updatedCategoryInfo);
+      res.status(200).json(result);
     } catch (error) {
       next(error);
     }
   },
 );
+
+/*
+{
+    "_id": "636b38b753e91f8a9285940c",
+    "categoryId": 10,
+    "name": "fork",
+    "createdTime": "2022. 11. 9. 오후 2:20:55",
+    "updatedTime": "2022. 11. 9. 오후 2:20:55",
+    "__v": 0
+}
+*/
+
 
 categoryRouter.delete("/:categoryId",async (req,res,next)=>{
   // 삭제할 상품 이름
@@ -70,7 +105,15 @@ categoryRouter.delete("/:categoryId",async (req,res,next)=>{
       const categoryId=req.params.categoryId;
       const deleteCategory=await categoryService.deleteCategory(categoryId);
   
-      res.status(201).json(deleteCategory);
+      const result = {
+        code:200,
+        data:{
+          id:deleteCategory.categoryId,
+          name:deleteCategory.name
+        }
+      }
+
+      res.status(200).json(result);
   }catch(err){
       next(err);
   }

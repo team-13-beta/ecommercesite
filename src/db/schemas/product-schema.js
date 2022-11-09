@@ -30,6 +30,11 @@ const ProductSchema = new Schema(
       requried: true,
       ref: 'categories',
     },
+    categoryName:{
+      type:String,
+      required:true,
+    },
+    
     createdTime : { 
       type: String
     },

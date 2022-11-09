@@ -5,8 +5,8 @@ import {timeZone} from "../../services/timeZone.js";
 const Category = model("categories", CategorySchema);
 
 export class CategoryModel {
-    async findByName(name) {
-        const category = await Category.findOne({ name });
+    async findByName(categoryName) {
+        const category = await Category.findOne({ name : categoryName });
         return category;
       }
     async findAll() {

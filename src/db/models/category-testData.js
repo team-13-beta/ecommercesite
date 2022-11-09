@@ -1,59 +1,50 @@
 import {categoryModel} from './category-model.js';
 import {timeZone} from '../../services/timeZone.js';
-
+import {categoryService} from '../../services/category-service.js';
 const time = timeZone();
 
 async function categoryModelTest(){
-if(!await categoryModel.findByName("chicken"))
-categoryModel.create({
-    categoryId:1,
-    name:"chicken",
-    createdTime:time,
-    updatedTime:time
-});
+    if(!await categoryModel.findByName("chicken")){
+        categoryService.addCategory({
+            name:"chicken"
+            })
+    }
 
-if(!await categoryModel.findByName("vegetable"))
-categoryModel.create({
-    categoryId:2,
-    name:"vegetable",
-    createdTime:time,
-    updatedTime:time
-})
-if(!await categoryModel.findByName("fork"))
-categoryModel.create({
-    categoryId:3,
-    name:"fork",
-    createdTime:time,
-    updatedTime:time
-})
-if(!await categoryModel.findByName("drink"))
-categoryModel.create({
-    categoryId:4,
-    name:"drink",
-    createdTime:time,
-    updatedTime:time
-})
-if(!await categoryModel.findByName("steak"))
-categoryModel.create({
-    categoryId:5,
-    name:"steak",
-    createdTime:time,
-    updatedTime:time
-})
-if(!await categoryModel.findByName("salad"))
-categoryModel.create({
-    categoryId:6,
-    name:"salad",
-    createdTime:time,
-    updatedTime:time
-})
-if(!await categoryModel.findByName("mealkit"))
-categoryModel.create({
-    categoryId:7,
-    name:"mealkit",
-    createdTime:time,
-    updatedTime:time
-})
+    if(!await categoryModel.findByName("vegetable")){
+        await categoryService.addCategory({
+            name:"vegetable"
+            })
+    }
+
+    if(!await categoryModel.findByName("fork")){
+        await categoryService.addCategory({
+            name:"fork"
+            })
+    }
+
+    if(!await categoryModel.findByName("drink")){
+        await categoryService.addCategory({
+            name:"drink"
+            }) 
+    }
+
+    if(!await categoryModel.findByName("steak")){
+        await categoryService.addCategory({
+            name:"steak"
+            })
+    }
+
+    if(!await categoryModel.findByName("salad")){
+        await categoryService.addCategory({
+            name:"salad"
+            })
+    }
+
+    if(!await categoryModel.findByName("mealkit")){
+        await categoryService.addCategory({
+            name:"mealkit"
+            })
+    }
 
 return "[SampleData] : categoryModelTestData => Created";
 }
