@@ -12,10 +12,7 @@ const productRouter = Router();
 productRouter.get("/", async (req, res, next) => {
   try {
     const products = await productService.getProducts();
-    if(!products) throw new Error("상품이 존재하지 않습니다.");
-
-    // const category = await categoryService.getCategoryByObjId(product.categoryId);
-    if(!category) throw new Error("상품 조회 간 해당하는 상품 연결되는 카테고리는 존재하지 않습니다.")
+    if(!products[0]) throw new Error("상품이 존재하지 않습니다.");
 
     let result=[];
     for(let product of products){
@@ -27,6 +24,10 @@ productRouter.get("/", async (req, res, next) => {
         stock: product.stock,
         companyName: product.company,
         description: product.description,
+        nutritionImage: product.description.nutritionImage,
+        deliveryImage: product.description.deliveryImage,
+        detailImage: product.description.detailImage,
+        titleImage: product.description.titleImage,
         createdTime: product.createdTime,
         updateTime: product.updateTime
       }
@@ -54,10 +55,10 @@ productRouter.post("/", async (req, res, next) => {
   try {
     // req (request)의 body 에서 데이터 가져오기
     // 추가해볼 데이터
-    const { name, stock, price, company, categoryId, nutritionImage, deliveryImage, detailImage, titleImage } = req.body;
+    const { name,stock,price, company, categoryId, nutritionImage, deleveryImage, detailImage, titleImage } = req.body;
     const description = {
       nutritionImage,
-      deliveryImage,
+      deleveryImage,
       detailImage,
       titleImage
     }
@@ -98,11 +99,15 @@ productRouter.get('/:categoryId', async(req,res,next)=>{
       let content={
         id: String(product.productId),
         name: product.name,
-        categoryId: String(product.categoryId.categoryId),
+        categoryId: product.categoryId,
         price: product.price,
         stock: product.stock,
         companyName: product.company,
         description: product.description,
+        nutritionImage: product.description.nutritionImage,
+        deliveryImage: product.description.deliveryImage,
+        detailImage: product.description.detailImage,
+        titleImage: product.description.titleImage,
         createdTime: product.createdTime,
         updateTime: product.updateTime
       }
@@ -119,17 +124,20 @@ productRouter.get('/item/:productId', async (req,res,next)=>{
     try {
     const productId = req.params.productId;
     const product = await productService.getProduct(productId);
-    console.log(product);
     const result={
       code:200,
       data :{
         id: String(product.productId),
         name: product.name,
-        categoryId: String(product.categoryId.categoryId),
+        categoryId: product.categoryId,
         price: product.price,
         stock: product.stock,
         companyName: product.company,
         description: product.description,
+        nutritionImage: product.description.nutritionImage,
+        deliveryImage: product.description.deliveryImage,
+        detailImage: product.description.detailImage,
+        titleImage: product.description.titleImage,
         createdTime: product.createdTime,
         updateTime: product.updateTime
       }
