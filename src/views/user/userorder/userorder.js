@@ -11,12 +11,12 @@ const deleteButton = document.querySelector(".deletebutton");
 const getOrderList = async () => {
   const user = await Api.get("/api/userlist");
   console.log(user._id);
-  const datas = await Api.get("/orders/", user._id);
+  const datas = await Api.get("/orders");
   console.log(datas);
   const result = datas
     .map(
       (data, i) => `
-<tr id="${data.id}">
+<tr id="${data.orderId}">
 <td>${datas.createdTime}</td>
 <td>${datas.productId}</td>
 <td>${data.totalPrice}</td>
