@@ -12,12 +12,17 @@ const productRouter = Router();
 productRouter.get("/", async (req, res, next) => {
   try {
     const products = await productService.getProducts();
+    if(!products) throw new Error("상품이 존재하지 않습니다.");
+
+    // const category = await categoryService.getCategoryByObjId(product.categoryId);
+    if(!category) throw new Error("상품 조회 간 해당하는 상품 연결되는 카테고리는 존재하지 않습니다.")
+
     let result=[];
     for(let product of products){
       let content={
         id: String(product.productId),
         name: product.name,
-        categoryId: String(product.categoryId.categoryId),
+        categoryId: product.categoryId, //(product.categoryId.categoryId)
         price: product.price,
         stock: product.stock,
         companyName: product.company,
@@ -49,10 +54,10 @@ productRouter.post("/", async (req, res, next) => {
   try {
     // req (request)의 body 에서 데이터 가져오기
     // 추가해볼 데이터
-    const { name,stock,price, company, categoryId, nutritionImage, deleveryImage, detailImage, titleImage } = req.body;
+    const { name, stock, price, company, categoryId, nutritionImage, deliveryImage, detailImage, titleImage } = req.body;
     const description = {
       nutritionImage,
-      deleveryImage,
+      deliveryImage,
       detailImage,
       titleImage
     }
@@ -68,6 +73,12 @@ productRouter.post("/", async (req, res, next) => {
 
     // 추가된 유저의 db 데이터를 프론트에 다시 보내줌
     // 물론 프론트에서 안 쓸 수도 있지만, 편의상 일단 보내 줌
+    if(newProduct === null){
+      res.status(501).json({
+        code:501,
+        message : "카테고리 정보가 존재하지 않아서 상품을 생성할 수 없습니다."
+      })
+    }
     res.status(201).json(newProduct);
   } catch (error) {
     next(error);

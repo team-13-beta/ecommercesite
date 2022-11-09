@@ -26,10 +26,8 @@ class ProductService {
         const { name, stock, price, company, categoryId, description } = productInfo;
 
         const category=await categoryModel.findById(Number(categoryId));
-
         if(!category) {
-            console.log(category.name + "출력하셨던데..?");
-            throw new Error('요청하신 상품에 관련된 카테고리가 존재하지 않아서 상품등록을 제한합니다.')
+            return null;
         }
         // 상품 이름 중복 확인
         const product = await this.productModel.findByName(name);
@@ -46,7 +44,8 @@ class ProductService {
             price,
             description,
             company,
-            categoryId:category._id,
+            categoryId:category.categoryId,
+            categoryObjId:category._id,
             categoryName:category.name
         });
 
