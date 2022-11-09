@@ -82,7 +82,6 @@ export const fileUpdateImage = (file, img) => {
 
 export const getImageKeyByCheckType = async (element, categoryId, imageKey) => {
   let result = element;
-  console.log(element);
   if (typeof element === "object") {
     deletePhoto(imageKey);
     result = await addImageToS3(element, categoryId);
