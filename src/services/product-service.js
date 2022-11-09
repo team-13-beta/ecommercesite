@@ -23,9 +23,14 @@ class ProductService {
     }
     async addProduct(productInfo){
         // 객체 destructuring
-        const { name,stock, price, description,company,categoryName } = productInfo;
+        const { name,stock, price, description,company, categoryName } = productInfo;
 
         const category=await categoryModel.findByName(categoryName);
+
+        if(!category) {
+            console.log(categoryName + "출력하셨던데..?");
+            throw new Error('요청하신 상품에 관련된 카테고리가 존재하지 않아서 상품등록을 제한합니다.')
+        }
         // 상품 이름 중복 확인
         const product = await this.productModel.findByName(name);
         if (product) {
@@ -33,14 +38,16 @@ class ProductService {
                 '이 상품은 현재 등록되었습니다. 다른 상품을 등록해 주세요.',
             );
         }
-        // db에 저장
+
+        // db에 저장, 
         const createdNewProduct = await this.productModel.create({
             name,
             stock,
             price,
             description,
             company,
-            categoryId:category._id
+            categoryId:category._id,
+            categoryName:category.name
         });
 
         return createdNewProduct;

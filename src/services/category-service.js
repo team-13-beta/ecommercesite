@@ -68,13 +68,16 @@ class CategoryService {
         const category = await this.categoryModel.findById(categoryId);
         if (!category) {
             throw new Error(
-                '삭제 불가능합니다.',
+                '카테고리가 존재하지 않아 삭제 불가능합니다.',
             );
         }
 
         const deleteCategory=await this.categoryModel.deleteOne(category);
 
-        return deleteCategory;
+        if (deleteCategory.acknowledged)
+        return category 
+        else
+        throw new Error("카테고리 삭제가 실패했습니다")
     }
 }
 
