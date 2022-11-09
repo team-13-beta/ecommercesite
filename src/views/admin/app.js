@@ -53,10 +53,10 @@ export default function App({ $app }) {
       console.log(appendItem);
       const postResult = await post(`${BASE_URL}/products`, appendItem);
       // 상품, 카테고리, 주무 조회 관련해서 데이터 schema 통일 시킬 것.
-      console.log(appendItem);
+      console.log(appendItem, postResult);
 
       this.setState({
-        productLists: [...this.state.productLists, { ...appendItem }],
+        productLists: [...this.state.productLists, { ...postResult.data }],
       });
     },
   });
@@ -112,11 +112,12 @@ export default function App({ $app }) {
     $initialState: this.state.productDetail,
     $categories: this.state.categoryLists,
     deleteHandler: async (deleteId, preImageKey) => {
+      console.log(preImageKey, "preImage");
       Object.values(preImageKey).forEach((imageKey) => deletePhoto(imageKey));
-      // const delResult = await dels(`${BASE_URL}/products`, `${deleteId}`);
-      // console.log(delResult);
+      const delResult = await dels(`${BASE_URL}/products/${deleteId}`);
+      console.log(delResult);
       const productLists = this.state.productLists.filter(
-        (product) => product.id !== deleteId,
+        (product) => Number(product.id) !== Number(deleteId),
       );
       navigate(`/admin/products`);
       this.setState({ productLists, productDetail: {} });
@@ -157,13 +158,16 @@ export default function App({ $app }) {
         ),
       };
 
-      // const patchResult = await patchs(`${BASE_URL}/products`, id, updateData);
-      // consnole.log(patchResult);
+      const patchResult = await patchs(
+        `${BASE_URL}/products/${id}`,
+        updateData,
+      );
+      console.log(patchResult);
       const productLists = this.state.productLists.map((product) =>
-        product.id === id ? updateData : product,
+        product.id == id ? updateData : product,
       );
       alert("수정 완료");
-      this.setState({ productLists, productDetail: updateData });
+      this.setState({ productLists, productDetail: patchResult });
     },
   });
   const orderDetail = new OrderDetail({

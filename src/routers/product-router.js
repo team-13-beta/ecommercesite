@@ -12,20 +12,18 @@ const productRouter = Router();
 productRouter.get("/", async (req, res, next) => {
   try {
     const products = await productService.getProducts();
+    if(!products[0]) throw new Error("상품이 존재하지 않습니다.");
+
     let result=[];
     for(let product of products){
       let content={
         id: String(product.productId),
         name: product.name,
-        categoryId: String(product.categoryId.categoryId),
+        categoryId: product.categoryId, //(product.categoryId.categoryId)
         price: product.price,
         stock: product.stock,
         companyName: product.company,
         description: product.description,
-        nutritionImage: product.description.nutritionImage,
-        deliveryImage: product.description.deliveryImage,
-        detailImage: product.description.detailImage,
-        titleImage: product.description.titleImage,
         createdTime: product.createdTime,
         updateTime: product.updateTime
       }
@@ -53,10 +51,10 @@ productRouter.post("/", async (req, res, next) => {
   try {
     // req (request)의 body 에서 데이터 가져오기
     // 추가해볼 데이터
-    const { name,stock,price, company, categoryId, nutritionImage, deleveryImage, detailImage, titleImage } = req.body;
+    const { name,stock,price, company, categoryId, nutritionImage, deliveryImage, detailImage, titleImage } = req.body;
     const description = {
       nutritionImage,
-      deleveryImage,
+      deliveryImage,
       detailImage,
       titleImage
     }
@@ -69,10 +67,29 @@ productRouter.post("/", async (req, res, next) => {
       categoryId,
       description
     });
-
+    const result={
+        code:200,
+        data :{
+          id: String(newProduct.productId),
+          name: newProduct.name,
+          categoryId: newProduct.categoryId,
+          price: newProduct.price,
+          stock: newProduct.stock,
+          company: newProduct.company,
+          description: newProduct.description,
+          createdTime: newProduct.createdTime,
+          updateTime: newProduct.updateTime
+        }
+      }
     // 추가된 유저의 db 데이터를 프론트에 다시 보내줌
     // 물론 프론트에서 안 쓸 수도 있지만, 편의상 일단 보내 줌
-    res.status(201).json(newProduct);
+    if(newProduct === null){
+      res.status(501).json({
+        code:501,
+        message : "카테고리 정보가 존재하지 않아서 상품을 생성할 수 없습니다."
+      })
+    }
+    res.status(201).json(result);
   } catch (error) {
     next(error);
   }
@@ -96,10 +113,6 @@ productRouter.get('/:categoryId', async(req,res,next)=>{
         stock: product.stock,
         companyName: product.company,
         description: product.description,
-        nutritionImage: product.description.nutritionImage,
-        deliveryImage: product.description.deliveryImage,
-        detailImage: product.description.detailImage,
-        titleImage: product.description.titleImage,
         createdTime: product.createdTime,
         updateTime: product.updateTime
       }
@@ -126,10 +139,6 @@ productRouter.get('/item/:productId', async (req,res,next)=>{
         stock: product.stock,
         companyName: product.company,
         description: product.description,
-        nutritionImage: product.description.nutritionImage,
-        deliveryImage: product.description.deliveryImage,
-        detailImage: product.description.detailImage,
-        titleImage: product.description.titleImage,
         createdTime: product.createdTime,
         updateTime: product.updateTime
       }
@@ -143,7 +152,7 @@ productRouter.get('/item/:productId', async (req,res,next)=>{
 productRouter.delete("/:productId", async (req, res, next) => {
   // 삭제할 상품 이름
   try {
-    const { productId } = req.params.productId;
+    const productId = req.params.productId;
     const deleteproduct = await productService.deleteProduct(productId);
 
     res.status(201).json(deleteproduct);
@@ -157,10 +166,10 @@ productRouter.patch("/:productId", async function (req, res, next) {
     // params로부터 id를 가져옴
     const productId = req.params.productId;
     // body data 로부터 업데이트할 사용자 정보를 추출함.
-    const { name, stock, price, company, nutritionImage, deleveryImage, detailImage, titleImage } = req.body;
+    const { name, stock, price, company, nutritionImage, deliveryImage, detailImage, titleImage } = req.body;
     const description = {
       nutritionImage,
-      deleveryImage,
+      deliveryImage,
       detailImage,
       titleImage
     }

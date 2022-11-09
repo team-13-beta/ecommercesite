@@ -11,7 +11,7 @@ async function productModelTest(){
             price:2000,
             description:"닭가슴살 초기 테스트 데이터",
             company:"허닭",
-            categoryName:'chicken'
+            categoryId:1,
         })
 
         if(!await productModel.findByName("돼지고기"))
@@ -21,7 +21,8 @@ async function productModelTest(){
             price:8000,
             description:"돼지고기 초기 테스트 데이터",
             company:"forking",
-            categoryName:'fork',
+            categoryId:3,
+
         });
       
         if(!await productModel.findByName("소고기"))
@@ -31,7 +32,7 @@ async function productModelTest(){
             price:2000,
             description:"스테이크 초기 테스트 데이터",
             company:"blackCow",
-            categoryName:'steak',
+            categoryId:5
         });
 
         if(!await productModel.findByName("샐러드"))
@@ -41,7 +42,7 @@ async function productModelTest(){
             price:2000,
             description:"샐러드 초기 테스트 데이터",
             company:"허닭",
-            categoryName:'salad',
+            categoryId:6
         });
        
         if(!await productModel.findByName("밀킷"))
@@ -51,7 +52,7 @@ async function productModelTest(){
             price:2000,
             description:"밀킷 초기 테스트 데이터",
             company:"밀킷회사",
-            categoryName:'mealkit'
+            categoryId:7
         })
        
         if(!await productModel.findByName("단백질음료"))
@@ -61,7 +62,7 @@ async function productModelTest(){
             price:2000,
             description:"단백질음료 초기 테스트 데이터",
             company:"이온음료회사",
-            categoryName:'drink',
+            categoryId:4
         })   
 }
 
