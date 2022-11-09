@@ -23,12 +23,12 @@ class ProductService {
     }
     async addProduct(productInfo){
         // 객체 destructuring
-        const { name, stock, price, company, categoryName, description } = productInfo;
+        const { name, stock, price, company, categoryId, description } = productInfo;
 
-        const category=await categoryModel.findByName(categoryName);
+        const category=await categoryModel.findById(Number(categoryId));
 
         if(!category) {
-            console.log(categoryName + "출력하셨던데..?");
+            console.log(category.name + "출력하셨던데..?");
             throw new Error('요청하신 상품에 관련된 카테고리가 존재하지 않아서 상품등록을 제한합니다.')
         }
         // 상품 이름 중복 확인

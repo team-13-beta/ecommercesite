@@ -53,7 +53,7 @@ productRouter.post("/", async (req, res, next) => {
   try {
     // req (request)의 body 에서 데이터 가져오기
     // 추가해볼 데이터
-    const { name,stock,price, company, categoryName, nutritionImage, deleveryImage, detailImage, titleImage } = req.body;
+    const { name,stock,price, company, categoryId, nutritionImage, deleveryImage, detailImage, titleImage } = req.body;
     const description = {
       nutritionImage,
       deleveryImage,
@@ -66,7 +66,7 @@ productRouter.post("/", async (req, res, next) => {
       stock,
       price,
       company,
-      categoryName,
+      categoryId,
       description
     });
 
