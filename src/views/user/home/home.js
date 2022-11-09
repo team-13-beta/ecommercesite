@@ -95,7 +95,7 @@ console.log(image[1]);
 // Category.addEventListener("click", (e) => {
 //   const filterResult = data
 //     .filter((data) => {
-//       return e.target.parentNode.parentNode.id == data.category._id;
+//       return e.target.parentNode.parentNode.id == data.categoryId;
 //     })
 //     .map((data, i) => {
 //       return `<div class ="bottom-products"><a href="products/${
@@ -181,7 +181,7 @@ allResult.addEventListener("click", (e) => {
 Category.addEventListener("click", (e) => {
   const filterResult = data
     .map((data, i) => {
-      if (e.target.parentNode.parentNode.id == data.category._id) {
+      if (data.categoryId == e.target.parentNode.parentNode.id) {
         return `<div class ="bottom-products"><a href="products/${
           data.productId
         }">
