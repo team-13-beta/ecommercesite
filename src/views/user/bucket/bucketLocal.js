@@ -9,23 +9,26 @@ function handleData() {
   for (let i = 0; i < window.localStorage.length; i++) {
     // 로컬 데이터 가져오기
     const key = window.localStorage.key(i);
-    const bucketData = JSON.parse(window.localStorage.getItem(key));
+    console.log(key);
+    if (Number.isInteger(parseInt(key))) {
+      const bucketData = JSON.parse(window.localStorage.getItem(key));
 
-    const [id, img, name, price, stock] = [
-      bucketData.id,
-      bucketData.img,
-      bucketData.name,
-      bucketData.price,
-      bucketData.stock,
-    ];
+      const [id, img, name, price, stock] = [
+        bucketData.id,
+        bucketData.img,
+        bucketData.name,
+        bucketData.price,
+        bucketData.stock,
+      ];
 
-    // 페이지에 뿌려준다.
-    const htmlStr = renderBucketData(id, img, name, price, stock);
-    let el = document.createElement("div");
-    el.classList.add("columns", "item-box");
-    el.id = `${id}`;
-    el.innerHTML = htmlStr;
-    bucketDataEl.append(el);
+      // 페이지에 뿌려준다.
+      const htmlStr = renderBucketData(id, img, name, price, stock);
+      let el = document.createElement("div");
+      el.classList.add("columns", "item-box");
+      el.id = `${id}`;
+      el.innerHTML = htmlStr;
+      bucketDataEl.append(el);
+    }
   }
 
   let totalPrice = calcTotalPrice();

@@ -5,16 +5,18 @@ function bucketInputHtml() {
   let totalPrice = 0;
   for (let i = 0; i < window.localStorage.length; i++) {
     const key = window.localStorage.key(i);
-    const item = JSON.parse(window.localStorage.getItem(key));
+    if (Number.isInteger(parseInt(key))) {
+      const item = JSON.parse(window.localStorage.getItem(key));
 
-    totalPrice += parseInt(item.price) * parseInt(item.stock);
-    if (item) {
-      const htmlStr = renderBucketData(item.name, item.stock, item.price);
-      // html에 추가
-      let el = document.createElement("div");
-      el.classList.add("card-content");
-      el.innerHTML = htmlStr;
-      box.after(el);
+      totalPrice += parseInt(item.price) * parseInt(item.stock);
+      if (item) {
+        const htmlStr = renderBucketData(item.name, item.stock, item.price);
+        // html에 추가
+        let el = document.createElement("div");
+        el.classList.add("card-content");
+        el.innerHTML = htmlStr;
+        box.after(el);
+      }
     }
   }
 

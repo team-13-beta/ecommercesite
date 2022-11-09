@@ -15,14 +15,16 @@ function handleSend() {
   const localData = [];
   for (let i = 0; i < window.localStorage.length; i++) {
     const key = window.localStorage.key(i);
-    const data = JSON.parse(window.localStorage.getItem(key));
-    const obj = {
-      productId: data.id,
-      stock: parseInt(data.stock),
-      name: data.name,
-      price: data.price,
-    };
-    localData.push(obj);
+    if (Number.isInteger(parseInt(key))) {
+      const data = JSON.parse(window.localStorage.getItem(key));
+      const obj = {
+        productId: data.id,
+        stock: parseInt(data.stock),
+        name: data.name,
+        price: data.price,
+      };
+      localData.push(obj);
+    }
   }
   console.log(localData);
   const sendData = {
