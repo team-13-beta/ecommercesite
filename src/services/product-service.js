@@ -23,7 +23,7 @@ class ProductService {
     }
     async addProduct(productInfo){
         // 객체 destructuring
-        const { name,stock, price, description,company, categoryName } = productInfo;
+        const { name, stock, price, company, categoryName, description } = productInfo;
 
         const category=await categoryModel.findByName(categoryName);
 
