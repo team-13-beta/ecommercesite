@@ -12,7 +12,7 @@ categoryRouter.get("/", async (req,res,next)=>{
         let result = [];
         for (let item of categories){
           let content = {
-            id:item.categoryId,
+            id:String(item.categoryId),
             name:item.name
           }
           result.push(content);
@@ -35,7 +35,7 @@ categoryRouter.post("/",async(req,res,next)=>{
       const result = {
         code : 201,
         data : {
-          id:newCategory.categoryId,
+          id:String(newCategory.categoryId),
           name:newCategory.name,
           created_date:newCategory.createdTime,
           updated_date:newCategory.updatedTime
@@ -74,7 +74,7 @@ categoryRouter.patch(
       const result = {
         code : 200,
         data : {
-          id:updatedCategoryInfo.categoryId,
+          id:String(updatedCategoryInfo.categoryId),
           name:updatedCategoryInfo.name,
         }
       };  
@@ -87,18 +87,6 @@ categoryRouter.patch(
   },
 );
 
-/*
-{
-    "_id": "636b38b753e91f8a9285940c",
-    "categoryId": 10,
-    "name": "fork",
-    "createdTime": "2022. 11. 9. 오후 2:20:55",
-    "updatedTime": "2022. 11. 9. 오후 2:20:55",
-    "__v": 0
-}
-*/
-
-
 categoryRouter.delete("/:categoryId",async (req,res,next)=>{
   // 삭제할 상품 이름
   try{
@@ -108,7 +96,7 @@ categoryRouter.delete("/:categoryId",async (req,res,next)=>{
       const result = {
         code:200,
         data:{
-          id:deleteCategory.categoryId,
+          id:String(deleteCategory.categoryId),
           name:deleteCategory.name
         }
       }
