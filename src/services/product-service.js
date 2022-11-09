@@ -16,8 +16,8 @@ class ProductService {
     return product;
   }
 
-  async getProductByCategory(categoryObjId) {
-    const product = await this.productModel.findByCategory(categoryObjId);
+  async getProductByCategory(categoryId) {
+    const product = await this.productModel.findByCategory(categoryId);
     return product;
   }
   async addProduct(productInfo) {
@@ -54,13 +54,15 @@ class ProductService {
 
   // 상품 이름을 매개변수로 받아서 삭제 기능 구현
   async deleteProduct(productId) {
-    // 만약
     const product = await this.productModel.findById(productId);
     if (!product) {
       throw new Error("삭제 불가능합니다.");
     }
 
     const deleteProduct = await this.productModel.deleteOne(product);
+
+    if (deleteProduct.acknowledged) return product;
+    else throw new Error("카테고리 삭제가 실패했습니다");
 
     return deleteProduct;
   }
