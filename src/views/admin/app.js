@@ -11,7 +11,7 @@ import {
 import ProductDetail from "./products/productDetail.js";
 import OrderDetail from "./orders/orderDetail.js";
 import { closeModal } from "./components/modal.js";
-import { get, post, dels, patch } from "../api.js";
+import { get, post, dels, patchs } from "../api.js";
 import { addImageToS3, deletePhoto } from "../aw3-s3.js";
 
 const BASE_URL = `http://localhost:5000`;
@@ -73,14 +73,15 @@ export default function App({ $app }) {
     appendHandler: async (appendItem) => {
       // Append 추가
       const postResult = await post(`${BASE_URL}/category`, appendItem);
+
       this.setState({
         ...this.state,
-        categoryLists: [...this.state.categoryLists, postResult],
+        categoryLists: [...this.state.categoryLists, postResult.data],
       });
       closeModal();
     },
     deleteHandler: async (deleteId) => {
-      const deleteResult = await dels(`${BASE_URL}/category`, `${deleteId}`);
+      const deleteResult = await dels(`${BASE_URL}/category/${deleteId}`);
       console.log(deleteResult); // 여기서 값 처리 되는지 확인
       const categoryLists = this.state.categoryLists.filter(
         (category) => category.id !== deleteId,
@@ -92,7 +93,7 @@ export default function App({ $app }) {
       closeModal();
     },
     updateHandler: async ({ id, name }) => {
-      const updateResult = await patch(`${BASE_URL}/category`, `${id}`, {
+      const updateResult = await patchs(`${BASE_URL}/category/${id}`, {
         name,
       });
       console.log(updateResult); // 여기서도 확인
@@ -155,7 +156,7 @@ export default function App({ $app }) {
         ),
       };
 
-      // const patchResult = await patch(`${BASE_URL}/products`, id, updateData);
+      // const patchResult = await patchs(`${BASE_URL}/products`, id, updateData);
       // consnole.log(patchResult);
       const productLists = this.state.productLists.map((product) =>
         product.id === id ? updateData : product,
@@ -178,7 +179,7 @@ export default function App({ $app }) {
     },
     updateHandler: async (updateData) => {
       const { id } = updateData;
-      const patchResult = patch(`${BASE_URL}/orders`, id, updateData);
+      const patchResult = await patchs(`${BASE_URL}/orders/${id}`, updateData);
       consnole.log(patchResult);
 
       const orderLists = this.state.orderLists.map((order) =>
@@ -237,6 +238,7 @@ export default function App({ $app }) {
     };
     // orderList가 애매함...
     // 동기화 기준을 어떻게 잡아야 할 지 모르겠다
+    console.log(this.state);
     orders.setState(this.state.orderLists);
     categories.setState(this.state.categoryLists);
     products.setState({ ...this.state });
