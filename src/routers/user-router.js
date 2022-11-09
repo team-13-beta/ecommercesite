@@ -43,7 +43,12 @@ userRouter.post("/register", async (req, res, next) => {
 
     // 추가된 유저의 db 데이터를 프론트에 다시 보내줌
     // 물론 프론트에서 안 쓸 수도 있지만, 편의상 일단 보내 줌
-    res.status(201).json(newUser);
+    const result = {
+      code : 200,
+      data : null,
+    }
+
+    res.status(200).json(result);
   } catch (error) {
     next(error);
   }
@@ -65,9 +70,13 @@ userRouter.post("/login",preLogin_Oauth, preLogin_General, async function (req, 
 
     // 로그인 진행 (로그인 성공 시 jwt 토큰을 프론트에 보내 줌)
     const userToken = await userService.getUserToken({ email, password });
-
     // jwt 토큰을 프론트에 보냄 (jwt 토큰은, 문자열임)
-    res.status(200).json(userToken);
+
+    const result = {
+      code:200,
+      token : "bearer "+userToken.token
+    }
+    res.status(200).json(result);
   } catch (error) {
     next(error);
   }
