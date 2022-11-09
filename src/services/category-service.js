@@ -11,7 +11,10 @@ class CategoryService {
         const categories = await this.categoryModel.findAll();
         return categories;
     }
-
+    async getCategoryByObjId(categoryObjId){
+        const category = await this.categoryModel.findByObjId(categoryObjId);
+        return category;
+    }
 
     async getCategoryById(categoryId){
         const category = await this.categoryModel.findById(categoryId);
