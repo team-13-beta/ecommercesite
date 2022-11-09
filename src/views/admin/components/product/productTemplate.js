@@ -1,7 +1,7 @@
 export function productDetailTemplate(data, categories = [], imgaes = {}) {
   if (!data) return `<div>데이터가 없습니다.</div>`;
   const { titleImage, detailImage, deliveryImage, nutritionImage } = imgaes;
-
+  console.log(data, imgaes);
   return `<div class="modify-container">
         <button class="button" data-type="update">
           수정 완료
@@ -31,7 +31,7 @@ export function productDetailTemplate(data, categories = [], imgaes = {}) {
                 ${categories.reduce(
                   (acc, { id, name }) =>
                     (acc += `<option value="${id}" 
-                    ${data.categoryId === id ? "selected" : ""}
+                    ${data.categoryId == id ? "selected" : ""}
                     >${name}</option>`),
                   "",
                 )}
@@ -47,7 +47,7 @@ export function productDetailTemplate(data, categories = [], imgaes = {}) {
               class="input"
               type="text"
               id="companyName"
-              value="${data.companyName}"
+              value="${data.company}"
               data-type="companyName"
             />
           </div>

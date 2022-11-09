@@ -11,7 +11,7 @@ export const navigate = (to, state = {}, isReplace = false) => {
 };
 
 export const appendDetailMoveHandler = (detailId, data = [], title) => {
-  const selectedData = data.find((element) => element.id === detailId);
+  const selectedData = data.find((element) => element.id == detailId);
   console.log(selectedData, detailId, data, "selectedData");
   if (selectedData) {
     navigate(`${location.pathname}/${detailId}`, {
