@@ -12,7 +12,7 @@ import ProductDetail from "./products/productDetail.js";
 import OrderDetail from "./orders/orderDetail.js";
 import { closeModal } from "./components/modal.js";
 import { get, post, dels, patch } from "../api.js";
-import { addImageToS3 } from "../aw3-s3.js";
+import { addImageToS3, deletePhoto } from "../aw3-s3.js";
 
 const BASE_URL = `http://localhost:5000`;
 
@@ -109,16 +109,17 @@ export default function App({ $app }) {
     $app,
     $initialState: this.state.productDetail,
     $categories: this.state.categoryLists,
-    deleteHandler: async (deleteId) => {
-      const delResult = await dels(`${BASE_URL}/products`, `${deleteId}`);
-      console.log(delResult);
+    deleteHandler: async (deleteId, preImageKey) => {
+      Object.values(preImageKey).forEach((imageKey) => deletePhoto(imageKey));
+      // const delResult = await dels(`${BASE_URL}/products`, `${deleteId}`);
+      // console.log(delResult);
       const productLists = this.state.productLists.filter(
         (product) => product.id !== deleteId,
       );
       navigate(`/admin/products`);
       this.setState({ productLists, productDetail: {} });
     },
-    updateHandler: async (updateData) => {
+    updateHandler: async (updateData, preImageKey) => {
       const {
         id,
         categoryId,
@@ -127,20 +128,32 @@ export default function App({ $app }) {
         deliveryImage,
         nutritionImage,
       } = updateData;
-      console.log(updateData, typeof titleImage, typeof detailImage, 123);
 
+      // 넘겨주는 image의 타입이 object라면, 기존에 있던 값을 삭제하고 해당 값을 넣어줘야 함.
+      // this.state.productDetail에 데이터가 들어가야 하는데, 그게 들어가지 않음.
       updateData = {
         ...updateData,
-        titleImage: await getImageKeyByCheckType(titleImage, categoryId),
-        detailImage: await getImageKeyByCheckType(detailImage, categoryId),
-        deliveryImage: await getImageKeyByCheckType(deliveryImage, categoryId),
+        titleImage: await getImageKeyByCheckType(
+          titleImage,
+          categoryId,
+          preImageKey.titleImage,
+        ),
+        detailImage: await getImageKeyByCheckType(
+          detailImage,
+          categoryId,
+          preImageKey.detailImage,
+        ),
+        deliveryImage: await getImageKeyByCheckType(
+          deliveryImage,
+          categoryId,
+          preImageKey.deliveryImage,
+        ),
         nutritionImage: await getImageKeyByCheckType(
           nutritionImage,
           categoryId,
+          preImageKey.nutritionImage,
         ),
       };
-
-      console.log(updateData, 1231231212);
 
       // const patchResult = await patch(`${BASE_URL}/products`, id, updateData);
       // consnole.log(patchResult);
@@ -198,13 +211,21 @@ export default function App({ $app }) {
     });
     let match = results.find((route) => route.result != null);
     if (match) {
-      this.setState(); // 테이블 초기화.
-      // switch (match.route.view) {
-      //   case orders:
-      //     const orderLists = await get(`${BASE_URL}/orders`);
-      //     console.log(orderLists);
-      //     break;
-      // }
+      // this.setState(); // 테이블 초기화.
+      switch (match.route.view) {
+        case orders:
+          const orderLists = await get(`${BASE_URL}/orders`);
+          this.setState({ orderLists });
+          break;
+        case products:
+          const productLists = await get(`${BASE_URL}/products`);
+          this.setState({ productLists });
+          break;
+        case categories:
+          const categoryLists = await get(`${BASE_URL}/category`);
+          this.setState({ categoryLists });
+          break;
+      }
       match.route.view.init();
     }
   };
