@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="home.css" />
     <script type="module" src="../user/header-footer/inputHeader.js"></script>
     <script type="module" src="../user/header-footer/inputFooter.js"></script>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.410.0.min.js"></script>
     <script src="home.js" type="module" defer></script>
   </head>
   <body>
@@ -45,12 +46,14 @@
 
     <!-- 카테고리 -->
     <div class="container">
-      <div class="category-header">
-        <h1>카테고리</h1>
-      </div>
+      <div class="category-container">
+        <div class="category-header">
+          <h1>카테고리</h1>
+        </div>
 
-      <!-- 카테고리 데이터 -->
-      <div class="category"></div>
+        <!-- 카테고리 데이터 -->
+        <div class="category"></div>
+      </div>
     </div>
 
     <!-- 상품 데이터 -->
