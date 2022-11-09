@@ -4,7 +4,7 @@ import {
   returnDocumentId,
 } from "../../utility/documentSelect.js";
 import { appendDetailMoveHandler } from "../../utility/navigate.js";
-import { categoryHeader } from "../components/product/productHeader.js";
+import { productHeader } from "../components/product/productHeader.js";
 import { tableTemplate } from "../components/tableTemplate.js";
 import { productModal, closeModal } from "../components/modal.js";
 import { checkStringEmpty, fileAppendImage } from "../../useful-functions.js";
@@ -150,7 +150,7 @@ export default function Products({
     clearContainer($app);
     clearContainer(this.$element);
 
-    this.$element.innerHTML = categoryHeader();
+    this.$element.innerHTML = productHeader();
 
     this.$element.insertAdjacentHTML(
       "beforeend",
