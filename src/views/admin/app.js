@@ -50,7 +50,8 @@ export default function App({ $app }) {
       products.setState({ ...products.state, productLists });
     },
     appendHandler: async (appendItem) => {
-      // const postResult = await post(`${BASE_URL}/products`, appendItem);
+      console.log(appendItem);
+      const postResult = await post(`${BASE_URL}/products`, appendItem);
       // 상품, 카테고리, 주무 조회 관련해서 데이터 schema 통일 시킬 것.
       console.log(appendItem);
 
@@ -238,7 +239,7 @@ export default function App({ $app }) {
     };
     // orderList가 애매함...
     // 동기화 기준을 어떻게 잡아야 할 지 모르겠다
-    console.log(this.state);
+
     orders.setState(this.state.orderLists);
     categories.setState(this.state.categoryLists);
     products.setState({ ...this.state });

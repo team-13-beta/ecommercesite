@@ -72,7 +72,7 @@ export function productModal(categories = []) {
           </div>
 
           <div class="field">
-            <label class="label">상품명</label>
+            <label class="label">제조사</label>
             <div class="control">
               <input
                 class="input"

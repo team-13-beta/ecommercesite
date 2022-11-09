@@ -47,7 +47,7 @@ export default function ProductDetail({
             {
               ...this.state,
               name,
-              categoryId,
+              categoryId: +categoryId,
               companyName,
               description,
               stock,
