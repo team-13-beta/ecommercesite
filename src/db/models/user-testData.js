@@ -6,6 +6,7 @@ async function userModelTest(){
 
 const pw = await bcypt.hash('1111',10);
 
+
 const time = timeZone();
 
 
@@ -43,7 +44,7 @@ if(!await userModel.findByEmail("admin@example.com"))
         userId:1,
         email:"admin@example.com",
         name:"admin",
-        password:pw,
+        password:String(pw),
         phoneNumber:'010-2323-2424',
         address:{  
             postalCode: "000-000",
@@ -59,7 +60,7 @@ if(!await userModel.findByEmail("abc@example.com"))
     await userService.addUser({
         email:"abc@example.com",
         fullName:"가가",
-        password:pw,
+        password:"1111",
         phoneNumber:'010-2323-2424',
         address:{  
             postalCode: "000-000",
@@ -72,7 +73,7 @@ if(!await userModel.findByEmail("aaa@example.com"))
     await userService.addUser({
         email:"aaa@example.com",
         fullName:"나나",
-        password:pw,
+        password:"1111",
         phoneNumber:'010-2323-2424',
         address:{  
             postalCode: "000-000",
@@ -86,7 +87,7 @@ if(!await userModel.findByEmail("bbb@example.com"))
     await userService.addUser({
         email:"bbb@example.com",
         fullName:"다다",
-        password:pw,
+        password:"1111",
         phoneNumber:'010-2323-2424',
         address:{  
             postalCode: "000-000",
@@ -99,7 +100,7 @@ if(!await userModel.findByEmail("ccc@example.com"))
    await userService.addUser({
         email:"ccc@example.com",
         fullName:"라라",
-        password:pw,
+        password:"1111",
         phoneNumber:'010-2323-2424',
         address:{  
             postalCode: "000-000",
