@@ -118,7 +118,7 @@ export default function App({ $app }) {
       navigate(`/admin/products`);
       this.setState({ productLists, productDetail: {} });
     },
-    updateHandler: async (updateData) => {
+    updateHandler: async (updateData, preImageKey) => {
       const {
         id,
         categoryId,
@@ -127,16 +127,31 @@ export default function App({ $app }) {
         deliveryImage,
         nutritionImage,
       } = updateData;
-      console.log(updateData, typeof titleImage, typeof detailImage, 123);
 
+      // 넘겨주는 image의 타입이 object라면, 기존에 있던 값을 삭제하고 해당 값을 넣어줘야 함.
+      // this.state.productDetail에 데이터가 들어가야 하는데, 그게 들어가지 않음.
+      console.log(updateData, preImageKey);
       updateData = {
         ...updateData,
-        titleImage: await getImageKeyByCheckType(titleImage, categoryId),
-        detailImage: await getImageKeyByCheckType(detailImage, categoryId),
-        deliveryImage: await getImageKeyByCheckType(deliveryImage, categoryId),
+        titleImage: await getImageKeyByCheckType(
+          titleImage,
+          categoryId,
+          preImageKey.titleImage,
+        ),
+        detailImage: await getImageKeyByCheckType(
+          detailImage,
+          categoryId,
+          preImageKey.detailImage,
+        ),
+        deliveryImage: await getImageKeyByCheckType(
+          deliveryImage,
+          categoryId,
+          preImageKey.deliveryImage,
+        ),
         nutritionImage: await getImageKeyByCheckType(
           nutritionImage,
           categoryId,
+          preImageKey.nutritionImage,
         ),
       };
 

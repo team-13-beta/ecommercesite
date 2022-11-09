@@ -84,4 +84,14 @@ function getImageUrl(imageKey) {
   return imageUrl;
 }
 
-export { addImageToS3, getImageUrl };
+function deletePhoto(imageKey) {
+  console.log(imageKey);
+  s3.deleteObject({ Key: imageKey }, function (err, data) {
+    if (err) {
+      return alert("There was an error deleting your photo: ", err.message);
+    }
+    alert("Successfully deleted photo.");
+  });
+}
+
+export { addImageToS3, getImageUrl, deletePhoto };
