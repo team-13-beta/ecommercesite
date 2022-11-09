@@ -40,17 +40,6 @@ productRouter.get("/", async (req, res, next) => {
   }
 });
 
-// productRouter.get("/:id", async (req, res, next) => {
-//   try {
-//     const id = req.params.id;
-//     const products = await productService.getProduct(id);
-//     console.log(products);
-//     res.status(200).json(products);
-//   } catch (err) {
-//     next(err);
-//   }
-// });
-
 productRouter.post("/", async (req, res, next) => {
   try {
     // req (request)의 body 에서 데이터 가져오기
@@ -92,8 +81,7 @@ productRouter.get('/:categoryId', async(req,res,next)=>{
     const categoryId = req.params.categoryId;
     const category = await categoryService.getCategoryById(categoryId);
     if(!category) throw new Error('요청하신 카테고리는 존재하지 않습니다.')
-    let categoryObjId = category._id.toString();
-    const products = await productService.getProductByCategory(categoryObjId);
+    const products = await productService.getProductByCategory(categoryId);
     let result=[];
     for(let product of products){
       let content={
@@ -124,6 +112,8 @@ productRouter.get('/item/:productId', async (req,res,next)=>{
     try {
     const productId = req.params.productId;
     const product = await productService.getProduct(productId);
+    if (!product) throw new Error("상품이 이미 삭제되었거나 존재하지 않습니다.")
+
     const result={
       code:200,
       data :{
@@ -151,10 +141,18 @@ productRouter.get('/item/:productId', async (req,res,next)=>{
 productRouter.delete("/:productId", async (req, res, next) => {
   // 삭제할 상품 이름
   try {
-    const { productId } = req.params.productId;
-    const deleteproduct = await productService.deleteProduct(productId);
+    const productId  = req.params.productId;
+    const deleteProduct = await productService.deleteProduct(productId);
 
-    res.status(201).json(deleteproduct);
+    const result = {
+      code:200,
+      data:{
+        id:String(deleteProduct.productId),
+        name:deleteProduct.name
+      }
+    }
+
+    res.status(200).json(result);
   } catch (err) {
     next(err);
   }
