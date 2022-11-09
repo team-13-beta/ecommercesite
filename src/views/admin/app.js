@@ -211,13 +211,21 @@ export default function App({ $app }) {
     });
     let match = results.find((route) => route.result != null);
     if (match) {
-      this.setState(); // 테이블 초기화.
-      // switch (match.route.view) {
-      //   case orders:
-      //     const orderLists = await get(`${BASE_URL}/orders`);
-      //     console.log(orderLists);
-      //     break;
-      // }
+      // this.setState(); // 테이블 초기화.
+      switch (match.route.view) {
+        case orders:
+          const orderLists = await get(`${BASE_URL}/orders`);
+          this.setState({ orderLists });
+          break;
+        case products:
+          const productLists = await get(`${BASE_URL}/products`);
+          this.setState({ productLists });
+          break;
+        case categories:
+          const categoryLists = await get(`${BASE_URL}/category`);
+          this.setState({ categoryLists });
+          break;
+      }
       match.route.view.init();
     }
   };
