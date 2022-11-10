@@ -15,8 +15,6 @@ function closeModal() {
 }
 
 function handleUserData() {
-  // TODO : 유저 정보 데이터 가져오기
-  // get /api/userlist
   fetch("/api/userlist", {
     headers: {
       Authorization: `Bearer ${sessionStorage.getItem("token")}`,

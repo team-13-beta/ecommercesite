@@ -2,8 +2,7 @@ const deleteBtn = document.querySelectorAll(".del-btn");
 const allDeleteBtn = document.querySelector(".all-delete");
 const itemEl = document.querySelectorAll(".item-box");
 const totalPriceEl = document.querySelector("#total-price");
-// TODO : 전체 삭제
-// TODO : 삭제 될 때 가격 빼기
+
 function handleDelete(e) {
   const dataIdEl = e.target.parentElement.id;
   const delPrice = parseInt(
