@@ -16,14 +16,29 @@ class ProductService {
     return product;
   }
 
-  async getProductByCategory(categoryObjId) {
-    const product = await this.productModel.findByCategory(categoryObjId);
+  async getProductByCategory(categoryId) {
+    const product = await this.productModel.findByCategory(categoryId);
     return product;
   }
   async addProduct(productInfo) {
     // 객체 destructuring
-    const { name, stock, price, company, categoryId, description } =
-      productInfo;
+    const {
+      name,
+      stock,
+      price,
+      company,
+      categoryId,
+      nutritionImage,
+      deliveryImage,
+      detailImage,
+      titleImage,
+    } = productInfo;
+    const description = {
+      nutritionImage,
+      deliveryImage,
+      detailImage,
+      titleImage,
+    };
 
     const category = await categoryModel.findById(Number(categoryId));
     if (!category) {
@@ -33,7 +48,7 @@ class ProductService {
     const product = await this.productModel.findByName(name);
     if (product) {
       throw new Error(
-        "이 상품은 현재 등록되었습니다. 다른 상품을 등록해 주세요.",
+        `상품(${product.name})은 기존에 등록되어 있어서 상품을 등록 할 수 없습니다. 다른 상품을 등록해 주세요.`,
       );
     }
 
@@ -54,13 +69,15 @@ class ProductService {
 
   // 상품 이름을 매개변수로 받아서 삭제 기능 구현
   async deleteProduct(productId) {
-    // 만약
     const product = await this.productModel.findById(productId);
     if (!product) {
       throw new Error("삭제 불가능합니다.");
     }
 
     const deleteProduct = await this.productModel.deleteOne(product);
+
+    if (deleteProduct.acknowledged) return product;
+    else throw new Error("카테고리 삭제가 실패했습니다");
 
     return deleteProduct;
   }
@@ -92,4 +109,3 @@ class ProductService {
 const productService = new ProductService(productModel);
 
 export { productService };
-

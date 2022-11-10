@@ -1,7 +1,6 @@
 export function productDetailTemplate(data, categories = [], imgaes = {}) {
   if (!data) return `<div>데이터가 없습니다.</div>`;
   const { titleImage, detailImage, deliveryImage, nutritionImage } = imgaes;
-  console.log(data, imgaes);
   return `<div class="modify-container">
         <button class="button" data-type="update">
           수정 완료
@@ -51,17 +50,6 @@ export function productDetailTemplate(data, categories = [], imgaes = {}) {
               data-type="companyName"
             />
           </div>
-        </div>
-
-        <div class="field">
-          <label class="label">제품 설명</label>
-          <div class="control">
-            <textarea class="textarea" id="description" data-type="description">${
-              data.description
-            }</textarea>
-          </div>
-
-
         </div>
 
         <div class="field file-field">

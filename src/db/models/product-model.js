@@ -9,12 +9,14 @@ export class ProductModel {
     return product;
   }
   async findById(productId) {
-    const product = await Product.findOne({ productId : productId }).populate("categoryId");
+    const product = await Product.findOne({ productId }).populate("categoryId");
+    console.log('findById')
+    console.log(product);
     return product;
   }
-  async findByCategory(categoryObjId){
-    const product = await Product.find({categoryId:categoryObjId});
-    if(product[0]) throw new Error("선택하신 카테고리에 해당하는 품목들은 없습니다.");
+  async findByCategory(categoryId){
+    const product = await Product.find({categoryId});
+    if(!product[0]) throw new Error("선택하신 카테고리에 해당하는 품목들은 없습니다.");
     return product;
   }
 
