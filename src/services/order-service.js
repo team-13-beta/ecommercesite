@@ -17,8 +17,7 @@ class OrderService {
         const user = await userModel.findById(consumer_id);
 
         if(!user) throw new Error('사용자의 주문내역을 요청하셨지만 해당하는 사용자가 존재하지 않거나 토큰이 유효하지 않습니다');
-
-        const orders = await this.orderModel.findByUsers(user._id);
+        const orders = await this.orderModel.findByUsers(user._id.toString());
         return orders;
     }
 

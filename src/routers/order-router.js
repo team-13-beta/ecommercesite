@@ -17,7 +17,7 @@ orderRouter.get("/",async (req,res,next)=>{
     for(let order of orders){
       let content={
         id: String(order.orderId),
-        username: order.userName,
+        userName: order.userName,
         userId: order.userId, //(product.categoryId.categoryId)
         buyingProduct: order.buyingProduct,
         address: order.address,
@@ -39,12 +39,12 @@ orderRouter.get("/:consumer_id", async (req,res,next)=>{
     try{
         const consumer_id = req.params.consumer_id;
 
-        const order=await orderService.getOrders(consumer_id);
+        const orders=await orderService.getOrders(consumer_id);
         let result=[];
         for(let order of orders){
           let content={
             id: String(order.orderId),
-            username: order.userName,
+            userName: order.userName,
             userId: order.userId, //(product.categoryId.categoryId)
             buyingProduct: order.buyingProduct,
             address: order.address,
@@ -71,7 +71,7 @@ orderRouter.get("/item/:order_id", async (req,res,next)=>{
       //console.log(products);
       let result={
         id: String(order.orderId),
-        username: order.userName,
+        userName: order.userName,
         userId: order.userId, //(product.categoryId.categoryId)
         buyingProduct: order.buyingProduct,
         address: order.address,
