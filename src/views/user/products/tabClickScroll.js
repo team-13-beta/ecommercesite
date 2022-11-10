@@ -7,11 +7,20 @@ const location2 = document.querySelector(".img2").offsetTop;
 const location3 = document.querySelector(".img3").offsetTop;
 
 detailBtnEl.addEventListener("click", () => {
+  detailBtnEl.parentElement.classList.add("is-active");
+  deliveryBtnEl.parentElement.classList.remove("is-active");
+  nutritionBtnEl.parentElement.classList.remove("is-active");
   window.scrollTo({ top: location1, behaivor: "smooth" });
 });
 deliveryBtnEl.addEventListener("click", () => {
+  detailBtnEl.parentElement.classList.remove("is-active");
+  deliveryBtnEl.parentElement.classList.add("is-active");
+  nutritionBtnEl.parentElement.classList.remove("is-active");
   window.scrollTo({ top: location2, behaivor: "smooth" });
 });
 nutritionBtnEl.addEventListener("click", () => {
+  detailBtnEl.parentElement.classList.remove("is-active");
+  deliveryBtnEl.parentElement.classList.remove("is-active");
+  nutritionBtnEl.parentElement.classList.add("is-active");
   window.scrollTo({ top: location3, behaivor: "smooth" });
 });

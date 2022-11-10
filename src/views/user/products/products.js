@@ -5,16 +5,13 @@ import { getImageUrl } from "/aws-s3.js";
 let contentEl = document.getElementById("input-data");
 let detailEl = document.getElementById("detail-data");
 
-async function handleData() {
+function handleData() {
   const url = window.location.pathname;
   const product_id = url.split("/")[3];
 
-  const [temp] = await Promise.all([getImageUrl("1/9l62l_스크린샷(3).png")]);
-  console.log("temp:", temp);
-
   fetch(`/products/item/${product_id}`)
     .then((res) => res.json())
-    .then((result) => {
+    .then(async (result) => {
       console.log(result);
       const [id, name, price, des, stock] = [
         product_id,
@@ -23,11 +20,13 @@ async function handleData() {
         result.data.description.summary,
         result.data.stock,
       ];
-      // const [des_img1, des_img2, des_img3] = Promise.all([
-      //   getImageUrl(),
-      //   getImageUrl(),
-      //   getImageUrl(),
-      // ]);
+      const [temp, des_img1, des_img2, des_img3] = await Promise.all([
+        getImageUrl("1/9l62l_스크린샷(3).png"),
+        getImageUrl(result.data.description.detailImage),
+        getImageUrl(result.data.description.deliveryImage),
+        getImageUrl(result.data.description.nutirtionImage),
+      ]);
+
       const koprice = price.toLocaleString("ko-KR");
 
       const htmlEl = renderDetailData(id, temp, name, koprice, des);
@@ -35,8 +34,8 @@ async function handleData() {
 
       // TODO : img key 완성되면 하기
 
-      //const html2El = productDesData(des_img1, des_img2, des_img3);
-      //detailEl.innerHTML = html2El;
+      const html2El = productDesData(des_img1, des_img2, des_img3);
+      detailEl.innerHTML = html2El;
 
       const scrollEl = document.createElement("script");
       scrollEl.setAttribute("src", "tabClickScroll.js");
