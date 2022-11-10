@@ -1,5 +1,5 @@
 import * as Api from "../../api.js";
-import { addCommas } from "../../useful-functions.js";
+import { addCommas, fileAppendImage } from "../../useful-functions.js";
 import { getImageUrl } from "../../aw3-s3.js";
 
 // 요소(element), input 혹은 상수
@@ -11,6 +11,8 @@ const allResult = document.querySelector("#all-result-button");
 
 rightArrow.addEventListener("click", rightArrowHandler);
 leftArrow.addEventListener("click", leftArrowHandler);
+allResult.addEventListener("click", allProduct);
+
 // Click Image Slider
 
 function leftArrowHandler() {
@@ -77,128 +79,117 @@ function rightArrowHandler() {
   nextSlide.classList.add("active");
 }
 
-const data = await Api.get("/products"); // 전체 상품 데이터
-console.log(data);
-const categoryData = await Api.get("/category");
-console.log(categoryData); // 전체 카테고리 데이터
-let image = [];
+// 카테고리 생성
+async function addCategory() {
+  const categorys = await Api.get("/category");
+  console.log(categorys);
 
-for (let i = 0; i < data.length; i++) {
-  let imageUrl = await getImageUrl(`${data[i].titleImage}`); //titleImage가 없어서 안뜨는 거 같다.
-  image.push(imageUrl);
+  for (const category of categorys) {
+    const { id, name } = category;
+    // const imageUrl = await getImageUrl(titleImage);
+
+    Category.innerHTML += `<div class ="category-item" id="${id}">
+        <div class="bottom-product-name">
+        <p>${name}</p>
+        </div>
+        </div>`;
+  }
 }
 
-// 이미지를 필터링 해서 보여주고 싶은데 어떻게 하지..
+// 전체 상품 생성.
 
-console.log(image[1]);
+async function addProduct() {
+  const products = await Api.get("/products");
 
-// Category.addEventListener("click", (e) => {
-//   const filterResult = data
-//     .filter((data) => {
-//       return e.target.parentNode.parentNode.id == data.categoryId;
-//     })
-//     .map((data, i) => {
-//       return `<div class ="bottom-products"><a href="products/${
-//         data.productId
-//       }">
-//         <div class="bottom-product-image-container">
-//         <img class="bottom-product-image" src="/${image[i]}" alt="">
-//         </div>
-//         <div class="bottom-product-name">
-//         <p>${data.name}</p>
-//         </div>
-//         <div class="bottom-product-price">
-//         ${addCommas(data.price) + "원"}
-//         </div>
-//         </div>
-//         `;
-//     })
-//     .join("");
-//   bottomInner.innerHTML = filterResult;
-// });
+  for (const product of products) {
+    const { id, name, price, description } = product;
+    const { titleImage } = description;
+    const imageUrl = await getImageUrl(titleImage);
 
-const result = data
-  .map((data, i) => {
-    {
-      return `<div class ="bottom-products"><a href="/user/products/${
-        data.productId
-      }">
-      <div class="bottom-product-image-container">
-      <img class="bottom-product-image" src="${image[i]}" alt="">
-      </div>
-      <div class="bottom-product-name">
-      <p>${data.name}</p>
-      </div>
-      <div class="bottom-product-price">
-      ${addCommas(data.price) + "원"}
-      </div>
-      </div>
-      `;
-    }
-  })
-  .join("");
+    bottomInner.innerHTML += ` <div class ="bottom-products ${id}"><a href="/user/products/${id}">
+    <div class="bottom-product-image-container">
+    <img class="bottom-product-image" src="${imageUrl}" alt="">
+    </div>
+    <div class="bottom-product-name">
+    <p>${name}</p>
+    </div>
+    <div class="bottom-product-price">
+    ${addCommas(price) + "원"}
+    </div>
+    </div>
+    `;
+  }
+}
 
-bottomInner.innerHTML = result;
+//바탕에 깔아두기
+addCategory();
+addProduct();
 
-const categoryResult = categoryData
-  .map((data, i) => {
-    {
-      return `    <div class ="category-item" id="${data._id}">
-      <div class="bottom-product-name">
-      <p>${data.name}</p>
-      </div>
-      </div>
-      `;
-    }
-  })
-  .join("");
-Category.innerHTML = categoryResult;
+// 카테고리 버튼 누르면 상품 나오는 이벤트
 
-// 상품 전체 보기 버튼
-allResult.addEventListener("click", (e) => {
+Category.addEventListener("click", async (e) => {
   e.preventDefault();
-  let allResults = data
-    .map((data, i) => {
-      return `<div class ="bottom-products"><a href="/user/products/${
-        data.productId
-      }">
-        <div class="bottom-product-image-container">
-        <img class="bottom-product-image" src="${image[i]}" alt="">
-        </div>
-        <div class="bottom-product-name">
-        <p>${data.name}</p>
-        </div>
-        <div class="bottom-product-price">
-        ${addCommas(data.price) + "원"}
-        </div>
-        </div>
-        `;
-    })
-    .join("");
-  bottomInner.innerHTML = allResults;
-});
+  let a = e.target.parentNode.parentNode.id;
+  try {
+    const products = await Api.get("/products");
+    const addTitleImage = await Promise.all(
+      products
+        .filter((data, i) => {
+          return data.categoryId == a;
+        })
+        .map(async (data) => {
+          return {
+            ...data,
+            titleImage: await getImageUrl(data.description.titleImage),
+          };
+        }),
+    );
 
-Category.addEventListener("click", (e) => {
-  const filterResult = data
-    .map((data, i) => {
-      if (data.categoryId == e.target.parentNode.parentNode.id) {
-        return `<div class ="bottom-products"><a href="products/${
-          data.productId
+    const result = addTitleImage
+      .map((data) => {
+        return `<div class ="bottom-products"><a href="/user/products/${
+          data.id
         }">
-        <div class="bottom-product-image-container">
-        <img class="bottom-product-image" src="/${image[i]}" alt="">
-        </div>
-        <div class="bottom-product-name">
-        <p>${data.name}</p>
-        </div>
-        <div class="bottom-product-price">
-        ${addCommas(data.price) + "원"}
-        </div>
-        </div>
-        `;
-      }
-    })
-    .join("");
-
-  bottomInner.innerHTML = filterResult;
+              <div class="bottom-product-image-container">
+              <img class="bottom-product-image" src="${data.titleImage}" alt="">
+              </div>
+              <div class="bottom-product-name">
+              <p>${data.name}</p>
+              </div>
+              <div class="bottom-product-price">
+              ${addCommas(data.price) + "원"}
+              </div>
+              </div>
+              `;
+      })
+      .join("");
+    bottomInner.innerHTML = result;
+  } catch (err) {
+    console.log(err);
+  }
 });
+
+// 전체 상품 보기 버튼
+async function allProduct(e) {
+  e.preventDefault();
+  const products = await Api.get("/products");
+  bottomInner.innerHTML = "";
+  for (const product of products) {
+    const { id, name, price, description } = product;
+    const { titleImage } = description;
+    const imageUrl = await getImageUrl(titleImage);
+
+    bottomInner.innerHTML += ` <div class ="bottom-products ${id}"><a href="/user/products/${id}">
+    <div class="bottom-product-image-container">
+    <img class="bottom-product-image" src="${imageUrl}" alt="">
+    </div>
+    <div class="bottom-product-name">
+    <p>${name}</p>
+    </div>
+    <div class="bottom-product-price">
+    ${addCommas(price) + "원"}
+    </div>
+    </div>
+    `;
+  }
+}
