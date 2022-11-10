@@ -1,6 +1,7 @@
 main {
   width: 1024px;
   margin: 30px auto 80px auto;
+  min-height: 300px;
 }
 .none-flex {
   flex: none;
