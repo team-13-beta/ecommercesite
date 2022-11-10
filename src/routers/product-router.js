@@ -84,15 +84,9 @@ productRouter.post("/", async (req, res, next) => {
     // 물론 프론트에서 안 쓸 수도 있지만, 편의상 일단 보내 줌
     if (newProduct === null) {
       res.status(501).json({
-<<<<<<< HEAD
         code:501,
         message : "카테고리 정보가 존재하지 않거나 기존 상품이 등록되어 있어서 상품을 생성할 수 없습니다."
       })
-=======
-        code: 501,
-        message: "카테고리 정보가 존재하지 않아서 상품을 생성할 수 없습니다.",
-      });
->>>>>>> 8337b1a477d457797b7c8ee8a0d1e4d189754606
     }
     res.status(201).json(result);
   } catch (error) {

@@ -22,13 +22,6 @@ class UserService {
     }
     // 이메일 중복은 이제 아니므로, 회원가입을 진행함
 
-<<<<<<< HEAD
-  // 우선 비밀번호 해쉬화(암호화)
-   const hashedPassword = await bcrypt.hash(password, 10);
-   const newUserInfo = { name, email, password: hashedPassword , phoneNumber, address };
-    
-    
-=======
     // 우선 비밀번호 해쉬화(암호화)
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -40,7 +33,6 @@ class UserService {
       address,
     };
 
->>>>>>> 8337b1a477d457797b7c8ee8a0d1e4d189754606
     // db에 저장
     const createdNewUser = await this.userModel.create(newUserInfo);
 
@@ -117,24 +109,17 @@ class UserService {
     return users;
   }
 
-<<<<<<< HEAD
-  async getUserByUserId(userId){
-=======
   async getUserByUserId(userId) {
->>>>>>> 8337b1a477d457797b7c8ee8a0d1e4d189754606
     const user = await this.userModel.findByUserId(userId);
     return user;
   }
 
-<<<<<<< HEAD
   async getUserByUserEmail(email){
     const user = await this.userModel.findByEmailSession(email);
     return user;
   }
 
 
-=======
->>>>>>> 8337b1a477d457797b7c8ee8a0d1e4d189754606
   // 유저정보 수정, 현재 비밀번호가 있어야 수정 가능함.
   async updateUser(userInfoRequired, toUpdate) {
     // 객체 destructuring
