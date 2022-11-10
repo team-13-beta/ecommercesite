@@ -43,7 +43,6 @@ export class OrderModel {
         const option = { returnOriginal: false };
         const time = timeZone();
         const updateInfo = {...update, updatedTime:time}
-       
         const updatedOrder = await Order.findOneAndUpdate(filter, updateInfo, option);
         console.log(updatedOrder);
         return updatedOrder;

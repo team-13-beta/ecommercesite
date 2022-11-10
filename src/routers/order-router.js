@@ -146,13 +146,14 @@ orderRouter.patch(
     },
   );
 
-  orderRouter.delete("/:order_Id",async (req,res,next)=>{
+  orderRouter.delete("/:order_Id", loginRequired, async (req,res,next)=>{
     // 삭제할 상품 이름
     try{
       const order_Id = req.params.order_Id;
       // body data 로부터 업데이트할 사용자 정보를 추출함.
-
-      const deleteorder = await orderService.deleteOrder(order_Id);
+      const userObjId = req.currentUserId;
+      console.log(userObjId);
+      const deleteorder = await orderService.deleteOrder(order_Id,userObjId);
       res.status(201).json(deleteorder);
     }catch(err){
         next(err);

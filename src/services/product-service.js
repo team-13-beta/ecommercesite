@@ -23,8 +23,9 @@ class ProductService {
     }
     async addProduct(productInfo){
         // 객체 destructuring
-        const { name, stock, price, company, categoryId, nutritionImage, deliveryImage, detailImage, titleImage} = productInfo;
+        const { name, stock, price, company, categoryId, summary, nutritionImage, deliveryImage, detailImage, titleImage} = productInfo;
         const description = {
+            summary,
             nutritionImage,
             deliveryImage,
             detailImage,

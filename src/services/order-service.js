@@ -100,17 +100,54 @@ class OrderService {
         return order;
       }
 
-    async deleteOrder(order_Id){
-        let orderId=Number(order_Id);
-        let order = await this.orderModel.findByOrderId(orderId);
+    async deleteOrder(orderId, userObjId){
+        let user=await userModel.findById(userObjId);
+        if (user.role === 'user'){
+            let order = await this.orderModel.findByOrderId(Number(orderId))
+            // db에서 찾지 못한 경우, 에러 메시지 반환
+            if (!order) {
+                throw new Error('주문 내역이 없습니다. 다시 한 번 확인해 주세요.');
+            }
+            console.log(order);
+            let order_Id=order._id;
+            let status="주문 취소"
+            const toUpdate = {
+                ...(status && { status }),
+            };
+            console.log(orderId,toUpdate);
+            //throw new Error("흠");
+            order = await this.orderModel.update({
+                order_Id,
+                update: toUpdate,
+            });
+            
+            return order;
 
-        // db에서 찾지 못한 경우, 에러 메시지 반환
-        if (!order) {
-            throw new Error('주문 내역이 없습니다. 다시 한 번 확인해 주세요.');
-          }
+        }else if(user.role === "admin"){
+            let order_Id=Number(orderId);
+            let order = await this.orderModel.findByOrderId(order_Id);
 
-        const deleteOrder=await this.orderModel.deleteOne(order);
-        return deleteOrder;
+            // db에서 찾지 못한 경우, 에러 메시지 반환
+            if (!order) {
+                throw new Error('주문 내역이 없습니다. 다시 한 번 확인해 주세요.');
+            }
+
+            const deleteOrder=await this.orderModel.deleteOne(order);
+            console.log(deleteOrder);
+            for(let item of order.buyingProduct){
+                let product = await productModel.findByName(item.name);
+                console.log(product);
+                const stock = product.stock + item.stock;
+                const productId = product.productId;
+                const toUpdate = {stock:stock};
+                product = await productModel.update({
+                    productId,
+                    update: toUpdate,
+                  });
+                 console.log(`${product.name}의 현 재고 : ${product.stock}입니다.`);
+            }
+            return deleteOrder;
+        }
     }
 
 }
