@@ -1,6 +1,6 @@
 import * as Api from "../../api.js";
 import { addCommas } from "../../useful-functions.js";
-import { getImageUrl } from "../../aw3-s3.js";
+import { getImageUrl } from "../../aws-s3.js";
 
 // 요소(element), input 혹은 상수
 const rightArrow = document.querySelector(".right-arrow");
