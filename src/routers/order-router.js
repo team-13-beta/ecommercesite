@@ -60,10 +60,13 @@ orderRouter.post("/", loginRequired, async(req,res,next)=>{
             userObjId,
             basket
         });
-    
+        const result = {
+          code : 200,
+          message: "주문 성공!"
+        }
         // 추가된 유저의 db 데이터를 프론트에 다시 보내줌
         // 물론 프론트에서 안 쓸 수도 있지만, 편의상 일단 보내 줌
-        res.status(201).json(newOrder);
+        res.status(200).json(result);
       } catch (error) {
         next(error);
       }

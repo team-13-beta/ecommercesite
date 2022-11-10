@@ -9,20 +9,20 @@ export class ProductModel {
     return product;
   }
   async findById(productId) {
-    const product = await Product.findOne({ productId : productId });
+    const product = await Product.findOne({ productId : productId }).populate("categoryId");
     return product;
   }
   async findByCategory(categoryObjId){
     const product = await Product.find({categoryId:categoryObjId});
-    if(product.length == 0) throw new Error("선택하신 카테고리에 해당하는 품목들은 없습니다.");
+    if(product[0]) throw new Error("선택하신 카테고리에 해당하는 품목들은 없습니다.");
     return product;
   }
 
   
   async create(productInfo) {
     const num = await Product.find().sort({productId:-1}).limit(1);
-    console.log(num);
-    const productId= (num[0])?  num[0].productId+1 : 1; 
+    console.log(num.productId);
+    const productId = (num[0])? num[0].productId+1 : 1 ;
     
     const time = timeZone();
     const timeInfo = {'createdTime':time,'updatedTime':time};
@@ -38,7 +38,7 @@ export class ProductModel {
 
 
   async update({ productId, update }) {
-    const filter = { productId : productId };
+    const filter = { productId : productId }; 
     const option = { returnOriginal: false };
     const time = timeZone();
     const updateInfo = {...update, updatedTime:time}

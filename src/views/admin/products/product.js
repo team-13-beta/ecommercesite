@@ -4,7 +4,7 @@ import {
   returnDocumentId,
 } from "../../utility/documentSelect.js";
 import { appendDetailMoveHandler } from "../../utility/navigate.js";
-import { categoryHeader } from "../components/product/productHeader.js";
+import { productHeader } from "../components/product/productHeader.js";
 import { tableTemplate } from "../components/tableTemplate.js";
 import { productModal, closeModal } from "../components/modal.js";
 import { checkStringEmpty, fileAppendImage } from "../../useful-functions.js";
@@ -97,17 +97,11 @@ export default function Products({
       const name = returnDocumentId("productName").value;
       const categoryId = returnDocumentId("categoryId").value;
       const companyName = returnDocumentId("companyName").value;
-      const description = returnDocumentId("description").value;
       const stock = returnDocumentId("stock").value;
       const price = returnDocumentId("price").value;
-      const isValidate = [
-        name,
-        categoryId,
-        companyName,
-        description,
-        stock,
-        price,
-      ].every((value) => !checkStringEmpty(value));
+      const isValidate = [name, categoryId, companyName, stock, price].every(
+        (value) => !checkStringEmpty(value),
+      );
 
       if (!isValidate) {
         alert("입력된 값을 확인해주세요");
@@ -123,19 +117,17 @@ export default function Products({
           ]);
 
         const data = {
-          id: String(Date.now()),
           name,
-          categoryId,
-          companyName,
-          description,
-          stock,
-          price,
+          categoryId: +categoryId,
+          company: companyName,
           titleImage: titleKey,
           detailImage: detailKey,
           deliveryImage: deliveryKey,
           nutritionImage: nutritionKey,
+          stock,
+          price,
         };
-        await appendHandler(data);
+        await appendHandler({ ...data });
         closeModal();
       } catch (err) {
         alert(
@@ -151,7 +143,7 @@ export default function Products({
     clearContainer($app);
     clearContainer(this.$element);
 
-    this.$element.innerHTML = categoryHeader();
+    this.$element.innerHTML = productHeader();
 
     this.$element.insertAdjacentHTML(
       "beforeend",
