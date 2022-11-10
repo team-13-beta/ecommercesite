@@ -21,6 +21,11 @@ function inputHeader() {
       window.location.href = "/";
       deleteCookie("connect.sid");
     });
+
+    const mypageEl = document.querySelector(".MYPAGE");
+    mypageEl.addEventListener("click", () => {
+      window.location.href = "/mypage";
+    });
   }
 
   if (!isLogin) {
