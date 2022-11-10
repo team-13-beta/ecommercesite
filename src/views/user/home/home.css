@@ -124,8 +124,18 @@ section#photo {
 }
 
 /* 카테고리 */
+.container {
+  width: 960px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.category-container {
+  margin-bottom: 100px;
+}
 .category {
-  width: 100%;
+  width: 960px;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -135,7 +145,7 @@ section#photo {
 }
 
 .category-header {
-  width: 100%;
+  width: 960px;
   font-size: 30px;
   padding-bottom: 30px;
   text-align: center;
@@ -143,9 +153,9 @@ section#photo {
 }
 
 .category-item {
-  padding-left: 10px;
-  padding-right: 10px;
+  padding: 15px;
   background-color: #ff922b;
+  font-size: 20px;
   color: white;
   border-radius: 15px;
 }
@@ -164,6 +174,9 @@ section#photo {
   flex-wrap: wrap;
   align-items: center;
   margin-bottom: 20px;
+}
+.bottom-products {
+  margin-right: 15px;
 }
 
 .bottom-products-container {
@@ -186,4 +199,15 @@ section#photo {
   font-size: 30px;
   padding-bottom: 30px;
   text-align: center;
+}
+
+.all-result {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+#all-result-button {
+  border: 1px #ffc078 solid;
 }
