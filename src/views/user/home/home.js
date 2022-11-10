@@ -120,9 +120,7 @@ console.log(image[1]);
 const result = data
   .map((data, i) => {
     {
-      return `<div class ="bottom-products"><a href="/user/products/${
-        data.productId
-      }">
+      return `<div class ="bottom-products"><a href="/user/products/${data.id}">
       <div class="bottom-product-image-container">
       <img class="bottom-product-image" src="${image[i]}" alt="">
       </div>
@@ -159,9 +157,7 @@ allResult.addEventListener("click", (e) => {
   e.preventDefault();
   let allResults = data
     .map((data, i) => {
-      return `<div class ="bottom-products"><a href="/user/products/${
-        data.productId
-      }">
+      return `<div class ="bottom-products"><a href="/user/products/${data.id}">
         <div class="bottom-product-image-container">
         <img class="bottom-product-image" src="${image[i]}" alt="">
         </div>
@@ -182,9 +178,7 @@ Category.addEventListener("click", (e) => {
   const filterResult = data
     .map((data, i) => {
       if (data.categoryId == e.target.parentNode.parentNode.id) {
-        return `<div class ="bottom-products"><a href="products/${
-          data.productId
-        }">
+        return `<div class ="bottom-products"><a href="products/${data.id}">
         <div class="bottom-product-image-container">
         <img class="bottom-product-image" src="/${image[i]}" alt="">
         </div>
