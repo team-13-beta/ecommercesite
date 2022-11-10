@@ -12,6 +12,7 @@ function handleData() {
   fetch(`/products/item/${product_id}`)
     .then((res) => res.json())
     .then(async (result) => {
+      console.log(result);
       const [id, name, price, des, stock] = [
         product_id,
         result.data.name,
