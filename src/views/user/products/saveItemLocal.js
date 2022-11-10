@@ -12,10 +12,11 @@ function handleSave() {
   const value = parseInt(
     selectValueEl.options[selectValueEl.selectedIndex].value,
   );
+  // TODO : img title 값을 가져온다..!!!
 
   const obj = {
     id: `${itemIdEl.textContent}`,
-    img: `${itemImgEl.src}`,
+    img: `${itemImgEl.title}`,
     name: `${itemNameEl.textContent}`,
     price: `${price}`,
     stock: `${value}`,

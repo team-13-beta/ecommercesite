@@ -13,7 +13,7 @@ function handleOrder() {
   );
   const obj = {
     id: `${itemId1El.textContent}`,
-    img: `${itemImg1El.src}`,
+    img: `${itemImg1El.title}`,
     name: `${itemName1El.textContent}`,
     price: `${priceDi}`,
     stock: `${value}`,
