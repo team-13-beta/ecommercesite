@@ -3,13 +3,16 @@ import dotenv from "dotenv";
 
 dotenv.config({ path: "../../.env" });
 //const DB_URL = process.env.MONGO_ATALS_URL;
-const DB_URL = "mongodb+srv://betaUser:lg0n7wsxWi4VU9Dq@cluster0.hl0qqs1.mongodb.net/?retryWrites=true&w=majority";
-// process.env.MONGODB_URL || 
+const DB_URL =
+  "mongodb+srv://betaUser:lg0n7wsxWi4VU9Dq@cluster0.hl0qqs1.mongodb.net/?retryWrites=true";
+// process.env.MONGODB_URL ||
 // "MongoDB 서버 주소가 설정되지 않았습니다.\n./db/index.ts 파일을 확인해 주세요. \n.env 파일도 필요합니다.\n";
 
-mongoose.connect(DB_URL,{
+mongoose.connect(DB_URL, {
   useNewUrlParser: true,
-  dbName:"product_test"});
+  useUnifiedTopology: false,
+  dbName: "product_test",
+});
 const db = mongoose.connection;
 
 db.on("connected", () =>

@@ -4,11 +4,11 @@ import {
   returnDocumentId,
 } from "../../utility/documentSelect.js";
 import { appendDetailMoveHandler } from "../../utility/navigate.js";
-import { categoryHeader } from "../components/product/productHeader.js";
+import { productHeader } from "../components/product/productHeader.js";
 import { tableTemplate } from "../components/tableTemplate.js";
 import { productModal, closeModal } from "../components/modal.js";
 import { checkStringEmpty, fileAppendImage } from "../../useful-functions.js";
-import { addImageToS3 } from "../../aw3-s3.js";
+import { addImageToS3 } from "../../aws-s3.js";
 
 const PRODUCT_COLUMNS = [
   ["id", "상품 아이디"],
@@ -97,14 +97,14 @@ export default function Products({
       const name = returnDocumentId("productName").value;
       const categoryId = returnDocumentId("categoryId").value;
       const companyName = returnDocumentId("companyName").value;
-      const description = returnDocumentId("description").value;
+      const summary = returnDocumentId("summary").value;
       const stock = returnDocumentId("stock").value;
       const price = returnDocumentId("price").value;
       const isValidate = [
         name,
         categoryId,
+        summary,
         companyName,
-        description,
         stock,
         price,
       ].every((value) => !checkStringEmpty(value));
@@ -125,16 +125,16 @@ export default function Products({
         const data = {
           name,
           categoryId: +categoryId,
-          companyName,
-          description,
-          stock,
-          price,
+          company: companyName,
           titleImage: titleKey,
           detailImage: detailKey,
           deliveryImage: deliveryKey,
           nutritionImage: nutritionKey,
+          summary,
+          stock,
+          price,
         };
-        await appendHandler(data);
+        await appendHandler({ ...data });
         closeModal();
       } catch (err) {
         alert(
@@ -150,7 +150,7 @@ export default function Products({
     clearContainer($app);
     clearContainer(this.$element);
 
-    this.$element.innerHTML = categoryHeader();
+    this.$element.innerHTML = productHeader();
 
     this.$element.insertAdjacentHTML(
       "beforeend",
