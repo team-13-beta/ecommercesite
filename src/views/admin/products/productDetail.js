@@ -39,6 +39,7 @@ export default function ProductDetail({
           const name = this.$element.querySelector("#productName").value;
           const categoryId = this.$element.querySelector("#categoryId").value;
           const companyName = this.$element.querySelector("#companyName").value;
+          const summary = this.$element.querySelector("#summary").value;
           const stock = this.$element.querySelector("#stock").value;
           const price = this.$element.querySelector("#price").value;
 
@@ -50,6 +51,7 @@ export default function ProductDetail({
               companyName,
               stock,
               price,
+              summary,
               titleImage: checkStringEmpty(titleImage)
                 ? this.state.description.titleImage
                 : titleImage,
