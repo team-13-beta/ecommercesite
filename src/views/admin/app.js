@@ -169,7 +169,7 @@ export default function App({ $app }) {
     $app,
     $initialState: this.state.orderDetail,
     deleteHandler: async (deleteId) => {
-      const delResult = await dels(`${BASE_URL}/orders`, `${deleteId}`);
+      const delResult = await dels(`${BASE_URL}/orders/${deleteId}`);
       console.log(delResult);
       const orderLists = this.state.orderLists.filter(
         (order) => order.id !== deleteId,
@@ -180,10 +180,10 @@ export default function App({ $app }) {
     updateHandler: async (updateData) => {
       const { id } = updateData;
       const patchResult = await patchs(`${BASE_URL}/orders/${id}`, updateData);
-      consnole.log(patchResult);
+      console.log(patchResult);
 
       const orderLists = this.state.orderLists.map((order) =>
-        order.id === id ? updateData : order,
+        order.id !== id ? updateData : order,
       );
 
       alert("수정 완료");
