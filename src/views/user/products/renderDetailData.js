@@ -1,7 +1,7 @@
-export default function renderDetailData(id, title, name, price, des) {
+export default function renderDetailData(id, title, t_id, name, price, des) {
   return `
     <div class="image column img-title">
-        <img src="${title}" alt="대표 이미지" id="item-img"/>
+        <img src="${title}" alt="대표 이미지" title="${t_id}" id="item-img"/>
     </div>
     <div class="column card item-info">
       <div style="display:none;" id="item-id">${id}</div>

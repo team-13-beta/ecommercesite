@@ -2,7 +2,7 @@ export default function renderBucketData(id, img, name, price, stock) {
   return `
           <input type="checkbox" class="checkbox" checked=true>
           <div class="column">
-            <img src=""/>
+            <img src="${img}" title="" />
           </div>
           <div style="display:none;" id="item-id">${id}</div>
           <div class="column">${name}</div>

@@ -21,6 +21,8 @@ function handleData() {
         result.data.stock,
       ];
 
+      const t_id = result.data.description.titleImage;
+      console.log(result.data.description.titleImage);
       const [temp, des_img1, des_img2, des_img3] = await Promise.all([
         getImageUrl(result.data.description.titleImage),
         getImageUrl(result.data.description.detailImage),
@@ -30,7 +32,7 @@ function handleData() {
 
       const koprice = price.toLocaleString("ko-KR");
 
-      const htmlEl = renderDetailData(id, temp, name, koprice, des);
+      const htmlEl = renderDetailData(id, temp, t_id, name, koprice, des);
       contentEl.innerHTML = htmlEl;
 
       const html2El = productDesData(des_img1, des_img2, des_img3);
