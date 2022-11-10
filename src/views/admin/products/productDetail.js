@@ -1,7 +1,7 @@
 import { checkStringEmpty, fileUpdateImage } from "../../useful-functions.js";
 import { clearContainer, createElement } from "../../utility/documentSelect.js";
 import { productDetailTemplate } from "../components/product/productTemplate.js";
-import { getImageUrl } from "../../aw3-s3.js";
+import { getImageUrl } from "../../aws-s3.js";
 
 export default function ProductDetail({
   $app,

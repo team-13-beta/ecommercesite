@@ -1,69 +1,215 @@
-import {productModel} from './product-model.js';
-import {productService} from "../../services/product-service.js"
-import {timeZone} from '../../services/timeZone.js';
+import { productModel } from "./product-model.js";
+import { productService } from "../../services/product-service.js";
+import { timeZone } from "../../services/timeZone.js";
 
 const time = timeZone();
-async function productModelTest(){
-    if(!await productModel.findByName("닭가슴살"))
-        await productService.addProduct({
-            name:"닭가슴살",
-            stock:200,
-            price:2000,
-            description:"닭가슴살 초기 테스트 데이터",
-            company:"허닭",
-            categoryId:1,
-        })
+async function productModelTest() {
+  await productService.addProduct({
+    name: "훈제 닭가슴살",
+    stock: 200,
+    price: 2000,
+    company: "맛있닭",
+    categoryId: "1",
+    nutritionImage: "asdfasdf",
+    deliveryImage: "qewrqwer",
+    detailImage: "zxcvzxcv",
+    titleImage: "liasdfasdfuhqwe",
+  });
+  await productService.addProduct({
+    name: "생 닭가슴살",
+    stock: 200,
+    price: 2000,
+    company: "신선닭",
+    categoryId: "1",
+    nutritionImage: "asdfasdf",
+    deliveryImage: "qewrqwer",
+    detailImage: "zxcvzxcv",
+    titleImage: "liasdfasdfuhqwe",
+  });
+  await productService.addProduct({
+    name: "소프트 닭 안심",
+    stock: 200,
+    price: 2000,
+    company: "맛있닭",
+    categoryId: "1",
+    nutritionImage: "asdfasdf",
+    deliveryImage: "qewrqwer",
+    detailImage: "zxcvzxcv",
+    titleImage: "liasdfasdfuhqwe",
+  });
 
-        if(!await productModel.findByName("돼지고기"))
-        await productService.addProduct({
-            name:"돼지고기",
-            stock:270,
-            price:8000,
-            description:"돼지고기 초기 테스트 데이터",
-            company:"forking",
-            categoryId:3,
+  await productService.addProduct({
+    name: "돼지고기 뒷다리살",
+    stock: 270,
+    price: 8000,
+    company: "푸드트립",
+    categoryId: "3",
+    nutritionImage: "asdfasdf",
+    deliveryImage: "qewrqwer",
+    detailImage: "zxcvzxcv",
+    titleImage: "liasdfasdfuhqwe",
+  });
+  await productService.addProduct({
+    name: "한돈 소시지",
+    stock: 270,
+    price: 8000,
+    company: "쿠킹유",
+    categoryId: "3",
+    nutritionImage: "asdfasdf",
+    deliveryImage: "qewrqwer",
+    detailImage: "zxcvzxcv",
+    titleImage: "liasdfasdfuhqwe",
+  });
+  await productService.addProduct({
+    name: "벌집 삼겹살",
+    stock: 270,
+    price: 8000,
+    company: "푸드트립",
+    categoryId: "3",
+    nutritionImage: "asdfasdf",
+    deliveryImage: "qewrqwer",
+    detailImage: "zxcvzxcv",
+    titleImage: "liasdfasdfuhqwe",
+  });
 
-        });
-      
-        if(!await productModel.findByName("소고기"))
-        await productService.addProduct({
-            name:"소고기",
-            stock:200,
-            price:2000,
-            description:"스테이크 초기 테스트 데이터",
-            company:"blackCow",
-            categoryId:5
-        });
+  await productService.addProduct({
+    name: "소고기볼 오리지널",
+    stock: 200,
+    price: 2000,
+    company: "blackCow",
+    categoryId: "5",
+    nutritionImage: "asdfasdf",
+    deliveryImage: "qewrqwer",
+    detailImage: "zxcvzxcv",
+    titleImage: "liasdfasdfuhqwe",
+  });
+  await productService.addProduct({
+    name: "설도 슬라이스",
+    stock: 200,
+    price: 2000,
+    company: "blackCow",
+    categoryId: "5",
+    nutritionImage: "asdfasdf",
+    deliveryImage: "qewrqwer",
+    detailImage: "zxcvzxcv",
+    titleImage: "liasdfasdfuhqwe",
+  });
+  await productService.addProduct({
+    name: "소고기 스테이크",
+    stock: 200,
+    price: 2000,
+    company: "blackCow",
+    categoryId: "5",
+    nutritionImage: "asdfasdf",
+    deliveryImage: "qewrqwer",
+    detailImage: "zxcvzxcv",
+    titleImage: "liasdfasdfuhqwe",
+  });
 
-        if(!await productModel.findByName("샐러드"))
-        await productService.addProduct({
-            name:"샐러드",
-            stock:200,
-            price:2000,
-            description:"샐러드 초기 테스트 데이터",
-            company:"허닭",
-            categoryId:6
-        });
-       
-        if(!await productModel.findByName("밀킷"))
-        await productService.addProduct({
-            name:"밀킷",
-            stock:200,
-            price:2000,
-            description:"밀킷 초기 테스트 데이터",
-            company:"밀킷회사",
-            categoryId:7
-        })
-       
-        if(!await productModel.findByName("단백질음료"))
-        await productService.addProduct({
-            name:"단백질음료",
-            stock:200,
-            price:2000,
-            description:"단백질음료 초기 테스트 데이터",
-            company:"이온음료회사",
-            categoryId:4
-        })   
+  await productService.addProduct({
+    name: "게맛살 펌킨 샐러드",
+    stock: 200,
+    price: 2000,
+    company: "폴업샐러드",
+    categoryId: "6",
+    nutritionImage: "asdfasdf",
+    deliveryImage: "qewrqwer",
+    detailImage: "zxcvzxcv",
+    titleImage: "liasdfasdfuhqwe",
+  });
+  await productService.addProduct({
+    name: "너트 리코타 샐러드",
+    stock: 200,
+    price: 2000,
+    company: "폴업샐러드",
+    categoryId: "6",
+    nutritionImage: "asdfasdf",
+    deliveryImage: "qewrqwer",
+    detailImage: "zxcvzxcv",
+    titleImage: "liasdfasdfuhqwe",
+  });
+  await productService.addProduct({
+    name: "과일콥 올리브 샐러드",
+    stock: 200,
+    price: 2000,
+    company: "폴업샐러드",
+    categoryId: "6",
+    nutritionImage: "asdfasdf",
+    deliveryImage: "qewrqwer",
+    detailImage: "zxcvzxcv",
+    titleImage: "liasdfasdfuhqwe",
+  });
+
+  await productService.addProduct({
+    name: "밀푀유나베",
+    stock: 200,
+    price: 2000,
+    description: "풍성한 맛이 나는 밀푀유 나베",
+    company: "신선애",
+    categoryId: "7",
+    nutritionImage: "asdfasdf",
+    deliveryImage: "qewrqwer",
+    detailImage: "zxcvzxcv",
+    titleImage: "liasdfasdfuhqwe",
+  });
+  await productService.addProduct({
+    name: "차이797 양장피",
+    stock: 200,
+    price: 2000,
+    description: "셰프의 특제소스를 더한 고급 중화 요리",
+    company: "차이797",
+    categoryId: "7",
+    nutritionImage: "asdfasdf",
+    deliveryImage: "qewrqwer",
+    detailImage: "zxcvzxcv",
+    titleImage: "liasdfasdfuhqwe",
+  });
+  await productService.addProduct({
+    name: "기사식당 돼지 불고기",
+    stock: 200,
+    price: 2000,
+    description: "달달하고 단백질까지 챙긴 그 때 그 맛 불고기",
+    company: "프레시지",
+    categoryId: "7",
+    nutritionImage: "asdfasdf",
+    deliveryImage: "qewrqwer",
+    detailImage: "zxcvzxcv",
+    titleImage: "liasdfasdfuhqwe",
+  });
+
+  await productService.addProduct({
+    name: "닥터유 단백질음료",
+    stock: 200,
+    price: 2000,
+    company: "닥터유",
+    categoryId: "4",
+    nutritionImage: "asdfasdf",
+    deliveryImage: "qewrqwer",
+    detailImage: "zxcvzxcv",
+    titleImage: "liasdfasdfuhqwe",
+  });
+  await productService.addProduct({
+    name: "퍼펙트 파워쉐이크",
+    stock: 200,
+    price: 2000,
+    company: "칼로바이",
+    categoryId: "4",
+    nutritionImage: "asdfasdf",
+    deliveryImage: "qewrqwer",
+    detailImage: "zxcvzxcv",
+    titleImage: "liasdfasdfuhqwe",
+  });
+  await productService.addProduct({
+    name: "프로틴 Rush",
+    stock: 200,
+    price: 2000,
+    company: "러쉬",
+    categoryId: "4",
+    nutritionImage: "asdfasdf",
+    deliveryImage: "qewrqwer",
+    detailImage: "zxcvzxcv",
+    titleImage: "liasdfasdfuhqwe",
+  });
 }
 
-export {productModelTest}
+export { productModelTest };
