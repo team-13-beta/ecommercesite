@@ -35,12 +35,10 @@ const ProductSchema = new Schema(
       type:Number,
       required:true,
     },
-
     categoryName:{
       type:String,
       required:true,
     },
-    
     createdTime : { 
       type: String
     },
@@ -55,3 +53,4 @@ const ProductSchema = new Schema(
 );
 
 export { ProductSchema };
+

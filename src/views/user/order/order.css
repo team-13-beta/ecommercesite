@@ -25,8 +25,27 @@
   width: 400px;
   height: 400px;
   padding: 20px;
+  border-radius: 0.25rem;
 }
 
+#paymentBtn:hover,
+.modal-btn:hover {
+  background-color: #ff922b;
+  color: #fff4e6;
+  border: none;
+}
 .is-close {
   display: none;
+}
+
+.bold {
+  font-weight: 500;
+}
+
+.success-box {
+  align-items: center;
+  justify-content: center;
+  width: 500px;
+  height: auto;
+  margin: 0 auto;
 }
