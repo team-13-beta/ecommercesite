@@ -94,9 +94,19 @@ function handleLogo() {
   headCartEl.onmouseout = function () {
     this.style.color = "#ff922b";
   };
+
   headCartEl.addEventListener("click", () => {
     window.location.href = "/user/bucket";
   });
+
+  const adminEl = document.querySelector(".head-admin");
+  adminEl.onmouseover = function () {
+    this.style.color = "#d9480f";
+    this.style.cursor = "pointer";
+  };
+  adminEl.onmouseout = function () {
+    this.style.color = "#ff922b";
+  };
 }
 
 inputHeader();

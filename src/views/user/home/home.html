@@ -30,6 +30,8 @@
     ></script>
     <!-- 커스텀 css, js -->
     <link rel="stylesheet" href="home.css" />
+    <!-- svg 설정 -->
+    <?xml-stylesheet type="text/css" href="style.css"?>
 
     <script type="module" src="../user/header-footer/inputHeader.js"></script>
     <script type="module" src="../user/header-footer/inputFooter.js"></script>
@@ -46,9 +48,23 @@
         <div class="slide"></div>
         <div class="slide"></div>
       </div>
+      <div class="arrow-container">
+        <img
+          class="left-arrow"
+          src="../../images/angle-left-solid.svg"
+          width="22"
+          height="22"
+        />
+        <img
+          class="right-arrow"
+          src="../../images/angle-right-solid.svg"
+          width="22"
+          height="22"
+        />
+      </div>
 
-      <p class="left-arrow"></p>
-      <p class="right-arrow"></p>
+      <!-- <p class="left-arrow"></p>
+      <p class="right-arrow"></p> -->
     </section>
 
     <!-- 카테고리 -->
@@ -67,11 +83,10 @@
     <div class="container">
       <div class="bottom-header">
         <h1>최신상품</h1>
+        <button class="button" id="all-result-button">전체 상품 보기</button>
       </div>
     </div>
-    <div class="all-result">
-      <button class="button" id="all-result-button">전체 상품 보기</button>
-    </div>
+
     <div class="container bottom-container">
       <div class="bottom-products-container"></div>
     </div>
