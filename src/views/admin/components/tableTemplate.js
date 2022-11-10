@@ -25,7 +25,7 @@ export function tableTemplate(columns, datas = [], categories = []) {
           break;
         case "categoryId":
           const { name } = categories.find(
-            (category) => category.id === data[key],
+            (category) => category.id == data[key],
           ) ?? { name: "none" };
           $td.innerHTML = name;
           break;

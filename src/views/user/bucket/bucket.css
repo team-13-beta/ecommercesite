@@ -22,3 +22,13 @@
 .pay-btn:hover {
   color: #fff4e6;
 }
+.result-price {
+  display: flex;
+}
+.price-box {
+  font-size: 24px;
+  margin-right: 0.4rem;
+}
+.item-box {
+  width: 100%;
+}

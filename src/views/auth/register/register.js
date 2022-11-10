@@ -28,6 +28,7 @@ function addAllEvents() {
   searchAddressButton.addEventListener("click", searchAddress);
   submitButton.addEventListener("click", handleSubmit);
 }
+
 // daum post api 불러오기.
 
 function searchAddress(e) {
@@ -63,6 +64,7 @@ function searchAddress(e) {
     },
   }).open();
 }
+
 // 회원가입 진행
 async function handleSubmit(e) {
   e.preventDefault();

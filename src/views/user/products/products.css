@@ -5,6 +5,12 @@
   box-sizing: border-box;
 }
 
+.bucket-btn:hover,
+.direct-pay:hover {
+  background-color: #ff922b;
+  border: none;
+  color: #fff4e6;
+}
 /* 제품 상단 컴포넌트 */
 .content_container {
   margin-bottom: 20px;

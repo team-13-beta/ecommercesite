@@ -1,15 +1,17 @@
 import * as Api from "../../api.js";
 import { addCommas } from "../../useful-functions.js";
+import { getImageUrl } from "../../aws-s3.js";
 
 // 요소(element), input 혹은 상수
 const rightArrow = document.querySelector(".right-arrow");
 const leftArrow = document.querySelector(".left-arrow");
 const Category = document.querySelector(".category");
 const bottomInner = document.querySelector(".bottom-products-container");
+const allResult = document.querySelector("#all-result-button");
 
 rightArrow.addEventListener("click", rightArrowHandler);
 leftArrow.addEventListener("click", leftArrowHandler);
-// category.addEventListener("click",);
+allResult.addEventListener("click", allProduct);
 
 // Click Image Slider
 
@@ -77,72 +79,117 @@ function rightArrowHandler() {
   nextSlide.classList.add("active");
 }
 
-const data = await Api.get("/products"); // 전체 상품 데이터
-const categoryData = await Api.get("/category"); // 전체 카테고리 데이터
-console.log(data);
-console.log(categoryData);
+// 카테고리 생성
+async function addCategory() {
+  const categorys = await Api.get("/category");
+  console.log(categorys);
 
-Category.addEventListener("click", (e) => {
-  const filterResult = data
-    .filter((data) => data.category === e.target.innerHTML)
-    .map((data, i) => {
-      {
-        return `<div class ="bottom-products"><a href="products/${
-          data.productId
-        }">
-          <div class="bottom-product-image-container">
-            <img class="bottom-product-image" src="${data.titleImage}" alt="">
-          </div>
-          <div class="bottom-product-name">
-              <p>${data.name}</p>
-          </div>
-          <div class="bottom-product-price">
-              ${addCommas(data.price) + "원"}
-          </div>
-          </div>
-          `;
-      }
-    })
-    .join("");
-  bottomInner.innerHTML = filterResult;
+  for (const category of categorys) {
+    const { id, name } = category;
+    // const imageUrl = await getImageUrl(titleImage);
 
-  console.log(filterResult);
-});
+    Category.innerHTML += `<div class ="category-item" id="${id}">
+        <div class="bottom-product-name">
+        <p>${name}</p>
+        </div>
+        </div>`;
+  }
+}
 
-const result = data
-  .map((data, i) => {
-    {
-      return `<div class ="bottom-products"><a href="/user/products/${
-        data.productId
-      }">
-          <div class="bottom-product-image-container">
-            <img class="bottom-product-image" src="${data.titleImage}" alt="">
-          </div>
-          <div class="bottom-product-name">
-              <p>${data.name}</p>
-          </div>
-          <div class="bottom-product-price">
-              ${addCommas(data.price) + "원"}
-          </div>
-          </div>
-          `;
-    }
-  })
-  .join("");
+// 전체 상품 생성.
 
-bottomInner.innerHTML = result;
+async function addProduct() {
+  const products = await Api.get("/products");
 
-const categoryResult = categoryData
-  .map((data, i) => {
-    {
-      return `    <div class ="category-item" id="${data._id}">
+  for (const product of products) {
+    const { id, name, price, description } = product;
+    const { titleImage } = description;
+    const imageUrl = await getImageUrl(titleImage);
+
+    bottomInner.innerHTML += ` <div class ="bottom-products ${id}"><a href="/user/products/${id}">
+    <div class="bottom-product-image-container">
+    <img class="bottom-product-image" src="${imageUrl}" alt="">
+    </div>
     <div class="bottom-product-name">
-        <p>${data.name}</p>
+    <p>${name}</p>
+    </div>
+    <div class="bottom-product-price">
+    ${addCommas(price) + "원"}
     </div>
     </div>
     `;
-    }
-  })
-  .join("");
+  }
+}
 
-Category.innerHTML = categoryResult;
+//바탕에 깔아두기
+addCategory();
+addProduct();
+
+// 카테고리 버튼 누르면 상품 나오는 이벤트
+
+Category.addEventListener("click", async (e) => {
+  e.preventDefault();
+  let a = e.target.parentNode.parentNode.id;
+  try {
+    const products = await Api.get("/products");
+    const addTitleImage = await Promise.all(
+      products
+        .filter((data, i) => {
+          return data.categoryId == a;
+        })
+        .map(async (data) => {
+          return {
+            ...data,
+            titleImage: await getImageUrl(data.description.titleImage),
+          };
+        }),
+    );
+
+    const result = addTitleImage
+      .map((data) => {
+        return `<div class ="bottom-products"><a href="/user/products/${
+          data.id
+        }">
+              <div class="bottom-product-image-container">
+              <img class="bottom-product-image" src="${data.titleImage}" alt="">
+              </div>
+              <div class="bottom-product-name">
+              <p>${data.name}</p>
+              </div>
+              <div class="bottom-product-price">
+              ${addCommas(data.price) + "원"}
+              </div>
+              </div>
+              `;
+      })
+      .join("");
+    bottomInner.innerHTML = result;
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+// 전체 상품 보기 버튼
+async function allProduct(e) {
+  e.preventDefault();
+  const products = await Api.get("/products");
+  bottomInner.innerHTML = "";
+  for (const product of products) {
+    const { id, name, price, description } = product;
+    const { titleImage } = description;
+    const imageUrl = await getImageUrl(titleImage);
+
+    bottomInner.innerHTML += ` <div class ="bottom-products ${id}"><a href="/user/products/${id}">
+    <div class="bottom-product-image-container">
+    <img class="bottom-product-image" src="${imageUrl}" alt="">
+    </div>
+    <div class="bottom-product-name">
+    <p>${name}</p>
+    </div>
+    <div class="bottom-product-price">
+    ${addCommas(price) + "원"}
+    </div>
+    </div>
+    `;
+  }
+}

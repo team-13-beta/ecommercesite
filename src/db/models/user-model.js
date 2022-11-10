@@ -62,3 +62,4 @@ export class UserModel { // 이메일 중복 검사
 const userModel = new UserModel();
 
 export { userModel };
+

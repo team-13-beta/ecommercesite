@@ -1,9 +1,6 @@
-import { getImageUrl } from "../../../aw3-s3.js";
-
 export function productDetailTemplate(data, categories = [], imgaes = {}) {
   if (!data) return `<div>데이터가 없습니다.</div>`;
   const { titleImage, detailImage, deliveryImage, nutritionImage } = imgaes;
-
   return `<div class="modify-container">
         <button class="button" data-type="update">
           수정 완료
@@ -33,7 +30,7 @@ export function productDetailTemplate(data, categories = [], imgaes = {}) {
                 ${categories.reduce(
                   (acc, { id, name }) =>
                     (acc += `<option value="${id}" 
-                    ${data.categoryId === id ? "selected" : ""}
+                    ${data.categoryId == id ? "selected" : ""}
                     >${name}</option>`),
                   "",
                 )}
@@ -49,7 +46,7 @@ export function productDetailTemplate(data, categories = [], imgaes = {}) {
               class="input"
               type="text"
               id="companyName"
-              value="${data.companyName}"
+              value="${data.company}"
               data-type="companyName"
             />
           </div>
@@ -58,12 +55,10 @@ export function productDetailTemplate(data, categories = [], imgaes = {}) {
         <div class="field">
           <label class="label">제품 설명</label>
           <div class="control">
-            <textarea class="textarea" id="description" data-type="description">${
-              data.description
+            <textarea class="textarea" id="summary" data-type="description">${
+              data.description.summary
             }</textarea>
           </div>
-
-
         </div>
 
         <div class="field file-field">

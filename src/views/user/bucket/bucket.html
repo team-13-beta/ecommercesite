@@ -18,19 +18,30 @@
       <div class="hero-body">
         <div class="title">장바구니</div>
         <hr />
-        <input type="checkbox" id="checkBoxAll" checked="true" />
+        <div class="level">
+          <input
+            type="checkbox"
+            class="level-left"
+            id="checkBoxAll"
+            checked="true"
+          />
+          <button class="delete level-right all-delete"></button>
+        </div>
+
         <hr />
         <div id="bucket-data"></div>
         <hr />
 
-        <div class="tags result-price">
-          <span class="tag" id="total-price">0</span>
+        <div class="result-price">
+          <div class="price-box">총 금액 :</div>
+          <div class="price-box" id="total-price">0</div>
           <button class="button pay-btn">주문하기</button>
         </div>
       </div>
     </section>
-
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.410.0.min.js"></script>
     <script type="module" src="bucketLocal.js"></script>
     <script src="redirectPay.js"></script>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.410.0.min.js"></script>
   </body>
 </html>

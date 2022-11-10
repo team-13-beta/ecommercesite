@@ -12,8 +12,12 @@ function handleCount(e) {
   const quantityEl = parentEl.querySelector(".stock-value");
   let quantityValue = parseInt(quantityEl.textContent); // 현재 수량 값
   const grandParentEl = parentEl.parentElement; // 상품 박스
-  const itemPrice = grandParentEl.querySelector(".price-value").textContent; // 상품 가격
+  const itemPrice = parseInt(
+    grandParentEl.querySelector(".price-value").textContent.replace(/,/g, ""),
+  ); // 상품 가격
+
   const itemTotalPriceEl = grandParentEl.querySelector(".item-total-price"); // 상품 총 가격
+
   const dataIdEl = grandParentEl.id; // 상품의 각 id
   const checkedEl = grandParentEl.querySelector(".checkbox");
 
@@ -29,24 +33,24 @@ function handleCount(e) {
     quantityValue += 1;
     const changePrice = parseInt(itemPrice) * quantityValue;
     quantityEl.innerText = `${quantityValue}`;
-    itemTotalPriceEl.innerText = `${changePrice}`;
+    itemTotalPriceEl.innerText = `${changePrice.toLocaleString("ko-KR")}원`;
 
     // 총 금액 계산
     if (checkedEl.checked) {
       totalPrice += parseInt(itemPrice);
-      totalPriceEl.innerText = `${totalPrice}`;
+      totalPriceEl.innerText = `${totalPrice.toLocaleString("ko-KR")}원`;
     }
   } else {
     if (quantityValue > 1) {
       quantityValue -= 1;
       const changePrice = parseInt(itemPrice) * quantityValue;
       quantityEl.innerText = `${quantityValue}`;
-      itemTotalPriceEl.innerText = `${changePrice}`;
+      itemTotalPriceEl.innerText = `${changePrice.toLocaleString("ko-KR")}원`;
 
       // 총 금액 계산
       if (checkedEl.checked) {
         totalPrice -= parseInt(itemPrice);
-        totalPriceEl.innerText = `${totalPrice}`;
+        totalPriceEl.innerText = `${totalPrice.toLocaleString("ko-KR")}원`;
       }
     }
   }
