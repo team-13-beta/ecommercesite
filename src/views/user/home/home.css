@@ -2,6 +2,14 @@
 *** Section ***
 *************/
 
+body {
+  font-family: "Yeon Sung";
+  font-weight: 400;
+}
+
+h1 {
+  font-size: 100px;
+}
 section {
   position: relative;
   width: 100%;
@@ -153,7 +161,10 @@ section#photo {
 }
 
 .category-item {
-  padding: 15px;
+  width: 100px;
+  height: 50px;
+  padding: 10px 0;
+  text-align: center;
   background-color: #ff922b;
   font-size: 20px;
   color: white;
@@ -167,31 +178,33 @@ section#photo {
 
 /* 바텀 produncts 부분 */
 .bottom-container {
-  width: 100%;
-  height: 100%;
+  width: 960px;
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
   align-items: center;
   margin-bottom: 20px;
+  border: 1px #ffc078 solid;
 }
+
 .bottom-products {
-  margin-right: 15px;
+  width: 20%;
+  margin: 10px;
 }
 
 .bottom-products-container {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
-  border: 1px #ffc078 solid;
+  justify-content: space-around;
   padding: 0px;
   text-align: center;
 }
 
 .bottom-product-image-container {
-  width: 80px;
-  height: 90px;
+  width: 200px;
+  height: 200px;
 }
 
 .bottom-header {
@@ -210,4 +223,8 @@ section#photo {
 
 #all-result-button {
   border: 1px #ffc078 solid;
+}
+
+a {
+  color: black;
 }
