@@ -38,9 +38,7 @@ class ProductService {
         // 상품 이름 중복 확인
         const product = await this.productModel.findByName(name);
         if (product) {
-            throw new Error(
-                `상품(${product.name})은 기존에 등록되어 있어서 상품을 등록 할 수 없습니다. 다른 상품을 등록해 주세요.`,
-            );
+            return null;
         }
 
         // db에 저장, 

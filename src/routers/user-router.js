@@ -2,7 +2,7 @@ import { Router } from "express";
 import is from "@sindresorhus/is";
 // 폴더에서 import하면, 자동으로 폴더의 index.js에서 가져옴
 import { loginRequired } from "../middlewares/index.js";
-import { userService } from "../services/index.js";
+import { userService  } from "../services/index.js";
 import { preLogin_General } from "../middlewares/index.js";
 import { preLogin_Oauth } from "../middlewares/index.js";
 import oauth2 from "passport-google-oauth2";
@@ -11,9 +11,25 @@ import session from "express-session";
 import MongoStore from "connect-mongo";
 import cookieParser from "cookie-parser";
 import { config } from "dotenv";
+
 config();
 const userRouter = Router();
 userRouter.use(cookieParser())
+userRouter.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      httpOnly: false, // js 코드로 쿠키를 가져오지 못하게
+      secure: false, // https 에서만 가져오도록 할 것인가?
+      maxAge:1800000 // cookie expired : 30minute 
+    },
+    store: MongoStore.create({mongoUrl: process.env.MONGO_SESSION_URL}), 
+    //store: MongoStore.create({mongoUrl: process.env.MONGO_SESSION_URL}), 
+  })
+);
+
 // 회원가입 api (아래는 /register이지만, 실제로는 /api/register로 요청해야 함.)
 userRouter.post("/register", async (req, res, next) => {
   try { 
@@ -52,10 +68,53 @@ userRouter.post("/register", async (req, res, next) => {
   } catch (error) {
     next(error);
   }
+});userRouter.post("/registerOauth", async (req, res, next) => {
+  try { 
+    // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
+    // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
+ 
+    
+    if (is.emptyObject(req.body)) {
+      throw new Error(
+        "headers의 Content-Type을 application/json으로 설정해주세요",
+      );
+    }
+    // req (request)의 body 에서 데이터 가져오기
+    // const {fullName, email, role, access}  = req.session.info;
+    
+    const address = req.body.address;
+    const phoneNumber = req.body.phoneNumber;
+    
+    const {fullName,email,role,access} = req.session.info;
+    
+    // 위 데이터를 유저 db에 추가하기
+    const newUser = await userService.addUserBySession({
+      fullName,
+      email,
+      address,
+      phoneNumber,
+      role,
+      access
+    });
+
+    // 추가된 유저의 db 데이터를 프론트에 다시 보내줌
+    // 물론 프론트에서 안 쓸 수도 있지만, 편의상 일단 보내 줌
+    const result = {
+      code : 200,
+      data : null,
+    }
+
+    res.status(200).json(result);
+  } catch (error) {
+    next(error);
+  }
 });
 
+
+
 // 로그인 api (아래는 /login 이지만, 실제로는 /api/login로 요청해야 함.)
-userRouter.post("/login",preLogin_Oauth, preLogin_General, async function (req, res, next) {
+userRouter.post("/login",preLogin_Oauth, preLogin_General)
+userRouter.post("/login", async function (req, res, next) {
   try {
     // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
     if (is.emptyObject(req.body)) {
@@ -82,20 +141,6 @@ userRouter.post("/login",preLogin_Oauth, preLogin_General, async function (req, 
   }
 });
 
-userRouter.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-      httpOnly: false, // js 코드로 쿠키를 가져오지 못하게
-      secure: false, // https 에서만 가져오도록 할 것인가?
-      maxAge:1800000 // cookie expired : 30minute 
-    },
-    store: MongoStore.create({mongoUrl: process.env.MONGO_SESSION_URL}), 
-    //store: MongoStore.create({mongoUrl: process.env.MONGO_SESSION_URL}), 
-  })
-);
 
 const GoogleStrategy = oauth2.Strategy;
 
@@ -106,7 +151,6 @@ const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_SECRET;
 userRouter.use(passport.initialize())
 userRouter.use(passport.session());
 passport.serializeUser(function (user, done) {
-  console.log(user.id);
     done(null, user.id);
 });
 // 사용자가 페이지를 방문할 때마다 호출되는 함수
@@ -129,31 +173,41 @@ passport.use(
           passReqToCallback: true,
       },
       function (request, accessToken, refreshToken, profile, done) {
-          // console.log("### Profile Value");
-          // console.log(profile);
-          // console.log("### Profile Value : " + accessToken);
-          // console.log("access Token")
           return done(null, profile);
       }
   )
 );
 
-userRouter.get('/auth/google',preLogin_General, preLogin_Oauth,  
-  passport.authenticate('google', { scope:
+userRouter.use('/auth/google',preLogin_General )
+userRouter.get('/auth/google', 
+passport.authenticate('google', { scope:
       [ 'email', 'profile' ] }
 ));
 
 userRouter.get('/auth/google/callback', 
-
   passport.authenticate( 'google', {failureRedirect: '/login?loginError' }),
-    function(req,res){
-      // req.session.name = req.user.displayName;
-      // req.session.email = req.user.email;
-      // req.session.role = "user",
-      // req.session.idcode = req.user.id
-      
-      
-      res.redirect("/?loginSuccess");
+    async function(req,res){
+      const email = req.user.email;     
+      const user = await userService.getUserByUserEmail(email); 
+      if(!user){ // 해당계정이 존재하지 않으므로 auth 사용자 회원가입 창으로 리다이렉트
+        req.session.info ={
+        fullName : req.user.displayName,
+        email : req.user.email,
+        role : "user",
+        access : "auth"
+      };
+
+        res.redirect('/registerOauth');
+        return;
+      }
+      req.session.userId = user.userId;
+      req.session.name = user.name;
+      req.session.email = user.email;
+      req.session.role = user.role;
+      req.session.access = user.access;
+      req.session.phoneNumber = user.phoneNumber;
+
+      res.redirect("/");
     }
 
 );
@@ -171,13 +225,11 @@ passport.authenticate("google",{
 }))
 */
 userRouter.get('/logout', async (req,res,next)=> {
-  req.logout((err)=>{
-    if (err) { 
-      req.session.redirect('/?logoutFailure') }
-    else{
-    req.session.destroy();
-    res.redirect('/?logoutSuccess');
-  }
+	await req.session.destroy((err)=>{
+    if(err)
+    res.redirect("/?logoutfail")
+    else
+    res.status(200).json("good");
   });
 })
 
