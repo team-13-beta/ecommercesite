@@ -22,7 +22,7 @@ categoryRouter.get("/", async (req,res,next)=>{
         next(err);
     }
 })
-categoryRouter.post("/",async(req,res,next)=>{
+categoryRouter.post("/",async(req,res,next)=>{  
     try {
         // req (request)의 body 에서 데이터 가져오기
         // 추가해볼 데이터

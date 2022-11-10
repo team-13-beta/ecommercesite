@@ -6,6 +6,7 @@ const phoneNumberEl = document.querySelector("#receiverPhoneNumber");
 const postalCodeEl = document.querySelector("#postalCode");
 const address1El = document.querySelector("#address1");
 const address2El = document.querySelector("#address2");
+
 function handleSend() {
   const localData = [];
   for (let i = 0; i < window.localStorage.length; i++) {
@@ -21,7 +22,8 @@ function handleSend() {
       localData.push(obj);
     }
   }
-  console.log(localData);
+  console.log("장바구니 데이터 : ", localData);
+
   const sendData = {
     userName: userNameEl.value,
     phoneNumber: phoneNumberEl.value,
@@ -32,7 +34,7 @@ function handleSend() {
     },
     buyingProduct: localData,
   };
-  console.log(sendData);
+  console.log("주문 생성 데이터 : ", sendData);
   const res = Api.post("/orders", sendData);
   if (res) {
     window.localStorage.clear();
