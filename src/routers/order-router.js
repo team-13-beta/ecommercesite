@@ -13,8 +13,23 @@ const orderRouter = Router();
 orderRouter.get("/",async (req,res,next)=>{
   try{
     const orders = await orderService.getAllOrders();
-
-    res.status(200).json(orders)
+    let result=[];
+    for(let order of orders){
+      let content={
+        id: String(order.orderId),
+        username: order.userName,
+        userId: order.userId, //(product.categoryId.categoryId)
+        buyingProduct: order.buyingProduct,
+        address: order.address,
+        phoneNumber: order.phoneNumber,
+        status: order.status,
+        totalPrice: order.totalPrice,
+        createdTime: order.createdTime,
+        updatedTime: order.updatedTime
+      }
+      result.push(content);
+    }
+    res.status(200).json(result)
   }catch(err){
     next(err);
   }
@@ -25,8 +40,24 @@ orderRouter.get("/:consumer_id", async (req,res,next)=>{
         const consumer_id = req.params.consumer_id;
 
         const order=await orderService.getOrders(consumer_id);
+        let result=[];
+        for(let order of orders){
+          let content={
+            id: String(order.orderId),
+            username: order.userName,
+            userId: order.userId, //(product.categoryId.categoryId)
+            buyingProduct: order.buyingProduct,
+            address: order.address,
+            phoneNumber: order.phoneNumber,
+            status: order.status,
+            totalPrice: order.totalPrice,
+            createdTime: order.createdTime,
+            updatedTime: order.updatedTime
+          }
+          result.push(content);
+        }
         //console.log(products);
-        res.status(200).json(order);
+        res.status(200).json(result);
     }catch(err){
         next(err);
     }
@@ -38,7 +69,19 @@ orderRouter.get("/item/:order_id", async (req,res,next)=>{
       const order_id = req.params.order_id;
       const order=await orderService.getOrder(Number(order_id));
       //console.log(products);
-      res.status(200).json(order);
+      let result={
+        id: String(order.orderId),
+        username: order.userName,
+        userId: order.userId, //(product.categoryId.categoryId)
+        buyingProduct: order.buyingProduct,
+        address: order.address,
+        phoneNumber: order.phoneNumber,
+        status: order.status,
+        totalPrice: order.totalPrice,
+        createdTime: order.createdTime,
+        updatedTime: order.updatedTime
+      }
+      res.status(200).json(result);
   }catch(err){
       next(err);
   }
