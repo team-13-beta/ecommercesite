@@ -5,16 +5,21 @@ import { validateEmail } from "../../useful-functions.js";
 const emailInput = document.querySelector("#emailInput");
 const passwordInput = document.querySelector("#passwordInput");
 const submitButton = document.querySelector("#submitButton");
+const googleButton = document.querySelector("#customBtn");
 
-addAllElements();
-addAllEvents();
-
+window.onload = function () {
+  addAllElements();
+  addAllEvents();
+};
 // html에 요소를 추가하는 함수들을 묶어주어서 코드를 깔끔하게 하는 역할임.
 async function addAllElements() {}
 
 // 여러 개의 addEventListener들을 묶어주어서 코드를 깔끔하게 하는 역할임.
 function addAllEvents() {
   submitButton.addEventListener("click", handleSubmit);
+  // googleButton.addEventListener("click", () => {
+  //   window.open(`http://localhost:5000/api/auth/google`);
+  // });
 }
 
 // 로그인 진행
