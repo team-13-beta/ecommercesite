@@ -2,9 +2,9 @@ import { Schema } from "mongoose";
 
 const UserSchema = new Schema(
   {
-    userId: {
-      type: Number,
-      required: true,
+    userId:{
+      type:Number,
+      required:true,
     },
     email: {
       type: String,
@@ -31,30 +31,30 @@ const UserSchema = new Schema(
         },
         {
           _id: false,
-        },
+        }
       ),
       required: false,
     },
-    role: {
-      // authority : user || admin
+    role: { // authority : user || admin
       type: String,
       default: "user",
     },
-    access: {
-      type: String,
-      default: "general",
+    access:{
+      type:String,
+      default:"general" 
     },
-    createdTime: {
-      type: String,
+    createdTime : { 
+      type: String
     },
-    updatedTime: {
-      type: String,
-    },
+    updatedTime : { 
+      type: String
+    }
   },
   {
     collection: "users",
     timestamps: false,
-  },
+  }
 );
 
 export { UserSchema };
+

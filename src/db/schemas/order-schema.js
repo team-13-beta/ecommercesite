@@ -2,21 +2,21 @@ import { Schema } from "mongoose";
 
 const OrderSchema = new Schema(
   {
-    orderId: {
-      type: Number,
-      required: true,
+    orderId:{
+      type : Number,
+      required:true,      
     },
-    userName: {
-      type: String,
-      required: true,
+    userName:{
+      type:String,
+      required:true
     },
-    userId: {
-      type: Schema.Types.ObjectId,
-      ref: "users",
+    userId:{
+        type : Schema.Types.ObjectId,
+        ref : "users"
     },
-    buyingProduct: {
-      type: [Schema.Types.Mixed],
-      required: true,
+    buyingProduct:{
+        type : [Schema.Types.Mixed],
+        required:true,
     },
     address: {
       type: new Schema(
@@ -27,34 +27,35 @@ const OrderSchema = new Schema(
         },
         {
           _id: false,
-        },
+        }
       ),
       required: true,
     },
-    phoneNumber: {
-      type: String,
+    phoneNumber:{
+      type:String,
     },
 
-    status: {
-      type: String,
-      required: true,
-      default: "주문 중",
+    status:{
+        type:String, 
+        required:true, 
+        default: '주문 중'
     },
-    totalPrice: {
-      type: Number,
-      default: 0,
+    totalPrice:{
+        type:Number,
+        default:0,
     },
-    createdTime: {
-      type: String,
+    createdTime : { 
+      type: String
     },
-    updatedTime: {
-      type: String,
-    },
+    updatedTime : { 
+      type: String
+    }
   },
   {
     collection: "orders",
     timestamps: false,
-  },
+  }
 );
 
 export { OrderSchema };
+

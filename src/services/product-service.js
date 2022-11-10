@@ -15,12 +15,20 @@ class ProductService {
     const product = await this.productModel.findById(id);
     return product;
   }
+
+  async getProductByCategory(categoryObjId) {
+    const product = await this.productModel.findByCategory(categoryObjId);
+    return product;
+  }
   async addProduct(productInfo) {
     // 객체 destructuring
-    const { name, stock, price, description, company, categoryName } =
+    const { name, stock, price, company, categoryId, description } =
       productInfo;
 
-    const category = await categoryModel.findByName(categoryName);
+    const category = await categoryModel.findById(Number(categoryId));
+    if (!category) {
+      return null;
+    }
     // 상품 이름 중복 확인
     const product = await this.productModel.findByName(name);
     if (product) {
@@ -28,14 +36,17 @@ class ProductService {
         "이 상품은 현재 등록되었습니다. 다른 상품을 등록해 주세요.",
       );
     }
-    // db에 저장
+
+    // db에 저장,
     const createdNewProduct = await this.productModel.create({
       name,
       stock,
       price,
       description,
       company,
-      categoryId: category._id,
+      categoryId: category.categoryId,
+      categoryObjId: category._id,
+      categoryName: category.name,
     });
 
     return createdNewProduct;
@@ -81,3 +92,4 @@ class ProductService {
 const productService = new ProductService(productModel);
 
 export { productService };
+
