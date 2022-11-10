@@ -80,33 +80,6 @@ orderRouter.get("/item/:order_id", async (req, res, next) => {
       createdTime: order.createdTime,
       updatedTime: order.updatedTime,
     };
-    result.push(content);
-
-    //console.log(products);
-    res.status(200).json(result);
-  } catch (err) {
-    next(err);
-  }
-});
-
-//주문 상세조회 API
-orderRouter.get("/item/:order_id", async (req, res, next) => {
-  try {
-    const order_id = req.params.order_id;
-    const order = await orderService.getOrder(Number(order_id));
-    //console.log(products);
-    let result = {
-      id: String(order.orderId),
-      userName: order.userName,
-      userId: order.userId, //(product.categoryId.categoryId)
-      buyingProduct: order.buyingProduct,
-      address: order.address,
-      phoneNumber: order.phoneNumber,
-      status: order.status,
-      totalPrice: order.totalPrice,
-      createdTime: order.createdTime,
-      updatedTime: order.updatedTime,
-    };
     res.status(200).json(result);
   } catch (err) {
     next(err);
@@ -166,13 +139,14 @@ orderRouter.patch("/:order_Id", async function (req, res, next) {
   }
 });
 
-orderRouter.delete("/:order_Id", async (req, res, next) => {
+orderRouter.delete("/:order_Id", loginRequired, async (req, res, next) => {
   // 삭제할 상품 이름
   try {
     const order_Id = req.params.order_Id;
     // body data 로부터 업데이트할 사용자 정보를 추출함.
-
-    const deleteorder = await orderService.deleteOrder(order_Id);
+    const userObjId = req.currentUserId;
+    console.log(userObjId);
+    const deleteorder = await orderService.deleteOrder(order_Id, userObjId);
     res.status(201).json(deleteorder);
   } catch (err) {
     next(err);

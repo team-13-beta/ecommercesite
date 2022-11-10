@@ -20,15 +20,20 @@ async function handleData() {
         product_id,
         result.data.name,
         result.data.price,
-        result.data.description,
+        result.data.description.summary,
         result.data.stock,
       ];
-
-      console.log(id, name, price, des, stock);
+      // const [des_img1, des_img2, des_img3] = Promise.all([
+      //   getImageUrl(),
+      //   getImageUrl(),
+      //   getImageUrl(),
+      // ]);
       const koprice = price.toLocaleString("ko-KR");
 
       const htmlEl = renderDetailData(id, temp, name, koprice, des);
       contentEl.innerHTML = htmlEl;
+
+      // TODO : img key 완성되면 하기
 
       //const html2El = productDesData(des_img1, des_img2, des_img3);
       //detailEl.innerHTML = html2El;
