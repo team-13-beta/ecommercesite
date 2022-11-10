@@ -29,6 +29,12 @@
   font-size: 24px;
   margin-right: 0.4rem;
 }
-.item-box {
-  width: 100%;
+
+@media screen and (max-width: 764px) {
+  #contents {
+    width: 100%;
+  }
+  .hero-body {
+    width: 100%;
+  }
 }
