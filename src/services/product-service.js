@@ -23,7 +23,13 @@ class ProductService {
     }
     async addProduct(productInfo){
         // 객체 destructuring
-        const { name, stock, price, company, categoryId, description } = productInfo;
+        const { name, stock, price, company, categoryId, nutritionImage, deliveryImage, detailImage, titleImage} = productInfo;
+        const description = {
+            nutritionImage,
+            deliveryImage,
+            detailImage,
+            titleImage
+          }
 
         const category=await categoryModel.findById(Number(categoryId));
         if(!category) {
@@ -33,7 +39,7 @@ class ProductService {
         const product = await this.productModel.findByName(name);
         if (product) {
             throw new Error(
-                '이 상품은 현재 등록되었습니다. 다른 상품을 등록해 주세요.',
+                `상품(${product.name})은 기존에 등록되어 있어서 상품을 등록 할 수 없습니다. 다른 상품을 등록해 주세요.`,
             );
         }
 

@@ -25,7 +25,7 @@ productRouter.get("/", async (req, res, next) => {
         companyName: product.company,
         description: product.description,
         createdTime: product.createdTime,
-        updateTime: product.updateTime
+        updatedTime: product.updatedTime
       }
       result.push(content);
     }
@@ -41,12 +41,7 @@ productRouter.post("/", async (req, res, next) => {
     // req (request)의 body 에서 데이터 가져오기
     // 추가해볼 데이터
     const { name,stock,price, company, categoryId, nutritionImage, deliveryImage, detailImage, titleImage } = req.body;
-    const description = {
-      nutritionImage,
-      deliveryImage,
-      detailImage,
-      titleImage
-    }
+   
     // 위 데이터를 유저 db에 추가하기
     const newProduct = await productService.addProduct({
       name,
@@ -54,7 +49,10 @@ productRouter.post("/", async (req, res, next) => {
       price,
       company,
       categoryId,
-      description
+      nutritionImage,
+      deliveryImage,
+      detailImage,
+      titleImage
     });
     const result={
         code:200,
@@ -144,14 +142,6 @@ productRouter.delete("/:productId", async (req, res, next) => {
   try {
     const productId  = req.params.productId;
     const deleteProduct = await productService.deleteProduct(productId);
-
-    const result = {
-      code:200,
-      data:{
-        id:String(deleteProduct.productId),
-        name:deleteProduct.name
-      }
-    }
 
     const result = {
       code:200,
