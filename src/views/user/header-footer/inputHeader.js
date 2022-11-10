@@ -7,7 +7,6 @@ const deleteCookie = (name) => {
 };
 function inputHeader() {
   const isLogin = sessionStorage.getItem("token") ? true : false;
-
   if (isLogin) {
     const headerStr = headerComponent("LOGOUT", "MYPAGE");
     const headerEl = document.createElement("div");

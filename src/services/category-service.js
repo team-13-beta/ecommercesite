@@ -7,10 +7,20 @@ class CategoryService {
     }
     
     // 전체 상품 데이터를 조회하는 함수
-    async getProducts() {
+    async getCategories() {
         const categories = await this.categoryModel.findAll();
         return categories;
     }
+    async getCategoryByObjId(categoryObjId){
+        const category = await this.categoryModel.findByObjId(categoryObjId);
+        return category;
+    }
+
+    async getCategoryById(categoryId){
+        const category = await this.categoryModel.findById(categoryId);
+        return category;
+    }
+
 
     async addCategory(categoryInfo){
         // 객체 destructuring
@@ -61,13 +71,16 @@ class CategoryService {
         const category = await this.categoryModel.findById(categoryId);
         if (!category) {
             throw new Error(
-                '삭제 불가능합니다.',
+                '카테고리가 존재하지 않아 삭제 불가능합니다.',
             );
         }
 
         const deleteCategory=await this.categoryModel.deleteOne(category);
 
-        return deleteCategory;
+        if (deleteCategory.acknowledged)
+        return category 
+        else
+        throw new Error("카테고리 삭제가 실패했습니다")
     }
 }
 

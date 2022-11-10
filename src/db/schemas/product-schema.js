@@ -35,12 +35,10 @@ const ProductSchema = new Schema(
       type:Number,
       required:true,
     },
-
     categoryName:{
       type:String,
       required:true,
     },
-    
     createdTime : { 
       type: String
     },
