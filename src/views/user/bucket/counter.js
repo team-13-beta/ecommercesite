@@ -15,9 +15,9 @@ function handleCount(e) {
   const itemPrice = parseInt(
     grandParentEl.querySelector(".price-value").textContent.replace(/,/g, ""),
   ); // 상품 가격
-  console.log(itemPrice);
+
   const itemTotalPriceEl = grandParentEl.querySelector(".item-total-price"); // 상품 총 가격
-  console.log(itemTotalPriceEl);
+
   const dataIdEl = grandParentEl.id; // 상품의 각 id
   const checkedEl = grandParentEl.querySelector(".checkbox");
 
@@ -33,7 +33,6 @@ function handleCount(e) {
     quantityValue += 1;
     const changePrice = parseInt(itemPrice) * quantityValue;
     quantityEl.innerText = `${quantityValue}`;
-    console.log(changePrice);
     itemTotalPriceEl.innerText = `${changePrice.toLocaleString("ko-KR")}원`;
 
     // 총 금액 계산
