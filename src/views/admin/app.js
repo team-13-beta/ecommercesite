@@ -14,7 +14,7 @@ import { closeModal } from "./components/modal.js";
 import { get, post, dels, patchs } from "../api.js";
 import { deletePhoto } from "../aws-s3.js";
 
-const BASE_URL = `http://localhost:5001`;
+const BASE_URL = `http://localhost:5000`;
 
 export default function App({ $app }) {
   this.state = {
