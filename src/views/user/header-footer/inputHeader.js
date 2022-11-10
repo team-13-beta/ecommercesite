@@ -24,7 +24,7 @@ function inputHeader() {
 
     const mypageEl = document.querySelector(".MYPAGE");
     mypageEl.addEventListener("click", () => {
-      window.location.href = "/user/mypage";
+      window.location.href = "/mypage";
     });
   }
 
