@@ -5,10 +5,11 @@ const bodyEl = document.querySelector("body");
 const deleteCookie = (name) => {
   document.cookie = name + "=; expires=Thu, 01 Jan 1999 00:00:10 GMT;";
 };
+
 function inputHeader() {
   const isLogin = sessionStorage.getItem("token") ? true : false;
   if (isLogin) {
-    const headerStr = headerComponent("LOGOUT", "MYPAGE");
+    const headerStr = headerComponent("LOGOUT", "MYPAGE", "ADMIN");
     const headerEl = document.createElement("div");
     headerEl.innerHTML = headerStr;
 
@@ -20,6 +21,12 @@ function inputHeader() {
       sessionStorage.removeItem("admin");
       window.location.href = "/";
       deleteCookie("connect.sid");
+    });
+
+    const admin = document.querySelector(".ADMIN");
+    admin.addEventListener("click", (e) => {
+      e.preventDefault();
+      window.location.href = "/admin";
     });
 
     const mypageEl = document.querySelector(".MYPAGE");

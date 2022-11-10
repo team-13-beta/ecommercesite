@@ -5,8 +5,7 @@ const itemImg1El = document.querySelector("#item-img");
 const itemId1El = document.querySelector("#item-id");
 const selectValue1El = document.querySelector("#select-value");
 
-const priceDi = parseInt(itemPriceEl.textContent.replace(/,/g, ""));
-console.log(priceDi);
+const priceDi = parseInt(itemPrice1El.textContent.replace(/,/g, ""));
 
 function handleOrder() {
   const value = parseInt(

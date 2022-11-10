@@ -97,11 +97,17 @@ export default function Products({
       const name = returnDocumentId("productName").value;
       const categoryId = returnDocumentId("categoryId").value;
       const companyName = returnDocumentId("companyName").value;
+      const summary = returnDocumentId("summary").value;
       const stock = returnDocumentId("stock").value;
       const price = returnDocumentId("price").value;
-      const isValidate = [name, categoryId, companyName, stock, price].every(
-        (value) => !checkStringEmpty(value),
-      );
+      const isValidate = [
+        name,
+        categoryId,
+        summary,
+        companyName,
+        stock,
+        price,
+      ].every((value) => !checkStringEmpty(value));
 
       if (!isValidate) {
         alert("입력된 값을 확인해주세요");
@@ -124,6 +130,7 @@ export default function Products({
           detailImage: detailKey,
           deliveryImage: deliveryKey,
           nutritionImage: nutritionKey,
+          summary,
           stock,
           price,
         };

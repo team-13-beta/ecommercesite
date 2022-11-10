@@ -82,7 +82,13 @@ export function productModal(categories = []) {
               />
             </div>
           </div>
-          
+             
+        <div class="field">
+        <label class="label">제품 설명</label>
+        <div class="control">
+          <textarea class="textarea" id="summary" data-type="description"></textarea>
+        </div>
+      </div>
         <div class="field file-field">
           <label class="label">메인 이미지</label>
           <div class="file">

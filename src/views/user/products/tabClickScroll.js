@@ -2,16 +2,21 @@ const detailBtnEl = document.querySelector(".img_detail");
 const deliveryBtnEl = document.querySelector(".img_delivery");
 const nutritionBtnEl = document.querySelector(".img_nutrition");
 
-const location1 = document.querySelector(".img1").offsetTop;
-const location2 = document.querySelector(".img2").offsetTop;
-const location3 = document.querySelector(".img3").offsetTop;
-
 detailBtnEl.addEventListener("click", () => {
-  window.scrollTo({ top: location1, behaivor: "smooth" });
+  detailBtnEl.parentElement.classList.add("is-active");
+  deliveryBtnEl.parentElement.classList.remove("is-active");
+  nutritionBtnEl.parentElement.classList.remove("is-active");
+  document.querySelector("#img1").scrollIntoView({ behaivor: "smooth" });
 });
 deliveryBtnEl.addEventListener("click", () => {
-  window.scrollTo({ top: location2, behaivor: "smooth" });
+  detailBtnEl.parentElement.classList.remove("is-active");
+  deliveryBtnEl.parentElement.classList.add("is-active");
+  nutritionBtnEl.parentElement.classList.remove("is-active");
+  document.querySelector("#img2").scrollIntoView({ behaivor: "smooth" });
 });
 nutritionBtnEl.addEventListener("click", () => {
-  window.scrollTo({ top: location3, behaivor: "smooth" });
+  detailBtnEl.parentElement.classList.remove("is-active");
+  deliveryBtnEl.parentElement.classList.remove("is-active");
+  nutritionBtnEl.parentElement.classList.add("is-active");
+  document.querySelector("#img3").scrollIntoView({ behaivor: "smooth" });
 });
