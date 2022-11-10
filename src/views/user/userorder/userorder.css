@@ -50,3 +50,20 @@ td {
   border-bottom: solid 1px;
   padding-bottom: 10px;
 }
+
+@media screen and (max-width: 764px) {
+  .orders-container {
+    width: 100%;
+  }
+  .ordersH1 {
+    font-size: 20px;
+  }
+  .thead {
+    width: 100%;
+    font-size: 11px;
+  }
+  .tbody {
+    width: 100%;
+    font-size: 10px;
+  }
+}
