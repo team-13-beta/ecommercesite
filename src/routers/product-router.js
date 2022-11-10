@@ -180,12 +180,14 @@ productRouter.patch("/:productId", async function (req, res, next) {
       stock,
       price,
       company,
+      summary,
       nutritionImage,
       deliveryImage,
       detailImage,
       titleImage,
     } = req.body;
     const description = {
+      summary,
       nutritionImage,
       deliveryImage,
       detailImage,

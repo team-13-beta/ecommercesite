@@ -12,6 +12,7 @@ function handleData() {
   fetch(`/products/item/${product_id}`)
     .then((res) => res.json())
     .then(async (result) => {
+      console.log(result);
       const [id, name, price, des, stock] = [
         product_id,
         result.data.name,
@@ -19,6 +20,7 @@ function handleData() {
         result.data.description.summary,
         result.data.stock,
       ];
+
       const [temp, des_img1, des_img2, des_img3] = await Promise.all([
         getImageUrl(result.data.description.titleImage),
         getImageUrl(result.data.description.detailImage),
@@ -30,8 +32,6 @@ function handleData() {
 
       const htmlEl = renderDetailData(id, temp, name, koprice, des);
       contentEl.innerHTML = htmlEl;
-
-      // TODO : img key 완성되면 하기
 
       const html2El = productDesData(des_img1, des_img2, des_img3);
       detailEl.innerHTML = html2El;
