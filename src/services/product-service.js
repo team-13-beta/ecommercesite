@@ -28,12 +28,14 @@ class ProductService {
       price,
       company,
       categoryId,
+      summary,
       nutritionImage,
       deliveryImage,
       detailImage,
       titleImage,
     } = productInfo;
     const description = {
+      summary,
       nutritionImage,
       deliveryImage,
       detailImage,

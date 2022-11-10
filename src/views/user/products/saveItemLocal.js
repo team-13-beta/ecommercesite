@@ -7,7 +7,6 @@ const selectValueEl = document.querySelector("#select-value");
 
 let str = itemPriceEl.textContent;
 const price = parseInt(str.replace(/,/g, ""));
-console.log(price);
 
 function handleSave() {
   const value = parseInt(

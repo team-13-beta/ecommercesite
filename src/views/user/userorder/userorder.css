@@ -8,7 +8,7 @@ body {
 }
 
 .orders-container {
-  padding: 48px 0;
+  padding: 3em 0;
   width: 55%;
   margin: auto;
   text-align: center;
@@ -16,7 +16,7 @@ body {
 
 .table {
   width: 100%;
-  padding: 32px;
+  padding: 2em;
   text-align: center;
   background-color: rgba(255, 255, 255, 0.106);
   /* color: rgb(155, 155, 155); */
@@ -26,11 +26,11 @@ body {
 }
 
 td {
-  width: 23.5%;
+  width: 25%;
 }
 
 .button {
-  font-size: 13px;
+  font-size: 0.8em;
   border-radius: 20px;
   color: white;
   background-color: #ff922b;
