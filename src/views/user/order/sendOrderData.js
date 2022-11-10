@@ -15,6 +15,7 @@ function handleSend() {
       const data = JSON.parse(window.localStorage.getItem(key));
       const obj = {
         productId: data.id,
+        img: data.img,
         stock: parseInt(data.stock),
         name: data.name,
         price: data.price,
