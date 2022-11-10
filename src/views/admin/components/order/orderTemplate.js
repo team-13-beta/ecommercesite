@@ -10,7 +10,7 @@ export function orderHeaderTemplate() {
 }
 
 export function orderDetailTemplate(data) {
-  const deliveryState = ["배송전", "배송중", "배송완료"];
+  const deliveryState = ["배송 전", "배송 중", "배송 완료", "주문 취소"];
   if (!data || checkObjectEmpty(data)) return `<div>데이터가 없습니다.</div>`;
   return `
       <div class = "content">
@@ -23,7 +23,7 @@ export function orderDetailTemplate(data) {
             <div>
               <label for="name">이름 </label>
               <input id="name" class="input info-input" value=${
-                data.consumerName
+                data.userName
               } readOnly />
               </div>
             <div>
@@ -39,9 +39,7 @@ export function orderDetailTemplate(data) {
         <div class = "detail-div">
           <div>
             <label for="address">배송지 정보 </label>
-            <input id="address" class="input info-input" value="${
-              data.address.address1 + data.address.address2
-            }" readOnly />
+            <input id="address" class="input info-input" value="${`${data.address.address1} ${data.address.address2}`}" readOnly />
           </div>
           <div>
             <label>배송 상태</label>

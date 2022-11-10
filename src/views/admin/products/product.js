@@ -8,7 +8,7 @@ import { productHeader } from "../components/product/productHeader.js";
 import { tableTemplate } from "../components/tableTemplate.js";
 import { productModal, closeModal } from "../components/modal.js";
 import { checkStringEmpty, fileAppendImage } from "../../useful-functions.js";
-import { addImageToS3 } from "../../aw3-s3.js";
+import { addImageToS3 } from "../../aws-s3.js";
 
 const PRODUCT_COLUMNS = [
   ["id", "상품 아이디"],
