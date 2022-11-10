@@ -25,3 +25,15 @@
   background-color: #ff922b;
   color: white;
 }
+
+.registerContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.register {
+  text-align: center;
+  color: #ff922b;
+}
