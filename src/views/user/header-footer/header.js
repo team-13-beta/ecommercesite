@@ -1,4 +1,4 @@
-export default function headerComponent(login, join) {
+export default function headerComponent(login, join, admin = null) {
   return `
     <header class="box" style="margin-bottom:1.5rem;">
         <div class="header-container">
@@ -15,6 +15,11 @@ export default function headerComponent(login, join) {
           <div class="level-right">
             <div class="level-item ${join} head-register" style="color:#ff922b; font-weight:bold;">${join}</div>
             <div class="level-item ${login} head-login" style="color:#ff922b; font-weight:bold;">${login}</div>
+            ${
+              admin
+                ? `<div class="level-item ${admin} head-admin" style="color:#ff922b; font-weight:bold;">${admin}</div>`
+                : ""
+            }
             <div class="level-item head-cart" style="color:#ff922b; font-weight:bold;">CART</div>
           </div>
         </nav>
