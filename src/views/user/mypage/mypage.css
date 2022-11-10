@@ -1,4 +1,5 @@
 .manageContainer {
+  height: 60vh;
   flex-grow: 1;
   margin: 5vh auto;
   position: relative;
@@ -47,4 +48,10 @@
 
 .subtitle.is-5 {
   color: #fff4e6;
+}
+
+@media screen and (max-width: 764px) {
+  .menuCard {
+    width: 350px;
+  }
 }

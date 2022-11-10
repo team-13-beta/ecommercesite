@@ -214,17 +214,18 @@ section#photo {
   text-align: center;
 }
 
-.all-result {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-
 #all-result-button {
   border: 1px #ffc078 solid;
 }
 
 a {
   color: black;
+}
+
+@media screen and (min-width: 764px) {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 }
