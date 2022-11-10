@@ -12,6 +12,7 @@ const viewsRouter = express.Router();
 viewsRouter.use("/", serveStatic("user/home/home"));
 viewsRouter.use("/register", serveStatic("auth/register/register"));
 viewsRouter.use("/login", serveStatic("auth/login/login"));
+viewsRouter.use("/mypage", serveStatic("user/mypage/mypage"));
 viewsRouter.use("/admin", serveStatic("admin/admin"), adminRouter); // 아래 split 연산때문에 admin/admin으로 인자 pass
 viewsRouter.use(
   "/user/accountUpdate",

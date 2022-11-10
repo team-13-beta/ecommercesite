@@ -94,3 +94,4 @@ class ProductService {
 const productService = new ProductService(productModel);
 
 export { productService };
+
