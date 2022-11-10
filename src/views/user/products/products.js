@@ -12,18 +12,19 @@ async function handleData() {
   const [temp] = await Promise.all([getImageUrl("1/9l62l_스크린샷(3).png")]);
   console.log("temp:", temp);
 
-  fetch(`/products/${product_id}`)
+  fetch(`/products/item/${product_id}`)
     .then((res) => res.json())
-    .then((data) => {
-      console.log(data);
+    .then((result) => {
+      console.log(result);
       const [id, name, price, des, stock] = [
         product_id,
-        data.name,
-        data.price,
-        data.description,
-        data.stock,
+        result.data.name,
+        result.data.price,
+        result.data.description,
+        result.data.stock,
       ];
 
+      console.log(id, name, price, des, stock);
       const koprice = price.toLocaleString("ko-KR");
 
       const htmlEl = renderDetailData(id, temp, name, koprice, des);

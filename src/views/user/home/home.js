@@ -112,9 +112,7 @@ Category.addEventListener("click", (e) => {
 const result = data
   .map((data, i) => {
     {
-      return `<div class ="bottom-products"><a href="/user/products/${
-        data.productId
-      }">
+      return `<div class ="bottom-products"><a href="/user/products/${data.id}">
           <div class="bottom-product-image-container">
             <img class="bottom-product-image" src="${data.titleImage}" alt="">
           </div>
