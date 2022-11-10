@@ -27,6 +27,7 @@ function handleData() {
       let el = document.createElement("div");
       el.classList.add("columns", "item-box");
       el.id = `${id}`;
+      el.style.margin = "0";
       el.innerHTML = htmlStr;
       bucketDataEl.append(el);
     }
