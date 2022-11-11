@@ -184,6 +184,7 @@ productRouter.patch("/:productId", async function (req, res, next) {
       deliveryImage,
       detailImage,
       titleImage,
+      categoryId,
     } = req.body;
     const description = {
       summary,
@@ -200,6 +201,7 @@ productRouter.patch("/:productId", async function (req, res, next) {
       ...(price && { price }),
       ...(description && { description }),
       ...(company && { company }),
+      ...(categoryId && { categoryId }),
     };
     // 사용자 정보를 업데이트함.
     const updatedProductInfo = await productService.setProduct(
