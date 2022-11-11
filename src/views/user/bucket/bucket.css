@@ -1,0 +1,56 @@
+@font-face {
+  font-family: "S-CoreDream-3Light";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  font-family: "S-CoreDream-3Light";
+}
+
+#contents {
+  width: 1024px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+.content_container {
+  margin-bottom: 20px;
+}
+
+.stock-con {
+  display: flex;
+}
+
+.result-price {
+  float: right;
+}
+.pay-btn {
+  background-color: #ff922b;
+  border: none;
+}
+.pay-btn:hover {
+  color: #fff4e6;
+}
+.result-price {
+  display: flex;
+}
+.price-box {
+  font-size: 24px;
+  margin-right: 0.4rem;
+}
+.bu-item-center {
+  text-align: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 764px) {
+  #contents {
+    width: 100%;
+  }
+  .hero-body {
+    width: 100%;
+  }
+}
