@@ -4,6 +4,7 @@ import Products from "./products/product.js";
 
 import { navigate } from "../utility/navigate.js";
 import {
+  checkAdmin,
   checkStringEmpty,
   getImageKeyByCheckType,
   pathToRegex,
@@ -15,7 +16,6 @@ import { get, post, dels, patchs } from "../api.js";
 import { deletePhoto } from "../aws-s3.js";
 
 const BASE_URL = `http://localhost:5000`;
-
 export default function App({ $app }) {
   this.state = {
     orderLists: [],
@@ -257,6 +257,7 @@ export default function App({ $app }) {
   };
 
   this.init = async () => {
+    checkAdmin();
     window.addEventListener("popstate", () => {
       this.render();
     });

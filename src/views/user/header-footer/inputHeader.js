@@ -1,10 +1,11 @@
+import * as Api from "../../api.js";
 import headerComponent from "./header.js";
 
 const bodyEl = document.querySelector("body");
 
-const deleteCookie = (name) => {
-  document.cookie = name + "=; expires=Thu, 01 Jan 1999 00:00:10 GMT;";
-};
+function deleteCookie(key) {
+  document.cookie = key + "=; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+}
 
 function getCookie(name) {
   let matches = document.cookie.match(
@@ -20,6 +21,8 @@ function getCookie(name) {
 function inputHeader() {
   const isLogin =
     sessionStorage.getItem("token") || getCookie("connect.sid") ? true : false;
+  console.log(isLogin, "@");
+
   if (isLogin) {
     const headerStr = headerComponent("LOGOUT", "MYPAGE", "ADMIN");
     const headerEl = document.createElement("div");
@@ -29,6 +32,10 @@ function inputHeader() {
     const logout = document.querySelector(".LOGOUT");
     logout.addEventListener("click", (e) => {
       e.preventDefault();
+      fetch("http://localhost:5000/api/logout").then(() =>
+        deleteCookie("connect.sid"),
+      );
+      // Api.get("http://localhost:5000/api/logout").then(()=>deleteCookie('connect.sid'));
       sessionStorage.removeItem("token");
       sessionStorage.removeItem("admin");
       window.location.href = "/";
