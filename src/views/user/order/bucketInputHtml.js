@@ -14,7 +14,7 @@ function bucketInputHtml() {
           const htmlStr = renderBucketData(item.name, item.stock, item.price);
           // html에 추가
           let el = document.createElement("div");
-          el.classList.add("card-content");
+          el.classList.add("card-content", "bucket-item-content");
           el.innerHTML = htmlStr;
           box.after(el);
         }

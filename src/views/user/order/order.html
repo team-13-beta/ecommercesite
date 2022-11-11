@@ -35,7 +35,7 @@
           </div>
         </div>
         <div class="column">
-          <div class="card">
+          <div class="card" style="padding: 16px">
             <div class="card-header-title">주문 결제 금액</div>
             <div class="card-content">결제 금액</div>
             <div class="card-content title total-price">0000</div>
@@ -56,15 +56,21 @@
         <div class="card">
           <div class="card-header-title">결제 금액</div>
           <div class="card-content">
-            <div class="content">ㄱ</div>
+            <div class="content">결제하시면 3대 500이 됩니다. 감사합니다.</div>
             <div class="total-price title"></div>
           </div>
+          <div class="card-footer">
+            <button
+              id="modal-close"
+              class="button card-footer-item close-btn modal-btn"
+            >
+              닫기
+            </button>
+            <button class="button card-footer-item modal-btn" id="send-order">
+              결제 하기
+            </button>
+          </div>
         </div>
-
-        <button id="modal-close" class="button close-btn modal-btn">
-          닫기
-        </button>
-        <button class="button modal-btn" id="send-order">결제 하기</button>
       </div>
     </div>
     <script src="https://sdk.amazonaws.com/js/aws-sdk-2.410.0.min.js"></script>

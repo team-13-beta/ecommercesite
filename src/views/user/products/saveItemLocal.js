@@ -1,6 +1,6 @@
 const bucketBtnEl = document.querySelector(".bucket-btn");
-const itemNameEl = document.querySelector(".item-name");
-const itemPriceEl = document.querySelector(".item-price");
+const itemNameEl = document.querySelector(".item-name > span");
+const itemPriceEl = document.querySelector(".item-price > span");
 const itemImgEl = document.querySelector("#item-img");
 const itemIdEl = document.querySelector("#item-id");
 const selectValueEl = document.querySelector("#select-value");
@@ -12,6 +12,7 @@ function handleSave() {
   const value = parseInt(
     selectValueEl.options[selectValueEl.selectedIndex].value,
   );
+  console.log(itemNameEl.textContent, itemPriceEl.textContent);
 
   const obj = {
     id: `${itemIdEl.textContent}`,

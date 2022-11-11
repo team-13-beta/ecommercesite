@@ -5,8 +5,8 @@ import { timeZone } from "../../services/timeZone.js";
 const User = model("users", UserSchema);
 
 export class UserModel { // 이메일 중복 검사
-  async findByEmail(email) {
-    const user = await User.findOne({ email });
+  async findByEmail(email) { // JWT 계정용 전용 함수
+    const user = await User.findOne({ email:email, access:"general" });
     return user;
   }
 
@@ -20,12 +20,15 @@ export class UserModel { // 이메일 중복 검사
     return user;
   }
 
-
+ async findByEmailSession(email){ //session 계정 전용 함수
+  const user = await User.findOne({email:email, access:"auth"});
+  return user;
+ }
  
 
   async create(userInfo) { 
-    const num = await User.find({}).sort({userId:-1}).limit(1);
-    const userId= (num[0])? num[0].userId+1: 1; 
+    const num = await User.find().sort({userId:-1}).limit(1);
+    const userId= (num[0] && num[0].userId)? num[0].userId+1 : 1;
 
     const time = timeZone();
     const timeInfo = {createdTime:time,updatedTime:time};
@@ -39,8 +42,8 @@ export class UserModel { // 이메일 중복 검사
     return users;
   }
 
-  async update({ userId, update }) {
-    const filter = { _id: userId };
+  async update({ userId, update:userInfo }) {
+    const filter = {_id : userId};
     const option = { returnOriginal: false };
     const time = timeZone();
     const timeInfo = {createdTime:time,updatedTime:time};

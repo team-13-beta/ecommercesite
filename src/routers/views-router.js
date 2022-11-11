@@ -2,7 +2,8 @@ import express from "express";
 import path from "path";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
-import { adminRouter } from "./admin-router.js";
+//import { adminRouter } from "./admin-router.js";
+
 // import {adminRouter} from "./admin-router"
 const viewsRouter = express.Router();
 
@@ -11,15 +12,25 @@ const viewsRouter = express.Router();
 // http://localhost:5000/register 에서는 views/register/register.html 파일을 화면에 띄움
 viewsRouter.use("/", serveStatic("user/home/home"));
 viewsRouter.use("/register", serveStatic("auth/register/register"));
+viewsRouter.use(
+  "/registerOauth",
+  serveStatic("auth/registerOauth/registerOauth"),
+);
 viewsRouter.use("/login", serveStatic("auth/login/login"));
 viewsRouter.use("/mypage", serveStatic("user/mypage/mypage"));
-viewsRouter.use("/admin", serveStatic("admin/admin"), adminRouter); // 아래 split 연산때문에 admin/admin으로 인자 pass
+viewsRouter.use("/admin", serveStatic("admin/admin"));
 viewsRouter.use(
   "/user/accountUpdate",
   serveStatic("user/accountUpdate/accountUpdate"),
 );
+viewsRouter.use(
+  "/user/oauthUpdate",
+  serveStatic("user/oauthUpdate/oauthUpdate"),
+);
+
 viewsRouter.use("/user/bucket", serveStatic("user/bucket/bucket"));
 viewsRouter.use("/user/order", serveStatic("user/order/order"));
+viewsRouter.use("/user/oauth", serveStatic("user/oauth/oauth"));
 viewsRouter.use("/user/order/success", serveStatic("/user/order/orderSuccess"));
 viewsRouter.use("/user/products/:id", serveStatic("user/products/products"));
 viewsRouter.use("/user/userorder", serveStatic("user/userorder/userorder"));

@@ -39,9 +39,7 @@ class ProductService {
         // 상품 이름 중복 확인
         const product = await this.productModel.findByName(name);
         if (product) {
-            throw new Error(
-                `상품(${product.name})은 기존에 등록되어 있어서 상품을 등록 할 수 없습니다. 다른 상품을 등록해 주세요.`,
-            );
+            return null;
         }
 
         // db에 저장, 
@@ -84,12 +82,16 @@ class ProductService {
    
         // 우선 해당 id의 유저가 db에 있는지 확인
         let product = await this.productModel.findById(productId);
-    
+        
         // db에서 찾지 못한 경우, 에러 메시지 반환
         if (!product) {
           throw new Error('상품 내역이 없습니다. 다시 한 번 확인해 주세요.');
         }
-    
+        let categoryId=toUpdate.categoryId;
+        let category=await categoryModel.findById(categoryId);
+        toUpdate['categoryObjId']=category._id;
+        toUpdate['categoryName']=category.name;
+
         // 이제, 정보 수정을 위해 사용자가 입력한 비밀번호가 올바른 값인지 확인해야 함
         // 이제 드디어 업데이트 시작
  

@@ -100,7 +100,7 @@ async function addCategory() {
 
 async function addProduct() {
   const products = await Api.get("/products");
-
+  console.log(products);
   for (const product of products) {
     const { id, name, price, description } = product;
     const { titleImage } = description;
@@ -145,7 +145,7 @@ Category.addEventListener("click", async (e) => {
         }),
     );
 
-    const result = addTitleImage
+    let result = addTitleImage
       .map((data) => {
         return `<div class ="bottom-products"><a href="/user/products/${
           data.id
@@ -163,7 +163,13 @@ Category.addEventListener("click", async (e) => {
               `;
       })
       .join("");
-    bottomInner.innerHTML = result;
+    if (result == 0) {
+    }
+
+    bottomInner.innerHTML =
+      result.length == 0
+        ? `<div class="nothing-products"><p class="nothing">상품 준비 중 입니다.</p></div>`
+        : result;
   } catch (err) {
     console.log(err);
   }
