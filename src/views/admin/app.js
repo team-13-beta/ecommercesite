@@ -15,7 +15,8 @@ import { closeModal } from "./components/modal.js";
 import { get, post, dels, patchs } from "../api.js";
 import { deletePhoto } from "../aws-s3.js";
 
-const BASE_URL = `http://localhost:5001`;
+const BASE_URL = window.location.origin;
+
 export default function App({ $app }) {
   this.state = {
     orderLists: [],
@@ -49,7 +50,7 @@ export default function App({ $app }) {
       products.setState({ ...products.state, productLists });
     },
     appendHandler: async (appendItem) => {
-      const postResult = await post(`${BASE_URL}/products`, appendItem);
+      const postResult = await post(`/products`, appendItem);
 
       this.setState({
         productLists: [...this.state.productLists, { ...postResult.data }],
@@ -68,7 +69,7 @@ export default function App({ $app }) {
       categories.setState(categoryLists);
     },
     appendHandler: async (appendItem) => {
-      const postResult = await post(`${BASE_URL}/category`, appendItem);
+      const postResult = await post(`/category`, appendItem);
 
       this.setState({
         ...this.state,
@@ -77,7 +78,7 @@ export default function App({ $app }) {
       closeModal();
     },
     deleteHandler: async (deleteId) => {
-      const deleteResult = await dels(`${BASE_URL}/category/${deleteId}`);
+      const deleteResult = await dels(`/category/${deleteId}`);
       if (deleteResult.code >= 400) {
         alert("삭제에 실패했습니다.");
         return;
@@ -92,7 +93,7 @@ export default function App({ $app }) {
       closeModal();
     },
     updateHandler: async ({ id, name }) => {
-      const updateResult = await patchs(`${BASE_URL}/category/${id}`, {
+      const updateResult = await patchs(`/category/${id}`, {
         name,
       });
       if (updateResult.code >= 400) {
@@ -115,7 +116,7 @@ export default function App({ $app }) {
     $categories: this.state.categoryLists,
     deleteHandler: async (deleteId, preImageKey) => {
       Object.values(preImageKey).forEach((imageKey) => deletePhoto(imageKey));
-      const delResult = await dels(`${BASE_URL}/products/${deleteId}`);
+      const delResult = await dels(`/products/${deleteId}`);
       if (delResult.code >= 400) {
         alert("삭제에 실패했습니다.");
         return;
@@ -162,10 +163,7 @@ export default function App({ $app }) {
         ),
       };
 
-      const patchResult = await patchs(
-        `${BASE_URL}/products/${id}`,
-        updateData,
-      );
+      const patchResult = await patchs(`/products/${id}`, updateData);
 
       const productLists = this.state.productLists.map((product) =>
         product.id == id ? updateData : product,
@@ -178,7 +176,7 @@ export default function App({ $app }) {
     $app,
     $initialState: this.state.orderDetail,
     deleteHandler: async (deleteId) => {
-      const delResult = await dels(`${BASE_URL}/orders/${deleteId}`);
+      const delResult = await dels(`/orders/${deleteId}`);
       if (!delResult.acknowledged) {
         alert("삭제에 실패했습니다.");
         return;
@@ -192,7 +190,7 @@ export default function App({ $app }) {
     },
     updateHandler: async (updateData) => {
       const { id } = updateData;
-      const patchResult = await patchs(`${BASE_URL}/orders/${id}`, updateData);
+      const patchResult = await patchs(`/orders/${id}`, updateData);
 
       const orderLists = this.state.orderLists.map((order) =>
         order.id !== id ? updateData : order,
@@ -227,15 +225,15 @@ export default function App({ $app }) {
       // this.setState(); // 테이블 초기화.
       switch (match.route.view) {
         case orders:
-          const orderLists = await get(`${BASE_URL}/orders`);
+          const orderLists = await get(`/orders`);
           this.setState({ orderLists });
           break;
         case products:
-          const productLists = await get(`${BASE_URL}/products`);
+          const productLists = await get(`/products`);
           this.setState({ productLists });
           break;
         case categories:
-          const categoryLists = await get(`${BASE_URL}/category`);
+          const categoryLists = await get(`/category`);
           this.setState({ categoryLists });
           break;
       }
@@ -298,9 +296,9 @@ export default function App({ $app }) {
     });
 
     const [productLists, categoryLists, orderLists] = await Promise.all([
-      get(`${BASE_URL}/products`),
-      get(`${BASE_URL}/category`),
-      get(`${BASE_URL}/orders`),
+      get(`/products`),
+      get(`/category`),
+      get(`/orders`),
     ]);
 
     this.setState({
@@ -309,7 +307,7 @@ export default function App({ $app }) {
       orderLists,
     });
 
-    navigate(`${BASE_URL}/admin/orders`, {
+    navigate(`/admin/orders`, {
       title: "Orders",
       state: "initial",
     });
