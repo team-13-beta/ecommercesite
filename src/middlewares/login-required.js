@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-
+import passport from "passport";
 function loginRequired(req, res, next) {
   // request 헤더로부터 authorization bearer 토큰을 받음. -> general access
   // request 헤더로부터 oauth 토큰을 받음 -> oauth access
@@ -29,6 +29,7 @@ function loginRequired(req, res, next) {
       // 라우터에서 req.currentUserId를 통해 유저의 id에 접근 가능하게 됨
       req.currentUserId = userId;
       req.currentRole = role;
+      req.currentAccess = 'general';
   
       next();
     } catch (error) {
@@ -43,10 +44,16 @@ function loginRequired(req, res, next) {
     }
 
   }
+  else if(req.session.userId){
+    req.currentUserId = req.session.userObjId;
+    req.currentRole = req.session.role;
+    req.currentAccess = req.session.access;
+    next();
+  }
   else{
     res.status(403).json({
-      
-      reason: "로그인한 유저만 사용할 수 있는 서비스22입니다.",
+      ff : req.session,
+      reason: "로그인한 유저만 사용할 수 있는 서비스입니다.",
     });
     return;
   }

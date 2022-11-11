@@ -18,7 +18,7 @@ function handleUserData() {
   fetch("/api/userlist", {
     headers: {
       Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-    },
+    }
   })
     .then((res) => res.json())
     .then((data) => {

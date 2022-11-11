@@ -200,6 +200,7 @@ userRouter.get('/auth/google/callback',
         res.redirect('/registerOauth');
         return;
       }
+      req.session.userObjId = user._id;
       req.session.userId = user.userId;
       req.session.name = user.name;
       req.session.email = user.email;
@@ -240,13 +241,16 @@ userRouter.get('/logout', async (req,res,next)=> {
 
 // 전체 유저 목록을 가져옴 (배열 형태임)
 // 미들웨어로 loginRequired 를 썼음 (이로써, jwt 토큰이 없으면 사용 불가한 라우팅이 됨)
-userRouter.get("/userlist", loginRequired, async function (req, res, next) {
+userRouter.use("/userlist", loginRequired)
+userRouter.get("/userlist", async function (req, res, next) {
   try {
     // 사용자의 권한(Role)에 따라 사용자 목록을 얻음 || admin : 전체 데이터, user : 본인의 데이터
     let option = '';
     if(req.currentRole !== 'admin')
     option = req.currentUserId;    
+    
     const user = await userService.getUsers(option);
+
     if(!user){
     res.status(502).json("해당 계정이 삭제되었거나 존재하지 않습니다");
     return ;
@@ -330,11 +334,20 @@ const state = await userService.deleteUser(userId);
 res.json(state);
 });
 
+
+userRouter.get('/sessionInfo',async (req,res,next)=>{
+  res.json({
+    name:req.session.name,
+  })
+})
+
+
+
 userRouter.get('/:user_id',loginRequired, async (req,res,next)=>{
   try {
     // 사용자의 권한(Role)에 따라 사용자 목록을 얻음 || admin : 전체 데이터, user : 본인의 데이터
     const userId = req.params.user_id;
-    if(req.currentRole !== 'admin') throw new Error("일반 사용자는 접근권한이 없습니다.") 
+    if(req.currentRole !== 'admin') throw new Error("일반 사용자는 접근권한이 없습니다!") 
     const user = await userService.getUserByUserId(userId);
     if(!user){
     res.status(502).json("해당 계정이 삭제되었거나 존재하지 않습니다");
@@ -390,7 +403,6 @@ userRouter.get('/admin/check', async (req,res,next)=>{
           return;
         }
     })
-  
 
 
 export { userRouter };
