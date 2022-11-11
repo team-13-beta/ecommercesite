@@ -1,27 +1,12 @@
-import * as Api from "../../api.js";
 import headerComponent from "./header.js";
+import { deleteCookie, getCookie } from "../../useful-functions.js";
 
 const bodyEl = document.querySelector("body");
-
-function deleteCookie(key) {
-  document.cookie = key + "=; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-}
-
-function getCookie(name) {
-  let matches = document.cookie.match(
-    new RegExp(
-      "(?:^|; )" +
-        name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, "\\$1") +
-        "=([^;]*)",
-    ),
-  );
-  return matches ? decodeURIComponent(matches[1]) : undefined;
-}
 
 function inputHeader() {
   const isLogin =
     sessionStorage.getItem("token") || getCookie("connect.sid") ? true : false;
-  console.log(isLogin, "@");
+  console.log(isLogin, window.location.pathname);
 
   if (isLogin) {
     const headerStr = headerComponent("LOGOUT", "MYPAGE", "ADMIN");
@@ -30,16 +15,17 @@ function inputHeader() {
 
     bodyEl.prepend(headerEl);
     const logout = document.querySelector(".LOGOUT");
-    logout.addEventListener("click", (e) => {
+    logout.addEventListener("click", async (e) => {
       e.preventDefault();
-      fetch("http://localhost:5000/api/logout").then(() =>
-        deleteCookie("connect.sid"),
-      );
-      // Api.get("http://localhost:5000/api/logout").then(()=>deleteCookie('connect.sid'));
+      const response = await fetch("/api/logout");
+      const { result } = await response.json();
+
+      if (result !== "success") alert("로그아웃에 실패했습니다.");
+      deleteCookie("connect.sid");
       sessionStorage.removeItem("token");
       sessionStorage.removeItem("admin");
+
       window.location.href = "/";
-      deleteCookie("connect.sid");
     });
 
     const admin = document.querySelector(".ADMIN");
