@@ -50,7 +50,7 @@ class OrderService {
     }
     const address = user.address.address1;
     console.log(address);
-    const status = "주문 결제 전";
+    const status = "배송 전";
     //console.log(status);
     let totalPrice = 0;
 

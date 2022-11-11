@@ -1,3 +1,15 @@
+@font-face {
+  font-family: "S-CoreDream-3Light";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  font-family: "S-CoreDream-3Light";
+}
+
 /*************
 *** Section ***
 *************/
@@ -68,6 +80,7 @@ section .team-intro p {
 
 section#photo {
   padding-bottom: 100px;
+  position: relative;
 }
 
 /* 포토 슬라이더 */
@@ -107,27 +120,17 @@ section#photo {
   display: block;
 }
 
-.left-arrow {
+.arrow-container {
   position: absolute;
-
-  width: 22px;
-  height: 22px;
-  background: url("../../images/img_arrow-left.png");
-
-  left: 20px;
-
-  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 400px;
+  top: 0;
+  padding: 0px 90px;
 }
 
-.right-arrow {
-  position: absolute;
-
-  width: 22px;
-  height: 22px;
-  background: url("../../images/img_arrow-right.png");
-
-  right: 20px;
-
+.arrow-container > img {
   cursor: pointer;
 }
 
@@ -154,7 +157,7 @@ section#photo {
 
 .category-header {
   width: 960px;
-  font-size: 30px;
+  font-size: 50px;
   padding-bottom: 30px;
   text-align: center;
   border-bottom: solid #ffc078 1px;
@@ -209,16 +212,9 @@ section#photo {
 
 .bottom-header {
   width: 100%;
-  font-size: 30px;
+  font-size: 50px;
   padding-bottom: 30px;
   text-align: center;
-}
-
-.all-result {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
 }
 
 #all-result-button {
@@ -227,4 +223,12 @@ section#photo {
 
 a {
   color: black;
+}
+
+@media screen and (min-width: 764px) {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 }

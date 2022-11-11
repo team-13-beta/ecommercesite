@@ -13,13 +13,16 @@ function handleSend() {
     const key = window.localStorage.key(i);
     if (Number.isInteger(parseInt(key))) {
       const data = JSON.parse(window.localStorage.getItem(key));
-      const obj = {
-        productId: data.id,
-        stock: parseInt(data.stock),
-        name: data.name,
-        price: data.price,
-      };
-      localData.push(obj);
+      if (data.checked) {
+        const obj = {
+          productId: data.id,
+          img: data.img,
+          stock: parseInt(data.stock),
+          name: data.name,
+          price: data.price,
+        };
+        localData.push(obj);
+      }
     }
   }
   console.log("장바구니 데이터 : ", localData);

@@ -1,6 +1,19 @@
+@font-face {
+  font-family: "S-CoreDream-3Light";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  font-family: "S-CoreDream-3Light";
+}
+
 main {
   width: 1024px;
   margin: 30px auto 80px auto;
+  min-height: 300px;
 }
 .none-flex {
   flex: none;
@@ -75,4 +88,13 @@ button:hover {
 .primary:hover {
   background-color: #ff7b00;
   color: white;
+}
+
+.tabs li.is-active a {
+  border-bottom-color: #ff922b;
+  color: #ff922b;
+}
+li.is-active:hover {
+  border-bottom-color: #ff922b;
+  color: #ff922b;
 }

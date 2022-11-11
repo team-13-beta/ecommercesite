@@ -100,7 +100,7 @@ async function addCategory() {
 
 async function addProduct() {
   const products = await Api.get("/products");
-
+  console.log(products);
   for (const product of products) {
     const { id, name, price, description } = product;
     const { titleImage } = description;

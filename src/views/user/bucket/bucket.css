@@ -1,3 +1,15 @@
+@font-face {
+  font-family: "S-CoreDream-3Light";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  font-family: "S-CoreDream-3Light";
+}
+
 #contents {
   width: 1024px;
   margin: 0 auto;
@@ -29,6 +41,16 @@
   font-size: 24px;
   margin-right: 0.4rem;
 }
-.item-box {
-  width: 100%;
+.bu-item-center {
+  text-align: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 764px) {
+  #contents {
+    width: 100%;
+  }
+  .hero-body {
+    width: 100%;
+  }
 }

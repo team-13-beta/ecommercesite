@@ -1,4 +1,16 @@
+@font-face {
+  font-family: "S-CoreDream-3Light";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  font-family: "S-CoreDream-3Light";
+}
 .manageContainer {
+  height: 60vh;
   flex-grow: 1;
   margin: 5vh auto;
   position: relative;
@@ -47,4 +59,10 @@
 
 .subtitle.is-5 {
   color: #fff4e6;
+}
+
+@media screen and (max-width: 764px) {
+  .menuCard {
+    width: 350px;
+  }
 }

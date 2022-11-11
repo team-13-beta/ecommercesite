@@ -1,32 +1,31 @@
-import * as Api from "../../api.js";
-import { getCookie, deleteCookie } from "../../../services/cookie.js";
 import headerComponent from "./header.js";
+import { deleteCookie, getCookie } from "../../useful-functions.js";
 
 const bodyEl = document.querySelector("body");
 
-const deleteCookie = (name) => {
-  document.cookie = name + "=; expires=Thu, 01 Jan 1999 00:00:10 GMT;";
-};
-
 function inputHeader() {
-  const isLogin = sessionStorage.getItem("token") ? true : false;
-  const isLoginBySession = getCookie('connect.sid');
+  const isLogin =
+    sessionStorage.getItem("token") || getCookie("connect.sid") ? true : false;
+  console.log(isLogin, window.location.pathname);
 
-  if (isLogin || isLoginBySession) {
+  if (isLogin) {
     const headerStr = headerComponent("LOGOUT", "MYPAGE", "ADMIN");
     const headerEl = document.createElement("div");
     headerEl.innerHTML = headerStr;
 
     bodyEl.prepend(headerEl);
     const logout = document.querySelector(".LOGOUT");
-    logout.addEventListener("click", (e) => {
+    logout.addEventListener("click", async (e) => {
       e.preventDefault();
-      fetch("http://localhost:5000/api/logout").then(()=>deleteCookie('connect.sid'));
-      // Api.get("http://localhost:5000/api/logout").then(()=>deleteCookie('connect.sid'));
+      const response = await fetch("/api/logout");
+      const { result } = await response.json();
+
+      if (result !== "success") alert("로그아웃에 실패했습니다.");
+      deleteCookie("connect.sid");
       sessionStorage.removeItem("token");
       sessionStorage.removeItem("admin");
+
       window.location.href = "/";
-      deleteCookie("connect.sid");
     });
 
     const admin = document.querySelector(".ADMIN");
@@ -41,7 +40,7 @@ function inputHeader() {
     });
   }
 
-  if (!(isLogin || isLoginBySession)) {
+  if (!isLogin) {
     const headerStr = headerComponent("LOGIN", "REGISTER");
     const headerEl = document.createElement("div");
     headerEl.innerHTML = headerStr;
@@ -58,8 +57,6 @@ function inputHeader() {
     });
   }
 }
-
-
 
 function handleLogo() {
   const logoEl = document.querySelector("#logo-box");
@@ -102,9 +99,19 @@ function handleLogo() {
   headCartEl.onmouseout = function () {
     this.style.color = "#ff922b";
   };
+
   headCartEl.addEventListener("click", () => {
     window.location.href = "/user/bucket";
   });
+
+  const adminEl = document.querySelector(".head-admin");
+  adminEl.onmouseover = function () {
+    this.style.color = "#d9480f";
+    this.style.cursor = "pointer";
+  };
+  adminEl.onmouseout = function () {
+    this.style.color = "#ff922b";
+  };
 }
 
 inputHeader();

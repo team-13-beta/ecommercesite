@@ -15,10 +15,11 @@ function handleSave() {
 
   const obj = {
     id: `${itemIdEl.textContent}`,
-    img: `${itemImgEl.src}`,
+    img: `${itemImgEl.title}`,
     name: `${itemNameEl.textContent}`,
     price: `${price}`,
     stock: `${value}`,
+    checked: true,
   };
   if (window.localStorage.getItem(`${itemIdEl.textContent}`)) {
     alert("장바구니에 같은 상품이 있습니다!");
