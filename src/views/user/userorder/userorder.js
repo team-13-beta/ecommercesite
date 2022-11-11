@@ -10,7 +10,7 @@ const deleteButton = document.querySelector(".deletebutton");
 //일단 데이터베이스 데이터 가져오기
 const getOrderList = async () => {
   const user = await Api.get("/api/userlist");
-  const datas = await Api.get("/orders", user._id);
+  const datas = await Api.get("api/orders", user._id);
   console.log(datas);
   const addName = datas.map((data) => {
     return data.buyingProduct
