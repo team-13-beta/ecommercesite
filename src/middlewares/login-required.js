@@ -1,14 +1,28 @@
 import jwt from "jsonwebtoken";
+import passport from "passport";
 
 function loginRequired(req, res, next) {
   // request 헤더로부터 authorization bearer 토큰을 받음. -> general access
   // request 헤더로부터 oauth 토큰을 받음 -> oauth access
-
+  const userToken = req.headers["authorization"]?.split(" ")[1];
+  const isUserToken = !userToken || userToken === "null";
+// console.log(req);  
   const access = '';
-  if(req.headers.authorization){
-    const userToken = req.headers["authorization"]?.split(" ")[1];
-    const isUserToken = !userToken || userToken === "null";
-  
+  // console.log("미들웨어안에서")
+  // console.log(req.cookies);
+  // console.log(req.session);
+  if(req.cookies && req.session.name){
+    // console.log(req.session);
+    req.currentName = req.session.name;
+    req.currentUserId = req.session.userObjId;
+    req.currentRole = req.session.role;
+    req.currentAccess = req.session.access;
+    req.currentEmail = req.session.email
+    req.currentPhoneNumber = req.session.phoneNumber;
+    // console.log(req.cookie)
+    next(); 
+  }
+  else if(req.headers.authorization){ 
     if (isUserToken) {
       console.log("서비스 사용 요청이 있습니다.하지만, Authorization 토큰: 없음");
       res.status(403).json({
@@ -18,7 +32,7 @@ function loginRequired(req, res, next) {
   
       return;
     }
-  
+    
     // 해당 token 이 정상적인 token인지 확인
     try {
       const secretKey = process.env.JWT_SECRET_KEY || "secret-key";
@@ -29,6 +43,7 @@ function loginRequired(req, res, next) {
       // 라우터에서 req.currentUserId를 통해 유저의 id에 접근 가능하게 됨
       req.currentUserId = userId;
       req.currentRole = role;
+      req.currentAccess = 'general';
   
       next();
     } catch (error) {
@@ -45,8 +60,7 @@ function loginRequired(req, res, next) {
   }
   else{
     res.status(403).json({
-      
-      reason: "로그인한 유저만 사용할 수 있는 서비스22입니다.",
+      reason: "로그인한 유저만 사용할 수 있는 서비스입니다.",
     });
     return;
   }

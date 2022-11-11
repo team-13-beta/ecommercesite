@@ -21,7 +21,8 @@ function handleOrder() {
   };
   window.localStorage.setItem(`${itemId1El.textContent}`, JSON.stringify(obj));
 
-  if (sessionStorage.getItem("token")) window.location.href = "/user/order";
+  if (sessionStorage.getItem("token")|| document.cookie) 
+  window.location.href = "/user/order";
   else window.location.href = "/login";
 }
 directBtnEl.addEventListener("click", handleOrder);

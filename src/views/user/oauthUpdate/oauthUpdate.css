@@ -1,0 +1,62 @@
+@font-face {
+  font-family: "S-CoreDream-3Light";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  font-family: "S-CoreDream-3Light";
+}
+
+.update-user-form-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 85vh;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+.update-user-form-box {
+  width: 30rem;
+}
+
+.update-user-form-box .title {
+  text-align: center;
+}
+
+.update-user-form-box .button {
+  font-weight: bold;
+}
+
+.update-user-form-box .input:focus {
+  border-color: #00d1b2;
+  box-shadow: 0 0 0 0.125em rgba(0, 209, 178, 0.25);
+}
+
+#saveAccountButton,
+#deleteAccountButton,
+#cancelButton {
+  width: 100%;
+  margin-bottom: 1.4vh;
+}
+
+#User_Title {
+  color: #ffa94d;
+}
+
+.button {
+  background-color: #ffa94d;
+  color: white;
+}
+
+.button:hover {
+  background-color: #ffa94d;
+  color: white;
+}
+
+.title {
+  color: #ffa94d;
+}
