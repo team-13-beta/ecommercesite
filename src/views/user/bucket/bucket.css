@@ -41,6 +41,10 @@
   font-size: 24px;
   margin-right: 0.4rem;
 }
+.bu-item-center {
+  text-align: center;
+  align-items: center;
+}
 
 @media screen and (max-width: 764px) {
   #contents {

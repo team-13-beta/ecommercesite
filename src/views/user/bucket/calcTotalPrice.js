@@ -1,4 +1,4 @@
-export default function calcTotalPrice(idEl) {
+export default function calcTotalPrice() {
   let res = 0;
   for (let i = 0; i < window.localStorage.length; i++) {
     const key = window.localStorage.key(i);

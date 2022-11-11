@@ -12,7 +12,6 @@ function handleSave() {
   const value = parseInt(
     selectValueEl.options[selectValueEl.selectedIndex].value,
   );
-  // TODO : img title 값을 가져온다..!!!
 
   const obj = {
     id: `${itemIdEl.textContent}`,
@@ -20,6 +19,7 @@ function handleSave() {
     name: `${itemNameEl.textContent}`,
     price: `${price}`,
     stock: `${value}`,
+    checked: true,
   };
   if (window.localStorage.getItem(`${itemIdEl.textContent}`)) {
     alert("장바구니에 같은 상품이 있습니다!");
