@@ -89,3 +89,12 @@ button:hover {
   background-color: #ff7b00;
   color: white;
 }
+
+.tabs li.is-active a {
+  border-bottom-color: #ff922b;
+  color: #ff922b;
+}
+li.is-active:hover {
+  border-bottom-color: #ff922b;
+  color: #ff922b;
+}

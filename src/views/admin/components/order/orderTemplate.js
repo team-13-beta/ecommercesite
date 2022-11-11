@@ -9,7 +9,7 @@ export function orderHeaderTemplate() {
       `;
 }
 
-export function orderDetailTemplate(data) {
+export function orderDetailTemplate(data, imageUrls = []) {
   const deliveryState = ["배송 전", "배송 중", "배송 완료", "주문 취소"];
   if (!data || checkObjectEmpty(data)) return `<div>데이터가 없습니다.</div>`;
   return `
@@ -62,10 +62,13 @@ export function orderDetailTemplate(data) {
           ? `<div class = "content">        
           <p class="subtitle divideTitle">상품 정보</p>
           ${data.buyingProduct.reduce((acc, cur) => {
+            const { img } = imageUrls.find(
+              (data) => data.productId == cur.productId,
+            );
             return (acc += `<div class="media">
                 <div class="media-left">
-                  <figure class="image is-96x96">
-                    <img src=${cur.img} alt="상품 이미지"/>
+                  <figure class="image is-128x128">
+                    <img src=${img} alt="상품 이미지"/>
                   </figure>
                 </div>
                 <div class="media-content">
