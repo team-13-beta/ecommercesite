@@ -52,6 +52,7 @@ async function handleSubmit(e) {
     sessionStorage.setItem("token", accessToken);
 
     alert(`정상적으로 로그인되었습니다.`);
+    document.cookie = 'connect.sid' + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;'
     if (isAdmin) {
       sessionStorage.setItem("admin", "admin");
     }
