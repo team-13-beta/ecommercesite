@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- bulma css -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/elice-rabbit-favicon.png"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+    <!-- 폰트 어썸: 아이콘 -->
+    <script
+      defer
+      src="https://kit.fontawesome.com/9daa42bcef.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      type="module"
+      src="../../user/header-footer/inputHeader.js"
+    ></script>
+    <script
+      type="module"
+      src="../../user/header-footer/inputFooter.js"
+    ></script>
+    <!-- aws를 사용하기 위한  파일 -->
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.410.0.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="admin.css" />
+    <title>관리자 페이지</title>
+  </head>
+  <body>
+    <main>
+      <div class="tabs">
+        <ul>
+          <li class="is-active">
+            <a href="/admin/orders" data-link="Orders"> 주문 내역 </a>
+          </li>
+          <li>
+            <a href="/admin/products" data-link="Products"> 상품 </a>
+          </li>
+          <li>
+            <a href="/admin/categories" data-link="Categories"> 카테고리 </a>
+          </li>
+        </ul>
+      </div>
+      <div id="root"></div>
+    </main>
+    <script type="module" src="./index.js"></script>
+  </body>
+</html>

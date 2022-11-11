@@ -1,0 +1,100 @@
+@font-face {
+  font-family: "S-CoreDream-3Light";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  font-family: "S-CoreDream-3Light";
+}
+
+main {
+  width: 1024px;
+  margin: 30px auto 80px auto;
+  min-height: 300px;
+}
+.none-flex {
+  flex: none;
+}
+
+.search-input {
+  width: 30%;
+}
+
+.subSpan {
+  font-weight: 700;
+}
+
+.divideTitle {
+  font-weight: 900;
+}
+.info-input {
+  width: 80%;
+  border-radius: 10px;
+}
+
+.content {
+  margin-bottom: 2rem;
+}
+
+.content > .detail-div {
+  display: flex;
+  align-items: center;
+}
+
+.content > .detail-div > div {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-right: 20px;
+}
+.content > .detail-div > div > label {
+  font-weight: bold;
+}
+
+.select {
+  width: 80%;
+}
+
+.full-select {
+  width: 100%;
+}
+
+.select > select {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.table > thead {
+  font-weight: bold;
+}
+
+.table > tbody > tr:hover {
+  background-color: #ffdfc2;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.primary {
+  background-color: #ff922b;
+  color: white;
+}
+
+.primary:hover {
+  background-color: #ff7b00;
+  color: white;
+}
+
+.tabs li.is-active a {
+  border-bottom-color: #ff922b;
+  color: #ff922b;
+}
+li.is-active:hover {
+  border-bottom-color: #ff922b;
+  color: #ff922b;
+}

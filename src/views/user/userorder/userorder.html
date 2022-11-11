@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>13팀</title>
+    <!-- 아이콘 -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/elice-rabbit-favicon.png"
+    />
+    <!-- bulma css -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+    <!-- 폰트 어썸: 아이콘 -->
+    <script
+      defer
+      src="https://kit.fontawesome.com/9daa42bcef.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- 커스텀 css, js -->
+    <link rel="stylesheet" href="userorder.css" />
+    <script type="module" src="../header-footer/inputHeader.js"></script>
+    <script type="module" src="../header-footer/inputFooter.js"></script>
+    <script src="userorder.js" type="module" defer></script>
+  </head>
+  <body>
+    <section class="orders-container">
+      <div class="block order-h1">
+        <h1 class="ordersH1 is-4">주문조회</h1>
+      </div>
+      <!-- 유저 주문 조회가 담기는 곳 -->
+      <table class="table">
+        <thead class="thead">
+          <tr>
+            <td id="color">주문 날짜</td>
+            <td id="color">주문 상품</td>
+            <td id="color">주문 가격</td>
+            <td id="color">상태</td>
+            <td id="color">신청</td>
+          </tr>
+        </thead>
+        <tbody class="tbody">
+          <!-- <tr>
+            <td>1</td>
+            <td>2011-10-10</td>
+            <td>닭가슴살</td>
+            <td>배송 완료</td>
+            <td>
+              <button type="button" class="button deletebutton">
+                주문 취소
+              </button>
+            </td>
+          </tr>
+
+          <tr>
+            <td>2</td>
+            <td>2011-11-11</td>
+            <td>프로틴</td>
+            <td>배송 준비중</td>
+            <td>
+              <button type="button" class="button deletebutton">
+                주문 취소
+              </button>
+            </td>
+          </tr> -->
+        </tbody>
+      </table>
+    </section>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.410.0.min.js"></script>
+  </body>
+</html>

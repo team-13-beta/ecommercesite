@@ -1,0 +1,90 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>13팀</title>
+    <!-- 아이콘 -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../../images/elice-rabbit-favicon.png"
+    />
+    <!-- bulma css -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+
+    <!-- 폰트 어썸: 아이콘 -->
+    <script
+      defer
+      src="https://kit.fontawesome.com/9daa42bcef.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- 커스텀 css, js -->
+    <link rel="stylesheet" href="home.css" />
+    <!-- svg 설정 -->
+    <?xml-stylesheet type="text/css" href="style.css"?>
+
+    <script type="module" src="../user/header-footer/inputHeader.js"></script>
+    <script type="module" src="../user/header-footer/inputFooter.js"></script>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.410.0.min.js"></script>
+    <script src="home.js" type="module" defer></script>
+  </head>
+  <body>
+    <!-- 슬라이더 -->
+    <section id="photo">
+      <div class="title"></div>
+
+      <div class="slider">
+        <div class="slide active"></div>
+        <div class="slide"></div>
+        <div class="slide"></div>
+      </div>
+      <div class="arrow-container">
+        <img
+          class="left-arrow"
+          src="../../images/angle-left-solid.svg"
+          width="22"
+          height="22"
+        />
+        <img
+          class="right-arrow"
+          src="../../images/angle-right-solid.svg"
+          width="22"
+          height="22"
+        />
+      </div>
+
+      <!-- <p class="left-arrow"></p>
+      <p class="right-arrow"></p> -->
+    </section>
+
+    <!-- 카테고리 -->
+    <div class="container">
+      <div class="category-container">
+        <div class="category-header">
+          <p>카테고리</p>
+        </div>
+
+        <!-- 카테고리 데이터 -->
+        <div class="category"></div>
+      </div>
+    </div>
+
+    <!-- 상품 데이터 -->
+    <div class="container">
+      <div class="bottom-header">
+        <p>최신상품</p>
+        <button class="button" id="all-result-button">전체 상품 보기</button>
+      </div>
+    </div>
+
+    <div class="container bottom-container">
+      <div class="bottom-products-container"></div>
+    </div>
+
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.410.0.min.js"></script>
+  </body>
+</html>
