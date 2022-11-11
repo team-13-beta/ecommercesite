@@ -44,7 +44,7 @@
 .homeBtn:hover {
   background-color: #ff922b;
   color: #fff4e6;
-  border: none;
+  border-color: ff922b;
 }
 
 .homeBtn {
@@ -73,6 +73,10 @@
   height: auto;
   margin: 0 auto;
   padding: 10px;
+}
+
+.bucket-item-content {
+  padding: 0.5rem 1.5rem;
 }
 
 @media screen and (max-width: 764px) {

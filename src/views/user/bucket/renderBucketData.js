@@ -9,10 +9,10 @@ export default function renderBucketData(id, img, name, price, stock) {
           <div class="column price-value">
           ${(price * 1).toLocaleString("ko-KR")}
           <span>원</span></div>
-          <div class="stock-con bu-item-center column">
-            <button class="button minus-btn">-</button>
+          <div class="stock-con bu-item-center column" style="gap:8px;">
+            <button class="button minus-btn" style="padding:0; width:1.5rem; height:1.5rem;">-</button>
             <div class="stock-value">${stock}</div>
-            <button class="button plus-btn">+</button>
+            <button class="button plus-btn" style="padding:0; width:1.5rem; height:1.5rem;">+</button>
           </div>
           <div class="column item-total-price">
           ${(price * stock).toLocaleString("ko-KR")}<span>원</span></div>
