@@ -29,7 +29,7 @@ userRouter.use(
       secure: false, // https 에서만 가져오도록 할 것인가?
       // maxAge:1800000 // cookie expired : 30minute 
     },
-    store: MongoStore.create({mongoUrl: process.env.MONGO_SESSION_URL}), 
+    store: MongoStore.create({mongoUrl: process.env.MONGO_ATALS_URL}), 
     //store: MongoStore.create({mongoUrl: process.env.MONGO_SESSION_URL}), 
   })
 );
@@ -416,8 +416,9 @@ userRouter.get('/admin/check', async (req,res,next)=>{
         
         const { userName, address, phoneNumber, buyingProduct } = req.body;
         const basket = { userName, address, phoneNumber, buyingProduct };
-        //console.log(basket);
-        //console.log(userId,basket);
+        console.log("여기가 order apiw 지점");
+        console.log(basket);
+        console.log(userObjId,basket);
         // 위 데이터를 유저 db에 추가하기
         const newOrder = await orderService.addOrder({
           userObjId,
