@@ -83,9 +83,10 @@ productRouter.post("/", async (req, res, next) => {
     // 물론 프론트에서 안 쓸 수도 있지만, 편의상 일단 보내 줌
     if (newProduct === null) {
       res.status(501).json({
-        code:501,
-        message : "카테고리 정보가 존재하지 않거나 기존 상품이 등록되어 있어서 상품을 생성할 수 없습니다."
-      })
+        code: 501,
+        message:
+          "카테고리 정보가 존재하지 않거나 기존 상품이 등록되어 있어서 상품을 생성할 수 없습니다.",
+      });
     }
     res.status(201).json(result);
   } catch (error) {
@@ -184,6 +185,7 @@ productRouter.patch("/:productId", async function (req, res, next) {
       deliveryImage,
       detailImage,
       titleImage,
+      categoryId,
     } = req.body;
     const description = {
       summary,
@@ -200,6 +202,7 @@ productRouter.patch("/:productId", async function (req, res, next) {
       ...(price && { price }),
       ...(description && { description }),
       ...(company && { company }),
+      ...(categoryId && { categoryId }),
     };
     // 사용자 정보를 업데이트함.
     const updatedProductInfo = await productService.setProduct(

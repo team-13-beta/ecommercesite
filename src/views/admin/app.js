@@ -174,7 +174,7 @@ export default function App({ $app }) {
     $app,
     $initialState: this.state.orderDetail,
     deleteHandler: async (deleteId) => {
-      const delResult = await dels(`/orders/${deleteId}`);
+      const delResult = await dels(`/orders/${deleteId}`, {});
       if (!delResult.acknowledged) {
         alert("삭제에 실패했습니다.");
         return;
