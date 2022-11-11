@@ -8,9 +8,9 @@ function loginRequired(req, res, next) {
   const isUserToken = !userToken || userToken === "null";
 // console.log(req);  
   const access = '';
-  // console.log("미들웨어안에서")
-  // console.log(req.cookies);
-  // console.log(req.session);
+  console.log("미들웨어안에서")
+  console.log(req.cookies);
+  console.log(req.session);
   if(req.cookies && req.session.name){
     // console.log(req.session);
     req.currentName = req.session.name;

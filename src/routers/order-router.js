@@ -34,7 +34,7 @@ orderRouter.use(cookieParser())
 // );
 
 
-orderRouter.get("/", async (req, res, next) => {
+orderRouter.get("/orders", async (req, res, next) => {
   try {
     const orders = await orderService.getAllOrders();
     let result = [];
@@ -59,7 +59,7 @@ orderRouter.get("/", async (req, res, next) => {
   }
 });
 
-orderRouter.get("/:consumer_id", async (req, res, next) => {
+orderRouter.get("/orders/:consumer_id", async (req, res, next) => {
   try {
     const consumer_id = req.params.consumer_id;
     const orders = await orderService.getOrders(consumer_id);
@@ -87,7 +87,7 @@ orderRouter.get("/:consumer_id", async (req, res, next) => {
 });
 
 //주문 상세조회 API
-orderRouter.get("/item/:order_id", async (req, res, next) => {
+orderRouter.get("orders/item/:order_id", async (req, res, next) => {
   try {
     const order_id = req.params.order_id;
     const order = await orderService.getOrder(Number(order_id));
@@ -111,7 +111,7 @@ orderRouter.get("/item/:order_id", async (req, res, next) => {
 });
 
 // order 생성 loginRequired로 누군지 사전 파악 후 처리
-orderRouter.post("/", loginRequired, async (req, res, next) => {
+orderRouter.post("/orders", loginRequired, async (req, res, next) => {
   try {
     // req (request)의 body 에서 데이터 가져오기
     // 추가해볼 데이터
