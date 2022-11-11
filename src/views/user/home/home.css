@@ -1,3 +1,15 @@
+@font-face {
+  font-family: "S-CoreDream-3Light";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  font-family: "S-CoreDream-3Light";
+}
+
 /*************
 *** Section ***
 *************/
@@ -145,7 +157,7 @@ section#photo {
 
 .category-header {
   width: 960px;
-  font-size: 30px;
+  font-size: 50px;
   padding-bottom: 30px;
   text-align: center;
   border-bottom: solid #ffc078 1px;
@@ -200,7 +212,7 @@ section#photo {
 
 .bottom-header {
   width: 100%;
-  font-size: 30px;
+  font-size: 50px;
   padding-bottom: 30px;
   text-align: center;
 }
