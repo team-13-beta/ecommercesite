@@ -8,9 +8,9 @@ function loginRequired(req, res, next) {
   const isUserToken = !userToken || userToken === "null";
 // console.log(req);  
   const access = '';
-  console.log("미들웨어안에서")
-  console.log(req.cookies);
-  console.log(req.session);
+  // console.log("미들웨어안에서")
+  // console.log(req.cookies);
+  // console.log(req.session);
   if(req.cookies && req.session.name){
     // console.log(req.session);
     req.currentName = req.session.name;
@@ -60,7 +60,6 @@ function loginRequired(req, res, next) {
   }
   else{
     res.status(403).json({
-      ff : req.session,
       reason: "로그인한 유저만 사용할 수 있는 서비스입니다.",
     });
     return;

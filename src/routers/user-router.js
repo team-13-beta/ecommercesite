@@ -265,7 +265,38 @@ userRouter.get("/userlist", async function (req, res, next) {
   }
 });
 
-userRouter.get("/userlistBySession", async function(req,res,next){
+userRouter.get("/userlistBySession", loginRequired, async function(req,res,next){
+  try{
+  if (is.emptyObject(req.body)) {
+    throw new Error(
+      "headers의 Content-Type을 application/json으로 설정해주세요",
+    );
+  }
+
+  const fullName = req.body.fullName;
+  const userId = req.session.userObjId;
+  const address = req.body.address;
+  const phoneNumber =  req.body.phoneNumber;
+  const role = req.session.role;
+
+  const toUpdate = {
+    ...(fullName && { fullName }),
+    ...(password && { password }),
+    ...(address && { address }),
+    ...(phoneNumber && { phoneNumber }),
+    ...(role && { role }),
+  };
+
+  // 사용자 정보를 업데이트함.
+  const updatedUserInfo = await userService.updateUserBySession(userId,toUpdate);
+  console.log(updatedUserInfo);
+  // 업데이트 이후의 유저 데이터를 프론트에 보내 줌
+  res.status(200).json(updatedUserInfo);
+  return;
+
+} catch (error) {
+  next(error);
+}
 
 });
 
@@ -320,7 +351,7 @@ userRouter.patch("/users",
         userInfoRequired,
         toUpdate,
       );
-
+      console.log(updatedUserInfo);
       // 업데이트 이후의 유저 데이터를 프론트에 보내 줌
       res.status(200).json(updatedUserInfo);
       return;

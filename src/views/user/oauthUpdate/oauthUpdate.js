@@ -117,7 +117,7 @@ async function updateAccount(e) {
     };
 
     await Api.get("/api/userlist");
-    await Api.patchs("/api/userBySession", data);
+    await Api.patch("/api/userBySession", data);
 
     alert(`정상적으로 정보 수정되었습니다.`);
 
