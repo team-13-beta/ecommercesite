@@ -12,6 +12,7 @@ function handleSave() {
   const value = parseInt(
     selectValueEl.options[selectValueEl.selectedIndex].value,
   );
+  console.log(itemNameEl.textContent, itemPriceEl.textContent);
 
   const obj = {
     id: `${itemIdEl.textContent}`,
