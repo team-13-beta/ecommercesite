@@ -62,6 +62,10 @@ td {
   padding-bottom: 10px;
 }
 
+.button[disabled] {
+  background-color: #ff922b;
+}
+
 @media screen and (max-width: 764px) {
   .orders-container {
     width: 100%;

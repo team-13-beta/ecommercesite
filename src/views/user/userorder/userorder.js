@@ -20,14 +20,6 @@ const getOrderList = async () => {
       .join("<br>");
   });
 
-  // let buyname = buyingProduct["0"].name;
-  // console.log(buyname);
-  // console.log(addName);
-  // const addStock = datas.map((data) => {
-  //   return data.buyingProduct.map((data) => data.stock);
-  // });
-  // console.log(addStock);
-
   const result = datas
     .map((data, i) => {
       return `
@@ -37,7 +29,9 @@ const getOrderList = async () => {
 <td>${data.totalPrice}</td>
 <td>${data.status}</td>
 <td>
-  <button type="button" class="button deleteButton">주문 취소</button>
+  <button type="button" class="button deleteButton" ${
+    data.status === "배송 전" ? "" : "disabled"
+  } id="${data.id}">주문 취소</button>
 </td>
 </tr>`;
     })
@@ -52,7 +46,6 @@ container.addEventListener("click", deleteButton1);
 function deleteButton1(e) {
   const target = e.target;
   const id = target.parentNode.parentNode.id; //tr의 id를 가져와줌
-  console.log(id);
   if (target.tagName === "BUTTON") {
     deleteOrder(id);
   }
@@ -64,7 +57,7 @@ const deleteOrder = async (id) => {
   if (deleteConfirm) {
     try {
       await Api.delete(`/orders/${id}`);
-      alert("삭제되었습니다");
+      alert("취소되었습니다");
       window.location.href = "/user/userorder";
     } catch (err) {
       alert(err);
