@@ -13,14 +13,14 @@ export default function headerComponent(login, join, admin = null) {
             border-radius: 10px;">β</div>
           </div>
           <div class="level-right">
-            <div class="level-item ${join} head-register" style="color:#ff922b; font-weight:bold;">${join}</div>
-            <div class="level-item ${login} head-login" style="color:#ff922b; font-weight:bold;">${login}</div>
+            <div class="level-item ${join} head-register" style="color:#ff922b; font-weight:bold; letter-spacing: 1px;">${join}</div>
+            <div class="level-item ${login} head-login" style="color:#ff922b; font-weight:bold; letter-spacing: 1px;">${login}</div>
             ${
               admin
-                ? `<div class="level-item ${admin} head-admin" style="color:#ff922b; font-weight:bold;">${admin}</div>`
+                ? `<div class="level-item ${admin} head-admin" style="color:#ff922b; font-weight:bold; letter-spacing: 1px;">${admin}</div>`
                 : ""
             }
-            <div class="level-item head-cart" style="color:#ff922b; font-weight:bold;">CART</div>
+            <div class="level-item head-cart" style="color:#ff922b; font-weight:bold; letter-spacing: 1px;">CART</div>
           </div>
         </nav>
         </div>
