@@ -27,7 +27,7 @@ async function handleData() {
       const [img_url] = await Promise.all([getImageUrl(img)]);
       const htmlStr = renderBucketData(id, img_url, name, price, stock);
       let el = document.createElement("div");
-      el.classList.add("columns", "item-box");
+      el.classList.add("columns", "item-box", "bu-item-center");
       el.id = `${id}`;
       el.style.margin = "0";
       el.innerHTML = htmlStr;
