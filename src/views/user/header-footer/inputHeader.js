@@ -6,8 +6,20 @@ const deleteCookie = (name) => {
   document.cookie = name + "=; expires=Thu, 01 Jan 1999 00:00:10 GMT;";
 };
 
+function getCookie(name) {
+  let matches = document.cookie.match(
+    new RegExp(
+      "(?:^|; )" +
+        name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, "\\$1") +
+        "=([^;]*)",
+    ),
+  );
+  return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+
 function inputHeader() {
-  const isLogin = sessionStorage.getItem("token") ? true : false;
+  const isLogin =
+    sessionStorage.getItem("token") || getCookie("connect.sid") ? true : false;
   if (isLogin) {
     const headerStr = headerComponent("LOGOUT", "MYPAGE", "ADMIN");
     const headerEl = document.createElement("div");
