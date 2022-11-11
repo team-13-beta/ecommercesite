@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>쇼핑-n팀</title>
+    <!-- 커스텀 css, js -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+    <script type="module" src="/user/header-footer/inputHeader.js"></script>
+    <script type="module" src="/user/header-footer/inputFooter.js"></script>
+    <link rel="stylesheet" href="bucket.css" />
+  </head>
+  <body>
+    <section id="contents" class="box hero">
+      <div class="hero-body">
+        <div class="title">장바구니</div>
+        <hr />
+        <div class="level">
+          <input
+            type="checkbox"
+            class="level-left"
+            id="checkBoxAll"
+            checked="true"
+          />
+          <button class="delete level-right all-delete"></button>
+        </div>
+
+        <hr />
+        <div id="bucket-data"></div>
+        <hr />
+
+        <div class="result-price" style="align-items: center; gap: 16px">
+          <div class="price-box">총 금액 :</div>
+          <div class="price-box" id="total-price">0</div>
+          <button class="button pay-btn">주문하기</button>
+        </div>
+      </div>
+    </section>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.410.0.min.js"></script>
+    <script type="module" src="bucketLocal.js"></script>
+    <script src="redirectPay.js"></script>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.410.0.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html style="scroll-behavior: smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>쇼핑-n팀</title>
+    <!-- 커스텀 css, js -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+    <script type="module" src="/user/header-footer/inputHeader.js"></script>
+    <script type="module" src="/user/header-footer/inputFooter.js"></script>
+    <link rel="stylesheet" href="products.css" />
+  </head>
+  <body>
+    <section id="contents" class="box">
+      <div class="content_container" id="content_container">
+        <div id="input-data" class="columns" style="align-items: center"></div>
+      </div>
+
+      <div class="tabs is-centered">
+        <ul>
+          <li class="is-active"><a class="img_detail">상세정보</a></li>
+          <li><a class="img_delivery">배송정보</a></li>
+          <li><a class="img_nutrition">영양정보</a></li>
+        </ul>
+      </div>
+
+      <div class="content is-medium item-des-img">
+        <div id="detail-data"></div>
+      </div>
+    </section>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.410.0.min.js"></script>
+    <script type="module" src="products.js"></script>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.410.0.min.js"></script>
+  </body>
+</html>

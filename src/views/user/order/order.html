@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>쇼핑-n팀</title>
+    <!-- 커스텀 css, js -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script type="module" src="/user/header-footer/inputHeader.js"></script>
+    <script type="module" src="/user/header-footer/inputFooter.js"></script>
+    <link rel="stylesheet" href="order.css" />
+  </head>
+  <body>
+    <section id="contents" class="">
+      <div class="columns">
+        <div class="column is-three-fifths">
+          <div class="card block">
+            <div class="card-header-title order-info">주문 정보</div>
+          </div>
+
+          <div class="card block">
+            <div class="card-header-title">제품 목록</div>
+            <div
+              class="card-content columns product-box"
+              style="margin-bottom: 0"
+            >
+              <div class="column bold">제품명</div>
+              <div class="column bold">제품 수량</div>
+              <div class="column bold">제품 가격</div>
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="card" style="padding: 16px">
+            <div class="card-header-title">주문 결제 금액</div>
+            <div class="card-content">결제 금액</div>
+            <div class="card-content title total-price">0000</div>
+            <button
+              class="card-footer-item button is-fullwidth"
+              id="paymentBtn"
+            >
+              결제 하기
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div id="modal-payment" class="modal-container is-close">
+      <div class="modal-bg"></div>
+      <div class="modal-box">
+        <div class="card">
+          <div class="card-header-title">결제 금액</div>
+          <div class="card-content">
+            <div class="content">결제하시면 3대 500이 됩니다. 감사합니다.</div>
+            <div class="total-price title"></div>
+          </div>
+          <div class="card-footer">
+            <button
+              id="modal-close"
+              class="button card-footer-item close-btn modal-btn"
+            >
+              닫기
+            </button>
+            <button class="button card-footer-item modal-btn" id="send-order">
+              결제 하기
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.410.0.min.js"></script>
+    <script type="module" src="order.js"></script>
+    <script type="module" src="bucketInputHtml.js"></script>
+  </body>
+</html>

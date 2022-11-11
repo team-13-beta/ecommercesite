@@ -1,0 +1,266 @@
+@font-face {
+  font-family: "S-CoreDream-3Light";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  font-family: "S-CoreDream-3Light";
+}
+
+/*************
+*** Section ***
+*************/
+
+body {
+  font-family: "Yeon Sung";
+  font-weight: 400;
+}
+
+h1 {
+  font-size: 100px;
+}
+section {
+  position: relative;
+  width: 100%;
+  padding: 0px 0px 0;
+}
+
+section .title {
+  width: 760px;
+  text-align: center;
+  margin: 0 auto 60px;
+}
+
+section .title h2 {
+  font-size: 40px;
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+section .title p {
+  font-size: 14px;
+  line-height: 24px;
+  font-family: Helvetica, Arial, sans-serif;
+  color: #8c979e;
+}
+
+section .row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  align-content: stretch;
+}
+
+section .team-intro {
+  width: 300px;
+  text-align: center;
+}
+
+section .team-intro img {
+  width: 225px;
+  height: 225px;
+  border: 7px solid #fff;
+  border-radius: 50%;
+
+  margin-bottom: 25px;
+}
+
+section .team-intro h3 {
+  margin-bottom: 15px;
+}
+
+section .team-intro p {
+  line-height: 24px;
+}
+
+section#photo {
+  padding-bottom: 100px;
+  position: relative;
+}
+
+/* 포토 슬라이더 */
+#photo .slider {
+  position: relative;
+  width: 100%;
+  height: 400px;
+
+  margin-bottom: 10px;
+  box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 10%),
+    0 0 0 1px rgb(10 10 10 / 2%);
+}
+
+#photo .slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+#photo .slide:nth-child(1) {
+  background: url("../../images/도시락 이벤트.jpg") no-repeat center;
+  background-size: cover;
+}
+
+#photo .slide:nth-child(2) {
+  background: url("../../images/샐러드 이벤트.jpg") no-repeat center;
+  background-size: cover;
+}
+
+#photo .slide:nth-child(3) {
+  background: url("../../images/엘리.webp") no-repeat center;
+  background-size: auto;
+}
+
+#photo .slide.active {
+  display: block;
+}
+
+.arrow-container {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 400px;
+  top: 0;
+  padding: 0px 90px;
+}
+
+.arrow-container > img {
+  cursor: pointer;
+}
+
+/* 카테고리 */
+.container {
+  width: 960px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.category-container {
+  margin-bottom: 100px;
+}
+.category {
+  width: 960px;
+  display: grid;
+  justify-content: space-around;
+  grid-template-columns: repeat(8, 1fr);
+  grid-gap: 16px;
+  padding: 24px;
+  box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 10%),
+    0 0 0 1px rgb(10 10 10 / 2%);
+  margin-bottom: 30px;
+  border-radius: 12px;
+  border: 1px #ffc078 solid;
+}
+
+.category-header {
+  width: 960px;
+  font-size: 50px;
+  font-weight: 700;
+  padding-bottom: 30px;
+  text-align: center;
+}
+
+.category-item {
+  width: 100px;
+  height: 50px;
+  padding: 10px 0;
+  text-align: center;
+  background-color: #ff922b;
+  font-size: 20px;
+  color: white;
+  border-radius: 15px;
+}
+
+.category-item:hover {
+  background-color: #ffa94d;
+  cursor: pointer;
+}
+
+/* 바텀 produncts 부분 */
+.bottom-container {
+  width: 960px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 20px;
+  border: 1px #ffc078 solid;
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.bottom-products {
+  width: 20%;
+  margin: 10px;
+}
+
+.bottom-products-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0px;
+  text-align: center;
+}
+
+.bottom-product-image-container {
+  width: 200px;
+  height: 200px;
+}
+
+.bottom-header {
+  font-weight: 700;
+  width: 100%;
+  font-size: 50px;
+  padding-bottom: 30px;
+  text-align: center;
+}
+
+#all-result-button {
+  background-color: #ff922b;
+  color: white;
+  border-radius: 12px;
+}
+
+#all-result-button:hover {
+  background-color: #ffa94d;
+  cursor: pointer;
+}
+
+.bottom-product-name {
+  font-weight: 600;
+}
+
+.bottom-product-image {
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+a {
+  color: black;
+}
+
+img:hover {
+  transform: scale(1.03);
+  transition: transform 1s;
+}
+
+a:hover {
+  color: #ffa94d;
+}
+
+@media screen and (min-width: 764px) {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+}

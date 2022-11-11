@@ -1,0 +1,91 @@
+@font-face {
+  font-family: "S-CoreDream-3Light";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  font-family: "S-CoreDream-3Light";
+}
+
+.login-form-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 85vh;
+}
+
+.login-form-box {
+  width: 30rem;
+}
+
+.login-form-box .title {
+  text-align: center;
+}
+
+.login-form-box .button {
+  font-weight: bold;
+}
+
+.title {
+  color: #ff922b;
+}
+
+.button {
+  background-color: #ff922b;
+  color: white;
+}
+
+.registerContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.register {
+  text-align: center;
+  color: #ff922b;
+}
+
+/* -------구글----------- */
+.googleButton {
+  display: flex;
+  width: 80%;
+  height: 2.5em;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  background: white;
+  color: #444;
+  border-radius: 5px;
+  border: thin solid #888;
+  white-space: nowrap;
+}
+
+.googleButton > img {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.googleButton:hover {
+  cursor: pointer;
+  background-color: rgb(228, 228, 228, 0.3);
+}
+span.label {
+  font-family: serif;
+  font-weight: normal;
+}
+
+buttonText {
+  display: inline-block;
+  vertical-align: middle;
+  padding-left: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  /* Use the Roboto font that is loaded in the <head> */
+  font-family: "Roboto", sans-serif;
+}

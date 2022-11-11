@@ -1,0 +1,89 @@
+@font-face {
+  font-family: "S-CoreDream-3Light";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  font-family: "S-CoreDream-3Light";
+}
+#contents {
+  width: 1024px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+.modal-container {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal-bg {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.modal-box {
+  position: absolute;
+  background-color: #fff;
+  width: 400px;
+  height: auto;
+  padding: 20px;
+  border-radius: 0.25rem;
+}
+
+#paymentBtn:hover,
+.modal-btn:hover,
+.homeBtn:hover {
+  background-color: #ff922b;
+  color: #fff4e6;
+  border-color: ff922b;
+}
+
+.homeBtn {
+  margin: auto;
+  display: block;
+}
+.is-close {
+  display: none;
+}
+.result-title {
+  font-size: 20px;
+  font-weight: 600;
+}
+.img-style {
+  margin: 30px 0;
+}
+
+.bold {
+  font-weight: 500;
+}
+
+.success-box {
+  align-items: center;
+  justify-content: center;
+  width: 500px;
+  height: auto;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.bucket-item-content {
+  padding: 0.5rem 1.5rem;
+}
+
+@media screen and (max-width: 764px) {
+  #contents {
+    width: 100%;
+  }
+  .hero-body {
+    width: 100%;
+  }
+}

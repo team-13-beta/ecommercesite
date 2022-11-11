@@ -1,0 +1,1481 @@
+[33mcommit 726ce4afe4260d5c77f22f902b7c44c4f51cb15a[m[33m ([m[1;36mHEAD -> [m[1;32mfeat-fe-seeun[m[33m)[m
+Author: jade-coding <dbtkddn598@gmail.com>
+Date:   Thu Nov 10 12:30:46 2022 +0900
+
+    fix : 테스트 데이터 수정
+
+[33mcommit 22690f372044482b0f5f3ef23fdf743e507ef44c[m
+Merge: 3d4d5d9 7d80800
+Author: jade-coding <dbtkddn598@gmail.com>
+Date:   Wed Nov 9 23:42:06 2022 +0900
+
+    Merge branch 'feat-fe-seeun' of https://kdt-gitlab.elice.io/sw_track/class_03/web_project/team13/ecommercesite into feat-fe-seeun
+
+[33mcommit 3d4d5d90bba86ea93eaf358e567e70dbfbcdd233[m
+Author: jade-coding <dbtkddn598@gmail.com>
+Date:   Wed Nov 9 23:40:20 2022 +0900
+
+    fix: 상품 삭제 및 카테고리 종속 상품 에러 해결
+
+[33mcommit 7d80800c21f9a423792dcf595ca6065808dcc531[m
+Author: jeonhl7579 <tpgus19@gmail.com>
+Date:   Wed Nov 9 23:31:39 2022 +0900
+
+    Feat: not delevery
+
+[33mcommit a87ef2457982fbaff11ae89ce672cf88dbcbd5b4[m
+Author: jeonhl7579 <tpgus19@gmail.com>
+Date:   Wed Nov 9 23:25:09 2022 +0900
+
+    product_delete_update
+
+[33mcommit 2abdd4d0d20ebb41095f5e9798c3efce51c20ff9[m
+Author: jade-coding <dbtkddn598@gmail.com>
+Date:   Wed Nov 9 22:44:12 2022 +0900
+
+    fix : product  전체조회 간 카테고리 조회시 오류 발생 코드 수정
+
+[33mcommit 650cdafe3d4abd4df293a605f4eaa33cadef3906[m
+Author: jade-coding <dbtkddn598@gmail.com>
+Date:   Wed Nov 9 22:27:58 2022 +0900
+
+    fix : 불필요 변수 정리
+
+[33mcommit ad7016716f18249648e093b829e3a4285d39ea1c[m
+Merge: ec221ea 600490c
+Author: jade-coding <dbtkddn598@gmail.com>
+Date:   Wed Nov 9 22:24:04 2022 +0900
+
+    Merge branch 'feat-fe-seeun' of https://kdt-gitlab.elice.io/sw_track/class_03/web_project/team13/ecommercesite into feat-fe-seeun
+
+[33mcommit ec221ea8296acde1f026c0e107faf109368ad3e6[m
+Author: jade-coding <dbtkddn598@gmail.com>
+Date:   Wed Nov 9 22:21:14 2022 +0900
+
+    fix : product스키마 수정 및 비구조적할당구간  변수 누락에 따른 오류 해결
+
+[33mcommit 600490cf1d8c2f77fbbee0605e9cb390f5157278[m
+Author: jeonhl7579 <tpgus19@gmail.com>
+Date:   Wed Nov 9 21:40:46 2022 +0900
+
+    update delivery
+
+[33mcommit c1c0afae26f42208daad1a24cc302cd31508051f[m
+Author: jeonhl7579 <tpgus19@gmail.com>
+Date:   Wed Nov 9 21:24:23 2022 +0900
+
+    In description
+
+[33mcommit 1c6b743aaa977067fa317b54f1dd9909587346b0[m[33m ([m[1;31morigin/feat-fe[m[33m, [m[1;32mfeat-fe[m[33m)[m
+Merge: a2a17e3 625d776
+Author: hojin jeong <ghwls0905@gmail.com>
+Date:   Wed Nov 9 08:45:36 2022 +0000
+
+    Merge branch 'feat-fe-admin' into 'feat-fe'
+    
+    상품 API 작업중
+    
+    See merge request sw_track/class_03/web_project/team13/ecommercesite!34
+
+[33mcommit 625d776c572bde5757eeb943f58e7206d7edddfc[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Wed Nov 9 17:43:23 2022 +0900
+
+    Refactor: 상품 API 붙이는 도중 에러
+
+[33mcommit e2c2b31fa63fbf9bdb43d8b498f0b1eed1597812[m
+Merge: dde8bcf f98283d
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Wed Nov 9 17:18:00 2022 +0900
+
+    Merge branch 'feat-fe-seeun' of https://kdt-gitlab.elice.io/sw_track/class_03/web_project/team13/ecommercesite into feat-fe-admin
+
+[33mcommit f98283d1655ace723635492adbf789d9292c3350[m
+Author: jeonhl7579 <tpgus19@gmail.com>
+Date:   Wed Nov 9 17:16:39 2022 +0900
+
+    update product_create_categoryId
+
+[33mcommit dde8bcf6a3d7077a930ae81e6289f086f07226b9[m
+Merge: 51ea3d1 94e4c69
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Wed Nov 9 16:44:53 2022 +0900
+
+    Merge branch 'feat-fe-seeun' of https://kdt-gitlab.elice.io/sw_track/class_03/web_project/team13/ecommercesite into feat-fe-admin
+
+[33mcommit 94e4c69b594f8b2f5924003158bde25c7efd7db9[m
+Author: jeonhl7579 <tpgus19@gmail.com>
+Date:   Wed Nov 9 16:40:45 2022 +0900
+
+    only categoryId
+
+[33mcommit 51ea3d186fe574ae5d60d65f122d059c20fb7519[m
+Merge: 1effd05 b1c6566
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Wed Nov 9 16:12:21 2022 +0900
+
+    Merge branch 'feat-fe-seeun' of https://kdt-gitlab.elice.io/sw_track/class_03/web_project/team13/ecommercesite into feat-fe-admin
+
+[33mcommit 1effd05a68d7384776957037e7f98edcb71b329c[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Wed Nov 9 16:10:33 2022 +0900
+
+    Refactor: category 업데이트, 삭제 구현
+
+[33mcommit a996fe71ca614001b08b34f3d9e9a92fda252257[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Wed Nov 9 16:10:17 2022 +0900
+
+    Refactor: login시 토큰값만 받게 설정
+
+[33mcommit 363fd2b9f2a44fa3573ee450f24f961b7655d3b6[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Wed Nov 9 16:09:52 2022 +0900
+
+    Design:primary Color 수정
+
+[33mcommit b1c656614a0b7c1d9d0fec90a53711c43845ce84[m
+Author: jeonhl7579 <tpgus19@gmail.com>
+Date:   Wed Nov 9 16:07:29 2022 +0900
+
+    update_productPatch
+
+[33mcommit fcc3d20e174d9b80101ebfbee877c51ba51adaeb[m
+Merge: 6ed6b9f c89cf11
+Author: jade-coding <dbtkddn598@gmail.com>
+Date:   Wed Nov 9 15:14:48 2022 +0900
+
+    Merge branch 'feat-fe-seeun' of https://kdt-gitlab.elice.io/sw_track/class_03/web_project/team13/ecommercesite into feat-fe-seeun
+
+[33mcommit 6ed6b9f64fffff1df8e937308c19d2b8438f061b[m
+Author: jade-coding <dbtkddn598@gmail.com>
+Date:   Wed Nov 9 15:14:22 2022 +0900
+
+    fix : auth api testcode 오류 수정
+
+[33mcommit c89cf11d94c6101bf920a1663e5b23187989ad2d[m
+Author: jeonhl7579 <tpgus19@gmail.com>
+Date:   Wed Nov 9 15:10:45 2022 +0900
+
+    product_id 수정
+
+[33mcommit 6ccead6ffae3bacebac292513ce8428004a0beae[m
+Merge: 6e710ef adf295c
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Wed Nov 9 15:08:15 2022 +0900
+
+    Merge branch 'feat-fe-seeun' of https://kdt-gitlab.elice.io/sw_track/class_03/web_project/team13/ecommercesite into feat-fe-admin
+
+[33mcommit 6e710eff584be8537c6fd28dd3706c1f84523fc3[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Wed Nov 9 15:07:17 2022 +0900
+
+    Refactor: aws-s3 재설정
+
+[33mcommit adf295cc50796f2336201f1e98ee30102043c5a4[m
+Author: jade-coding <dbtkddn598@gmail.com>
+Date:   Wed Nov 9 14:56:14 2022 +0900
+
+    fix : auth Api 반환 값 수정
+
+[33mcommit b739bd4f2096858d385b5ad592ed4e6e1ab0c5d5[m
+Author: jade-coding <dbtkddn598@gmail.com>
+Date:   Wed Nov 9 14:42:53 2022 +0900
+
+    fix : category api 반환 값 id type string 변환
+
+[33mcommit d231507541e6c47a07553e22dfe81d65857157a4[m
+Author: jade-coding <dbtkddn598@gmail.com>
+Date:   Wed Nov 9 14:36:25 2022 +0900
+
+    fix: 테스트 코드 수정, category api 반환값 수정
+
+[33mcommit aa2cada2995bc17a9160654c11e512f26c3299e6[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Wed Nov 9 13:35:42 2022 +0900
+
+    Refactor: 페이지 이동시마다 해당 페이지 데이터 호출 추가
+
+[33mcommit fe0d3282e58faf71344578e2bc68c54dad7d93bb[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Wed Nov 9 13:27:58 2022 +0900
+
+    Feat: 상품 삭제시 상품에 포함되어 있는 이미지 삭제 추가
+
+[33mcommit 16fcecc36fb88302403510647fee3996eb396c83[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Wed Nov 9 13:21:14 2022 +0900
+
+    Refactor: 이미지 수정시 s3에서 기존 이미지 삭제 후 재등록 설정
+
+[33mcommit e12385d668bda60066eec3e677cd728be1d07b0f[m
+Author: jeonhl7579 <tpgus19@gmail.com>
+Date:   Wed Nov 9 11:03:27 2022 +0900
+
+    Feat: productId 처음 생성
+
+[33mcommit 3b240616e34e4b32f7093955a846ee26ff5b8d3d[m
+Merge: 8883276 baaf002
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Wed Nov 9 09:49:30 2022 +0900
+
+    Merge branch 'feat-fe-seeun' of https://kdt-gitlab.elice.io/sw_track/class_03/web_project/team13/ecommercesite into feat-fe-admin
+
+[33mcommit baaf0027fd3dcb833505cc078baedefe2c6c08ee[m
+Author: jade-coding <dbtkddn598@gmail.com>
+Date:   Wed Nov 9 01:00:02 2022 +0900
+
+    feat:카테고리 종속 상품조회 api 구현
+
+[33mcommit 85428b02cc723c5600735bdbd579ad775de886c5[m
+Author: jeonhl7579 <tpgus19@gmail.com>
+Date:   Wed Nov 9 00:13:27 2022 +0900
+
+    Feat: order update,delete
+
+[33mcommit 8883276d474aa5050d59b276b7ab153216fc4279[m
+Merge: a2a17e3 2fb5035
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Wed Nov 9 00:10:53 2022 +0900
+
+    Pull: 백엔드 값들 pull
+
+[33mcommit 2fb5035fa0314ab35c158dc5dee8c1c9047022c0[m
+Author: jade-coding <dbtkddn598@gmail.com>
+Date:   Tue Nov 8 23:06:07 2022 +0900
+
+    fix: order DB null 값에 대한 에러처리
+
+[33mcommit a2a17e38034db715ed42a712d43f24b9410cec13[m
+Merge: 4ca39cf 23cc3f1
+Author: 화낙 홍 <ghdghkwo5@gmail.com>
+Date:   Tue Nov 8 14:02:58 2022 +0000
+
+    Merge branch 'feat-fe-honghn' into 'feat-fe'
+    
+    Feat fe honghn
+    
+    See merge request sw_track/class_03/web_project/team13/ecommercesite!30
+
+[33mcommit 23cc3f1acb85c806f281e265c3c62225ba6946ee[m
+Merge: ba652d8 4ca39cf
+Author: 화낙 홍 <ghdghkwo5@gmail.com>
+Date:   Tue Nov 8 13:57:47 2022 +0000
+
+    Merge branch 'feat-fe' into 'feat-fe-honghn'
+    
+    # Conflicts:
+    #   src/views/api.js
+
+[33mcommit 4ca39cf76632472eb524fcd48ffc392c03cedce0[m
+Merge: 400c76e ac4a700
+Author: hojin jeong <ghwls0905@gmail.com>
+Date:   Tue Nov 8 13:56:13 2022 +0000
+
+    Merge branch 'feat-fe-admin' into 'feat-fe'
+    
+    API 반환 값에 맞춰 코드 리팩토링 & 이미지 로드 관련 aws 연동 및 구현
+    
+    See merge request sw_track/class_03/web_project/team13/ecommercesite!28
+
+[33mcommit ac4a700f3a762f67bfee76735fb4ae07bc7177e1[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Tue Nov 8 22:22:11 2022 +0900
+
+    Feat: 주문 상세 관련 상품 값 구현 및 디자인 적용
+
+[33mcommit ba652d8c1ab272e6f1ad31824024167055f522b7[m
+Author: HwanakHong <94178576+Nakhong@users.noreply.github.com>
+Date:   Tue Nov 8 21:57:39 2022 +0900
+
+    fix: 바텀 프로덕트 링크 수정
+
+[33mcommit 27cf0f3e74dd4aef3b5f6d97493f6a297e983006[m
+Merge: 9784007 a6d9925
+Author: jeonhl7579 <tpgus19@gmail.com>
+Date:   Tue Nov 8 21:48:45 2022 +0900
+
+    Merge branch 'feat-fe-seeun' of https://kdt-gitlab.elice.io/sw_track/class_03/web_project/team13/ecommercesite into feat-fe-seeun
+
+[33mcommit 97840079c81caa41c373aad4f40e237b238c0bee[m
+Author: jeonhl7579 <tpgus19@gmail.com>
+Date:   Tue Nov 8 21:43:18 2022 +0900
+
+    Feat: not find
+
+[33mcommit 0532517f45c47d54b8b4f0661b16a2a03be153d7[m
+Author: HwanakHong <94178576+Nakhong@users.noreply.github.com>
+Date:   Tue Nov 8 21:40:25 2022 +0900
+
+    feat : api 설정 추가
+
+[33mcommit ae8b1e770192ebc8eef616b78acd8dc933c39f5c[m
+Author: HwanakHong <94178576+Nakhong@users.noreply.github.com>
+Date:   Tue Nov 8 21:39:10 2022 +0900
+
+    Design : header,footer 설정
+
+[33mcommit 4cab74fe7e68911dd69ea78259c54b2cb9103512[m
+Author: HwanakHong <94178576+Nakhong@users.noreply.github.com>
+Date:   Tue Nov 8 21:38:42 2022 +0900
+
+    feat: 파라미터 수정한 함수 생성
+
+[33mcommit 9de9f44589ae21a9761b27e779ed2feec1b27ca7[m
+Author: HwanakHong <94178576+Nakhong@users.noreply.github.com>
+Date:   Tue Nov 8 21:37:41 2022 +0900
+
+    Design : 디자인 수정
+
+[33mcommit 70c948ca4edefea126aae8fb6517ca2d89d6bff9[m
+Author: jeonhl7579 <tpgus19@gmail.com>
+Date:   Tue Nov 8 21:33:29 2022 +0900
+
+    Feat: 주문 상세 조회ing
+
+[33mcommit 859ba0e0b10ecbb7a69ac50f491a4ae08e8118d5[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Tue Nov 8 21:28:41 2022 +0900
+
+    Refactor: 상품 추가 및 수정시 이미지 파일 변경 구현
+
+[33mcommit a6d99250956e9549ccdfff5785f4d70e61b094fb[m
+Author: jade-coding <dbtkddn598@gmail.com>
+Date:   Tue Nov 8 20:57:16 2022 +0900
+
+    fix : order id 생성간 에러해결
+
+[33mcommit 364912bc258fea4bc4fa89c55dec2c0ba16f96a2[m
+Merge: 09e46d4 2cf55c3
+Author: jade-coding <dbtkddn598@gmail.com>
+Date:   Tue Nov 8 20:45:26 2022 +0900
+
+    Merge branch 'feat-fe-seeun' of https://kdt-gitlab.elice.io/sw_track/class_03/web_project/team13/ecommercesite into feat-fe-seeun
+
+[33mcommit 09e46d4f5d910a2b9ef888c32d6d57d176ace4f9[m
+Author: jade-coding <dbtkddn598@gmail.com>
+Date:   Tue Nov 8 20:45:04 2022 +0900
+
+    fix: order 데이터 input 수정
+
+[33mcommit 2cf55c3c3f87daa2f485a317f3be40ba568c0481[m
+Author: jeonhl7579 <tpgus19@gmail.com>
+Date:   Tue Nov 8 19:37:33 2022 +0900
+
+    Feat : 주문 상세 조회ing
+
+[33mcommit c6c988137b539b717a07166aecd80c83717aa641[m
+Author: jade-coding <dbtkddn598@gmail.com>
+Date:   Tue Nov 8 19:21:04 2022 +0900
+
+    fix : userService userlist undefined variable error 해결
+
+[33mcommit aaac90c0cdb3825d792249e26c3643fb445fb8b5[m
+Author: jade-coding <dbtkddn598@gmail.com>
+Date:   Tue Nov 8 18:38:03 2022 +0900
+
+    feat: order 생성api, 및 타 api test 점검 양호 확인 완료
+
+[33mcommit c9c1f2804ae97eed9ca43dd4948cb4802a3ce042[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Tue Nov 8 16:19:31 2022 +0900
+
+    Refactor: aws-s3활용해서 이미지 저장 및 불러오기 구현 완료
+
+[33mcommit 78227ba543d7e9cb388a75e63d938ce2a7a6bffa[m
+Author: jade-coding <dbtkddn598@gmail.com>
+Date:   Tue Nov 8 15:10:39 2022 +0900
+
+    fix : category null 참조 문제 해결
+
+[33mcommit f4d0f41737dae2cab158730a1329aa72cc6ca0fb[m
+Author: jade-coding <dbtkddn598@gmail.com>
+Date:   Tue Nov 8 14:56:56 2022 +0900
+
+    Fix : category id 할당 null 값 에러 해결
+
+[33mcommit d1e65a5dd8241a00b9d8fa66c4d55bd10f5236be[m
+Author: jade-coding <dbtkddn598@gmail.com>
+Date:   Tue Nov 8 14:40:10 2022 +0900
+
+    Feat: 유저스키마, 상품스키마 개별 ID 할당, 특정사용자 정보조회 API 구현
+
+[33mcommit 5b2c04f38f0a637f6a68c02ecd2d14fe4b2e5c8c[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Tue Nov 8 12:40:39 2022 +0900
+
+    Refactor: product 상품 카테고리에 맞춰 설정 단, aws 설정이 필요함
+
+[33mcommit bfab0a28641950c06148845c66e5f0c4efce4a96[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Tue Nov 8 10:58:52 2022 +0900
+
+    Feat: AWS s3 설정
+
+[33mcommit 7ba75aa25031440919ea1cac77ac810461df1e4f[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Tue Nov 8 10:22:09 2022 +0900
+
+    Refactor: Category 반환 형식에 맞춰 코드 수정
+
+[33mcommit 218a5157e79937f2f01606e6709a2d0a0c293748[m
+Author: jeonhl7579 <tpgus19@gmail.com>
+Date:   Tue Nov 8 01:22:25 2022 +0900
+
+    Feat:CategoryId 및 관련 기능 Update
+
+[33mcommit b324fc2f65a12071bf5573e1b84fd20efa1631d9[m
+Author: HwanakHong <94178576+Nakhong@users.noreply.github.com>
+Date:   Mon Nov 7 22:49:45 2022 +0900
+
+    Design : 메인 색 수정
+
+[33mcommit c2f4e554e041cd1c25010dacc43365e54260c26f[m
+Author: HwanakHong <94178576+Nakhong@users.noreply.github.com>
+Date:   Mon Nov 7 22:43:16 2022 +0900
+
+    feat: header.js 인자로 받아서 헤더변경
+
+[33mcommit 37a462d3d27a2078e6725a5ef5a6145e210f6555[m
+Author: jade-coding <dbtkddn598@gmail.com>
+Date:   Mon Nov 7 20:23:10 2022 +0900
+
+    feat: productId 반영 및 개별 상품 조회 구현
+
+[33mcommit 14a6ef922a2cac60367177aa0c6cb6d742b6a5db[m
+Merge: baf09d1 6a9b735
+Author: jeonhl7579 <tpgus19@gmail.com>
+Date:   Mon Nov 7 17:36:41 2022 +0900
+
+    Merge branch 'feat-fe-seeun' of https://kdt-gitlab.elice.io/sw_track/class_03/web_project/team13/ecommercesite into feat-be-admin-saehyeon
+
+[33mcommit baf09d1f6072b45350b759a96a62af5d3746fa29[m
+Merge: 35e34b7 3de6151
+Author: jeonhl7579 <tpgus19@gmail.com>
+Date:   Mon Nov 7 17:29:22 2022 +0900
+
+    Feat: orders_all_read
+
+[33mcommit 6a9b735c837e4b6fa857dae670c46b251b8b612c[m
+Merge: 3de6151 9280fd1
+Author: Seeun Han <infbbse@gmail.com>
+Date:   Mon Nov 7 08:28:38 2022 +0000
+
+    Merge branch 'feat-fe-seeun-bucket' into 'feat-fe-seeun'
+    
+    # Conflicts:
+    #   src/views/auth/register/register.js
+
+[33mcommit 3de6151b140dc8a079a42f0abe28b9978b084e7e[m
+Author: jade-coding <dbtkddn598@gmail.com>
+Date:   Mon Nov 7 17:19:30 2022 +0900
+
+    feat : get product by Id api 구현
+
+[33mcommit 9280fd139b3567a472da09f80655b4af8c806328[m
+Merge: 9dcc3c4 400c76e
+Author: Seeun Han <infbbse@gmail.com>
+Date:   Mon Nov 7 07:53:40 2022 +0000
+
+    Merge branch 'feat-fe' into 'feat-fe-seeun-bucket'
+    
+    Feat fe
+    
+    See merge request sw_track/class_03/web_project/team13/ecommercesite!19
+
+[33mcommit e5601ddf153e55f3071384a60eef2678d371dc2f[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Mon Nov 7 16:46:45 2022 +0900
+
+    Refactor: api 연결
+
+[33mcommit 9dcc3c4e0c0da1c4181c8467233201521eab4116[m
+Author: siha <es2008e@naver.com>
+Date:   Mon Nov 7 16:46:20 2022 +0900
+
+    Feat : order 모듈
+
+[33mcommit 35e34b72f9a4f1a1f6c9d3ed0d58024c093742f8[m
+Merge: af878f2 6f2d054
+Author: jeonhl7579 <tpgus19@gmail.com>
+Date:   Mon Nov 7 16:43:49 2022 +0900
+
+    Merge branch 'feat-fe-seeun-bucket' of https://kdt-gitlab.elice.io/sw_track/class_03/web_project/team13/ecommercesite into feat-be-admin-saehyeon
+
+[33mcommit af878f2f1479fcc22b6aa096e073b17c916d3613[m
+Merge: 5f8d582 400c76e
+Author: jeonhl7579 <tpgus19@gmail.com>
+Date:   Mon Nov 7 16:41:24 2022 +0900
+
+    Merge branch 'feat-fe' of https://kdt-gitlab.elice.io/sw_track/class_03/web_project/team13/ecommercesite into feat-be-admin-saehyeon
+
+[33mcommit 6f2d054dfe0d3b0e2c0f8c50bcef7dfc4a64b944[m
+Author: siha <es2008e@naver.com>
+Date:   Mon Nov 7 16:37:26 2022 +0900
+
+    Feat : order user form
+
+[33mcommit 0eab59a3902ad0e0a2c89ce72da539a4a7f8e3f6[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Mon Nov 7 16:18:45 2022 +0900
+
+    Refactor: API 연동 및 그에 table 코드 리팩토링
+
+[33mcommit 4217e33e4ea83039a087d69e3469c5d90d009cf8[m
+Author: siha <es2008e@naver.com>
+Date:   Mon Nov 7 15:41:55 2022 +0900
+
+    Feat : 주문 성공 페이지
+
+[33mcommit 400c76e80b6e9683081f760907565d25dfba6851[m
+Merge: 7fd290a d5cb05f
+Author: hojin jeong <ghwls0905@gmail.com>
+Date:   Mon Nov 7 05:54:41 2022 +0000
+
+    Merge branch 'feat-fe-hwanak' into 'feat-fe'
+    
+    Feat fe hwanak
+    
+    See merge request sw_track/class_03/web_project/team13/ecommercesite!18
+
+[33mcommit d5cb05f27c510f336b2252aef5e0e7f9ccefc632[m
+Author: HwanakHong <94178576+Nakhong@users.noreply.github.com>
+Date:   Mon Nov 7 14:47:37 2022 +0900
+
+    feat : 핸드폰 번호 체크
+
+[33mcommit 68ebf6e8b69cbe0ed8b1511679558792510511b6[m
+Author: HwanakHong <94178576+Nakhong@users.noreply.github.com>
+Date:   Mon Nov 7 14:44:36 2022 +0900
+
+    feat:주소 구현
+
+[33mcommit 69ad37ff26e80f53d45b00a57851d4640c5edead[m
+Author: siha <es2008e@naver.com>
+Date:   Mon Nov 7 14:43:05 2022 +0900
+
+    Fix : page 이동
+
+[33mcommit 474b604cf81c60585c41de974346c1a736d9e7cf[m
+Merge: f70184b 26e2e23
+Author: HwanakHong <94178576+Nakhong@users.noreply.github.com>
+Date:   Mon Nov 7 14:29:04 2022 +0900
+
+    Merge branch 'feat-fe-hwanak' of https://kdt-gitlab.elice.io/sw_track/class_03/web_project/team13/ecommercesite into feat-fe-hwanak
+
+[33mcommit f70184b1a1d86bdafbca93235aeb5fa2c2c45aea[m
+Author: HwanakHong <94178576+Nakhong@users.noreply.github.com>
+Date:   Mon Nov 7 14:25:53 2022 +0900
+
+    Desing: 바텀 헤더 수정
+
+[33mcommit 7fd290a34400dcfba08895c2a221880d45ef2d54[m
+Merge: 6e85675 26e2e23
+Author: hojin jeong <ghwls0905@gmail.com>
+Date:   Mon Nov 7 05:21:00 2022 +0000
+
+    Merge branch 'feat-fe-hwanak' into 'feat-fe'
+    
+    Fix : 회원가입  주소 찾기 버그 해결
+    
+    See merge request sw_track/class_03/web_project/team13/ecommercesite!15
+
+[33mcommit 6e85675087934241ce870c2387c6b809574ef1a5[m
+Merge: f33ff5c 9ae5467
+Author: hojin jeong <ghwls0905@gmail.com>
+Date:   Mon Nov 7 05:20:41 2022 +0000
+
+    Merge branch 'feat-fe-admin' into 'feat-fe'
+    
+    Feat fe admin
+    
+    See merge request sw_track/class_03/web_project/team13/ecommercesite!14
+
+[33mcommit eb00887ffe68216cd81332a6ea1d8426d4f502ab[m
+Author: jade-coding <dbtkddn598@gmail.com>
+Date:   Mon Nov 7 14:20:26 2022 +0900
+
+    feat : atalas 탑재
+
+[33mcommit 26e2e230572264225c6cf1d02b7ca8919aa342f9[m
+Merge: 79a4d7d f33ff5c
+Author: 화낙 홍 <ghdghkwo5@gmail.com>
+Date:   Mon Nov 7 05:18:22 2022 +0000
+
+    Merge branch 'feat-fe' into 'feat-fe-hwanak'
+    
+    # Conflicts:
+    #   src/routers/views-router.js
+    #   src/views/user/home/home.js
+
+[33mcommit 79a4d7d4692a85f3394b60a4fe76212c3db8d401[m
+Author: HwanakHong <94178576+Nakhong@users.noreply.github.com>
+Date:   Mon Nov 7 14:08:09 2022 +0900
+
+    Docs: home.js a태그 수정
+
+[33mcommit f33ff5ccd3db858cc058acd0df1fd972716b08cc[m
+Merge: c3c0546 bf75e8e
+Author: Seeun Han <infbbse@gmail.com>
+Date:   Mon Nov 7 04:55:53 2022 +0000
+
+    Merge branch 'feat-fe-seeun-bucket' into 'feat-fe'
+    
+    Feat fe seeun bucket
+    
+    See merge request sw_track/class_03/web_project/team13/ecommercesite!11
+
+[33mcommit bf75e8ebe8fbe62fde1848904ecfcf59873ff3d8[m
+Author: siha <es2008e@naver.com>
+Date:   Mon Nov 7 13:48:00 2022 +0900
+
+    Fix : 오타 수정, 헤더 푸터 수정
+
+[33mcommit 1486a4499669fe0adb6346979f6138675b5aaf68[m
+Author: siha <es2008e@naver.com>
+Date:   Mon Nov 7 13:39:13 2022 +0900
+
+    Fix : header, footer
+
+[33mcommit e74745748c9d51bcccd6aaa658930fcc2c88103d[m
+Author: siha <es2008e@naver.com>
+Date:   Mon Nov 7 12:59:24 2022 +0900
+
+    Fix : 체크될때 총 금액 계산
+
+[33mcommit 4f40d45457351cdff0def8f2438012be75ef2e7f[m
+Author: jade-coding <dbtkddn598@gmail.com>
+Date:   Mon Nov 7 12:55:49 2022 +0900
+
+    feat: 데이터 스키마 및 api에 localtime 반영 및 이중 로그인방지미들웨어 구현
+
+[33mcommit 5f8d5821856bf886fa05e563d3c43ac8c48732d1[m
+Author: jeonhl7579 <tpgus19@gmail.com>
+Date:   Mon Nov 7 12:39:09 2022 +0900
+
+    Feat: update_order_findByUsers
+
+[33mcommit 9ae5467328ad8f7bdfa69e6aecee19186cb00890[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Mon Nov 7 12:03:56 2022 +0900
+
+    Refactor: render시 에러처리 수정
+
+[33mcommit 69fc3e43f4ccb38f58c30a150d9ac415e3132cdd[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Mon Nov 7 11:56:57 2022 +0900
+
+    Refactor: spread연산자 사용시 사용하지 않는 변수 제거
+
+[33mcommit 00993ab94af30fc0b7b5c6016c4564cf0e69bb3b[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Mon Nov 7 11:56:04 2022 +0900
+
+    Refactor: category 오류 메세지 수정 및 modal 삭제시 특정 element 기준으로 삭제
+
+[33mcommit 39f0839a0d07e40c8d59e2714f4b5952a9cd90c6[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Mon Nov 7 11:50:06 2022 +0900
+
+    Refactor: 상수를 비교하는 if-else문 switch-case 문으로 변환
+
+[33mcommit 83b4cab0cd403cd1c6ee1883d3e075651272ed0c[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Mon Nov 7 11:38:33 2022 +0900
+
+    Refactor: map 함수 reduce로 변경
+
+[33mcommit 11c2cc056f8e5837cc8df8afff07be9e49d11bf2[m
+Merge: a66e23c 4f30d78
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Mon Nov 7 10:21:05 2022 +0900
+
+    Merge branch 'feat-fe-seeun' of https://kdt-gitlab.elice.io/sw_track/class_03/web_project/team13/ecommercesite into feat-fe-admin
+
+[33mcommit 4f30d789e4add99c2a168f93bb2ed5d1f3770958[m
+Author: jade-coding <dbtkddn598@gmail.com>
+Date:   Mon Nov 7 04:01:33 2022 +0900
+
+    Feat : mongoDB 데이터 time 데이터 타입  구)UTC 타임존 => 신)LocalTime 모듈 완성
+
+[33mcommit 46ed9d7d9e266b940bbf8397e37318521e9bfef1[m
+Author: jade-coding <dbtkddn598@gmail.com>
+Date:   Mon Nov 7 02:47:16 2022 +0900
+
+    Refactor : 테스트 코드 수정 및 oauth 계정용 스키마 생성
+
+[33mcommit 7bd5523ae819b57c949fe7c709c08024aa9c73d7[m
+Author: jade-coding <dbtkddn598@gmail.com>
+Date:   Mon Nov 7 00:20:51 2022 +0900
+
+    Refactor: Oauth 기능 파일 1차 분리
+
+[33mcommit a66e23cd4bbc9138b6b35e888923eb5ebc3a3953[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Sun Nov 6 23:51:59 2022 +0900
+
+    remove: merge시에 같이 적용된 이전 파일 삭제
+
+[33mcommit 48ef4265acbc89e4d8e76fe253752f348c106c29[m
+Author: siha <es2008e@naver.com>
+Date:   Sun Nov 6 16:47:16 2022 +0900
+
+    Feat : tab click scroll 이동
+
+[33mcommit b16045cc5eb4b32ac93ac24a43f233d2ec6bf7b9[m
+Author: HwanakHong <94178576+Nakhong@users.noreply.github.com>
+Date:   Sat Nov 5 23:33:56 2022 +0900
+
+    Fix : 회원가입  주소 찾기 버그 해결
+    body: useful-functions.js 파일에 checkPhoneNumberValid 함수가 2개 있어서 하나 삭제
+
+[33mcommit 15ec65870c986751a1683274da44ff7b67015adc[m
+Author: siha <es2008e@naver.com>
+Date:   Sat Nov 5 20:45:25 2022 +0900
+
+    Feat : todo tree
+
+[33mcommit 589ded14ad7487f66bdf42fc9011356397dc038b[m
+Author: siha <es2008e@naver.com>
+Date:   Sat Nov 5 19:56:59 2022 +0900
+
+    Feat : product uri 수정
+
+[33mcommit d974858e5da27e1d63b7e8a8318106d4bd622996[m
+Author: jade-coding <dbtkddn598@gmail.com>
+Date:   Sat Nov 5 18:21:25 2022 +0900
+
+    Feat: view-router view 폴더 연결 완료
+
+[33mcommit ca525e95ca456b4ce413b41994220c6639cd993b[m
+Merge: cc31db7 80936e1
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Sat Nov 5 00:12:19 2022 +0900
+
+    merge: admin과 merge
+
+[33mcommit 80936e1f040a3f80514f96fc60f2efba1451c6a5[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Fri Nov 4 23:24:53 2022 +0900
+
+    Refactor: 검색시 전역 상태 변화 수정
+
+[33mcommit cc31db7131be137a9c770d940f9558cf3679455a[m
+Merge: 2c44941 f9a6528
+Author: Seeun Han <infbbse@gmail.com>
+Date:   Fri Nov 4 13:55:21 2022 +0000
+
+    Merge branch 'feat-fe-seeun' into 'feat-fe-seeun'
+    
+    Feat fe seeun
+    
+    See merge request sw_track/class_03/web_project/team13/ecommercesite!9
+
+[33mcommit 697ed29de5e609308d09b0174086f373c3b15959[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Fri Nov 4 22:27:45 2022 +0900
+
+    Refactor: template guard 추가
+
+[33mcommit eaacb6f1deb87d3bdb91a8ead2fd7232cc8e9fbb[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Fri Nov 4 22:23:04 2022 +0900
+
+    Refactor: category구분 name -> id로 변경
+
+[33mcommit 84ebc638a54b7774083f3a1892207fcbc76dff40[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Fri Nov 4 22:07:24 2022 +0900
+
+    Feat: category 수정,삭제 modal 구현
+
+[33mcommit f9a6528d694bd34c631b27ad4caf959cf636152a[m
+Merge: e942ca4 3c1af8e
+Author: siha <es2008e@naver.com>
+Date:   Fri Nov 4 22:03:24 2022 +0900
+
+    Feat : feat_be + feat_fe_seeun
+
+[33mcommit e942ca4a17d261eac8aa914dfd778d2509823d84[m
+Author: siha <es2008e@naver.com>
+Date:   Fri Nov 4 21:54:16 2022 +0900
+
+    Feat : ???
+
+[33mcommit 2c449419eff562c01caedc20339e2be22412b828[m
+Merge: fc48027 e8a2df4
+Author: Seeun Han <infbbse@gmail.com>
+Date:   Fri Nov 4 12:47:53 2022 +0000
+
+    Merge branch 'feat-fe-seeun' into 'feat-fe-seeun'
+    
+    Feat fe seeun
+    
+    See merge request sw_track/class_03/web_project/team13/ecommercesite!8
+
+[33mcommit e8a2df483ea539fcd6662108692e73d79d6e13b5[m
+Author: siha <es2008e@naver.com>
+Date:   Fri Nov 4 21:25:31 2022 +0900
+
+    Feat : header footer
+
+[33mcommit 752e4137d966f2df8cdce1ba1532d958cb4b8353[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Fri Nov 4 20:29:10 2022 +0900
+
+    Refactor: 상품 수정 관련 이슈 해결 -> 하지만 렌더링 할때마다 eventListener를 추가하는 것은 비효율
+
+[33mcommit 2bc2aff96d3d0cc6dad49d29ab29c0b82da927ea[m
+Author: HwanakHong <94178576+Nakhong@users.noreply.github.com>
+Date:   Fri Nov 4 20:14:04 2022 +0900
+
+    Rename: 마이페이지 user폴더로 이동
+
+[33mcommit 7b9ad9b9ba0c5bea5d272d630af81dfc32ca4735[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Fri Nov 4 19:08:48 2022 +0900
+
+    Design: Product Detail CSS 추가 완료
+
+[33mcommit 3c1af8ee4430175dc99439c09be852bd03d628c5[m[33m ([m[1;31morigin/feat-be[m[33m, [m[1;32mfeat-be[m[33m)[m
+Merge: 8ac236f 565c2f0
+Author: jade-coding <dbtkddn598@gmail.com>
+Date:   Fri Nov 4 18:10:21 2022 +0900
+
+    Merge branch 'feat-be-yu' of
+    https://kdt-gitlab.elice.io/sw_track/class_03/web_project/team13/ecommercesite
+    commit message 수정
+
+[33mcommit 8ac236ff1bcff23b109938bbdc3cabb323c18ee5[m
+Merge: a3fb774 6fed01f
+Author: jade-coding <dbtkddn598@gmail.com>
+Date:   Fri Nov 4 18:00:44 2022 +0900
+
+    fix: merge 간 충돌 해결
+
+[33mcommit 565c2f0e3c0ccf4d6c4057a1d4f7e60f8b6e7760[m
+Merge: a3fb774 6fed01f
+Author: jade-coding <dbtkddn598@gmail.com>
+Date:   Fri Nov 4 18:00:44 2022 +0900
+
+    fix: merge 간 춫돌 해결
+
+[33mcommit 64242318766c823d339baf6de04b15173573a365[m[33m ([m[1;31morigin/feat-fe-admin[m[33m)[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Fri Nov 4 17:37:33 2022 +0900
+
+    Design: product 추가 modal 디자인 및 클래스에 맞게 코드 변경
+
+[33mcommit df267bc13dff5e424123938ff81315496b77b8e2[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Fri Nov 4 16:44:20 2022 +0900
+
+    Design: category 추가 Modal 디자인 및 클래스에 맞게 코드 변경
+
+[33mcommit 6fed01fa02cdec9cd68b6cceb99d54e1befc14d5[m[33m ([m[1;31morigin/feat-be-admin-saehyeon[m[33m, [m[1;32mfeat-be-admin-saehyeon[m[33m)[m
+Author: jeonhl7579 <tpgus19@gmail.com>
+Date:   Fri Nov 4 16:42:07 2022 +0900
+
+    Feat: Order delete
+
+[33mcommit e5ec7ba0a40e058cc1368a87072dc58ebd2313da[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Fri Nov 4 16:28:27 2022 +0900
+
+    Design: 테이블, 주문 상세 정보, 버튼 관련 CSS 스타일링
+
+[33mcommit d3118bac613b3fb79ed819148db6b34e82867527[m[33m ([m[1;31morigin/feat-fe-seeun-hwanak[m[33m)[m
+Merge: b22d2e7 fc48027
+Author: Seeun Han <infbbse@gmail.com>
+Date:   Fri Nov 4 07:27:55 2022 +0000
+
+    Merge branch 'feat-fe-seeun' into 'feat-fe-seeun-hwanak'
+    
+    feat seeun + hwanak
+    
+    See merge request sw_track/class_03/web_project/team13/ecommercesite!7
+
+[33mcommit fc4802745c6d9f1fa27f60e71a334a63b892e64f[m
+Merge: b22d2e7 05ce478
+Author: siha <es2008e@naver.com>
+Date:   Fri Nov 4 16:27:05 2022 +0900
+
+    Feat : seeun + hwanak
+
+[33mcommit b22d2e73e3a6257f7c7c6e1b4c701a14816cca43[m
+Merge: 0a2eb8f 0c123a0
+Author: Seeun Han <infbbse@gmail.com>
+Date:   Fri Nov 4 07:12:36 2022 +0000
+
+    Merge branch 'feat-fe-seeun' into 'feat-fe-seeun'
+    
+    Feat fe seeun
+    
+    See merge request sw_track/class_03/web_project/team13/ecommercesite!6
+
+[33mcommit 05ce478efb87d8c54b963d7039ebba9b583e1ffc[m[33m ([m[1;31morigin/feat-fe-hwanak[m[33m)[m
+Merge: 727ff60 6f15ff1
+Author: HwanakHong <94178576+Nakhong@users.noreply.github.com>
+Date:   Fri Nov 4 16:11:55 2022 +0900
+
+    Merge branch 'feat-fe-userorder-hwanak' into feat-fe-hwanak
+
+[33mcommit 0c123a0e2f5ef7466f70bf1ae7832f9d27f4a7cb[m
+Author: siha <es2008e@naver.com>
+Date:   Fri Nov 4 16:07:42 2022 +0900
+
+    Feat : temp product detail page move
+
+[33mcommit 727ff60d1accbb7f5de8dbff533fa15f02efd068[m
+Merge: aae00a2 b9dfc39
+Author: HwanakHong <94178576+Nakhong@users.noreply.github.com>
+Date:   Fri Nov 4 16:06:34 2022 +0900
+
+    Merge branch 'feat-fe-mainpage-hwanak' into feat-fe-hwanak
+
+[33mcommit aae00a2cffb1df48252f7f84cdcd09d09ed349b0[m
+Merge: 28e0fc5 74f623c
+Author: HwanakHong <94178576+Nakhong@users.noreply.github.com>
+Date:   Fri Nov 4 16:06:10 2022 +0900
+
+    Merge branch 'feat_fe_accountUpdate_hwanak' into feat-fe-hwanak
+
+[33mcommit 28e0fc5702d54fd611ade0c87e5d27fcc49d439c[m
+Merge: b3f3efe 385b9f3
+Author: HwanakHong <94178576+Nakhong@users.noreply.github.com>
+Date:   Fri Nov 4 16:05:16 2022 +0900
+
+    Merge branch 'feat_fe_mypage_hwanak' into feat-fe-hwanak
+
+[33mcommit b3f3efe343850b844bc4f34e47e705027f54e59f[m
+Merge: 611ee10 198fc07
+Author: HwanakHong <94178576+Nakhong@users.noreply.github.com>
+Date:   Fri Nov 4 16:04:18 2022 +0900
+
+    Merge branch 'feat_fe_login' into feat-fe-hwanak
+
+[33mcommit b9dfc398f9829a7edd57a44bf8ddc3f35b022289[m[33m ([m[1;31morigin/feat-fe-mainpage-hwanak[m[33m)[m
+Author: HwanakHong <94178576+Nakhong@users.noreply.github.com>
+Date:   Fri Nov 4 15:44:29 2022 +0900
+
+    feat : home 화면  구현하기.
+
+[33mcommit 69767445faa967071527d4cf80e20a37136d9e84[m
+Author: siha <es2008e@naver.com>
+Date:   Fri Nov 4 15:32:34 2022 +0900
+
+    Feat : order bucket
+
+[33mcommit 45b4b168846dd4910e48b2769bbdea7a9a188d28[m
+Author: siha <es2008e@naver.com>
+Date:   Fri Nov 4 15:25:28 2022 +0900
+
+    Feat : bucket checkbox
+
+[33mcommit 6275e2fc9cb13024230ee20f7e2984a5f5bd27e1[m
+Author: jeonhl7579 <tpgus19@gmail.com>
+Date:   Fri Nov 4 14:27:50 2022 +0900
+
+    Feat: Order Create,Update,Read
+
+[33mcommit de77e3d60f6670472b4431492654ba6b2718d49a[m
+Author: seeys <es2008e@naver.com>
+Date:   Fri Nov 4 13:17:07 2022 +0900
+
+    Feat : bucket func
+
+[33mcommit a3fb77474a05641bce0781693647e5bc5a04bdc7[m
+Author: jade-coding <dbtkddn598@gmail.com>
+Date:   Fri Nov 4 13:11:37 2022 +0900
+
+    feat: user 삭제 기능 구현
+
+[33mcommit 0df85fcdcb158c86962ae772a0ce18dc4c1f976e[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Fri Nov 4 09:29:29 2022 +0900
+
+    Feat: 상품 상세 -> 이미지 수정 구현 (이후 수정 예정)
+
+[33mcommit 62320762b185333289afc26975032c7ef9d15edf[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Thu Nov 3 22:29:35 2022 +0900
+
+    Refactor: 데이터 json 파일에서 받아오는 것으로 변환. 하지만, 검색시 데이터 변환에 대해 생각해 볼 필요 있음
+
+[33mcommit fb2e13c286419db1e9e20c8d7d3ed144707f07b7[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Thu Nov 3 22:07:33 2022 +0900
+
+    Feat: category 삭제 기능 구현
+
+[33mcommit bc94ce703eb03df8a536124f08ccf30180a42f0b[m
+Author: siha <es2008e@naver.com>
+Date:   Thu Nov 3 21:53:59 2022 +0900
+
+    Feat : 리팩토링 로컬 상품 아이디로 변경
+
+[33mcommit 7369181b22e56cc0f882d0ca0fdfb26a0bffd206[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Thu Nov 3 21:52:45 2022 +0900
+
+    Feat: 삭제 구현
+
+[33mcommit d4c19a4f80a34501a9d59f1a4ee1e0f5760260f2[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Thu Nov 3 21:41:55 2022 +0900
+
+    Refactor: 상세보기 페이지 event 수정
+
+[33mcommit 4b8fe3e02d3fda4b975bebbac2b876efb37fbac5[m
+Author: jade-coding <dbtkddn598@gmail.com>
+Date:   Thu Nov 3 21:39:44 2022 +0900
+
+    fix : admin view 폴더구조 특이성에 따른 routing 예외처리문 추가
+
+[33mcommit 6a8b55806666974c960dcbca50b02d791f4a8840[m
+Author: jeonhl7579 <tpgus19@gmail.com>
+Date:   Thu Nov 3 21:11:22 2022 +0900
+
+    Feat: 장바구니 상품 삭제 기능
+
+[33mcommit 0a2eb8f0e0aa759052fc7f2f13964f0bd0d490f5[m
+Merge: 728410e 24d52c0
+Author: Seeun Han <infbbse@gmail.com>
+Date:   Thu Nov 3 10:12:24 2022 +0000
+
+    Merge branch 'feat-fe-seeun' into 'feat-fe-seeun'
+    
+    Feat fe seeun
+    
+    See merge request sw_track/class_03/web_project/team13/ecommercesite!5
+
+[33mcommit 24d52c04059c2f18c87f24b475a35ebe08c83c83[m
+Author: siha <es2008e@naver.com>
+Date:   Thu Nov 3 19:11:02 2022 +0900
+
+    Feat : bucket 수정 중
+
+[33mcommit 1d71550339bb45769a97529cf125e2ef7c702a1c[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Thu Nov 3 19:10:53 2022 +0900
+
+    Refactor: product 추가 수정
+
+[33mcommit a0d7813643364639fb2fefd98e7a58ac1c18f846[m
+Author: jade-coding <dbtkddn598@gmail.com>
+Date:   Thu Nov 3 18:24:06 2022 +0900
+
+    feat: Google OAuth login 기능 추가
+
+[33mcommit 242e356ba364dec14a2781b4981f33ce3aee148e[m
+Author: siha <es2008e@naver.com>
+Date:   Thu Nov 3 17:48:14 2022 +0900
+
+    Feat : 상품 클릭시 장바구니 로컬에 저장
+
+[33mcommit c8911bd3736d2cd9e5600b7f444513bd6875a9d9[m
+Author: jeonhl7579 <tpgus19@gmail.com>
+Date:   Thu Nov 3 17:37:50 2022 +0900
+
+    Feat: 장바구니 Create,Update,Read 구현
+
+[33mcommit ce957f4792d11a044c67fff15c6ea1bb76bf4373[m
+Author: siha <es2008e@naver.com>
+Date:   Thu Nov 3 16:25:34 2022 +0900
+
+    Feat : update bucket
+
+[33mcommit eb46080cdcb71de9a1427ba8f32fd1640274272b[m
+Author: siha <es2008e@naver.com>
+Date:   Thu Nov 3 16:25:04 2022 +0900
+
+    Feat : update 장바구니 목록 가져오기
+
+[33mcommit 5f19d42e011e7d77cde9febce9b8b83249ddc34c[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Thu Nov 3 15:49:22 2022 +0900
+
+    Feat: 상품 추가기능 구현
+
+[33mcommit 6f15ff15aaf48ac80b668b8cb1f70efe1171efa0[m
+Author: HwanakHong <94178576+Nakhong@users.noreply.github.com>
+Date:   Thu Nov 3 15:39:50 2022 +0900
+
+    Design: 버튼 디자인 수정
+
+[33mcommit 54f014764c031bb855d2c4febc412844dd3797c1[m
+Author: HwanakHong <94178576+Nakhong@users.noreply.github.com>
+Date:   Thu Nov 3 15:38:42 2022 +0900
+
+    feat: 임시데이터로 주문조회 구현
+
+[33mcommit 9a398f4d0cd6982918638ebfeacb687c73973c97[m
+Author: siha <es2008e@naver.com>
+Date:   Thu Nov 3 15:27:20 2022 +0900
+
+    Feat : update 로컬 스토리지
+
+[33mcommit 461e739f820b09cc9aa4cce94416da85a4a9e296[m
+Author: siha <es2008e@naver.com>
+Date:   Thu Nov 3 15:02:10 2022 +0900
+
+    Feat : 클릭시 주문 페이지 이동
+
+[33mcommit 48756dab73ecb2f818fa845c16841393cde0e9b8[m
+Author: jade-coding <dbtkddn598@gmail.com>
+Date:   Thu Nov 3 14:39:29 2022 +0900
+
+    feat: 세션DB 코드 및 auth 구현 사전 세팅, Role에따른 userlist 출력 분류
+
+[33mcommit 385b9f35a345d275242c0e00261f780e3bcff2fd[m
+Author: HwanakHong <94178576+Nakhong@users.noreply.github.com>
+Date:   Thu Nov 3 12:55:14 2022 +0900
+
+    feat : 마이페이지 css,html 틀 구성
+
+[33mcommit ab4bbb05bff81e5345b0d2ae18fd7ec6aa3e2c30[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Thu Nov 3 12:33:04 2022 +0900
+
+    Feat: product 상품 추가 기능 구현
+
+[33mcommit 4ca0a7e8cc008b300606e9fa399ca5732a8fea83[m
+Author: siha <es2008e@naver.com>
+Date:   Thu Nov 3 10:42:23 2022 +0900
+
+    Feat : update product folder
+
+[33mcommit d7355d0f1208fd43f438c5dd072fd6fbff6ac5df[m
+Author: siha <es2008e@naver.com>
+Date:   Thu Nov 3 10:41:51 2022 +0900
+
+    Feat : product itmes 뿌리기
+
+[33mcommit e127c636712e3ebd756c969d3e89923ce10671c3[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Wed Nov 2 23:03:42 2022 +0900
+
+    Refactor: orderDetail 중복 렌더링 관련 코드 리팩토링
+
+[33mcommit 84e66b458d95edb83fe1b5956fe844019288c905[m
+Author: jade-coding <dbtkddn598@gmail.com>
+Date:   Wed Nov 2 22:27:42 2022 +0900
+
+    Test: category, user, product 테스트 데이터 코드 생성
+
+[33mcommit b583b93eea2c98a895101b4364718f85b375cdf2[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Wed Nov 2 21:13:52 2022 +0900
+
+    Feat: Modal Skeleton 추가
+
+[33mcommit 728410e01282a9b609f8128f882b6886c45673a6[m
+Merge: c3c0546 d437267
+Author: Seeun Han <infbbse@gmail.com>
+Date:   Wed Nov 2 12:02:49 2022 +0000
+
+    Merge branch 'feat-fe-seeun' into 'feat-fe-seeun'
+    
+    Feat fe seeun
+    
+    See merge request sw_track/class_03/web_project/team13/ecommercesite!4
+
+[33mcommit d437267129eae7c3fd7dddb0edf594f5c42db66b[m
+Author: siha <es2008e@naver.com>
+Date:   Wed Nov 2 20:58:04 2022 +0900
+
+    Feat : add temp data
+
+[33mcommit aa09dde4cb4053d46863fffb96ce1ccf8f3226b5[m
+Author: siha <es2008e@naver.com>
+Date:   Wed Nov 2 20:57:02 2022 +0900
+
+    Feat : UPDATE 장바구니 기능
+
+[33mcommit 148b3ee3044c19316bd7a4ea2d068f3b9f5ace80[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Wed Nov 2 20:49:31 2022 +0900
+
+    Issue: 여러 값 랜더링 이슈
+
+[33mcommit 47279cadae640142ba82ca726a8278990ec0882a[m
+Author: siha <es2008e@naver.com>
+Date:   Wed Nov 2 20:43:12 2022 +0900
+
+    Feat : bucket stock count
+
+[33mcommit f26d11bed9ca27b7d5208dbf973212ffd8ec7bdf[m
+Merge: 5c64782 2ab1dff
+Author: jade-coding <dbtkddn598@gmail.com>
+Date:   Wed Nov 2 19:02:44 2022 +0900
+
+    Fix : merge 충돌 해결
+
+[33mcommit 2ab1dffb67e27f707af3fcd52d40390ef6c93d03[m
+Author: jeonhl7579 <tpgus19@gmail.com>
+Date:   Wed Nov 2 18:42:48 2022 +0900
+
+    Feat: product_schema 수정, 카테고리 CRUD
+
+[33mcommit 8114da720aea8ccb4cca32ed84a42f495023532b[m[33m ([m[1;31morigin/feat-fe-admin-orders-hozzi[m[33m)[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Wed Nov 2 18:04:44 2022 +0900
+
+    ISSUE: 상태관리 관련 이슈
+
+[33mcommit 74f623c8c19835bea3c4e568658bec8ff7e71f34[m
+Author: HwanakHong <94178576+Nakhong@users.noreply.github.com>
+Date:   Wed Nov 2 16:59:01 2022 +0900
+
+    Design : 타이틀 글씨 색 변경
+
+[33mcommit f50248f4df29bf43e5805bc566e59770a2c73f0b[m
+Author: siha <es2008e@naver.com>
+Date:   Wed Nov 2 16:51:17 2022 +0900
+
+    Feat : Update all
+
+[33mcommit eb03022d61c6f8dfe4064da93904417200844d01[m
+Author: siha <es2008e@naver.com>
+Date:   Wed Nov 2 16:49:06 2022 +0900
+
+    Feat : tempData render
+
+[33mcommit 11d243ca911da1285b50273c3a4901ed71230721[m
+Author: HwanakHong <94178576+Nakhong@users.noreply.github.com>
+Date:   Wed Nov 2 16:46:35 2022 +0900
+
+    feat : 전체적인 틀 구성
+
+[33mcommit dc10561a7f59c547e55b680c984f073c655279ce[m
+Author: siha <es2008e@naver.com>
+Date:   Wed Nov 2 16:43:14 2022 +0900
+
+    Feat : tempData render
+
+[33mcommit 1bd582785d4fcbd3577dea3148c200b3dd985fa9[m
+Author: jeonhl7579 <tpgus19@gmail.com>
+Date:   Wed Nov 2 16:30:12 2022 +0900
+
+    feat: 카테고리 생성 및 조회, 상품 카테고리populate
+
+[33mcommit 449767b090003c75752636356fb4ae010ed5713f[m
+Author: HwanakHong <94178576+Nakhong@users.noreply.github.com>
+Date:   Wed Nov 2 15:58:36 2022 +0900
+
+    feat : 회원정보 수정 페이지 구현
+
+[33mcommit c634d410acaddeeadf26be123eca2a709886d818[m
+Author: siha <es2008e@naver.com>
+Date:   Wed Nov 2 15:18:53 2022 +0900
+
+    Feat : UPDATE func
+
+[33mcommit 5c647826030bf655f5b1fe26398eba66dd4eb05b[m
+Author: sangwooyu <dbtkddn598@gmail.com>
+Date:   Wed Nov 2 15:15:05 2022 +0900
+
+    feat: admin 라우팅 및 orders,products,categories 리다이렉팅 구현
+
+[33mcommit 674cf6af76d57f60468eecdff603fb8b16547690[m
+Merge: f9fd3c9 5d8e648
+Author: Seeun Han <infbbse@gmail.com>
+Date:   Wed Nov 2 06:12:20 2022 +0000
+
+    Merge branch 'feat-fe-header-seeun' into 'feat-fe-seeun'
+    
+    Feat : header ADD strucuture
+    
+    See merge request infbbse/ecommercesite!4
+
+[33mcommit f9fd3c95c2429ca888cdf2498a48965fe459eabd[m
+Merge: e2e7d02 c9fe9a3
+Author: Seeun Han <infbbse@gmail.com>
+Date:   Wed Nov 2 06:11:55 2022 +0000
+
+    Merge branch 'feat-fe-footer-seeun' into 'feat-fe-seeun'
+    
+    Feat : footer ADD structure
+    
+    See merge request infbbse/ecommercesite!3
+
+[33mcommit e2e7d022bc1e5ecceb345ef5a1fb812cdba271b8[m
+Merge: fc8de95 18b73a0
+Author: Seeun Han <infbbse@gmail.com>
+Date:   Wed Nov 2 06:05:06 2022 +0000
+
+    Merge branch 'feat-fe-product-seeun' into 'feat-fe-seeun'
+    
+    Feat fe product seeun
+    
+    See merge request infbbse/ecommercesite!1
+
+[33mcommit 9f6b85c5feff95c999518543cd35da0d18faa576[m
+Author: sangwooyu <dbtkddn598@gmail.com>
+Date:   Wed Nov 2 14:56:56 2022 +0900
+
+    Refactor : 파일구조 변경에 따른 라우팅 경로 수정 및 admin router 추가
+
+[33mcommit 5d8e648c5c00dae817c3dd4d9c22031ed0141fc6[m
+Author: siha <es2008e@naver.com>
+Date:   Wed Nov 2 14:50:23 2022 +0900
+
+    Feat : header ADD strucuture
+
+[33mcommit c9fe9a350afee5b7e01cbc7b0a205ad95fe52581[m
+Author: siha <es2008e@naver.com>
+Date:   Wed Nov 2 14:42:46 2022 +0900
+
+    Feat : footer ADD structure
+
+[33mcommit 942539362b087dd22781a915148af18d51f9746b[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Wed Nov 2 14:20:15 2022 +0900
+
+    Feat: 잘못된 url 접근시 adminRouter로 최초 admin 페이지 반환
+
+[33mcommit a6400fa73296a46769e84aa5b6720d9219e61fc9[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Wed Nov 2 13:50:30 2022 +0900
+
+    Feat: 상세경로 이동 기능 추가
+
+[33mcommit 69ad3a4aa951bb5af34dc7e649b6d21c60425969[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Wed Nov 2 13:12:55 2022 +0900
+
+    Rename: 각 기능별 js 파일 이름 변경
+
+[33mcommit 9ea806eceff187bd82942d04585d8c154b190d6e[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Wed Nov 2 13:01:48 2022 +0900
+
+    Feat: product mock데이터 리스트 및 상품명 검색 구현
+
+[33mcommit 70e65c4ff678619c3c12f1b372f6bec0e7cde408[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Wed Nov 2 12:30:36 2022 +0900
+
+    Feat: category 검색 추가
+
+[33mcommit 6360f58e4742d9f26a8813146240a608fc608739[m[33m ([m[1;31morigin/feat-fe-admin-hozzi-yu[m[33m)[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Wed Nov 2 12:13:03 2022 +0900
+
+    Feat: Product, category table
+
+[33mcommit a1d76f31aca3d0af7cee7992b0cc523ab70ddc79[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Wed Nov 2 00:14:52 2022 +0900
+
+    Refactor: order Table 값 구현 및 검색 구현
+
+[33mcommit 118abb62593fc8a11c255f95f5aa5a8c88af3a60[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Tue Nov 1 22:45:50 2022 +0900
+
+    Refactor: table 수정
+
+[33mcommit e5e80bc1438d7e08e1e43744cab44b21d61da12a[m
+Author: jade-coding <dbtkddn598@gmail.com>
+Date:   Tue Nov 1 21:49:19 2022 +0900
+
+     feat: 로그인 API, 회원가입API 완료
+
+[33mcommit 94d885b040b81536b9c6b769708095967996f336[m
+Author: jeonhl7579 <tpgus19@gmail.com>
+Date:   Tue Nov 1 21:26:08 2022 +0900
+
+    Feat(Product):상품 조회,상품 생성,상품 삭제
+
+[33mcommit 18b73a0db0f6cb36546a3318476050eecdb44311[m
+Author: siha <es2008e@naver.com>
+Date:   Tue Nov 1 21:08:16 2022 +0900
+
+    Feat : product UPDATE bulma css
+
+[33mcommit 3c1e07825c751bf1b4b27ecb115af8c6b117f1c6[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Tue Nov 1 17:52:22 2022 +0900
+
+    Feat: order 테이블 생성중
+
+[33mcommit 9077055e50a880234f9f0bc23debe0178dec60fa[m
+Author: siha <es2008e@naver.com>
+Date:   Tue Nov 1 17:47:43 2022 +0900
+
+    Feat : product ADD detail structure
+
+[33mcommit 198fc076a05a9900744b49d8b00f6ff0c597ef6b[m[33m ([m[1;31morigin/feat_fe_login[m[33m)[m
+Author: HwanakHong <94178576+Nakhong@users.noreply.github.com>
+Date:   Tue Nov 1 17:10:53 2022 +0900
+
+    Disign: Login Update
+
+[33mcommit 611ee101475ceb577ddeb4cf1f48619d9b039751[m[33m ([m[1;31morigin/feat_fe_register[m[33m)[m
+Author: HwanakHong <94178576+Nakhong@users.noreply.github.com>
+Date:   Tue Nov 1 16:56:10 2022 +0900
+
+    Design: Register Update
+    body : address ,phoneNumber 추가
+
+[33mcommit 8017f0e0e0ca87782608ea2c60d525971716aa3a[m
+Author: siha <es2008e@naver.com>
+Date:   Tue Nov 1 16:53:03 2022 +0900
+
+    Feat : product ADD structure
+
+[33mcommit 4a78de36b8500e31bd112c58a18232e67bd9ac76[m
+Author: HwanakHong <94178576+Nakhong@users.noreply.github.com>
+Date:   Tue Nov 1 16:38:31 2022 +0900
+
+    Feat: Register Update
+    body : address ,phoneNumber 추가
+
+[33mcommit b1b65bae9f029449d67e2c713cc610ebad662fc0[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Tue Nov 1 15:52:13 2022 +0900
+
+    Refactor: 초기 url orders로 설정
+
+[33mcommit 07f499d34190fa76f4c312102cdc4326476e54b5[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Tue Nov 1 15:18:54 2022 +0900
+
+    Feat: admin route 설정
+
+[33mcommit 47f8349dcd4a18883c935d4e220ffa62a5718f5c[m
+Author: HwanakHong <94178576+Nakhong@users.noreply.github.com>
+Date:   Tue Nov 1 14:17:19 2022 +0900
+
+    핸드폰 번호 체크 함수 생성
+
+[33mcommit c3c0546e76d48b5464cc5afd897f717f14dc3f3a[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Tue Nov 1 10:42:57 2022 +0900
+
+    Rename: 기능별 폴더 분할
+
+[33mcommit f8a8d43f171a3d692d6f38cd90cbae963ccf4baf[m[33m ([m[1;31morigin/feat[m[33m, [m[1;32mfeat[m[33m)[m
+Author: hozzijeong <ghwls0905@naver.com>
+Date:   Tue Nov 1 10:17:24 2022 +0900
+
+    Chore: Eslint, Prettier 설정 완료
+
+[33mcommit d044355e2647368ef29c9e5bf3f0ab950f6e4b2c[m
+Author: jade-coding <dbtkddn598@gmail.com>
+Date:   Mon Oct 31 12:20:28 2022 +0900
+
+    환경세팅 Template Code
+
+[33mcommit fc8de957a8556535211c379c0a991de60fd7c5e6[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/dev[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m, [m[1;32mdev[m[33m)[m
+Author: jade-coding <dbtkddn598@gmail.com>
+Date:   Mon Oct 31 11:54:10 2022 +0900
+
+    환경설정 완료
+
+[33mcommit e0aad31d2fbf19a71012daac33688a70bc9d3564[m
+Author: 유 상우 <dbtkddn598@gmail.com>
+Date:   Mon Oct 31 02:31:06 2022 +0000
+
+    Initial commit
