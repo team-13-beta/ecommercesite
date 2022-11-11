@@ -11,6 +11,7 @@ import session from "express-session";
 import MongoStore from "connect-mongo";
 import cookieParser from "cookie-parser";
 import { config } from "dotenv";
+import jwt from "jsonwebtoken";
 
 config();
 const userRouter = Router();
@@ -68,7 +69,8 @@ userRouter.post("/register", async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-});userRouter.post("/registerOauth", async (req, res, next) => {
+});
+userRouter.post("/registerOauth", async (req, res, next) => {
   try { 
     // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
     // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
@@ -130,10 +132,10 @@ userRouter.post("/login", async function (req, res, next) {
     // 로그인 진행 (로그인 성공 시 jwt 토큰을 프론트에 보내 줌)
     const userToken = await userService.getUserToken({ email, password });
     // jwt 토큰을 프론트에 보냄 (jwt 토큰은, 문자열임)
-
     const result = {
       code:200,
-      token : "bearer "+userToken.token
+      token : "bearer "+userToken.token,
+      isAdmin : userToken.isAdmin
     }
     res.status(200).json(result);
   } catch (error) {
@@ -340,5 +342,52 @@ userRouter.get('/:user_id',loginRequired, async (req,res,next)=>{
     next(error);
   }
 })
+
+userRouter.get('/admin/check', async (req,res,next)=>{
+      if(req.headers.Authorization){
+          const userToken = req.headers["authorization"]?.split(" ")[1];
+          const isUserToken = !userToken || userToken === "null";
+         
+          if (isUserToken) {
+            res.status(403).json({
+              result: "fail",
+              });
+              return;
+            }
+  
+          try {
+          const secretKey = process.env.JWT_SECRET_KEY || "secret-key";
+          const jwtDecoded = jwt.verify(userToken, secretKey);
+      
+          const userId = jwtDecoded.userId;
+          const role = jwtDecoded.role;
+          // 라우터에서 req.currentUserId를 통해 유저의 id에 접근 가능하게 됨
+          if(role !== "admin"){
+          throw new Error("해당 페이지에 접근 할 권한이 없습니다");
+          }
+          
+          res.status(200).json({
+            result : "success"
+          });
+          return;
+          
+           } catch (error) {
+          // jwt.verify 함수가 에러를 발생시키는 경우는 토큰이 정상적으로 decode 안되었을 경우임.
+          // 403 코드로 JSON 형태로 프론트에 전달함.
+          res.status(403).json({
+              result: "fail",
+          });
+          return;
+          }
+      }
+      else{
+        res.status(403).json({
+          result: "fail",
+        });
+          return;
+        }
+    })
+  
+
 
 export { userRouter };
