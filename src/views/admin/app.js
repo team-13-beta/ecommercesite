@@ -248,7 +248,7 @@ export default function App({ $app }) {
       ...this.state,
       ...nextState,
     };
-
+    console.log(nextState, "nextState!!");
     orders.setState(this.state.orderLists);
     categories.setState(this.state.categoryLists);
     products.setState({ ...this.state });
