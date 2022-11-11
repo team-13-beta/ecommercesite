@@ -34,19 +34,32 @@
   position: absolute;
   background-color: #fff;
   width: 400px;
-  height: 400px;
+  height: auto;
   padding: 20px;
   border-radius: 0.25rem;
 }
 
 #paymentBtn:hover,
-.modal-btn:hover {
+.modal-btn:hover,
+.homeBtn:hover {
   background-color: #ff922b;
   color: #fff4e6;
-  border: none;
+  border-color: ff922b;
+}
+
+.homeBtn {
+  margin: auto;
+  display: block;
 }
 .is-close {
   display: none;
+}
+.result-title {
+  font-size: 20px;
+  font-weight: 600;
+}
+.img-style {
+  margin: 30px 0;
 }
 
 .bold {
@@ -59,6 +72,11 @@
   width: 500px;
   height: auto;
   margin: 0 auto;
+  padding: 10px;
+}
+
+.bucket-item-content {
+  padding: 0.5rem 1.5rem;
 }
 
 @media screen and (max-width: 764px) {
