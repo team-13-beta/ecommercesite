@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@sindresorhus/is": "^4.6.0",
+    "aws-sdk": "^2.1250.0",
     "bcrypt": "^5.0.1",
     "bulma": "^0.9.4",
     "connect-mongo": "^4.6.0",
