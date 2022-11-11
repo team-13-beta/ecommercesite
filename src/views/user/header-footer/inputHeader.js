@@ -21,8 +21,8 @@ function inputHeader() {
     const logout = document.querySelector(".LOGOUT");
     logout.addEventListener("click", (e) => {
       e.preventDefault();
-      fetch("http://localhost:5000/api/logout").then(()=>deleteCookie('connect.sid')
-      );
+      fetch("http://localhost:5000/api/logout").then(()=>deleteCookie('connect.sid'));
+      // Api.get("http://localhost:5000/api/logout").then(()=>deleteCookie('connect.sid'));
       sessionStorage.removeItem("token");
       sessionStorage.removeItem("admin");
       window.location.href = "/";

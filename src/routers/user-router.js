@@ -115,7 +115,6 @@ userRouter.post("/registerOauth", async (req, res, next) => {
 
 
 // 로그인 api (아래는 /login 이지만, 실제로는 /api/login로 요청해야 함.)
-userRouter.post("/login",preLogin_Oauth, preLogin_General)
 userRouter.post("/login", async function (req, res, next) {
   try {
     // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
@@ -180,7 +179,6 @@ passport.use(
   )
 );
 
-userRouter.use('/auth/google',preLogin_General )
 userRouter.get('/auth/google', 
 passport.authenticate('google', { scope:
       [ 'email', 'profile' ] }
@@ -228,10 +226,12 @@ passport.authenticate("google",{
 */
 userRouter.get('/logout', async (req,res,next)=> {
 	await req.session.destroy((err)=>{
-    if(err)
-    res.redirect("/?logoutfail")
+    if(err){  // 에러가 발생하면 세션에 상태를 저장 -> 이후에 session DB를 훑어서 삭제.
+    req.session.staus = 'deleted';
+    res.json({result:"error"});
+  }
     else
-    res.status(200).json("good");
+    res.status(200).json({result:"success"});
   });
 })
 
@@ -256,6 +256,10 @@ userRouter.get("/userlist", loginRequired, async function (req, res, next) {
   } catch (error) {
     next(error);
   }
+});
+
+userRouter.get("/userlistBySession", async function(req,res,next){
+
 });
 
 // 사용자 정보 수정
@@ -344,13 +348,12 @@ userRouter.get('/:user_id',loginRequired, async (req,res,next)=>{
 })
 
 userRouter.get('/admin/check', async (req,res,next)=>{
-      if(req.headers.Authorization){
-          const userToken = req.headers["authorization"]?.split(" ")[1];
+      if(req.headers.authorization){
+          const userToken = req.headers["authorization"].split(" ")[1];
           const isUserToken = !userToken || userToken === "null";
-         
           if (isUserToken) {
             res.status(403).json({
-              result: "fail",
+              result: userToken,
               });
               return;
             }
@@ -382,7 +385,7 @@ userRouter.get('/admin/check', async (req,res,next)=>{
       }
       else{
         res.status(403).json({
-          result: "fail",
+          result: "fail"
         });
           return;
         }

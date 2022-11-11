@@ -42,7 +42,7 @@ export class UserModel { // 이메일 중복 검사
     return users;
   }
 
-  async update({ userId, update }) {
+  async update({ userId, update:userInfo }) {
     const filter = { _id: userId };
     const option = { returnOriginal: false };
     const time = timeZone();

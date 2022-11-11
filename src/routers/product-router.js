@@ -29,7 +29,6 @@ productRouter.get("/", async (req, res, next) => {
       };
       result.push(content);
     }
-    console.log(products);
     res.status(200).json(result);
   } catch (err) {
     next(err);
