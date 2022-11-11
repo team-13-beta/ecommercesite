@@ -6,10 +6,35 @@ import is from "@sindresorhus/is";
 //import { userService } from "../services";
 import { orderService } from "../services/index.js";
 
+
+import oauth2 from "passport-google-oauth2";
+import passport from "passport";
+import session from "express-session";
+import MongoStore from "connect-mongo";
+import cookieParser from "cookie-parser";
+import { config } from "dotenv";
+import jwt from "jsonwebtoken";
+
 //상품 관련 라우터
 const orderRouter = Router();
+orderRouter.use(cookieParser())
+// orderRouter.use(
+//   session({
+//     secret: process.env.SESSION_SECRET,
+//     resave: false,
+//     saveUninitialized: true,
+//     cookie: {
+//       httpOnly: false, // js 코드로 쿠키를 가져오지 못하게
+//       secure: false, // https 에서만 가져오도록 할 것인가?
+//       // maxAge:1800000 // cookie expired : 30minute 
+//     },
+//     store: MongoStore.create({mongoUrl: process.env.MONGO_SESSION_URL}), 
+//     //store: MongoStore.create({mongoUrl: process.env.MONGO_SESSION_URL}), 
+//   })
+// );
 
-orderRouter.get("/", async (req, res, next) => {
+
+orderRouter.get("/orders", async (req, res, next) => {
   try {
     const orders = await orderService.getAllOrders();
     let result = [];
@@ -34,10 +59,9 @@ orderRouter.get("/", async (req, res, next) => {
   }
 });
 
-orderRouter.get("/:consumer_id", async (req, res, next) => {
+orderRouter.get("/orders/:consumer_id", async (req, res, next) => {
   try {
     const consumer_id = req.params.consumer_id;
-
     const orders = await orderService.getOrders(consumer_id);
     let result = [];
     for (let order of orders) {
@@ -63,7 +87,7 @@ orderRouter.get("/:consumer_id", async (req, res, next) => {
 });
 
 //주문 상세조회 API
-orderRouter.get("/item/:order_id", async (req, res, next) => {
+orderRouter.get("orders/item/:order_id", async (req, res, next) => {
   try {
     const order_id = req.params.order_id;
     const order = await orderService.getOrder(Number(order_id));
@@ -87,12 +111,12 @@ orderRouter.get("/item/:order_id", async (req, res, next) => {
 });
 
 // order 생성 loginRequired로 누군지 사전 파악 후 처리
-orderRouter.post("/", loginRequired, async (req, res, next) => {
+orderRouter.post("/orders", loginRequired, async (req, res, next) => {
   try {
     // req (request)의 body 에서 데이터 가져오기
     // 추가해볼 데이터
-
     const userObjId = req.currentUserId;
+    if(req.body.userName){ // token 방식일 경우 
     const { userName, address, phoneNumber, buyingProduct } = req.body;
     const basket = { userName, address, phoneNumber, buyingProduct };
     //console.log(basket);
@@ -102,6 +126,12 @@ orderRouter.post("/", loginRequired, async (req, res, next) => {
       userObjId,
       basket,
     });
+    }
+    else{
+      console.log("주문넣었을때!!");
+      console.log(req.cookies);
+      res.json({gg:"fwfwfwxxxx"})
+    }
     const result = {
       code: 200,
       message: "주문 성공!",

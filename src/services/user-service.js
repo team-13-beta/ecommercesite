@@ -120,6 +120,19 @@ class UserService {
   }
 
 
+  async updateUserBySession(userId, toUpdate){
+    let user = await this.userModel.findById(userId);
+    // db에서 찾지 못한 경우, 에러 메시지 반환
+    if (!user) {
+      throw new Error("가입 내역이 없습니다. 다시 한 번 확인해 주세요.");
+    }
+    user = await this.userModel.update({
+      userId,
+      update: toUpdate,
+    });
+
+    return user;
+  }
   // 유저정보 수정, 현재 비밀번호가 있어야 수정 가능함.
   async updateUser(userInfoRequired, toUpdate) {
     // 객체 destructuring

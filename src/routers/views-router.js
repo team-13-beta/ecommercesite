@@ -23,6 +23,11 @@ viewsRouter.use(
   "/user/accountUpdate",
   serveStatic("user/accountUpdate/accountUpdate"),
 );
+viewsRouter.use(
+  "/user/oauthUpdate",
+  serveStatic("user/oauthUpdate/oauthUpdate"),
+);
+
 viewsRouter.use("/user/bucket", serveStatic("user/bucket/bucket"));
 viewsRouter.use("/user/order", serveStatic("user/order/order"));
 viewsRouter.use("/user/oauth", serveStatic("user/oauth/oauth"));
