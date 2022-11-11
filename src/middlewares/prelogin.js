@@ -2,22 +2,19 @@ import { connect } from "mongoose";
 
 
 function preLogin_Oauth(req,res,next){
-    console.log(req.cookies['connect.sid'], 'oauth 미들웨어');
-    if(req.cookies['connect.sid'] !== undefined || req.cookies['connect.sid'] == ''){
-        throw new Error("이미 로그인 되어있습니다");
-        return;        
+    if(req.cookies['connect.sid']){
+        throw new Error(`Oauth로 이미 로그인 되어있습니다`);        
     }
     else next();
-    return;
+    
 } 
 
 function preLogin_General(req,res,next){
-    // console.log(req.cookies['token'],'제너럴 미들웨어');
-    // if(req.cookies['token]){
-    //     throw new Error("이미 로그인 되어있습니다");
-    //     // res.json(202).redirect("/?login=AlreadyLogined");
-    // }
-    next();
+    if(req.headers.Authorization){
+        throw new Error(`${req.headers.Authorization} 일반 접속으로 이미 로그인 되어있습니다`);
+        // res.json(202).redirect("/?login=AlreadyLogined");
+    }
+    else next();
 }
 
 export {preLogin_Oauth,preLogin_General};

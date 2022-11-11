@@ -5,13 +5,9 @@ function loginRequired(req, res, next) {
   // request 헤더로부터 oauth 토큰을 받음 -> oauth access
 
   const access = '';
-  if( !req.headers.authoriztion && req.headers.oauth){ // oauth로 접근시 
-    const oauthToken = req.headers.oauth.split("s%3A")[0].split(".")[0];
-  
-  }
-  else if(!req.headers.oauth && req.headers.authorization){
+  if(req.headers.authorization){
     const userToken = req.headers["authorization"]?.split(" ")[1];
-  const isUserToken = !userToken || userToken === "null";
+    const isUserToken = !userToken || userToken === "null";
   
     if (isUserToken) {
       console.log("서비스 사용 요청이 있습니다.하지만, Authorization 토큰: 없음");
@@ -39,7 +35,7 @@ function loginRequired(req, res, next) {
       // jwt.verify 함수가 에러를 발생시키는 경우는 토큰이 정상적으로 decode 안되었을 경우임.
       // 403 코드로 JSON 형태로 프론트에 전달함.
       res.status(403).json({
-        result: "forbidden-approach",
+      
         reason: "정상적인 토큰이 아닙니다.",
       });
   
@@ -49,8 +45,8 @@ function loginRequired(req, res, next) {
   }
   else{
     res.status(403).json({
-      result: "forbidden-approach",
-      reason: "로그인한 유저만 사용할 수 있는 서비스입니다.",
+      
+      reason: "로그인한 유저만 사용할 수 있는 서비스22입니다.",
     });
     return;
   }

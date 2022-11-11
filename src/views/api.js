@@ -3,6 +3,7 @@ async function get(endpoint, params = "") {
   const apiUrl = `${endpoint}/${params}`;
   console.log(`%cGET 요청: ${apiUrl} `, "color: #a25cd1;");
 
+  
   const res = await fetch(apiUrl, {
     // JWT 토큰을 헤더에 담아 백엔드 서버에 보냄.
     headers: {
@@ -64,7 +65,7 @@ async function patch(endpoint, params = "", data) {
   console.log(`%cPATCH 요청: ${apiUrl}`, "color: #059c4b;");
   console.log(`%cPATCH 요청 데이터: ${bodyData}`, "color: #059c4b;");
 
-  const res = await fetch(apiUrl, {
+  const res = await fetch(apiUrl, { 
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",

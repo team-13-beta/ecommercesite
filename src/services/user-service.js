@@ -20,7 +20,6 @@ class UserService {
         "이 이메일은 현재 사용중입니다. 다른 이메일을 입력해 주세요.",
       );
     }
-
     // 이메일 중복은 이제 아니므로, 회원가입을 진행함
 
     // 우선 비밀번호 해쉬화(암호화)
@@ -38,6 +37,25 @@ class UserService {
     const createdNewUser = await this.userModel.create(newUserInfo);
 
     return createdNewUser;
+  }
+
+  async addUserBySession(userInfo){
+  // 객체 destructuring
+  const { email, fullName:name, phoneNumber, address, role, access } = userInfo;
+  // 이메일 중복 확인
+  const user = await this.userModel.findByEmailSession(email);
+  if (user) {
+    throw new Error(
+      '이 이메일은 현재 사용중입니다.',
+    );
+  }
+  // 이메일 중복은 이제 아니므로, 회원가입을 진행함
+  const newUserInfo = {name, email, phoneNumber, address, role, access};
+  
+  // db에 저장
+  const createdNewUser = await this.userModel.create(newUserInfo);
+
+  return createdNewUser;
   }
 
   // 로그인
@@ -95,6 +113,12 @@ class UserService {
     const user = await this.userModel.findByUserId(userId);
     return user;
   }
+
+  async getUserByUserEmail(email){
+    const user = await this.userModel.findByEmailSession(email);
+    return user;
+  }
+
 
   // 유저정보 수정, 현재 비밀번호가 있어야 수정 가능함.
   async updateUser(userInfoRequired, toUpdate) {

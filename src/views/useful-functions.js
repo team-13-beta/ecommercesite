@@ -89,3 +89,79 @@ export const getImageKeyByCheckType = async (element, categoryId, imageKey) => {
 
   return result;
 };
+
+export const checkAdmin = async () => {
+  // 우선 화면을 가리고 시작함 -> 화면 번쩍거림으로 인해 일단 미적용
+  //window.document.body.style.display = 'none';
+
+  const token = sessionStorage.getItem("token");
+  // 우선 토큰 존재 여부 확인
+  if (!token) {
+    // 현재 페이지의 url 주소 추출하기
+    const pathname = window.location.pathname;
+    const search = window.location.search;
+
+    // 로그인 후 다시 지금 페이지로 자동으로 돌아가도록 하기 위한 준비작업임.
+    window.location.replace(`/login?previouspage=${pathname + search}`);
+  }
+  // 관리자 토큰 여부 확인
+  const res = await fetch("/api/admin/check", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const { result } = await res.json();
+
+  if (result === "success") {
+    window.document.body.style.display = "block";
+
+    return;
+  } else {
+    alert("관리자 전용 페이지입니다.");
+
+    window.location.replace("/");
+  }
+};
+
+export function deleteCookie(name) {
+  setCookie(name, "", {
+    "max-age": -1,
+  });
+}
+
+export function setCookie(name, value, options = {}) {
+  options = {
+    path: "/",
+    // 필요한 경우, 옵션 기본값을 설정할 수도 있습니다.
+    ...options,
+  };
+
+  if (options.expires instanceof Date) {
+    options.expires = options.expires.toUTCString();
+  }
+
+  let updatedCookie =
+    encodeURIComponent(name) + "=" + encodeURIComponent(value);
+
+  for (let optionKey in options) {
+    updatedCookie += "; " + optionKey;
+    let optionValue = options[optionKey];
+    if (optionValue !== true) {
+      updatedCookie += "=" + optionValue;
+    }
+  }
+
+  document.cookie = updatedCookie;
+}
+
+export function getCookie(name) {
+  let matches = document.cookie.match(
+    new RegExp(
+      "(?:^|; )" +
+        name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, "\\$1") +
+        "=([^;]*)",
+    ),
+  );
+  return matches ? decodeURIComponent(matches[1]) : undefined;
+}
