@@ -19,7 +19,7 @@
 .bucket-btn:hover,
 .direct-pay:hover {
   background-color: #ff922b;
-  border: none;
+  border-color: #ff922b;
   color: #fff4e6;
 }
 /* 제품 상단 컴포넌트 */
