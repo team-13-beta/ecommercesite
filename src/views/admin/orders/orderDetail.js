@@ -1,3 +1,5 @@
+import { getImageUrl } from "../../aws-s3.js";
+import { checkObjectEmpty } from "../../useful-functions.js";
 import { clearContainer, createElement } from "../../utility/documentSelect.js";
 import { navigate } from "../../utility/navigate.js";
 import { orderDetailTemplate } from "../components/order/orderTemplate.js";
@@ -29,19 +31,35 @@ export default function OrderDetail({
         return;
     }
   });
-  this.init = () => {
+
+  const getTitleImage = async (array = []) => {
+    const image = await Promise.all(
+      array.map(async (data) => ({
+        productId: data.productId,
+        img: await getImageUrl(data.img),
+      })),
+    );
+    return image;
+  };
+
+  this.init = async () => {
     clearContainer($app);
     if (!this.state || this.state.id !== history.state.state.id) {
       this.setState(history.state.state);
     } else {
-      this.$element.innerHTML = orderDetailTemplate(this.state);
+      const imageUrls = await getTitleImage(this.state.buyingProduct);
+
+      this.$element.innerHTML = orderDetailTemplate(this.state, imageUrls);
     }
 
     $app.appendChild(this.$element);
   };
 
-  this.render = () => {
-    this.$element.innerHTML = orderDetailTemplate(this.state);
+  this.render = async () => {
+    if (checkObjectEmpty(this.state)) return;
+
+    const imageUrls = await getTitleImage(this.state.buyingProduct);
+    this.$element.innerHTML = orderDetailTemplate(this.state, imageUrls);
   };
 
   this.setState = (nextState) => {
