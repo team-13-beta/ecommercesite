@@ -38,7 +38,7 @@ function handleSend() {
     buyingProduct: localData,
   };
   console.log("주문 생성 데이터 : ", sendData);
-  const res = Api.post("/orders", sendData);
+  const res = Api.post("/api/orders", sendData);
   if (res) {
     window.localStorage.clear();
     window.location.href = "/user/order/success";

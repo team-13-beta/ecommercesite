@@ -13,6 +13,9 @@ import cookieParser from "cookie-parser";
 import { config } from "dotenv";
 import jwt from "jsonwebtoken";
 
+
+import {orderService} from "../services/order-service.js"
+
 config();
 const userRouter = Router();
 userRouter.use(cookieParser())
@@ -24,7 +27,7 @@ userRouter.use(
     cookie: {
       httpOnly: false, // js 코드로 쿠키를 가져오지 못하게
       secure: false, // https 에서만 가져오도록 할 것인가?
-      maxAge:1800000 // cookie expired : 30minute 
+      // maxAge:1800000 // cookie expired : 30minute 
     },
     store: MongoStore.create({mongoUrl: process.env.MONGO_SESSION_URL}), 
     //store: MongoStore.create({mongoUrl: process.env.MONGO_SESSION_URL}), 
@@ -403,6 +406,42 @@ userRouter.get('/admin/check', async (req,res,next)=>{
           return;
         }
     })
+
+
+    userRouter.post("/orders", loginRequired, async (req, res, next) => {
+      try {
+        // req (request)의 body 에서 데이터 가져오기
+        // 추가해볼 데이터
+        const userObjId = req.currentUserId;
+        if(req.body.userName){ // token 방식일 경우 
+        const { userName, address, phoneNumber, buyingProduct } = req.body;
+        const basket = { userName, address, phoneNumber, buyingProduct };
+        //console.log(basket);
+        //console.log(userId,basket);
+        // 위 데이터를 유저 db에 추가하기
+        const newOrder = await orderService.addOrder({
+          userObjId,
+          basket,
+        });
+        }
+        else{
+          console.log("주문넣었을때!!");
+          console.log(req.cookies);
+          res.json({gg:"fwfwfwxxxx"})
+        }
+        const result = {
+          code: 200,
+          message: "주문 성공!",
+        };
+        // 추가된 유저의 db 데이터를 프론트에 다시 보내줌
+        // 물론 프론트에서 안 쓸 수도 있지만, 편의상 일단 보내 줌
+        res.status(200).json(result);
+      } catch (error) {
+        next(error);
+      }
+    });
+
+
 
 
 export { userRouter };

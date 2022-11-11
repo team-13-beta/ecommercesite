@@ -34,6 +34,24 @@ async function test(){
     await productModelTest();
     console.log(`테스트 코드 생성 완료`);
 }
+// new Promise((resolve, reject)=>{
+//             categoryModelTest()
+//             console.log("** category 초기 데이터 생성 완료 **")
+//             resolve();    
+//             })
+//             .then(()=>{
+//                 userModelTest()
+//                 console.log("** user 초기 데이터 생성 완료 **")
+//                 return;
+//             })
+//             .then(()=>{
+//                 console.log("Product 초기 데이터 생성 3초 소요됩니다.");
+//                 setTimeout(()=>{
+//                     productModelTest();
+//                     console.log("** Product 초기 데이터 생성 완료 **")
+//                 },3000);
+//                 return ;
+//             })
 test();
 
 
