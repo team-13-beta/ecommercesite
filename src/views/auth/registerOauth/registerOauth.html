@@ -11,7 +11,7 @@
       sizes="16x16"
       href="../../images/elice-rabbit-favicon.png"
     />
-    <!-- bulma css -->
+    <!-- bulma css 관련 -->
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
@@ -22,69 +22,30 @@
       src="https://kit.fontawesome.com/9daa42bcef.js"
       crossorigin="anonymous"
     ></script>
+    <!-- 구글 OAuth -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <!-- 카카오 OAuth -->
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <!-- 커스텀 css, js -->
-    <link rel="stylesheet" href="accountUpdate.css" />
+    <link rel="stylesheet" href="register.css" />
+    <script
+      type="module"
+      src="../../user/header-footer/inputHeader.js"
+    ></script>
+    <script
+      type="module"
+      src="../../user/header-footer/inputFooter.js"
+    ></script>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.410.0.min.js"></script>
 
+    <script src="registerOauth.js" type="module" defer></script>
   </head>
-
   <body>
-
-    <!-- 회원정보 수정 폼(Form) -->
-    <div class="update-user-form-container">
-      <form class="box update-user-form-box" id="registerUserForm">
-        <p class="title">회원정보 수정</p>
-
-        <div class="field">
-          <label class="label" for="fullNameInput">이름</label>
-          <div class="control">
-            <input
-              class="input"
-              id="fullNameInput"
-              type="text"
-              placeholder="이름을 작성해주세요"
-              autocomplete="on"
-            />
-          </div>
-        </div>
-
-        <div class="field">
-          <label class="label" for="passwordInput">현재 비밀번호</label>
-          <div class="control">
-            <input
-              class="input"
-              id="CurrentpasswordInput"
-              type="password"
-              placeholder="********"
-              autocomplete="off"
-            />
-          </div>
-        </div>
-
-        <div class="field">
-          <label class="label" for="passwordInput">새로운 비밀번호</label>
-          <div class="control">
-            <input
-              class="input"
-              id="NewpasswordInput"
-              type="password"
-              placeholder="********"
-              autocomplete="off"
-            />
-          </div>
-        </div>
-
-        <div class="field">
-          <label class="label" for="passwordConfirmInput">새로운 비밀번호 확인</label>
-          <div class="control">
-            <input
-              class="input"
-              id="NewpasswordConfirmInput"
-              type="password"
-              placeholder="********"
-              autocomplete="off"
-            />
-          </div>
-        </div>
+    <!-- 회원가입 폼(Form) -->
+    <div class="register-user-form-container">
+      <form class="box register-user-form-box" id="registerUserForm">
+        <p class="title is-5">β 환영합니다!</p>
+        <p class="title is-5">서비스를 이용하기 위해서는 추가적인 사용자의 정보가 필요합니다.</p>
 
         <div class="field">
           <label class="label" for="phoneNumberInput">휴대폰 번호</label>
@@ -98,10 +59,10 @@
             />
           </div>
         </div>
-
+        
         <!-- 주소 찾기 -->
-        <div class="field">
-          <label class="label label-address" for="address2">주소</label>
+        <label class="label" for="address2">주소</label>
+        <div class="field is-horizontal">
           <div class="field-label is-normal"></div>
           <div class="field-body search">
             <div class="field">
@@ -126,7 +87,7 @@
           </div>
         </div>
 
-        <div class="field">
+        <div class="field is-horizontal">
           <div class="field-label is-normal no-label"></div>
           <div class="field-body">
             <div class="field">
@@ -144,7 +105,7 @@
           </div>
         </div>
 
-        <div class="field">
+        <div class="field is-horizontal mb-5">
           <div class="field-label is-normal no-label"></div>
           <div class="field-body">
             <div class="field">
@@ -161,18 +122,9 @@
           </div>
         </div>
 
-            <button class="button" id="saveAccountButton">저장하기</button>
-            <button class="button" id="deleteAccountButton">탈퇴하기</button>
-            <button class="button" id="cancelButton">취소하기</button>
-          </form>
-        </div>
-      </div>
-    </section>
-    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.410.0.min.js"></script>
+        <button class="button is-fullwidth" id="submitButton">회원가입</button>
+      </form>
+    </div>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.410.0.min.js"></script>
-    <script type="module" src="../header-footer/inputHeader.js"></script>
-    <script type="module" src="../header-footer/inputFooter.js"></script> 
-    <script src="./accountUpdate.js" type="module" defer></script>
   </body>
 </html>
