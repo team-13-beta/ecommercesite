@@ -32,9 +32,7 @@ export default function App({ $app }) {
     searchHandler: (searchData) => {
       const orderLists = checkStringEmpty(searchData)
         ? this.state.orderLists
-        : orders.state.filter((order) =>
-            order.consumerName.includes(searchData),
-          );
+        : orders.state.filter((order) => order.userName.includes(searchData));
       orders.setState(orderLists);
     },
   });

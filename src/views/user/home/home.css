@@ -147,9 +147,10 @@ section#photo {
 }
 .category {
   width: 960px;
-  display: flex;
+  display: grid;
   justify-content: space-around;
-  align-items: center;
+  grid-template-columns: repeat(8, 1fr);
+  grid-gap: 16px;
   padding: 24px;
   box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 10%),
     0 0 0 1px rgb(10 10 10 / 2%);
