@@ -116,8 +116,8 @@ async function updateAccount(e) {
       phoneNumber,
     };
 
-    await Api.get("/api/userlist");
-    await Api.patch("/api/userBySession", data);
+    // await Api.get("/api/userlist");
+    fetch("/api/userBySession", data);
 
     alert(`정상적으로 정보 수정되었습니다.`);
 

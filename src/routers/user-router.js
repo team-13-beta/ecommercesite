@@ -265,7 +265,13 @@ userRouter.get("/userlist", async function (req, res, next) {
   }
 });
 
-userRouter.get("/userlistBySession", loginRequired, async function(req,res,next){
+// userRouter.get("/userlistBySession", loginRequired,async function(req,res,next){
+
+// });
+
+
+
+userRouter.get("/userBySession", loginRequired, async function(req,res,next){
   try{
   if (is.emptyObject(req.body)) {
     throw new Error(
@@ -273,15 +279,14 @@ userRouter.get("/userlistBySession", loginRequired, async function(req,res,next)
     );
   }
 
-  const fullName = req.body.fullName;
+  const name = req.body.fullName;
   const userId = req.session.userObjId;
   const address = req.body.address;
   const phoneNumber =  req.body.phoneNumber;
   const role = req.session.role;
 
   const toUpdate = {
-    ...(fullName && { fullName }),
-    ...(password && { password }),
+    ...(name && { name }),
     ...(address && { address }),
     ...(phoneNumber && { phoneNumber }),
     ...(role && { role }),
@@ -293,12 +298,13 @@ userRouter.get("/userlistBySession", loginRequired, async function(req,res,next)
   // 업데이트 이후의 유저 데이터를 프론트에 보내 줌
   res.status(200).json(updatedUserInfo);
   return;
-
-} catch (error) {
+}catch (error) {
   next(error);
 }
+}); 
 
-});
+
+
 
 // 사용자 정보 수정
 // (예를 들어 /api/users/abc12345@example.com => req.params.userEmail
@@ -319,7 +325,7 @@ userRouter.patch("/users",
        const userId = req.currentUserId;
 
       // body data 로부터 업데이트할 사용자 정보를 추출함.
-      const fullName = req.body.fullName;
+      const name = req.body.fullName;
       const password = req.body.password;
       const address = req.body.address;
       const phoneNumber = req.body.phoneNumber;
@@ -339,7 +345,7 @@ userRouter.patch("/users",
       // 보내주었다면, 업데이트용 객체에 삽입함.
       // req.body로 보내주지 않은 필드는 업데이트를 진행하지 않음
       const toUpdate = {
-        ...(fullName && { fullName }),
+        ...(name && { name }),
         ...(password && { password }),
         ...(address && { address }),
         ...(phoneNumber && { phoneNumber }),
@@ -351,7 +357,7 @@ userRouter.patch("/users",
         userInfoRequired,
         toUpdate,
       );
-      console.log(updatedUserInfo);
+
       // 업데이트 이후의 유저 데이터를 프론트에 보내 줌
       res.status(200).json(updatedUserInfo);
       return;

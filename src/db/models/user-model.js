@@ -43,12 +43,12 @@ export class UserModel { // 이메일 중복 검사
   }
 
   async update({ userId, update:userInfo }) {
-    const filter = { _id: userId };
+    const filter = {_id : userId};
     const option = { returnOriginal: false };
     const time = timeZone();
     const timeInfo = {createdTime:time,updatedTime:time};
     const updateInfo = {...userInfo , ...timeInfo };
-    const updatedUser = await User.findOneAndUpdate(filter, updateInfo);
+    const updatedUser = await User.findOneAndUpdate(filter, updateInfo, option);
     return updatedUser;
   }
 
