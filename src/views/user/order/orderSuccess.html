@@ -9,7 +9,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
     />
-
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.410.0.min.js"></script>
     <script type="module" src="/user/header-footer/inputHeader.js"></script>
     <script type="module" src="/user/header-footer/inputFooter.js"></script>
     <script type="module" src="/user/order/ordersuccess.js"></script>
@@ -17,11 +17,16 @@
   </head>
   <body>
     <div class="box success-box">
+      <div class="result-title">
+        주문해주셔서 감사합니다. 얼른 배송해드리겠습니다.
+      </div>
       <img
+        class="img-style"
         src="https://cdn.pixabay.com/photo/2013/07/13/12/15/chicken-159496__480.png"
       />
-      <div>주문해주셔서 감사합니다. 얼른 배송해드리겠습니다.</div>
-      <button class="button homeBtn">홈으로 돌아가기</button>
+      <div style="display: flex">
+        <button class="button homeBtn">홈으로 돌아가기</button>
+      </div>
     </div>
   </body>
 </html>

@@ -17,6 +17,7 @@ function handleOrder() {
     name: `${itemName1El.textContent}`,
     price: `${priceDi}`,
     stock: `${value}`,
+    checked: true,
   };
   window.localStorage.setItem(`${itemId1El.textContent}`, JSON.stringify(obj));
 
