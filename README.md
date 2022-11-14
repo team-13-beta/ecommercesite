@@ -127,4 +127,4 @@
 **아래는 김헬창과 팀원들이 2주 동안 개발하여 만든 사이트이다!**
 <br/>
 <br/>
-[베타 사이트 클릭!](https://www.naver.com)
+[베타 사이트 클릭!](http://kdt-sw3-team13.elicecoding.com/)
